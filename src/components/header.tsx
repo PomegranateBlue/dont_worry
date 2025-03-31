@@ -1,7 +1,7 @@
 import Link from 'next/link';
 export default function Header() {
   return (
-    <div>
+    <header className="flex flex-row bg-slate-200 p-4 justify-between">
       <Link href="community">commnunity</Link>
       <Link href="note">note</Link>
       <Link href="letter">letter</Link>
@@ -9,6 +9,8 @@ export default function Header() {
       <Link href="signup">signup</Link>
       <Link href="ranking">ranking</Link>
       <Link href="mypage">profile</Link>
-    </div>
+      <Link href="test">test</Link>
+      <button>로그아웃</button>
+    </header>
   );
 }

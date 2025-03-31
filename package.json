@@ -12,6 +12,7 @@
     "@supabase/supabase-js": "^2.49.3",
     "@tanstack/react-query": "^5.69.2",
     "next": "14.2.18",
+    "openai": "^4.90.0",
     "react": "^18",
     "react-dom": "^18",
     "zustand": "^5.0.3"

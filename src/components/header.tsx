@@ -8,7 +8,7 @@ export default function Header() {
       <Link href="login">login</Link>
       <Link href="signup">signup</Link>
       <Link href="ranking">ranking</Link>
-      <Link href="profile">profile</Link>
+      <Link href="mypage">profile</Link>
     </div>
   );
 }

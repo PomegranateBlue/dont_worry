@@ -1,3 +1,9 @@
+import ChatModule from '@/components/main/modules/ChatTemplate';
+
 export default function HomePage() {
-  return <div></div>;
+  return (
+    <div>
+      <ChatModule />
+    </div>
+  );
 }

@@ -6,10 +6,14 @@ type TextAreaProps = {
   placeholder?: string;
 };
 
-export default function TextArea({ value, onChange, placeholder }: TextAreaProps) {
+export default function TextArea({
+  value,
+  onChange,
+  placeholder
+}: TextAreaProps) {
   return (
     <textarea
-      className="w-full p-2 border rounded"
+      className="w-full p-2 border rounded text-black"
       rows={4}
       value={value}
       onChange={onChange}

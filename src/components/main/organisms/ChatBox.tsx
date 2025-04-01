@@ -17,8 +17,13 @@ export default function ChatBox() {
   };
 
   return (
-    <div className="p-4 border rounded bg-gray-100">
-      <InputForm value={input} onChange={(e) => setInput(e.target.value)} onSubmit={handleSubmit} />
+    <div className="p-4 border rounded bg-gray-100 ">
+      <InputForm
+      
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onSubmit={handleSubmit}
+      />
       <div className="mt-4 whitespace-pre-line">{response}</div>
     </div>
   );

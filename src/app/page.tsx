@@ -13,7 +13,7 @@ const HomePage = () => {
     messages.current?.appendChild(me);
     const formData = new FormData();
     formData.append('content', value);
-    const res = await fetch('/api/openai', {
+    const res = await fetch('/utils/openai', {
       method: 'POST',
       body: formData
     });

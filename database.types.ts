@@ -13,7 +13,7 @@ export type Database = {
         Row: {
           content: string
           created_at: string
-          image_url: string | null
+          img_url: string | null
           letter_id: string
           send_at: string | null
           user_id: string
@@ -21,7 +21,7 @@ export type Database = {
         Insert: {
           content: string
           created_at?: string
-          image_url?: string | null
+          img_url?: string | null
           letter_id?: string
           send_at?: string | null
           user_id?: string
@@ -29,7 +29,7 @@ export type Database = {
         Update: {
           content?: string
           created_at?: string
-          image_url?: string | null
+          img_url?: string | null
           letter_id?: string
           send_at?: string | null
           user_id?: string

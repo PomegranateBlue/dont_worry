@@ -1,21 +1,17 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ChatForm from '../organisms/chatForm';
-import MessageList from '../organisms/messageList';
 const ChatBox = () => {
   const [value, setValue] = useState('');
-  const [messages, setMessages] = useState<
-    { content: string; from: 'user' | 'chatBot' }[]
-  >([]);
+  const [result, setResult] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userInput = value.trim();
     if (!userInput) return;
 
-    setMessages((prev) => [...prev, { content: userInput, from: 'user' }]);
     setValue('');
-    setResult('');
+    setResult(null);
 
     const formData = new FormData();
     formData.append('content', userInput);
@@ -26,21 +22,22 @@ const ChatBox = () => {
     });
 
     const resJson = await res.json();
-
-    setMessages((prev) => [
-      ...prev,
-      { content: resJson.content, from: 'chatBot' }
-    ]);
+    setResult(resJson.content);
   };
 
   return (
     <div className="max-w-xl mx-auto mt-10">
-      <MessageList messages={messages} />
       <ChatForm
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onSubmit={handleSubmit}
       />
+      {result && (
+        <div className="mt-4 p-4 bg-gray-100 rounded shadow">
+          <p className="text-black text-sm mb-2">GPT 응답:</p>
+          <p className="text-black">{result}</p>
+        </div>
+      )}
     </div>
   );
 };

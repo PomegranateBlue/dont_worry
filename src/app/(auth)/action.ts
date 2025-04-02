@@ -4,16 +4,15 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/app/utils/supabase/server';
-import { error } from 'console';
 
-interface LoginFormState {
+interface ErrorFormState {
   error: string | null;
 }
 
 export async function login(
-  prevState: LoginFormState,
+  prevState: ErrorFormState,
   formData: FormData
-): Promise<LoginFormState> {
+): Promise<ErrorFormState> {
   const supabase = await createClient();
 
   // type-casting here for convenience
@@ -26,7 +25,7 @@ export async function login(
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    return { error: '땡' };
+    return { error: '이메일 또는 미밀번호가 틀렸습니다' };
     // redirect('/error');
   }
 
@@ -34,14 +33,18 @@ export async function login(
   redirect('/');
 }
 
-export async function signup(formData: FormData) {
+export async function signup(
+  prevState: ErrorFormState,
+  formData: FormData
+): Promise<ErrorFormState> {
   const supabase = await createClient();
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const data = {
     email: formData.get('email') as string,
-    password: formData.get('password') as string
+    password: formData.get('password') as string,
+    nickname: formData.get('nickname') as string
   };
 
   const { error } = await supabase.auth.signUp(data);

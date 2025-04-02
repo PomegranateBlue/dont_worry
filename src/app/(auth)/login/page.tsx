@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { login } from '../action';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useFormState } from 'react-dom';
 
 const schema = z.object({
   email: z
@@ -11,6 +12,7 @@ const schema = z.object({
     .nonempty('이메일을 입력하세요'),
   password: z.string().nonempty('비밀번호를 입력하세요')
 });
+const initialState = { error: null };
 export default function LoginPage() {
   const {
     register,
@@ -24,9 +26,10 @@ export default function LoginPage() {
       password: ''
     }
   });
+  const [state, formAction] = useFormState(login, initialState);
 
   return (
-    <form action={login}>
+    <form action={formAction}>
       <label>
         Email:
         <input
@@ -50,8 +53,8 @@ export default function LoginPage() {
         />
       </label>
       {errors.password && <span>{errors.password.message}</span>}
+      {state.error && <p>{state.error}</p>}
       <button type="submit">Log in</button>
-      {/* <button formAction={signup}>Sign up</button> */}
     </form>
   );
 }

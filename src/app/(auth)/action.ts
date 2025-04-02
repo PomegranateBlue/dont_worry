@@ -4,8 +4,16 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/app/utils/supabase/server';
+import { error } from 'console';
 
-export async function login(formData: FormData) {
+interface LoginFormState {
+  error: string | null;
+}
+
+export async function login(
+  prevState: LoginFormState,
+  formData: FormData
+): Promise<LoginFormState> {
   const supabase = await createClient();
 
   // type-casting here for convenience
@@ -18,8 +26,7 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    // console.log(error.code);
-    return { error: error.code };
+    return { error: '땡' };
     // redirect('/error');
   }
 

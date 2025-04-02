@@ -26,6 +26,7 @@ const HomePage = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input
+          className="text-black"
           type="text"
           value={value}
           onChange={(e) => setValue(e.currentTarget.value)}

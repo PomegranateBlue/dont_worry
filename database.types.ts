@@ -88,26 +88,29 @@ export type Database = {
         Row: {
           content: string
           created_at: string
-          diary_id: string
-          diary_img: string | null
-          emotion: string | null
+          emotion_category: string | null
           id: string
+          note_id: string
+          note_img: string | null
+          topic_category: string | null
         }
         Insert: {
           content: string
           created_at?: string
-          diary_id?: string
-          diary_img?: string | null
-          emotion?: string | null
+          emotion_category?: string | null
           id?: string
+          note_id?: string
+          note_img?: string | null
+          topic_category?: string | null
         }
         Update: {
           content?: string
           created_at?: string
-          diary_id?: string
-          diary_img?: string | null
-          emotion?: string | null
+          emotion_category?: string | null
           id?: string
+          note_id?: string
+          note_img?: string | null
+          topic_category?: string | null
         }
         Relationships: []
       }

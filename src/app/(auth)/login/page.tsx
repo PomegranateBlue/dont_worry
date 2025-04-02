@@ -1,9 +1,23 @@
 'use client';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { login } from '../action';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
+const schema = z.object({
+  email: z
+    .string()
+    .email('이메일 형식이 아닙니다.')
+    .nonempty('이메일을 입력하세요'),
+  password: z.string().nonempty('비밀번호를 입력하세요')
+});
 export default function LoginPage() {
-  const { register, handleSubmit, formState } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema),
     mode: 'onBlur',
     defaultValues: {
       email: '',
@@ -11,28 +25,12 @@ export default function LoginPage() {
     }
   });
 
-  const onSubmit = (value: FieldValues) => {
-    console.log(value);
-    // login(value);
-  };
-
-  console.log('에러', formState.errors);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form action={login}>
       <label>
         Email:
         <input
-          {...register('email', {
-            required: {
-              value: true,
-              message: '이메일을 입력해 주세요.'
-            },
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: '유효한 이메일 주소가 아닙니다.'
-            }
-          })}
+          {...register('email')}
           type="email"
           name="email"
           id="email"
@@ -40,21 +38,19 @@ export default function LoginPage() {
           required
         />
       </label>
-      {formState.errors.email && <span>{formState.errors.email.message}</span>}
+      {errors.email && <span>{errors.email.message}</span>}
       <label>
         Password:
         <input
-          {...register('password', {
-            required: true
-          })}
+          {...register('password')}
           type="password"
           name="password"
           placeholder="Password"
           required
         />
       </label>
-      {formState.errors.email && <span>{formState.errors.email.message}</span>}
-      <button formAction={login}>Log in</button>
+      {errors.password && <span>{errors.password.message}</span>}
+      <button type="submit">Log in</button>
       {/* <button formAction={signup}>Sign up</button> */}
     </form>
   );

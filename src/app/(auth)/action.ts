@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/app/utils/supabase/server';
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -18,7 +18,9 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect('/error');
+    // console.log(error.code);
+    return { error: error.code };
+    // redirect('/error');
   }
 
   revalidatePath('/', 'layout');

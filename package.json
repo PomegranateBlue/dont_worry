@@ -13,6 +13,8 @@
     "@supabase/supabase-js": "^2.49.3",
     "@tanstack/react-query": "^5.69.2",
     "chart.js": "^4.4.8",
+    "framer-motion": "^12.6.3",
+    "lucide-react": "^0.487.0",
     "next": "14.2.18",
     "openai": "^4.90.0",
     "react": "^18",

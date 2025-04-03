@@ -6,17 +6,14 @@ import {
 } from '@/constants/openai/category';
 import { useState } from 'react';
 const CategorySelector = () => {
-  const [topicCategory, setTopicCategory] = useState<string | null>(null);
+  const [topicCategory, setTopicCategory] = useState<string>[]([]);
+  const [emotionCategory, setEmotionCategory] = useState<string>[]([]);
 
   return (
     <div>
       <div>
         {TOPIC_CATEGORIES.map((topic) => (
-          <button
-            key={topic}
-            onClick={() => setTopicCategory(topic)}
-            className="px-4 py-2 border rounded text-white"
-          >
+          <button key={topic} className="px-4 py-2 border rounded text-white">
             {topic}
           </button>
         ))}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 export default function Header() {
   return (
-    <div>
+    <div className="w-full bg-white h-[48px] text-black   ">
       <Link href="community">commnunity</Link>
       <Link href="note">note</Link>
       <Link href="letter">letter</Link>

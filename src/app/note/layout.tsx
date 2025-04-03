@@ -7,8 +7,8 @@ export default function NoteLayout({
 }) {
   return (
     <div>
-      {children}
-      {steps}
+      <div>{children}</div>
+      <div>{steps}</div>
     </div>
   );
 }

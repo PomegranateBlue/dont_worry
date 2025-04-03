@@ -1,7 +1,14 @@
-import ChatBox from '@/components/main/modules/chatBox';
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const NotePage = () => {
-  return <ChatBox />;
+  const router = useRouter();
+  useEffect(() => {
+    router.replace('/note/category');
+  }, [router]);
+  return null;
 };
 
 export default NotePage;

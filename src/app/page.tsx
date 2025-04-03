@@ -1,7 +1,5 @@
-import ChatBox from '@/components/main/modules/chatBox';
-
 const HomePage = () => {
-  return <ChatBox />;
+  return <p>This is Home Page</p>;
 };
 
 export default HomePage;

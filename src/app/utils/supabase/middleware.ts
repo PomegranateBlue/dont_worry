@@ -40,13 +40,14 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (
+    //로그인 안되어있을때 페이지 이동 안막을 페이지 작성하기
     !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
+    //로그인이 안되어있을때에는 auth폴더 안의 페이지는 모두 이동 가능
     !request.nextUrl.pathname.startsWith('/auth')
   ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
+    url.pathname = '/auth/login';
     return NextResponse.redirect(url);
   }
 

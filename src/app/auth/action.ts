@@ -60,5 +60,5 @@ export async function signup(
 
   //로그인페이지로
   revalidatePath('/', 'layout');
-  redirect('/login');
+  redirect('/auth/login');
 }

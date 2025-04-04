@@ -43,7 +43,6 @@ export const useRankingStore = create<RankingState>((set) => ({
   month: new Date().getMonth() + 1,
   week: getWeekOfMonth(new Date()),
 
-  // 초기화 함수
   initialize: (year, month, week) => {
     const date = new Date();
     date.setFullYear(year);
@@ -71,7 +70,6 @@ export const useRankingStore = create<RankingState>((set) => ({
       };
     }),
 
-  // 다음 주로 이동
   goToNextWeek: () =>
     set((state) => {
       const newDate = new Date(state.currentDate);

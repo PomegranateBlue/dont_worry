@@ -4,24 +4,23 @@ import { useRankingStore } from '@/store/store';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
 
-interface WeekNavigatorClientProps {
-  initialYear: number;
-  initialMonth: number;
-  initialWeek: number;
-}
-
-export default function WeekNavigator({
-  initialYear,
-  initialMonth,
-  initialWeek
-}: WeekNavigatorClientProps) {
-  const { formattedDate, goToPreviousWeek, goToNextWeek, initialize } =
-    useRankingStore();
+export default function WeekNavigator() {
+  const {
+    formattedDate,
+    goToPreviousWeek,
+    goToNextWeek,
+    initialize,
+    currentDate,
+    year,
+    month,
+    week
+  } = useRankingStore();
 
   useEffect(() => {
-    initialize(initialYear, initialMonth, initialWeek);
-  }, [initialize, initialYear, initialMonth, initialWeek]);
+    initialize(year, month, week);
+  }, [initialize, year, month, week]);
 
+  console.log(currentDate);
   return (
     <div>
       <div className="flex items-center justify-between p-4 border-b">

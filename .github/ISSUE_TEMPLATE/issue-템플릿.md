@@ -1,0 +1,20 @@
+---
+name: ISSUE 템플릿
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+💡 Feature Issue 이슈는 지속적인 문제 상황을 위해 생성합니다 작업 중의 문제 사항, 프로젝트에서 마무리 단계에서 정리할 사항에 대해서 남겨주시면 됩니다.
+
+🌿 Explain Issue 이슈에 대한 작업 사항에 대해서 연이어 설명해주시면 됩니다.
+
+예)
+
+A문제 발생
+
+A문제 해결, B문제 발생...
+
+현재 B문제 작업 상황

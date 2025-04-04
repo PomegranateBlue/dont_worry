@@ -3,7 +3,7 @@ import React from 'react';
 import { createClient } from '../utils/supabase/server';
 import {
   makeTopTen,
-  counttMentionedKeyword
+  countMentionedKeyword
 } from '../utils/ranking/RankingFilter';
 
 const RankingPage = async () => {

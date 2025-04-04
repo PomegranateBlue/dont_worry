@@ -2,10 +2,10 @@
 import Chart from '@/components/ranking/Chart';
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase/supabase';
-import type { Tables } from '../../../database.types';
+import { UsersNote } from '@/types/ranking/types';
 
 const RankingPage = () => {
-  const [test, setTest] = useState<Tables<'users_note'>[]>([]);
+  const [test, setTest] = useState<UsersNote[]>([]);
   useEffect(() => {
     const getData = async () => {
       const { data, error } = await supabase.from('users_note').select('*');

@@ -10,7 +10,6 @@ export default function WeekNavigator() {
     goToPreviousWeek,
     goToNextWeek,
     initialize,
-    currentDate,
     year,
     month,
     week
@@ -20,7 +19,6 @@ export default function WeekNavigator() {
     initialize(year, month, week);
   }, [initialize, year, month, week]);
 
-  console.log(currentDate);
   return (
     <div>
       <div className="flex items-center justify-between p-4 border-b">

@@ -1,15 +1,35 @@
+'use client';
 import Link from 'next/link';
 import LogOutButton from './loginComponents/LogOutButton';
+import { useEffect, useState } from 'react';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '@/app/utils/supabase/supabase';
+// import browserClient from '@/app/utils/supabase/client';
 
 export default function Header() {
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const { data } = await browserClient.auth.getUser();
-  //     console.log('data:', data);
-  //   };
+  const [session, setSession] = useState<Session | null>(null);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-  //   getUser();
-  // }, []);
+    const {
+      data: { subscription }
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      // if (session) {
+      //   setSession(session);
+      // }
+      setSession(session);
+      console.log('session', session);
+
+      console.log('_event', _event);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+  console.log('session: ', session);
 
   return (
     <header className="flex flex-row flex-wrap bg-slate-200 p-4 justify-between">

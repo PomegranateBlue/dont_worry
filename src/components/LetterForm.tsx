@@ -1,8 +1,7 @@
 'use client';
 
 import { supabase } from '@/app/utils/supabase/supabase';
-import { useUserStore } from '@/store/store';
-import { type } from '../types/supabase/supabase';
+import { useState } from 'react';
 
 const LetterForm = () => {
   //useState를 이용해 사용자가 입력한 값 상태관리
@@ -12,7 +11,24 @@ const LetterForm = () => {
   const [message, setMessage] = useState('');
 
   //zustand에서 로그인 한 유저 정보 가져오기
-  const { user: userId } = useUserStore();
+  //const { user, setUser } = useUserStore();
+
+  // 유저 테스트용 더미데이터 생성
+  // useEffect(() => {
+  //   const createDummyUser = async () => {
+  //     const { data, error } = await supabase.auth.signUp({
+  //       email: 'dumuser@example.com',
+  //       password: 'dumuser@example.com'
+  //     });
+  //     if (error) {
+  //       console.error('더미 유저 생성 실패:', error.message);
+  //     } else if (data?.user) {
+  //       console.log('더미 유저 생성 성공:', data.user);
+  //       setUser(data.user.id); // Zustand 상태 업데이트
+  //     }
+  //   };
+  //   if (!user) createDummyUser();
+  // }, [user, setUser]);
 
   //편지 제출 핸들러
   const handleLetterSubmit = async (e) => {
@@ -26,7 +42,7 @@ const LetterForm = () => {
 
     //supabase에 편지 데이터 저장
     const { data, error } = await supabase
-      .from('letters')
+      .from('letter')
       .insert([
         { user_id: userId, content, send_at: sendAt, img_url: imageUrl }
       ]);

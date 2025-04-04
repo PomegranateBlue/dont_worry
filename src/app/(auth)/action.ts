@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
 import { createClient } from '@/app/utils/supabase/server';
 
 interface ErrorFormState {
@@ -25,7 +24,7 @@ export async function login(
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    return { error: '이메일 또는 미밀번호가 틀렸습니다' };
+    return { error: '이메일 또는 비밀번호가 틀렸습니다' };
     // redirect('/error');
   }
 
@@ -41,18 +40,25 @@ export async function signup(
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-    nickname: formData.get('nickname') as string
-  };
 
-  const { error } = await supabase.auth.signUp(data);
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const fullName = formData.get('fullName') as string;
+
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { full_name: fullName }
+    }
+  });
 
   if (error) {
+    console.log(error);
     redirect('/error');
   }
 
+  //로그인페이지로
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/login');
 }

@@ -36,7 +36,7 @@ const SignupPage = () => {
     <div>
       <form
         action={formAction}
-        className="flex flex-col gap-4 p-4 shadow-md rounded-md w-[500px]"
+        className="flex flex-col gap-4 p-4 shadow-md rounded-md"
       >
         <label>
           이메일
@@ -64,14 +64,14 @@ const SignupPage = () => {
           닉네임
           <input
             {...register('nickname')}
-            type="nickname"
-            name="nickname"
-            id=""
+            type="text"
+            name="fullName"
             placeholder="닉네임"
             required
           />
           {errors.nickname && <p>{errors.nickname.message}</p>}
         </label>
+        {state.error && <p>{state.error}</p>}
         <button type="submit" className="bg-black text-white p-2 rounded-md">
           회원가입
         </button>

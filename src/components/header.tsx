@@ -1,5 +1,16 @@
 import Link from 'next/link';
+import LogOutButton from './header/LogOutButton';
+
 export default function Header() {
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const { data } = await browserClient.auth.getUser();
+  //     console.log('data:', data);
+  //   };
+
+  //   getUser();
+  // }, []);
+
   return (
     <header className="flex flex-row bg-slate-200 p-4 justify-between">
       <Link href="community">commnunity</Link>
@@ -10,7 +21,7 @@ export default function Header() {
       <Link href="ranking">ranking</Link>
       <Link href="mypage">profile</Link>
       <Link href="test">test</Link>
-      <button>로그아웃</button>
+      <LogOutButton />
     </header>
   );
 }

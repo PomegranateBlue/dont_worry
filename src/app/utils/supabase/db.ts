@@ -2,14 +2,14 @@ import { Database } from '@/types/supabase/supabase';
 import { supabase } from './supabase';
 
 // 데이터베이스 타입 정의
-type Tables = Database['public']['Tables'];   // Tables<'letters'>
+type Tables = Database['public']['Tables']; // Tables<'letters'>
 type User = Tables['users']['Row'];
 export type UserUpdate = Pick<User, 'email' | 'nickname' | 'profile_img'>;
 
 // 사용자 정보 가져오기
 export const fetchUserInfo = async (userId: string | null | undefined) => {
   if (!userId) return null;
-  
+
   try {
     const { data, error } = await supabase
       .from('users')
@@ -21,7 +21,7 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
     return data as Pick<User, 'email' | 'nickname' | 'profile_img' | 'user_id'>;
   } catch (error) {
     console.error('사용자 정보 조회 실패:', error);
-    
+
     throw new Error('사용자 정보를 불러오는 중 문제가 발생했습니다.');
   }
 };
@@ -50,7 +50,7 @@ export const updateUserInfo = async (
   if (userId === null || userId === undefined) {
     return null;
   }
-  
+
   const { data, error } = await supabase
     .from('users')
     .update(updates)

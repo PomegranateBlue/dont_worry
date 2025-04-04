@@ -1,25 +1,12 @@
-import { supabase } from '../utils/supabase/supabase';
+import LetterForm from '@/components/LetterForm';
 
-type LetterProps = {
-  userId: string;
-  content: string;
-  sendAt: string;
-  imageUrl: string;
-};
-
-const LetterPage = async ({
-  userId,
-  content,
-  sendAt,
-  imageUrl
-}: LetterProps) => {
-  const { data, error } = await supabase
-    .from('letters')
-    .insert([{ user_id: userId, content, send_at: sendAt, img_url: imageUrl }]);
-  if (error) {
-    console.error('편지 저장 실패', error);
-  }
-  return data;
+const LetterPage = () => {
+  return (
+    <div>
+      <h1>편지페이지</h1>
+      <LetterForm />
+    </div>
+  );
 };
 
 export default LetterPage;

@@ -5,3 +5,36 @@ export type UsersNote = Tables<'users_note'>;
 export type UserStatistice = Tables<'user_statistics'>;
 
 export type Supabse = SupabaseClient<Database>;
+
+export interface UserNote {
+  created_at: string;
+  content: string;
+  note_img: string | null;
+  note_id: string;
+  id: string;
+  topic_category: string;
+  emotion_category: string;
+}
+
+// 언급 횟수를 저장하는 카운트 객체 타입
+export interface CategoryCounts {
+  [key: string]: number;
+}
+
+// 키워드 분석 결과 타입
+export interface KeywordAnalysis {
+  topics: CategoryCounts;
+  emotions: CategoryCounts;
+}
+
+// 랭킹 데이터 항목 타입
+export interface RankingItem {
+  name: string;
+  count: number;
+}
+
+// Top 10 랭킹 결과 타입
+export interface TopTenRanking {
+  topTopics: RankingItem[];
+  topEmotions: RankingItem[];
+}

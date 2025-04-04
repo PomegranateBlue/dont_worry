@@ -4,7 +4,7 @@ import {
   TOPIC_CATEGORIES,
   EMOTION_CATEGORIES
 } from '@/constants/openai/category';
-import { useState } from 'react';
+// import { useState } from 'react';
 const CategorySelector = () => {
   // const [topicCategory, setTopicCategory] = useState<string>[]([]);
   // const [emotionCategory, setEmotionCategory] = useState<string>[]([]);

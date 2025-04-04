@@ -1,12 +1,12 @@
 import FilterMenu from '@/components/ranking/FilterMenu';
-import RankingHeader from '@/components/ranking/RankingHeader';
+import WeekNavigator from '@/components/ranking/WeekNavigator';
 
 const RankingLayout = ({
   children
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
-      <RankingHeader />
+      <WeekNavigator />
       <FilterMenu />
       {children}
     </>

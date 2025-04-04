@@ -25,7 +25,7 @@ export default function WeekNavigator() {
         <div className="flex-shrink-0 w-6">
           <button
             onClick={goToPreviousWeek}
-            className="text-gray-600 hover:text-black"
+            className="text-600 hover:text-black"
           >
             <ChevronLeft size={24} />
           </button>
@@ -34,10 +34,7 @@ export default function WeekNavigator() {
         <h1 className="text-xl font-bold text-center">{formattedDate}</h1>
 
         <div className="flex-shrink-0 w-6">
-          <button
-            onClick={goToNextWeek}
-            className="text-gray-600 hover:text-black"
-          >
+          <button onClick={goToNextWeek} className="text-600 hover:text-black">
             <ChevronRight size={24} />
           </button>
         </div>

@@ -61,3 +61,13 @@ export const updateUserInfo = async (
   if (error) throw new Error(error.message);
   return data as Pick<User, 'email' | 'nickname' | 'profile_img'>;
 };
+
+export const getUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.log('오류!!', '사용자 정보를 가져오는 중 에러가 발생했습니다.');
+  } else {
+    console.log('data***:', data);
+    return data.user.id;
+  }
+};

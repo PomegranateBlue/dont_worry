@@ -1,9 +1,9 @@
 'use client';
 
 import {
+  fetchUser,
   fetchUserInfo,
   fetchUserLetters,
-  getUser,
   updateUserInfo,
   UserUpdate
 } from '@/app/utils/supabase/db';
@@ -24,7 +24,7 @@ export const useUserLetters = () => {
 // 사용자 정보
 export const useUserInfo = () => {
   const { user } = useUserStore();
-  console.log('user:', user);
+  console.log('텐스텍쿼리useUserInfo에서 사용자 ID:', user);
 
   return useQuery({
     queryKey: ['userinfo', user],
@@ -48,9 +48,8 @@ export const useUpdateUserInfo = () => {
 
 export const useUserData = () => {
   return useQuery({
-    queryKey: ["user"],
-    queryFn: () => getUser(),
-    staleTime: 1000 * 60 * 5,
+    queryKey: ['user'],
+    queryFn: () => fetchUser(),
+    staleTime: 1000 * 60 * 5
   });
 };
-

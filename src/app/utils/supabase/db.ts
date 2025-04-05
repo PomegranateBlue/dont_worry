@@ -1,5 +1,6 @@
 import { Database } from '@/types/supabase/supabase';
 import { supabase } from './supabase';
+import browserClient from './client';
 
 // 데이터베이스 타입 정의
 type Tables = Database['public']['Tables']; // Tables<'letters'>
@@ -9,6 +10,7 @@ export type UserUpdate = Pick<User, 'email' | 'nickname' | 'profile_img'>;
 // 사용자 정보 가져오기
 export const fetchUserInfo = async (userId: string | null | undefined) => {
   if (!userId) return null;
+  console.log('db.ts$$$$$$$', userId);
 
   try {
     const { data, error } = await supabase
@@ -62,12 +64,13 @@ export const updateUserInfo = async (
   return data as Pick<User, 'email' | 'nickname' | 'profile_img'>;
 };
 
-export const getUser = async () => {
-  const { data, error } = await supabase.auth.getUser();
+export const fetchUser = async () => {
+  const { data, error } = await browserClient.auth.getUser();
+  console.log('data***:', data);
   if (error) {
     console.log('오류!!', '사용자 정보를 가져오는 중 에러가 발생했습니다.');
+    throw new Error('사용자 정보를 가져오는 중 에러가 발생했습니다');
   } else {
-    console.log('data***:', data);
-    return data.user.id;
+    return data.user?.id;
   }
 };

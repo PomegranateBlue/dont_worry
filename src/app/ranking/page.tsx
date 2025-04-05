@@ -1,13 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import {
-  makeTopTen,
-  countMentionedKeyword
-} from '../utils/ranking/RankingFilter';
+import { makeTopTen } from '../utils/ranking/RankingFilter';
 import TopicChart from '@/components/ranking/TopicChart';
 import { useRankingStore } from '@/store/store';
-import { supabase } from '../utils/supabase/supabase';
-import { UserNote } from '@/types/ranking/types';
+import { fetchUserNotes } from '../utils/ranking/DataFetch';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();
@@ -22,30 +18,10 @@ const RankingPage = () => {
       try {
         setIsLoading(true);
 
-        const startDate = new Date(year, month - 1, (week - 1) * 7 + 1);
-        const endDate = new Date(year, month - 1, (week - 1) * 7 + 7);
+        const userNotes = await fetchUserNotes(year, month, week);
 
-        const startDateStr = startDate.toISOString().split('T')[0];
-        const endDateStr = endDate.toISOString().split('T')[0];
-
-        const { data, error } = await supabase
-          .from('users_note')
-          .select('*')
-          .gte('created_at', startDateStr)
-          .lte('created_at', endDateStr);
-
-        if (error) {
-          throw error;
-        }
-
-        if (data && data.length > 0) {
-          const userNotes = data as UserNote[];
-
-          const keywordAnalysis = countMentionedKeyword(userNotes);
-          console.log('키워드별 언급 횟수:', keywordAnalysis);
-
+        if (userNotes.length > 0) {
           const result = makeTopTen(userNotes);
-
           setTopTopics(result.topTopics);
         } else {
           console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`);

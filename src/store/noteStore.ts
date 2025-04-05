@@ -3,9 +3,11 @@ import { create } from 'zustand';
 interface NoteProps {
   selectedTopic: string | null; // 주제는 1개만
   selectedEmotions: string[]; // 감정은 최대 3개
-
   toggleTopic: (topic: string) => void;
   toggleEmotion: (emotion: string) => void;
+
+  message: string;
+  setMessage: (message: string) => void;
 }
 
 export const useNoteStore = create<NoteProps>((set) => ({
@@ -34,5 +36,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
       return {
         selectedEmotions: [...state.selectedEmotions, emotion]
       };
-    })
+    }),
+  message: '',
+  setMessage: (message) => set({ message })
 }));

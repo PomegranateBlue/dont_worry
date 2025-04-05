@@ -20,13 +20,14 @@ const MessagePage = () => {
     router.push('/note/result');
   };
   return (
-    <div>
+    <div className="flex flex-col">
+      <p>당신의 이야기를 듣고싶어요</p>
       <textarea
-        className="text-black"
+        className="text-black border-[1px] border-black"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button onClick={handleSubmit}>제출하기</button>
+      <button onClick={handleSubmit}>완료</button>
     </div>
   );
 };

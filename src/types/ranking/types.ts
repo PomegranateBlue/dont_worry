@@ -38,3 +38,10 @@ export interface TopTenRanking {
   topTopics: RankingItem[];
   topEmotions: RankingItem[];
 }
+
+//가장 많이 언급된 키워드 타입
+export interface Most {
+  name: string;
+  count: number;
+  percentage: string;
+}

@@ -11,6 +11,10 @@ import {
   ChartData
 } from 'chart.js';
 import { backgroundColor, borderColor } from '@/constants/ranking/ChartOptions';
+import {
+  EMOTION_FILTER_DESCRIPTION,
+  EMOTION_FILTER_DESCRIPTION2
+} from '@/constants/ranking/Line';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -47,7 +51,8 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
 
   return (
     <div>
-      <h1>감정별 분석 차트</h1>
+      <h1>{EMOTION_FILTER_DESCRIPTION}</h1>
+      <h1>{EMOTION_FILTER_DESCRIPTION2}</h1>
       <div style={{ width: 400, height: 400 }}>
         <Doughnut options={options} data={emotionChartData} />
       </div>

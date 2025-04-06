@@ -3,15 +3,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { motion } from 'framer-motion';
+import {
+  CHART_FILTER_EMOTION,
+  CHART_FILTER_TOPIC
+} from '@/constants/ranking/Line';
 const FilterMenu = () => {
   const pathName = usePathname();
   return (
     <div className="flex gap-3 text-white relative">
       <Link href="/ranking" className="relative">
-        주제별
+        {CHART_FILTER_TOPIC}
       </Link>
       <Link href="/ranking/emotions-rank" className="relative">
-        감정별
+        {CHART_FILTER_EMOTION}
       </Link>
       <motion.div
         className="absolute bottom-0 h-1 bg-white"

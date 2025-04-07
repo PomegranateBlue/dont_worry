@@ -29,7 +29,8 @@ export const createClient = () => {
 export const getIsLogin = async () => {
   const serverClient = createClient();
   const {
-    data: { session }
-  } = await serverClient.auth.getSession();
-  return !!session;
+    data: { user }
+  } = await serverClient.auth.getUser();
+  console.log(user);
+  return !!user;
 };

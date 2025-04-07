@@ -59,7 +59,7 @@ export default function LoginPage() {
         {state.error && <p>{state.error}</p>}
         <button type="submit">Log in</button>
       </form>
-      <Link href="signup">회원가입하러가기</Link>
+      <Link href="/auth/signup">회원가입하러가기</Link>
     </>
   );
 }

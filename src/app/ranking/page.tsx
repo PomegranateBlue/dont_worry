@@ -1,42 +1,91 @@
 'use client';
-import Chart from '@/components/ranking/Chart';
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../utils/supabase/supabase';
-import type { Tables } from '../../../database.types';
+import { makeTopTen } from '../utils/ranking/RankingFilter';
+import TopicChart from '@/components/ranking/TopicChart';
+
+import { fetchUserNotes } from '../utils/ranking/DataFetch';
+import { Most } from '@/types/ranking/types';
+import Report from '@/components/ranking/Report';
+import { NO_DATA_CHART } from '@/constants/ranking/Line';
+import { useRankingStore } from '@/store/ranking/rankingStore';
 
 const RankingPage = () => {
-  const [test, setTest] = useState<Tables<'users_note'>[]>([]);
+  const { year, month, week } = useRankingStore();
+  const [topTopics, setTopTopics] = useState<{ name: string; count: number }[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [most, setMost] = useState<Most | null>(null);
   useEffect(() => {
-    const getData = async () => {
-      const { data, error } = await supabase.from('users_note').select('*');
-      if (error) {
-        console.log(error);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+
+        const userNotes = await fetchUserNotes(year, month, week);
+
+        if (userNotes.length > 0) {
+          const result = makeTopTen(userNotes);
+          setTopTopics(result.topTopics);
+        } else {
+          console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`);
+          setTopTopics([]);
+        }
+      } catch (err) {
+        console.error('데이터 조회 오류:', err);
+        setError('데이터를 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        setIsLoading(false);
       }
-      console.log('fetcheddata=>', data);
-      setTest(data ?? []);
     };
 
-    getData();
-  }, []);
+    fetchData();
+
+    return () => {
+      setMost(null);
+    };
+  }, [year, month, week]);
 
   useEffect(() => {
-    console.log('Updated test:', test);
-  }, [test]);
+    if (topTopics.length === 0) return;
 
-  // const { data, error } = await supabase.from('users_note').select('*');   async잊지 말고 붙이세요
+    const mentionedEmotionPercentege = () => {
+      const sortedArr = topTopics.sort((a, b) => b.count - a.count);
+      const totalMentions = sortedArr.reduce(
+        (total, emotion) => total + emotion.count,
+        0
+      );
+      const emotionsWithPercentage = sortedArr.map((emotion) => ({
+        name: emotion.name,
+        count: emotion.count,
+        percentage: ((emotion.count / totalMentions) * 100).toFixed(2)
+      }));
 
-  // if (error) {
-  //   console.error('Error fetching data:', error);
-  //   return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
-  // }
+      if (emotionsWithPercentage.length > 0) {
+        setMost(emotionsWithPercentage[0]);
+      } else {
+        setMost(null);
+      }
+    };
 
-  // console.log(data); // data가 실제 배열인지 확인
-  // const res = JSON.stringify(data); // data를 문자열로 변환
-  // console.log('res=>', res);
+    mentionedEmotionPercentege();
+  }, [topTopics]);
 
+  if (isLoading) {
+    return <div>데이터를 불러오는 중입니다...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (topTopics.length === 0) {
+    return <div>{NO_DATA_CHART}</div>;
+  }
   return (
     <div>
-      <Chart />
+      <TopicChart topTopics={topTopics} />
+      <Report most={most} />
     </div>
   );
 };

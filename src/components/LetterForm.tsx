@@ -1,8 +1,9 @@
 'use client';
 
+import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { useUserStore } from '@/store/store';
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 
 const LetterForm = () => {
   //useState를 이용해 사용자가 입력한 값 상태관리
@@ -10,29 +11,34 @@ const LetterForm = () => {
   const [sendAt, setSendAt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [message, setMessage] = useState('');
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const { user } = useUserStore();
-  console.log('사용자!!!!', user);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+        error
+      } = await browserClient.auth.getUser();
+
+      //로그인하지 않은 경우, 제출 방지
+      if (user) {
+        console.log('사용자정보=>', user);
+        setUserId(user.id);
+      } else {
+        console.error('사용자 정보를 불러오는데 실패했습니다.', error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   //편지 제출 핸들러
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    //유저 정보 가져오기
-
-    const {
-      data: { user },
-      error: userError
-    } = await supabase.auth.getUser();
-    //console.log('사용자정보=>', user);
-    //로그인하지 않은 경우, 제출 방지
-    if (!user || userError) {
+    if (!userId) {
       setMessage('로그인 후 이용해주세요.');
       return;
     }
-
-    //supabase에 편지 데이터 저장
-    const userId = user.id;
 
     const { data, error } = await supabase
       .from('letter')
@@ -54,7 +60,6 @@ const LetterForm = () => {
   return (
     <section>
       <header>
-        {' '}
         <h1>미래의 나에게 하고싶은 말을 작성해보세요!</h1>
       </header>
 

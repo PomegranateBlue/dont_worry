@@ -10,37 +10,25 @@ const LetterForm = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [message, setMessage] = useState('');
 
-  //zustand에서 로그인 한 유저 정보 가져오기
-  //const { user, setUser } = useUserStore();
-
-  // 유저 테스트용 더미데이터 생성
-  // useEffect(() => {
-  //   const createDummyUser = async () => {
-  //     const { data, error } = await supabase.auth.signUp({
-  //       email: 'dumuser@example.com',
-  //       password: 'dumuser@example.com'
-  //     });
-  //     if (error) {
-  //       console.error('더미 유저 생성 실패:', error.message);
-  //     } else if (data?.user) {
-  //       console.log('더미 유저 생성 성공:', data.user);
-  //       setUser(data.user.id); // Zustand 상태 업데이트
-  //     }
-  //   };
-  //   if (!user) createDummyUser();
-  // }, [user, setUser]);
-
   //편지 제출 핸들러
-  const handleLetterSubmit = async (e) => {
+  const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    //유저 정보 가져오기
+    const {
+      data: { user },
+      error: userError
+    } = await supabase.auth.getUser();
+    console.log('사용자정보=>', user);
     //로그인하지 않은 경우, 제출 방지
-    if (!user) {
+    if (!user || userError) {
       setMessage('로그인 후 이용해주세요.');
       return;
     }
 
     //supabase에 편지 데이터 저장
+    const userId = user.id;
+
     const { data, error } = await supabase
       .from('letter')
       .insert([
@@ -50,6 +38,7 @@ const LetterForm = () => {
       console.error('편지 저장 실패', error);
       setMessage('저장에 실패했습니다.');
     } else {
+      console.log('저장된 편지 =>', data);
       setMessage('편지를 저장했습니다!');
       //저장 했으면 입력 필드 초기화
       setContent('');

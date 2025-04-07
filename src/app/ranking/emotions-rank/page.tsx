@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { makeTopTen } from '@/app/utils/ranking/RankingFilter';
 import EmotionChart from '@/components/ranking/EmotionsChart';
-import { useRankingStore } from '@/store/store';
 import { fetchUserNotes } from '@/app/utils/ranking/DataFetch';
 import Report from '@/components/ranking/Report';
 import { Most } from '@/types/ranking/types';
+import { NO_DATA_CHART } from '@/constants/ranking/Line';
+import { useRankingStore } from '@/store/ranking/rankingStore';
 
 const EmotionsRankginPage = () => {
   const { year, month, week } = useRankingStore();
@@ -76,6 +77,10 @@ const EmotionsRankginPage = () => {
 
   if (error) {
     return <div>{error}</div>;
+  }
+
+  if (topEmotions.length === 0) {
+    return <div>{NO_DATA_CHART}</div>;
   }
 
   return (

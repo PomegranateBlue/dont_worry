@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { makeTopTen } from '../utils/ranking/RankingFilter';
 import TopicChart from '@/components/ranking/TopicChart';
-import { useRankingStore } from '@/store/store';
+
 import { fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
 import Report from '@/components/ranking/Report';
+import { NO_DATA_CHART } from '@/constants/ranking/Line';
+import { useRankingStore } from '@/store/ranking/rankingStore';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();
@@ -66,8 +68,6 @@ const RankingPage = () => {
       }
     };
 
-    //todo: 가장 많이 언급된 감정 백분율 뽑아내기
-
     mentionedEmotionPercentege();
   }, [topTopics]);
 
@@ -79,6 +79,9 @@ const RankingPage = () => {
     return <div>{error}</div>;
   }
 
+  if (topTopics.length === 0) {
+    return <div>{NO_DATA_CHART}</div>;
+  }
   return (
     <div>
       <TopicChart topTopics={topTopics} />

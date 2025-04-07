@@ -1,9 +1,25 @@
-import React from 'react'
+'use client';
+
+import useAnalysisTrend from '@/app/utils/ranking/hooks/useAnalysisTrend';
+import { MOST_DECREASE_COMMENT } from '@/constants/ranking/Line';
+import { useRankingStore } from '@/store/ranking/rankingStore';
+
+import React from 'react';
 
 const BetterThing = () => {
-  return (
-    <div>BetterThing</div>
-  )
-}
+  const { year, month } = useRankingStore();
+  const { data, loading, error } = useAnalysisTrend(year, month);
+  if (loading) return <div className="p-4">데이터를 불러오는 중...</div>;
+  if (error) return <div className="p-4 text-red-500">{error}</div>;
+  if (!data) return <div className="p-4">표시할 데이터가 없습니다.</div>;
 
-export default BetterThing
+  const { mostDecreased } = data;
+
+  return (
+    <>
+      <div>{`${mostDecreased.category + MOST_DECREASE_COMMENT}`}</div>
+    </>
+  );
+};
+
+export default BetterThing;

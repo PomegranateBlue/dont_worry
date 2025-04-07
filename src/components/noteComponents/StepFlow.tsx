@@ -1,18 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+
 import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
+
 import { fetchGPT } from '@/lib/api/gpt/gpt';
 import { useNoteStore } from '@/store/noteStore';
 
+import StepButton from './StepButton';
 const StepFlow = () => {
-  const [step, setStep] = useState<'emotion' | 'topic' | 'message' | 'result'>(
-    'emotion'
+  const [step, setStep] = useState<'topic' | 'emotion' | 'message' | 'result'>(
+    'topic'
   );
-
   const { selectedTopic, selectedEmotions, message, setResult } =
     useNoteStore();
 
@@ -23,7 +25,6 @@ const StepFlow = () => {
         emotions: selectedEmotions,
         message
       });
-
       setResult(userInput);
       setStep('result');
     } catch (error) {
@@ -33,16 +34,16 @@ const StepFlow = () => {
 
   return (
     <div>
-      {step === 'emotion' && (
-        <div>
-          <EmotionCategoryForm />
-          <button onClick={() => setStep('topic')}>다음으로</button>
-        </div>
-      )}
-
       {step === 'topic' && (
         <div>
           <TopicCategoryForm />
+          <button onClick={() => setStep('emotion')}>다음으로</button>
+        </div>
+      )}
+
+      {step === 'emotion' && (
+        <div>
+          <EmotionCategoryForm />
           <button onClick={() => setStep('message')}>다음으로</button>
         </div>
       )}

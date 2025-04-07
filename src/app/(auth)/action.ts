@@ -32,6 +32,11 @@ export async function login(
   redirect('/');
 }
 
+// export async function logout(
+//   prevState:ErrorFormState,
+//   formData
+// )
+
 export async function signup(
   prevState: ErrorFormState,
   formData: FormData

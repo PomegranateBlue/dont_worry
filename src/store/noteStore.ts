@@ -8,6 +8,9 @@ interface NoteProps {
 
   message: string;
   setMessage: (message: string) => void;
+
+  result: string;
+  setResult: (result: string) => void;
 }
 
 export const useNoteStore = create<NoteProps>((set) => ({
@@ -37,6 +40,10 @@ export const useNoteStore = create<NoteProps>((set) => ({
         selectedEmotions: [...state.selectedEmotions, emotion]
       };
     }),
+
   message: '',
-  setMessage: (message) => set({ message })
+  setMessage: (message) => set({ message }),
+
+  result: '',
+  setResult: (result) => set({ result })
 }));

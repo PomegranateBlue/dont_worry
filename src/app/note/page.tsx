@@ -1,9 +1,9 @@
-import React from 'react'
+'use client';
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
-}
+import StepFlow from '@/components/noteComponents/StepFlow';
 
-export default page
+const NotePage = () => {
+  return <StepFlow />;
+};
+
+export default NotePage;

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 type UserState = {
-  user: string | null;
+  userId: string | null;
   setUser: (user: string | null) => void;
 };
 
@@ -19,7 +19,7 @@ interface RankingState {
 }
 
 export const useUserStore = create<UserState>((set) => ({
-  user: null,
+  userId: null,
   setUser: (user) => set({ user })
 }));
 

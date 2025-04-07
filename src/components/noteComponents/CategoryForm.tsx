@@ -5,7 +5,7 @@ import {
   EMOTION_CATEGORIES
 } from '@/constants/openai/category';
 import { useNoteStore } from '@/store/noteStore';
-const CategorySelector = () => {
+const CategoryForm = () => {
   const { selectedTopic, toggleTopic, selectedEmotions, toggleEmotion } =
     useNoteStore();
   return (
@@ -53,4 +53,4 @@ const CategorySelector = () => {
   );
 };
 
-export default CategorySelector;
+export default CategoryForm;

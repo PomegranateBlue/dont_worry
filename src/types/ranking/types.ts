@@ -45,3 +45,23 @@ export interface Most {
   count: number;
   percentage: string;
 }
+
+export interface CategoryChangeData {
+  change: number;
+  percentage: number;
+  current: number;
+  previous: number;
+}
+
+export interface CategoryResult {
+  category: string;
+  data: CategoryChangeData;
+}
+
+export interface AnalysisTrendsResult {
+  mostIncreased: CategoryResult;
+  mostDecreased: CategoryResult;
+  allChanges: Record<string, CategoryChangeData>;
+  prevMonthName: string;
+  currentMonthName: string;
+}

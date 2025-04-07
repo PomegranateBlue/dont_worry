@@ -1,6 +1,7 @@
 'use client';
 
-import { useRankingStore } from '@/store/store';
+
+import { useRankingStore } from '@/store/ranking/rankingStore';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { supabase } from '@/app/utils/supabase/supabase';
+import { useUserStore } from '@/store/store';
 import { useState } from 'react';
 
 const LetterForm = () => {
@@ -10,16 +11,20 @@ const LetterForm = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [message, setMessage] = useState('');
 
+  const { user } = useUserStore();
+  console.log('사용자!!!!', user);
+
   //편지 제출 핸들러
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     //유저 정보 가져오기
+
     const {
       data: { user },
       error: userError
     } = await supabase.auth.getUser();
-    console.log('사용자정보=>', user);
+    //console.log('사용자정보=>', user);
     //로그인하지 않은 경우, 제출 방지
     if (!user || userError) {
       setMessage('로그인 후 이용해주세요.');

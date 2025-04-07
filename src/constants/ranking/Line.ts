@@ -15,3 +15,14 @@ export const EMOTION_FILTER_DESCRIPTION = '감정별 분포';
 
 export const EMOTION_FILTER_DESCRIPTION2 =
   '걱정과 함께 기록한 감정을 한 눈에 볼 수 있어요';
+
+export const IS_LOADING = '데이터를 불러오는 중입니다...'; //임시 다른 폴백 ui추가시 제거
+
+export const NO_DATA_CHART =
+  '아직 걱정이 없으시군요! 걱정이 없으시다니 정말 다행이에요!'; //멘트 변경 필요
+
+export const MOST_DECREASE_COMMENT =
+  '에 관한 걱정이 전월 대비 가장 많이 감소했어요!';
+
+export const MOST_INCREASE_COMMENT =
+  '에 관한 걱정이 전월 대비 가장 많이 증가했어요!';

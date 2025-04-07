@@ -1,5 +1,7 @@
+import BetterThing from '@/components/ranking/BetterThing';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import WeekNavigator from '@/components/ranking/WeekNavigator';
+import WorsenedThing from '@/components/ranking/WorsenedThing';
 import { CHART_PAGE_TITLE } from '@/constants/ranking/Line';
 
 const RankingLayout = ({
@@ -11,6 +13,9 @@ const RankingLayout = ({
       <WeekNavigator />
       <FilterMenu />
       {children}
+      <BetterThing /> {/*걱숭이*/}
+      <WorsenedThing />
+      {/*걱숭이*/}
     </>
   );
 };

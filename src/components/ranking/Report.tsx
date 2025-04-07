@@ -5,7 +5,7 @@ interface ReportProps {
   most: Most | null;
 }
 
-const Report: React.FC<ReportProps> = ({ most }) => {
+const Report: React.FC<ReportProps> = ({ most }) => {//주차별 차트 하단에 간단 요약
   return (
     <div>
       {most && (

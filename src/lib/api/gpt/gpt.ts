@@ -3,7 +3,7 @@ export const fetchGPT = async ({
   emotions,
   message
 }: {
-  topic: string;
+  topic: string | null;
   emotions: string[];
   message: string;
 }) => {

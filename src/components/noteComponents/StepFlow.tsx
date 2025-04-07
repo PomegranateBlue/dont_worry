@@ -5,10 +5,31 @@ import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
+import { fetchGPT } from '@/lib/api/gpt/gpt';
+import { useNoteStore } from '@/store/noteStore';
+
 const StepFlow = () => {
   const [step, setStep] = useState<'emotion' | 'topic' | 'message' | 'result'>(
     'emotion'
   );
+
+  const { selectedTopic, selectedEmotions, message, setResult } =
+    useNoteStore();
+
+  const handelSubmit = async () => {
+    try {
+      const userInput = await fetchGPT({
+        topic: selectedTopic,
+        emotions: selectedEmotions,
+        message
+      });
+
+      setResult(userInput);
+      setStep('result');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -29,7 +50,7 @@ const StepFlow = () => {
       {step === 'message' && (
         <div>
           <MessageForm />
-          <button onClick={() => setStep('result')}>제출하기</button>
+          <button onClick={handelSubmit}>제출하기</button>
         </div>
       )}
 

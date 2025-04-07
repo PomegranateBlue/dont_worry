@@ -1,16 +1,16 @@
 import LetterForm from '@/components/LetterForm';
 import { supabase } from '../utils/supabase/supabase';
 
-interface LetterProps = {
+interface LetterProps {
   user: string;
 }
 
-const LetterPage = async ({user}: LetterProps) => {
+const LetterPage = async ({ user }: LetterProps) => {
   const { user, error } = await supabase.auth.signUp({
     email: 'user@example.com',
-    password: 'yourpassword',
+    password: 'yourpassword'
   });
-  
+
   if (error) {
     console.error('회원가입 실패:', error.message);
   } else {

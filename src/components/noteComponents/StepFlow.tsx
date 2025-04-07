@@ -10,11 +10,14 @@ import ResultForm from './ResultForm';
 import { fetchGPT } from '@/lib/api/gpt/gpt';
 import { useNoteStore } from '@/store/noteStore';
 
-import StepButton from './StepButton';
+enum StepProps {
+  topic = 'topic',
+  emotion = 'emotion',
+  message = 'message',
+  result = 'result'
+}
 const StepFlow = () => {
-  const [step, setStep] = useState<'topic' | 'emotion' | 'message' | 'result'>(
-    'topic'
-  );
+  const [step, setStep] = useState<StepProps>(StepProps.topic);
   const { selectedTopic, selectedEmotions, message, setResult } =
     useNoteStore();
 
@@ -26,7 +29,7 @@ const StepFlow = () => {
         message
       });
       setResult(userInput);
-      setStep('result');
+      setStep(StepProps.result);
     } catch (error) {
       console.error(error);
     }
@@ -34,28 +37,28 @@ const StepFlow = () => {
 
   return (
     <div>
-      {step === 'topic' && (
+      {step === StepProps.topic && (
         <div>
           <TopicCategoryForm />
-          <button onClick={() => setStep('emotion')}>다음으로</button>
+          <button onClick={() => setStep(StepProps.emotion)}>다음으로</button>
         </div>
       )}
 
-      {step === 'emotion' && (
+      {step === StepProps.emotion && (
         <div>
           <EmotionCategoryForm />
-          <button onClick={() => setStep('message')}>다음으로</button>
+          <button onClick={() => setStep(StepProps.message)}>다음으로</button>
         </div>
       )}
 
-      {step === 'message' && (
+      {step === StepProps.message && (
         <div>
           <MessageForm />
           <button onClick={handelSubmit}>제출하기</button>
         </div>
       )}
 
-      {step === 'result' && (
+      {step === StepProps.result && (
         <div>
           <ResultForm />
         </div>

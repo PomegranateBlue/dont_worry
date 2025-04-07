@@ -6,6 +6,7 @@ const LogOutButton = () => {
   const router = useRouter();
   const signOut = async () => {
     const { error } = await browserClient.auth.signOut();
+    
     router.refresh();
     console.log(error);
     alert('로그아웃');

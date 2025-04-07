@@ -1,14 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import StepFlow from '@/components/noteComponents/StepFlow';
 
 const NotePage = () => {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace('/note/category');
-  }, [router]);
-  return null;
+  return <StepFlow />;
 };
 
 export default NotePage;

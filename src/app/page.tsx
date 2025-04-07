@@ -39,7 +39,13 @@ const HomePage = () => {
           <br />
           편지를 보내보세요
         </p>
-        <Image src="/images/mail.svg" width={280} height={80} alt="mail" />
+        <Image
+          className="mx-auto"
+          src="/images/mail.svg"
+          width={280}
+          height={80}
+          alt="mail"
+        />
         <button className="flex justify-center items-center mx-auto px-6 py-3 bg-black text-white rounded-xl font-semibold">
           <Plus />
           서비스 시작하기

@@ -1,35 +1,26 @@
-// components/FilterModal.tsx
-interface Props {
+'use client';
+
+import React from 'react';
+
+interface FilterModalProps {
+  isOpen: boolean;
   onClose: () => void;
 }
 
-const FilterModal = ({ onClose }: Props) => {
-  return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-end">
-      {/* 배경 클릭 시 닫힘 */}
-      <div className="absolute inset-0" onClick={onClose} />
+const FilterModal = ({ isOpen, onClose }: FilterModalProps) => {
+  if (!isOpen) return null;
 
-      <div className="relative w-full max-w-[375px] bg-white rounded-t-2xl p-4 z-10">
-        <h2 className="text-lg font-bold text-center mb-4">작성순</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {['최신순', '오래된순', '가나다순'].map((item) => (
-            <button
-              key={item}
-              className="border rounded-full px-3 py-1 text-sm"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-        <div className="mt-6 flex justify-between">
-          <button className="text-sm text-gray-400">초기화</button>
-          <button
-            className="bg-black text-white px-4 py-2 text-sm rounded-full"
-            onClick={onClose}
-          >
-            12개 결과보기
-          </button>
-        </div>
+  return (
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+        <h2 className="text-lg font-semibold mb-4">필터 모달</h2>
+        <p>여기에 필터 내용을 넣으면 됩니다.</p>
+        <button
+          className="mt-4 px-4 py-2 bg-black text-white rounded-md"
+          onClick={onClose}
+        >
+          닫기
+        </button>
       </div>
     </div>
   );

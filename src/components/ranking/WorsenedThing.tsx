@@ -14,7 +14,12 @@ const WorsenedThing = () => {
   const { data, loading, error } = useAnalysisTrend(year, month);
   if (loading) return <div className="p-4">데이터를 불러오는 중...</div>;
   if (error) console.log(error);
-  if (!data) return <div className="p-4">표시할 데이터가 없습니다.</div>;
+  if (!data)
+    return (
+      <div className="p-4">
+        걱정이 없으시군요! 오늘도 기분 좋은 하루 되세요!
+      </div>
+    );
 
   const { mostIncreased } = data;
 

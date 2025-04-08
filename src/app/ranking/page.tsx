@@ -11,6 +11,7 @@ import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
+import TopThreeCard from '@/components/ranking/TopThreeCard';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();
@@ -23,6 +24,9 @@ const RankingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [most, setMost] = useState<Most | null>(null);
+  const [topThree, setTopThree] = useState<{ name: string; count: number }[]>(
+    []
+  );
 
   useEffect(() => {
     if (mode === 'week') {
@@ -34,6 +38,8 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopTopics(result.topTopics);
+            const topthree = result.topTopics.slice(0, 3);
+            setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`); //todo: del
             setTopTopics([]);
@@ -55,6 +61,8 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopTopics(result.topTopics);
+            const topthree = result.topTopics.slice(0, 3);
+            setTopThree(topthree);
             console.log(result);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`);
@@ -101,6 +109,8 @@ const RankingPage = () => {
     mentionedEmotionPercentege();
   }, [topTopics]);
 
+  console.log(topThree);
+
   if (isLoading) {
     return <div>데이터를 불러오는 중입니다...</div>;
   }
@@ -117,6 +127,13 @@ const RankingPage = () => {
     <div>
       <TopicChart topTopics={topTopics} />
       <Report most={most} />
+      {topThree.map((e) => {
+        return (
+          <div key={e.name}>
+            <TopThreeCard topThree={e} />
+          </div>
+        );
+      })}
     </div>
   );
 };

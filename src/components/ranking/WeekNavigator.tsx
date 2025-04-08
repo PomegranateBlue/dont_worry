@@ -21,7 +21,7 @@ export default function WeekNavigator() {
 
   return (
     <div>
-      <div className="flex items-center justify-between p-4 ">
+      <div className="flex items-center justify-between p-4 pb-4">
         <div className="flex-shrink-0 w-6">
           <button
             onClick={goToPreviousWeek}

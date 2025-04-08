@@ -1,6 +1,6 @@
 'use client';
 
-import LetterForm from '@/components/LetterForm';
+import LetterForm from '@/components/letterComponents/LetterForm';
 
 const LetterPage = () => {
   return (

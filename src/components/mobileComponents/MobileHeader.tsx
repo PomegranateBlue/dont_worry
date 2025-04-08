@@ -5,15 +5,15 @@ import Link from 'next/link';
 import LogOutButton from '../loginComponents/LogOutButton';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
+// import { useUserInfo } from '@/hooks/useMyPageQueries';
 
 interface MobileHeaderProps {
   isLogin: boolean;
 }
 
 export default function MobileHeader({ isLogin }: MobileHeaderProps) {
-  const { data: userData, isLoading: userDataLoading } = useUserInfo();
-  console.log(userData);
+  // const { data: userData, isLoading: userDataLoading } = useUserInfo();
+  // console.log(userData);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);

@@ -27,6 +27,7 @@ export type Database = {
           user_id?: string;
         };
         Update: {
+
           content?: string;
           created_at?: string;
           img_url?: string | null;
@@ -44,6 +45,7 @@ export type Database = {
           }
         ];
       };
+
       user_statistics: {
         Row: {
           comment: string;
@@ -58,21 +60,22 @@ export type Database = {
           user_id: string;
         };
         Update: {
-          comment?: string;
-          created_at?: string;
-          id?: number;
-          user_id?: string;
-        };
+          comment?: string
+          created_at?: string
+          id?: number
+          user_id?: string
+        }
         Relationships: [
           {
-            foreignKeyName: 'user_statistics_user_id_fkey';
-            columns: ['user_id'];
-            isOneToOne: false;
-            referencedRelation: 'users';
-            referencedColumns: ['user_id'];
-          }
-        ];
-      };
+            foreignKeyName: "user_statistics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+
       users: {
         Row: {
           created_at: string;
@@ -120,6 +123,7 @@ export type Database = {
           topic_category?: string | null;
         };
         Update: {
+
           content?: string;
           created_at?: string;
           emotion_category?: string | null;
@@ -139,6 +143,7 @@ export type Database = {
         ];
       };
     };
+
     Views: {
       [_ in never]: never;
     };
@@ -153,6 +158,7 @@ export type Database = {
     };
   };
 };
+
 
 type DefaultSchema = Database[Extract<keyof Database, 'public'>];
 
@@ -180,11 +186,13 @@ export type Tables<
       Row: infer R;
     }
     ? R
+
     : never
   : never;
 
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
+
     | keyof DefaultSchema['Tables']
     | { schema: keyof Database },
   TableName extends DefaultSchemaTableNameOrOptions extends {
@@ -203,11 +211,13 @@ export type TablesInsert<
       Insert: infer I;
     }
     ? I
+
     : never
   : never;
 
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
+
     | keyof DefaultSchema['Tables']
     | { schema: keyof Database },
   TableName extends DefaultSchemaTableNameOrOptions extends {
@@ -226,11 +236,13 @@ export type TablesUpdate<
       Update: infer U;
     }
     ? U
+
     : never
   : never;
 
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
+
     | keyof DefaultSchema['Enums']
     | { schema: keyof Database },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
@@ -247,6 +259,7 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema['CompositeTypes']
+
     | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
     schema: keyof Database;
@@ -254,6 +267,7 @@ export type CompositeTypes<
     ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
     : never = never
 > = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+
   ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema['CompositeTypes']
   ? DefaultSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
@@ -264,3 +278,4 @@ export const Constants = {
     Enums: {}
   }
 } as const;
+

@@ -9,6 +9,7 @@ import {
 } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
 import { PencilLine } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -50,7 +51,17 @@ const MyPage = () => {
     <div className="px-4 pb-20">
       {/* 프로필 섹션 */}
       <div className="flex flex-col items-center py-6">
-        {userInfo?.profile_img}
+        {userInfo?.profile_img && (
+          <div className="relative w-28 h-28 rounded-full overflow-hidden">
+            <Image
+              src={userInfo.profile_img}
+              alt="프로필 이미지"
+              fill
+              className="object-cover"
+              sizes="112px"
+            />
+          </div>
+        )}
         {/* 프로필 이미지 */}
         <div className="relative w-28 h-28 rounded-full bg-gray-200 border overflow-hidden">
           {/* 수정 아이콘 */}
@@ -77,14 +88,14 @@ const MyPage = () => {
         <div className="flex-1 text-center">
           <p className="text-lg font-semibold">
             {/* 걱정 갯수 넣기 */}
-            {userWorries?.length}개
+            {userWorries?.length || 0}개
           </p>
           <p className="text-xs text-gray-500">작성한 걱정</p>
         </div>
         <div className="w-px h-10 bg-gray-200" />
         <div className="flex-1 text-center">
           <Link href="/letter">
-            <p className="text-lg font-semibold">{letters?.length}개</p>
+            <p className="text-lg font-semibold">{letters?.length || 0}개</p>
             <p className="text-xs text-gray-500">미래 편지</p>
           </Link>
         </div>

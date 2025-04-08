@@ -11,8 +11,8 @@ const LetterForm = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [message, setMessage] = useState('');
 
-  const { user } = useUserStore();
-  console.log('사용자!!!!', user);
+  const { userId } = useUserStore();
+  console.log('사용자!!!!', userId);
 
   //편지 제출 핸들러
   const handleLetterSubmit = async (e: React.FormEvent) => {

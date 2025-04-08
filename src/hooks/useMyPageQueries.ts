@@ -12,36 +12,37 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // 미래 편지
 export const useUserLetters = () => {
-  const { user } = useUserStore();
+  const { userId } = useUserStore();
 
   return useQuery({
-    queryKey: ['futureLetters', user],
-    queryFn: () => fetchUserLetters(user),
-    enabled: !!user
+    queryKey: ['futureLetters', userId],
+    queryFn: () => fetchUserLetters(userId),
+    enabled: !!userId
   });
 };
 
 // 사용자 정보
 export const useUserInfo = () => {
-  const { user } = useUserStore();
-  console.log('텐스텍쿼리useUserInfo에서 사용자 ID:', user);
+  const { userId } = useUserStore();
+  console.log('텐스텍쿼리useUserInfo에서 사용자 ID:', userId);
 
   return useQuery({
-    queryKey: ['userinfo', user],
-    queryFn: () => fetchUserInfo(user),
-    enabled: !!user
+    queryKey: ['userinfo', userId],
+    queryFn: () => fetchUserInfo(userId),
+    enabled: !!userId
   });
 };
 
 // 사용자 정보 업데이트
 export const useUpdateUserInfo = () => {
-  const { user } = useUserStore();
+  const { userId } = useUserStore();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (updates: Partial<UserUpdate>) => updateUserInfo(user, updates),
+    mutationFn: (updates: Partial<UserUpdate>) =>
+      updateUserInfo(userId, updates),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userinfo', user] });
+      queryClient.invalidateQueries({ queryKey: ['userinfo', userId] });
     }
   });
 };

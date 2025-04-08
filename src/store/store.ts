@@ -7,5 +7,5 @@ type UserState = {
 
 export const useUserStore = create<UserState>((set) => ({
   userId: null,
-  setUser: (user) => set({ user })
+  setUser: (userId) => set({ userId })
 }));

@@ -27,6 +27,8 @@ const MyPage = () => {
   const { data: letters, isLoading: lettersLoading } = useUserLetters();
   const { data: userData, isLoading: userDataLoading } = useUserInfo(); // 작동 함 Rls 문제
 
+  console.log(letters);
+  
   const isLoading = userDataLoading || lettersLoading || isUserPending;
   console.log('page.tsx userData$$', userData);
 

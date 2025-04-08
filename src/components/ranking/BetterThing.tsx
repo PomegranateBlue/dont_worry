@@ -1,6 +1,7 @@
 'use client';
 
-import useAnalysisTrend from '@/app/utils/ranking/hooks/useAnalysisTrend';
+// import useAnalysisTrend from '@/app/utils/ranking/hooks/useAnalysisTrend';
+import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import { MOST_DECREASE_COMMENT } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 

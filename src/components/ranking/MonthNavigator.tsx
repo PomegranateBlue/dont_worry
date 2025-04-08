@@ -1,30 +1,29 @@
 'use client';
 
-import { useRankingStore } from '@/store/ranking/rankingStore';
+import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
 
-export default function WeekNavigator() {
+export default function MonthNavigator() {
   const {
-    formattedDate,
-    goToPreviousWeek,
-    goToNextWeek,
-    initialize,
     year,
     month,
-    week
-  } = useRankingStore();
+    formattedDate,
+    goToNextMonth,
+    goToPreviousMonth,
+    initialize
+  } = useMRankingStore();
 
   useEffect(() => {
-    initialize(year, month, week);
-  }, [initialize, year, month, week]);
+    initialize(year, month);
+  }, [initialize, year, month]);
 
   return (
     <div>
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex-shrink-0 w-6">
           <button
-            onClick={goToPreviousWeek}
+            onClick={goToPreviousMonth}
             className="text-600 hover:text-black"
             style={{ fontSize: '1.5rem' }}
           >
@@ -35,7 +34,7 @@ export default function WeekNavigator() {
         <h1 className="text-xl font-bold text-center">{formattedDate}</h1>
 
         <div className="flex-shrink-0 w-6">
-          <button onClick={goToNextWeek} className="text-600 hover:text-black">
+          <button onClick={goToNextMonth} className="text-600 hover:text-black">
             <ChevronRight size={24} />
           </button>
         </div>

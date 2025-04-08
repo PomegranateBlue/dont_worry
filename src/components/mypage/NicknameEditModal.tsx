@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useUpdateUserInfo, useUserInfo } from '@/hooks/useMyPageQueries';
+import { useEffect } from 'react';
 
 // 닉네임만을 위한 유효성 검증 스키마
 const nicknameSchema = z.object({
@@ -25,13 +26,20 @@ const NicknameEditModal = ({
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue
   } = useForm<NicknameFormValues>({
     resolver: zodResolver(nicknameSchema),
     defaultValues: {
       nickname: userInfo?.nickname || ''
     }
   });
+
+  useEffect(() => {
+    if (userInfo?.nickname) {
+      setValue('nickname', userInfo.nickname);
+    }
+  }, [userInfo, setValue]);
 
   const onSubmit = (data: NicknameFormValues) => {
     // 닉네임만 업데이트
@@ -41,6 +49,9 @@ const NicknameEditModal = ({
         onSuccess: () => {
           onClose();
           reset();
+        },
+        onError: (error) => {
+          console.log('Failed to update nickname:', error);
         }
       }
     );
@@ -50,8 +61,19 @@ const NicknameEditModal = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md m-8">
-        <h2 className="text-xl font-bold mb-4">닉네임 변경</h2>
+      {/* <div className="bg-white p-6 rounded-lg w-full max-w-md m-8"> */}
+      <div
+        className="bg-white p-6 rounded-lg w-full max-w-md m-8"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') onClose();
+        }}
+      >
+        <h2 id="modal-title" className="text-xl font-bold mb-4">
+          닉네임 변경
+        </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">

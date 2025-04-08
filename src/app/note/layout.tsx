@@ -3,5 +3,9 @@ export default function NoteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <div>{children}</div>
+    </div>
+  );
 }

@@ -9,7 +9,7 @@ import { useUserData } from '@/hooks/useMyPageQueries';
 
 const ResultSaveButton = () => {
   const { selectedTopic, selectedEmotions, result } = useNoteStore();
-  const { userId } = useUserStore();
+  const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
   const loginUser = useUserData();
 
@@ -18,14 +18,14 @@ const ResultSaveButton = () => {
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');
     console.log(result);
-    console.log(userId);
+    console.log(user);
     const note: TablesInsert<'users_note'> = {
       content: result,
       topic_category: selectedTopic,
       emotion_category: selectedEmotions.join(','),
       created_at: new Date().toISOString(),
       note_img: null,
-      id: userId!
+      id: user!
     };
 
     // console.log('111111111111111', selectedTopic);

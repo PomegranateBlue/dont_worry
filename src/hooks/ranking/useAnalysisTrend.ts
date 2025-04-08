@@ -1,8 +1,9 @@
 'use client';
+import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
 import { AnalysisTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
-// import { analyzeCategoryTrends } from '../DataFetch';
-import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
+//
+
 const useAnalysisTrend = (year: number, month: number) => {
   const [data, setData] = useState<AnalysisTrendsResult | null>(null); //todo: 이하 3개 스테이트 커스텀훅 리팩토링
   const [loading, setLoading] = useState(true);

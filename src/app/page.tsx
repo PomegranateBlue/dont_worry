@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+import { useUserData } from '@/hooks/useMyPageQueries';
 const HomePage = () => {
+  const { data } = useUserData();
+  console.log(data);
   return (
     <main className="min-h-screen">
       <section className="w-full h-[482px] bg-black">Hero section</section>

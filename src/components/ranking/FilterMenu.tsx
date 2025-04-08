@@ -14,7 +14,7 @@ const FilterMenu = () => {
   const isEmotion = pathName === '/ranking/emotions-rank';
 
   return (
-    <div className="w-full px-4 pb-6 bg-white">
+    <div className="w-full px-4 pb-6 bg-white mt-2">
       <div className="flex justify-start gap-3 max-w-screen-md mx-auto">
         <Link href="/ranking">
           <button

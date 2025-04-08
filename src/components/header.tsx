@@ -7,10 +7,9 @@ export default async function Header() {
   const isLogin = await getIsLogin();
 
   return (
-    <>
-      <header className="hidden md:flex flex-row flex-wrap bg-white p-4 justify-between border-b border-b-[#ccc]">
+    <header className="w-full bg-white border-b border-b-[#EDEDED]">
+      <nav className="hidden md:flex flex-row flex-wrap justify-between w-full p-4">
         <Link href="/">서비스 소개</Link>
-
         {isLogin ? (
           <>
             <Link href="/note">걱정 작성</Link>
@@ -26,8 +25,8 @@ export default async function Header() {
             <Link href="/auth/signup">회원가입</Link>
           </div>
         )}
-      </header>
+      </nav>
       <MobileHeader isLogin={isLogin} />
-    </>
+    </header>
   );
 }

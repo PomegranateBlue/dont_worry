@@ -32,34 +32,66 @@ export default function LoginPage() {
 
   return (
     <>
-      <form action={formAction}>
-        <label>
-          Email:
-          <input
-            {...register('email')}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            required
-          />
-        </label>
-        {errors.email && <span>{errors.email.message}</span>}
-        <label>
-          Password:
-          <input
-            {...register('password')}
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-        </label>
-        {errors.password && <span>{errors.password.message}</span>}
+      <h2 className="m-4 text-center font-semibold">로그인</h2>
+      <form action={formAction} className="space-y-2">
+        <div>
+          <label>
+            <span className="font-semibold">이메일</span>
+            <input
+              {...register('email')}
+              type="email"
+              name="email"
+              id="email"
+              placeholder="ex)abc@email.com"
+              required
+              className="w-full p-4 border-b-[1px] border-b-[#D6D6D6]"
+            />
+            {errors.email && (
+              <p className="text-red-500 mt-1">{errors.email.message}</p>
+            )}
+          </label>
+        </div>
+        <div>
+          <label>
+            비밀번호
+            <input
+              {...register('password')}
+              type="password"
+              name="password"
+              placeholder="비밀번호 입력"
+              required
+              className="w-full p-4 border-b-[1px] border-b-[#D6D6D6]"
+            />
+            {errors.password ? (
+              <p className="text-red-500 mt-1">{errors.password.message}</p>
+            ) : (
+              <p className="text-[#A3A3A3] text-sm mt-1">
+                영문 및 숫자, 12자 이내
+              </p>
+            )}
+          </label>
+        </div>
+
         {state.error && <p>{state.error}</p>}
-        <button type="submit">Log in</button>
+
+        <button
+          type="submit"
+          className="w-full bg-black p-3 rounded-sm !mt-10 text-white"
+        >
+          로그인
+        </button>
       </form>
-      <Link href="/auth/signup">회원가입하러가기</Link>
+      <div className="mt-10">
+        <p className="text-lg text-center">소셜 계정으로 로그인</p>
+        <ul className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
+          <li className="w-[52px] h-[52px] bg-gray-300 rounded-full"></li>
+          <li className="w-[52px] h-[52px] bg-gray-300 rounded-full"></li>
+          <li className="w-[52px] h-[52px] bg-gray-300 rounded-full"></li>
+        </ul>
+      </div>
+      <Link href="/auth/signup" className="text-center mx-auto w-fit block">
+        회원가입
+      </Link>
     </>
   );
 }

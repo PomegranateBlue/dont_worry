@@ -10,7 +10,9 @@ const RankingLayout = ({
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <div className="h-100">
-      <h1>{CHART_PAGE_TITLE}</h1>
+      <h1 className="text-center text-2xl font-bold border-b border-gray-200 pb-4 pt-6">
+        {CHART_PAGE_TITLE}
+      </h1>
       <MWFilter />
       <MWNavigator />
       <FilterMenu />

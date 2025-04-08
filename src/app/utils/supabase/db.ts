@@ -1,6 +1,7 @@
-import { Database } from '@/types/supabase/supabase';
+
 import { supabase } from './supabase';
 import browserClient from './client';
+import { Database } from '../../../../database.types';
 
 // 데이터베이스 타입 정의
 type Tables = Database['public']['Tables']; // Tables<'letters'>

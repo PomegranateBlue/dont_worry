@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -10,7 +11,7 @@ import {
 const FilterMenu = () => {
   const pathName = usePathname();
   return (
-    <div className="flex gap-3 text-white relative">
+    <div className="flex gap-15 text-black relative justify-center items-center w-full">
       <Link href="/ranking" className="relative">
         {CHART_FILTER_TOPIC}
       </Link>
@@ -18,12 +19,12 @@ const FilterMenu = () => {
         {CHART_FILTER_EMOTION}
       </Link>
       <motion.div
-        className="absolute inset-0 bg-black  -z-10"
-        layoutId="background"
+        className="absolute bottom-0 h-1 bg-black"
+        layoutId="underline"
         initial={false}
         animate={{
-          width: pathName === '/ranking' ? '42px' : '40px',
-          x: pathName === '/ranking' ? '0%' : '138%'
+          width: pathName === '/ranking' ? '2.5rem' : '2.8rem',
+          x: pathName === '/ranking' ? '110%' : '118%'
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       />

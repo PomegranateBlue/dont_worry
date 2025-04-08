@@ -1,6 +1,7 @@
 import BetterThing from '@/components/ranking/BetterThing';
 import FilterMenu from '@/components/ranking/FilterMenu';
-import WeekNavigator from '@/components/ranking/WeekNavigator';
+import MWNavigator from '@/components/ranking/FusionComp/MWNavigator';
+import MWFilter from '@/components/ranking/MWFilter';
 import WorsenedThing from '@/components/ranking/WorsenedThing';
 import { CHART_PAGE_TITLE } from '@/constants/ranking/Line';
 
@@ -10,8 +11,9 @@ const RankingLayout = ({
   return (
     <>
       <h1>{CHART_PAGE_TITLE}</h1>
-      <WeekNavigator />
+      <MWNavigator />
       <FilterMenu />
+      <MWFilter />
       {children}
       <BetterThing /> {/*걱숭이*/}
       <WorsenedThing />

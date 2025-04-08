@@ -2,27 +2,38 @@
 
 import { useNoteStore } from '@/store/noteStore';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useState } from 'react';
 import { TablesInsert } from '../../../database.types';
+import { useUserStore } from '@/store/store';
+import { useUserData } from '@/hooks/useMyPageQueries';
 
 const ResultSaveButton = () => {
   const { selectedTopic, selectedEmotions, result } = useNoteStore();
-  const { data: user } = useUserInfo();
+  const { userId } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
+  const loginUser = useUserData();
+
+  console.log(loginUser);
 
   const handleSaveMessage = async () => {
-    if (!user || !result) return;
-
+    console.log('저장되었습니다');
+    console.log(result);
+    console.log(userId);
     const note: TablesInsert<'users_note'> = {
       content: result,
       topic_category: selectedTopic,
       emotion_category: selectedEmotions.join(','),
       created_at: new Date().toISOString(),
-      note_img: null
+      note_img: null,
+      id: userId!
     };
 
-    const { error } = await supabase.from('users_note').insert(note);
+    // console.log('111111111111111', selectedTopic);
+    // console.log('222222222222222222', selectedEmotions);
+    // console.log('33333333333333333333', result);
+
+    console.log('#############', note);
+    const { error } = await supabase.from('users_note').insert([note]);
 
     if (error) {
       console.error('저장 실패:', error);

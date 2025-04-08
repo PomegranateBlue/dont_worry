@@ -28,7 +28,7 @@ const MyPage = () => {
   const { data: userData, isLoading: userDataLoading } = useUserInfo(); // 작동 함 Rls 문제
 
   console.log(letters);
-  
+
   const isLoading = userDataLoading || lettersLoading || isUserPending;
   console.log('page.tsx userData$$', userData);
 
@@ -40,7 +40,7 @@ const MyPage = () => {
     return <div>Loading...</div>;
   }
 
-  console.log('userid:', userid);
+  // console.log('userid:', userid);
 
   return (
     <div>

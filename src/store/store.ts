@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+
 
 type UserState = {
   userId: string | null;

@@ -5,6 +5,7 @@ import { useUserStore } from '@/store/store';
 import { AnalysisTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
 //월별 추이 top2
+
 const useAnalysisTrend = (year: number, month: number) => {
   const [data, setData] = useState<AnalysisTrendsResult | null>(null);
   const [loading, setLoading] = useState(true);

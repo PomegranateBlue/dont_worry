@@ -76,7 +76,7 @@ const SignupPage = () => {
           회원가입
         </button>
       </form>
-      <Link href="login">로그인하러가기</Link>
+      <Link href="/auth/login">로그인하러가기</Link>
     </div>
   );
 };

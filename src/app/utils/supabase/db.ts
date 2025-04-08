@@ -1,6 +1,7 @@
-import { Database } from '@/types/supabase/supabase';
+
 import { supabase } from './supabase';
 import browserClient from './client';
+import { Database } from '../../../../database.types';
 
 // 데이터베이스 타입 정의
 type Tables = Database['public']['Tables']; // Tables<'letters'>
@@ -10,7 +11,6 @@ export type UserUpdate = Pick<User, 'email' | 'nickname' | 'profile_img'>;
 // 사용자 정보 가져오기
 export const fetchUserInfo = async (userId: string | null | undefined) => {
   if (!userId) return null;
-  console.log('db.ts$$$$$$$', userId);
 
   try {
     const { data, error } = await supabase
@@ -53,7 +53,7 @@ export const updateUserInfo = async (
     return null;
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await browserClient
     .from('users')
     .update(updates)
     .eq('user_id', userId)
@@ -64,13 +64,29 @@ export const updateUserInfo = async (
   return data as Pick<User, 'email' | 'nickname' | 'profile_img'>;
 };
 
+//로그인 유저 ID
 export const fetchUser = async () => {
   const { data, error } = await browserClient.auth.getUser();
-  console.log('data***:', data);
   if (error) {
     console.log('오류!!', '사용자 정보를 가져오는 중 에러가 발생했습니다.');
     throw new Error('사용자 정보를 가져오는 중 에러가 발생했습니다');
   } else {
     return data.user?.id;
   }
+};
+
+// 사용자 걱정 보관함
+export const fetchUserWorries = async (userId: string | null | undefined) => {
+  if (userId === null || userId === undefined) {
+    return [];
+  }
+
+  const { data, error } = await supabase
+    .from('users_note')
+    .select('*')
+    .eq('id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) throw new Error(error.message);
+  return data || [];
 };

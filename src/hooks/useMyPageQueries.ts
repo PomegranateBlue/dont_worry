@@ -4,6 +4,7 @@ import {
   fetchUser,
   fetchUserInfo,
   fetchUserLetters,
+  fetchUserWorries,
   updateUserInfo,
   UserUpdate
 } from '@/app/utils/supabase/db';
@@ -24,8 +25,6 @@ export const useUserLetters = () => {
 // 사용자 정보
 export const useUserInfo = () => {
   const { user } = useUserStore();
-  console.log('텐스텍쿼리useUserInfo에서 사용자 ID:', user);
-
   return useQuery({
     queryKey: ['userinfo', user],
     queryFn: () => fetchUserInfo(user),
@@ -46,10 +45,22 @@ export const useUpdateUserInfo = () => {
   });
 };
 
+//로그인 유저 ID
 export const useUserData = () => {
   return useQuery({
     queryKey: ['user'],
     queryFn: () => fetchUser(),
     staleTime: 1000 * 60 * 5
+  });
+};
+
+// 사용자 걱정 보관함
+export const useUserWorries = () => {
+  const { user } = useUserStore();
+
+  return useQuery({
+    queryKey: ['userworries', user],
+    queryFn: () => fetchUserWorries(user),
+    enabled: !!user
   });
 };

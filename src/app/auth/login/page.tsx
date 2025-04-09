@@ -5,9 +5,12 @@ import { login } from '../action';
 import { useForm } from 'react-hook-form';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/store';
+import { useUserData } from '@/hooks/useMyPageQueries';
 import Image from 'next/image';
 
-const initialState = { error: null };
+const initialState = { success: false, error: null };
 
 const schema = z.object({
   email: z
@@ -18,6 +21,9 @@ const schema = z.object({
 });
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { data: user } = useUserData();
+  const { setUser } = useUserStore();
   const {
     register,
     formState: { errors }
@@ -30,6 +36,12 @@ export default function LoginPage() {
     }
   });
   const [state, formAction] = useFormState(login, initialState);
+  if (state.success) {
+    console.log(state);
+    setUser(user!);
+    console.log(user);
+    router.push('/');
+  }
 
   return (
     <>

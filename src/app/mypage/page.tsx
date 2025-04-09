@@ -34,9 +34,12 @@ const MyPage = () => {
       if (!user) return;
       const url = await uploadProfileImage(file, user);
       await updateUserInfo({ profile_img: url });
+      queryClient.invalidateQueries({ queryKey: ['userinfo', user] });
+      return url;
     } catch (err) {
-      alert('이미지 업로드 실패 ');
-      console.log(err);
+      console.error('이미지 업로드 실패:', err);
+      alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
+      throw err;
     }
   };
 
@@ -44,9 +47,11 @@ const MyPage = () => {
     try {
       await updateUserInfo({ profile_img: null });
       queryClient.invalidateQueries({ queryKey: ['userinfo', user] });
+      return true;
     } catch (err) {
-      alert('이미지 삭제 실패 ');
-      console.log(err);
+      console.error('이미지 삭제 실패:', err);
+      alert('이미지 삭제에 실패했습니다. 다시 시도해주세요.');
+      throw err;
     }
   };
 
@@ -134,8 +139,8 @@ const MyPage = () => {
           </Link>
         ))}
       </div>
-      <div className='flex flex-row justify-center gap-12 mt-4 text-gray-500'>
-        <LogOutButton/>
+      <div className="flex flex-row justify-center gap-12 mt-4 text-gray-500">
+        <LogOutButton />
         <p>회원탈퇴</p>
       </div>
     </div>

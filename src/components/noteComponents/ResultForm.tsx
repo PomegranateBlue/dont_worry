@@ -1,8 +1,9 @@
+'use client';
+
 import { useNoteStore } from '@/store/noteStore';
-
 const ResultForm = () => {
-  const result = useNoteStore((state) => state.result);
-
+  const { result } = useNoteStore();
+  console.log(result);
   return (
     <div>
       <h2>걱숭이의 답변은?</h2>

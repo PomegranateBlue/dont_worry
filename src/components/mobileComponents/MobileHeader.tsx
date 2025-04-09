@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import LogOutButton from '../loginComponents/LogOutButton';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AlignJustify, X } from 'lucide-react';
 // import { useUserInfo } from '@/hooks/useMyPageQueries';
 
 interface MobileHeaderProps {
@@ -45,16 +45,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
-        {isMenuOpen ? (
-          <Image
-            src="/images/ico-close.png"
-            width={24}
-            height={24}
-            alt="close"
-          />
-        ) : (
-          <Image src="/images/ico-ham.png" width={30} height={30} alt="menu" />
-        )}
+        {isMenuOpen ? <X /> : <AlignJustify />}
       </button>
       {isLogin && !isMenuOpen && (
         <div className="w-[30px] h-[30px] bg-slate-400 rounded-full" />

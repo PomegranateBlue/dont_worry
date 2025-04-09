@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PencilLine, X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -11,17 +11,32 @@ interface ProfileImageProps {
 const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
   const [preview, setPreview] = useState<string | null>(imageUrl || null);
 
+  useEffect(() => {
+    return () => {
+      if (preview && preview !== imageUrl) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview, imageUrl]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (preview && preview !== imageUrl) {
+        URL.revokeObjectURL(preview);
+      }
       setPreview(URL.createObjectURL(file));
       onUpload(file);
     }
   };
 
   const handleDelete = async () => {
-    await onDelete();
-    setPreview(null);
+    try {
+      await onDelete();
+      setPreview(null);
+    } catch (error) {
+      console.error('Failed to delete image:', error);
+    }
   };
 
   return (

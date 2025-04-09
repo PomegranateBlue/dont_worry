@@ -19,13 +19,17 @@ const ResultSaveButton = () => {
     console.log('저장되었습니다');
     console.log(result);
     console.log(user);
+
+    if (!user) {
+      return;
+    }
     const note: TablesInsert<'users_note'> = {
       content: result,
       topic_category: selectedTopic,
       emotion_category: selectedEmotions.join(','),
       created_at: new Date().toISOString(),
       note_img: null,
-      id: user!
+      id: user
     };
 
     // console.log('111111111111111', selectedTopic);

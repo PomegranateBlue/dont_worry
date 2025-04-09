@@ -39,8 +39,9 @@ export default function LoginPage() {
     console.log(state);
     setUser(user!);
     console.log(user);
+    router.push('/');
   }
-  router.push('/');
+
   return (
     <>
       <form action={formAction}>

@@ -5,8 +5,13 @@ import { UserNote } from '@/types/ranking/types';
 export const fetchUserNotes = async (
   year: number,
   month: number,
-  week: number
+  week: number,
+  id: string | null
 ) => {
+  if (!id) {
+    throw new Error('사용자 ID가 없습니다.');
+  }
+
   try {
     const startDate = new Date(year, month - 1, (week - 1) * 7 + 1);
     const endDate = new Date(year, month - 1, (week - 1) * 7 + 7);
@@ -18,7 +23,8 @@ export const fetchUserNotes = async (
       .from('users_note')
       .select('*')
       .gte('created_at', startDateStr)
-      .lte('created_at', endDateStr);
+      .lte('created_at', endDateStr)
+      .eq('id', id);
 
     if (error) {
       throw error;
@@ -32,7 +38,15 @@ export const fetchUserNotes = async (
 };
 
 //월 단위의 데이터를 패칭
-export const fetchMonthlyNotes = async (year: number, month: number) => {
+export const fetchMonthlyNotes = async (
+  year: number,
+  month: number,
+  id: string | null
+) => {
+  if (!id) {
+    throw new Error('사용자 ID가 없습니다.');
+  }
+
   try {
     const startDate = new Date(year, month - 1, 1);
     const endDate = new Date(year, month, 0);
@@ -44,7 +58,8 @@ export const fetchMonthlyNotes = async (year: number, month: number) => {
       .from('users_note')
       .select('*')
       .gte('created_at', startDateStr)
-      .lte('created_at', endDateStr);
+      .lte('created_at', endDateStr)
+      .eq('id', id);
 
     if (error) {
       throw error;
@@ -83,7 +98,8 @@ const countAllCategoryMentions = (data: UserNote[]) => {
 
 export const analyzeCategoryTrends = async (
   currentYear: number,
-  currentMonth: number
+  currentMonth: number,
+  id: string | null
 ) => {
   try {
     let prevMonth = currentMonth - 1;
@@ -93,8 +109,12 @@ export const analyzeCategoryTrends = async (
       prevYear = currentYear - 1;
     }
 
-    const currentMonthData = await fetchMonthlyNotes(currentYear, currentMonth);
-    const prevMonthData = await fetchMonthlyNotes(prevYear, prevMonth);
+    const currentMonthData = await fetchMonthlyNotes(
+      currentYear,
+      currentMonth,
+      id
+    );
+    const prevMonthData = await fetchMonthlyNotes(prevYear, prevMonth, id);
 
     const currentCounts = countAllCategoryMentions(currentMonthData);
     const prevCounts = countAllCategoryMentions(prevMonthData);
@@ -128,7 +148,7 @@ export const analyzeCategoryTrends = async (
 
       changes[category] = {
         change,
-        percentage: Math.round(percentage * 10) / 10, 
+        percentage: Math.round(percentage * 10) / 10,
         current,
         previous
       };

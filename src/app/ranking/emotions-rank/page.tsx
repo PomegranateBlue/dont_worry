@@ -12,6 +12,7 @@ import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
+import TopThreeCard from '@/components/ranking/TopThreeCard';
 
 const EmotionsRankginPage = () => {
   const { year, month, week, mode } = useRankingStore();
@@ -23,7 +24,9 @@ const EmotionsRankginPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [most, setMost] = useState<Most | null>(null);
-
+  const [topThree, setTopThree] = useState<
+    { name: string; count: number }[] | null
+  >([]);
   useEffect(() => {
     if (mode === 'week') {
       const fetchData = async () => {
@@ -34,6 +37,8 @@ const EmotionsRankginPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopEmotions(result.topEmotions);
+            const topthree = result.topEmotions.slice(0, 3);
+            setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`); //todo: del
             setTopEmotions([]);
@@ -55,7 +60,8 @@ const EmotionsRankginPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopEmotions(result.topEmotions);
-            console.log(result);
+            const topthree = result.topEmotions.slice(0, 3);
+            setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`);
             setTopEmotions([]);
@@ -73,6 +79,7 @@ const EmotionsRankginPage = () => {
 
     return () => {
       setMost(null);
+      setTopThree(null);
     };
   }, [year, month, week, mode, Mmonth, Myear]);
 
@@ -121,6 +128,13 @@ const EmotionsRankginPage = () => {
     <div>
       <EmotionChart topEmotions={topEmotions} />
       <Report most={most} />
+      {topThree?.map((e) => {
+        return (
+          <div key={e.name}>
+            <TopThreeCard topThree={e} />
+          </div>
+        );
+      })}
     </div>
   );
 };

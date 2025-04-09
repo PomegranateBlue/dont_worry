@@ -1,4 +1,3 @@
-
 import { supabase } from './supabase';
 import browserClient from './client';
 import { Database } from '../../../../database.types';

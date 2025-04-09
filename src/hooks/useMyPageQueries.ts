@@ -24,7 +24,7 @@ export const useUserLetters = () => {
 
 // 사용자 정보
 export const useUserInfo = () => {
-  const { user } = useUserStore();
+  const { user } = useUserStore();  
   return useQuery({
     queryKey: ['userinfo', user],
     queryFn: () => fetchUserInfo(user),

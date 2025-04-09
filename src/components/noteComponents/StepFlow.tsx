@@ -12,13 +12,13 @@ import { useNoteStore } from '@/store/noteStore';
 import ResultSaveButton from './ResultSaveButton';
 
 enum StepProps {
-  topic = 'topic',
-  emotion = 'emotion',
-  message = 'message',
-  result = 'result'
+  CATEGORY = 'category',
+  EMOTION = 'emotion',
+  MESSAGE = 'message',
+  RESULT = 'result'
 }
 const StepFlow = () => {
-  const [step, setStep] = useState<StepProps>(StepProps.topic);
+  const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const { selectedTopic, selectedEmotions, message, setResult } =
     useNoteStore();
 
@@ -30,7 +30,7 @@ const StepFlow = () => {
         message
       });
       setResult(userInput);
-      setStep(StepProps.result);
+      setStep(StepProps.RESULT);
     } catch (error) {
       console.error(error);
     }
@@ -38,28 +38,22 @@ const StepFlow = () => {
 
   return (
     <div>
-      {step === StepProps.topic && (
+      {step === StepProps.CATEGORY && (
         <div>
           <TopicCategoryForm />
-          <button onClick={() => setStep(StepProps.emotion)}>다음으로</button>
-        </div>
-      )}
-
-      {step === StepProps.emotion && (
-        <div>
           <EmotionCategoryForm />
-          <button onClick={() => setStep(StepProps.message)}>다음으로</button>
+          <button onClick={() => setStep(StepProps.MESSAGE)}>다음으로</button>
         </div>
       )}
 
-      {step === StepProps.message && (
+      {step === StepProps.MESSAGE && (
         <div>
           <MessageForm />
           <button onClick={handelSubmit}>제출하기</button>
         </div>
       )}
 
-      {step === StepProps.result && (
+      {step === StepProps.RESULT && (
         <div>
           <ResultForm />
           <ResultSaveButton />

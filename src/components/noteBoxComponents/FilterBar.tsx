@@ -16,7 +16,7 @@ const FilterBar = () => {
           <button
             key={label}
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center  font-bold  px-3 py-0.5 border-[2px] border-black rounded-full text-md"
+            className="flex items-center  font-bold  px-2 py-0.5 border-[2px] border-black rounded-full text-sm"
           >
             {label}
             <ChevronDown className="w-4 h-4" />

@@ -9,37 +9,65 @@
 // export default NoteBox;
 // components/NotePage.tsx
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
+import { useUserData } from '@/hooks/useMyPageQueries';
+import useUserNote from '@/hooks/noteHooks/useUserNotes';
+import {
+  fetchUserInfo,
+  fetchUser,
+  fetchUserWorries
+} from '../utils/supabase/db';
+import NoteCard from '@/components/noteBoxComponents/NoteCard';
+
 const NotePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: loginUser } = useUserData();
+  const [notes, setNotes] = useState<any[]>([]);
 
+  console.log('스토어 유저', loginUser);
+  useEffect(() => {
+    const getUserNotes = async () => {
+      try {
+        const userId = await fetchUser(); // 로그인한 사용자 ID
+        // console.log('✅ 로그인된 사용자 ID:', userId);
+
+        const userInfo = await fetchUserInfo(userId); // 사용자 정보
+        // console.log('✅ 사용자 정보:', userInfo);
+
+        const userWorries = await fetchUserWorries(userId); // 걱정 노트 목록
+        setNotes(userWorries);
+        // console.log('✅ 걱정 노트:', userWorries);
+      } catch (error) {
+        console.error('🚨 에러 발생:', error);
+      }
+    };
+
+    getUserNotes();
+  }, []);
+
+  // console.log('notebox 페이지에서의 로그인 유저', loginUser);
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
-      <h1 className="text-xl font-bold text-center">걱정 보관함</h1>
+      <h1 className="text-xl font-bold text-center p-4">걱정 보관함</h1>
       <FilterBar />
       <main className="flex-1 overflow-y-auto px-4 py-2 space-y-4">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-gray-100 p-4 rounded-xl">
-            <div className="text-sm font-semibold">
-              불안해요{' '}
-              <span className="ml-1 px-2 py-0.5 text-xs bg-black text-white rounded-full">
-                학업
-              </span>
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              2025년 04월 02일 (수)
-            </div>
-            <div className="mt-2 text-sm leading-relaxed">
-              재테크 초보자를 위한 기본 가이드는 저축, 투자, 예산 관리의
-              중요성을 다룹니다...
-            </div>
-          </div>
+        {notes.map((note) => (
+          <NoteCard
+            key={note.note_id}
+            content={note.content}
+            created_at={note.created_at}
+            note_id={note.note_id}
+            topic_category={note.topic_category}
+            emotion_category={note.emotion_category}
+          />
         ))}
       </main>
 
-      {isModalOpen && <FilterModal isOpen onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <FilterModal isOpen onClose={() => setIsModalOpen(false)} />
+      )}
     </div>
   );
 };

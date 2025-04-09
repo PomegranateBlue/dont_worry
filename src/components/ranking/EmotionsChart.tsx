@@ -44,16 +44,23 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'bottom'
+        position: 'bottom',
+        display: false
       }
     }
   };
 
   return (
-    <div>
-      <h1>{EMOTION_FILTER_DESCRIPTION}</h1>
-      <h1>{EMOTION_FILTER_DESCRIPTION2}</h1>
-      <div style={{ width: 400, height: 400 }}>
+    <div className="w-full max-w-md mx-auto my-6 p-6 bg-white rounded-2xl flex flex-col items-center">
+      <div className="mb-6 text-center">
+        <h2 className="text-xl font-bold text-gray-900">
+          {EMOTION_FILTER_DESCRIPTION}
+        </h2>
+        <p className="text-sm text-gray-500 mt-1">
+          {EMOTION_FILTER_DESCRIPTION2}
+        </p>
+      </div>
+      <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
         <Doughnut options={options} data={emotionChartData} />
       </div>
     </div>

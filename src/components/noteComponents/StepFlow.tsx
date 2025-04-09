@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
@@ -19,8 +19,17 @@ enum StepProps {
 }
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
-  const { selectedTopic, selectedEmotions, message, setResult } =
+  const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
     useNoteStore();
+
+  const emotionRef = useRef<HTMLDivElement | null>(null);
+
+  const handleCategorySelect = (topic: string) => {
+    toggleTopic(topic);
+    setTimeout(() => {
+      emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   const handelSubmit = async () => {
     try {
@@ -40,8 +49,11 @@ const StepFlow = () => {
     <div>
       {step === StepProps.CATEGORY && (
         <div>
-          <TopicCategoryForm />
-          <EmotionCategoryForm />
+          <TopicCategoryForm onSelectCategory={handleCategorySelect} />
+          <div ref={emotionRef}>
+            <EmotionCategoryForm />
+          </div>
+
           <button onClick={() => setStep(StepProps.MESSAGE)}>다음으로</button>
         </div>
       )}

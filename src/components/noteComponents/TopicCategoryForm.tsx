@@ -2,8 +2,13 @@
 
 import { TOPIC_CATEGORIES } from '@/constants/openai/category';
 import { useNoteStore } from '@/store/noteStore';
-const TopicCategoryForm = () => {
-  const { selectedTopic, toggleTopic } = useNoteStore();
+
+interface Props {
+  onSelectCategory: (topic: string) => void;
+}
+
+const TopicCategoryForm = ({ onSelectCategory }: Props) => {
+  const { selectedTopic } = useNoteStore();
   return (
     <div className="p-4">
       <p className="text-xl font-semibold mb-4">무엇이 고민이신가요?</p>
@@ -13,7 +18,7 @@ const TopicCategoryForm = () => {
           return (
             <button
               key={topic}
-              onClick={() => toggleTopic(topic)}
+              onClick={() => onSelectCategory(topic)}
               className={`w-full aspect-square rounded-xl font-bold text-sm border-2 flex flex-col items-center justify-center
                 ${!isTopic ? 'bg-white text-black' : 'bg-black text-white'}
               `}

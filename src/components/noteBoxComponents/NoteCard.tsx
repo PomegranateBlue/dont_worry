@@ -4,8 +4,8 @@ interface NoteCardProps {
   content: string;
   created_at: string;
   note_id: string;
-  topic_category: string;
-  emotion_category: string;
+  topic_category: string | null;
+  emotion_category: string | null;
 }
 
 const NoteCard = ({

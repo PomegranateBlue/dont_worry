@@ -12,7 +12,7 @@ export default async function Header() {
       {isLogin ? (
         <>
           <Link href="/note">걱정 작성</Link>
-          <Link href="/">걱정 보관함</Link>
+          <Link href="/notebox">걱정 보관함</Link>
           <Link href="/ranking">통계 페이지</Link>
           <Link href="/letter">편지쓰기</Link>
           <Link href="/mypage">마이페이지</Link>

@@ -1,18 +1,24 @@
 'use client';
 
 import { useState } from 'react';
+
 import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
+
 import { fetchGPT } from '@/lib/api/gpt/gpt';
 import { useNoteStore } from '@/store/noteStore';
+import ResultSaveButton from './ResultSaveButton';
 
+enum StepProps {
+  topic = 'topic',
+  emotion = 'emotion',
+  message = 'message',
+  result = 'result'
+}
 const StepFlow = () => {
-  const [step, setStep] = useState<'emotion' | 'topic' | 'message' | 'result'>(
-    'emotion'
-  );
-
+  const [step, setStep] = useState<StepProps>(StepProps.topic);
   const { selectedTopic, selectedEmotions, message, setResult } =
     useNoteStore();
 
@@ -23,9 +29,8 @@ const StepFlow = () => {
         emotions: selectedEmotions,
         message
       });
-
       setResult(userInput);
-      setStep('result');
+      setStep(StepProps.result);
     } catch (error) {
       console.error(error);
     }
@@ -33,30 +38,31 @@ const StepFlow = () => {
 
   return (
     <div>
-      {step === 'emotion' && (
-        <div>
-          <EmotionCategoryForm />
-          <button onClick={() => setStep('topic')}>다음으로</button>
-        </div>
-      )}
-
-      {step === 'topic' && (
+      {step === StepProps.topic && (
         <div>
           <TopicCategoryForm />
-          <button onClick={() => setStep('message')}>다음으로</button>
+          <button onClick={() => setStep(StepProps.emotion)}>다음으로</button>
         </div>
       )}
 
-      {step === 'message' && (
+      {step === StepProps.emotion && (
+        <div>
+          <EmotionCategoryForm />
+          <button onClick={() => setStep(StepProps.message)}>다음으로</button>
+        </div>
+      )}
+
+      {step === StepProps.message && (
         <div>
           <MessageForm />
           <button onClick={handelSubmit}>제출하기</button>
         </div>
       )}
 
-      {step === 'result' && (
+      {step === StepProps.result && (
         <div>
           <ResultForm />
+          <ResultSaveButton />
         </div>
       )}
     </div>

@@ -84,7 +84,7 @@ const StepFlow = () => {
       {step === StepProps.RESULT && (
         <div>
           <ResultForm />
-          <ResultSaveButton />
+          {/* <ResultSaveButton /> */}
         </div>
       )}
     </div>

@@ -5,20 +5,20 @@ import { supabase } from '@/app/utils/supabase/supabase';
 import { useState } from 'react';
 import { TablesInsert } from '../../../database.types';
 import { useUserStore } from '@/store/store';
-import { useUserData } from '@/hooks/useMyPageQueries';
+// import { useUserData } from '@/hooks/useMyPageQueries';
 
 const ResultSaveButton = () => {
   const { selectedTopic, selectedEmotions, result } = useNoteStore();
   const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
-  const loginUser = useUserData();
+  // const loginUser = useUserData();
 
-  console.log(loginUser);
+  // console.log(loginUser);
 
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');
-    console.log(result);
-    console.log(user);
+    // console.log(result);
+    // console.log(user);
 
     if (!user) {
       return;

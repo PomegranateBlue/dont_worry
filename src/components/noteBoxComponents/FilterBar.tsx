@@ -11,19 +11,19 @@ const FilterBar = () => {
 
   return (
     <>
-      <header className="flex items-center justify-evenly p-4">
+      <header className="w-full flex items-center justify-evenly p-4 bg-orange-400 ">
         {sortOption.map((label) => (
           <button
             key={label}
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center  font-bold  px-2 py-0.5 border-[2px] border-black rounded-full text-sm"
+            className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
           >
             {label}
             <ChevronDown className="w-4 h-4" />
           </button>
         ))}
 
-        <button className="ml-6 text-md text-black flex items-center gap-1">
+        <button className="ml-6 text-md text-black flex items-center ">
           편집
         </button>
       </header>

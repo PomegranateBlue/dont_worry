@@ -21,12 +21,16 @@ const NoteCard = ({
   });
   return (
     <div id={note_id} className="bg-gray-100 p-4 rounded-xl">
-      <div className="text-sm font-semibold">
-        {emotion_category}
-        <span className="ml-1 px-2 py-0.5 text-xs bg-black text-white rounded-full">
+      <div className="flex">
+        {/* <span>이모티콘</span> */}
+        <div className="text-sm px-3 py-1 font-semibold bg-gray rounded-full border-black border-[1px]">
+          {emotion_category}
+        </div>
+        <div className="ml-1 px-3 py-1 text-sm bg-black text-white rounded-full">
           {topic_category}
-        </span>
+        </div>
       </div>
+
       <div className="text-xs text-gray-500 mt-1">{formattedDate}</div>
       <div className="mt-2 text-sm leading-relaxed">{content}</div>
     </div>

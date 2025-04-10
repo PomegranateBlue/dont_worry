@@ -8,7 +8,7 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 const MWNavigator = () => {
   const { mode } = useRankingStore();
   const { year, month, week } = useRankingStore();
-  console.log(year, month, week);
+  console.log(year, month, week);//삭제 예정
   return <div>{mode === 'week' ? <WeekNavigator /> : <MonthNavigator />}</div>;
 };
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface NoteCardProps {
   content: string;
@@ -23,29 +24,22 @@ const NoteCard = ({
   });
   const [showAnswer, setShowAnswer] = useState(false);
 
-  console.log('content Props', content); //string
-
   const userNote = JSON.parse(content);
-
-  // console.log('유저 노트부분', userNote);
   const message = userNote.Question;
   const answer = userNote.Answer;
-
-  // console.log('user Input', message);
-  // console.log('gpt answer', answer);
 
   return (
     <div id={note_id} className="bg-gray-100 p-4 rounded-xl">
       <div className="flex items-center">
-        <div className="text-sm px-3 py-1 font-semibold bg-gray rounded-full border-black border-[1px]">
+        <div className="text-sm px-3 py-1 bg-gray rounded-full border-gray-400 border-[1px]">
           {emotion_category}
         </div>
-        <div className="ml-1 px-3 py-1 text-sm bg-black text-white rounded-full">
+        <div className="ml-1 px-3 py-1 text-sm bg-white border-gray-400 border-[1px] text-black rounded-full">
           {topic_category}
         </div>
       </div>
 
-      <div className="text-xs text-gray-500 mt-1">{formattedDate}</div>
+      <div className="text-md  text-gray-500 mt-1">{formattedDate}</div>
 
       <div className="mt-2 text-sm leading-relaxed text-gray-800 whitespace-pre-wrap line-clamp-5">
         {message}
@@ -53,13 +47,22 @@ const NoteCard = ({
 
       <button
         onClick={() => setShowAnswer(!showAnswer)}
-        className="mt-2 text-sm text-blue-600 underline"
+        className="mt-2 text-sm text-gray-600 flex ml-auto "
       >
-        {showAnswer ? '답변 숨기기' : 'GPT 답변 보기'}
+        {showAnswer ? (
+          <div className="flex">
+            접기 <ChevronUp />
+          </div>
+        ) : (
+          <div className="flex">
+            답장 <ChevronDown />
+          </div>
+        )}
       </button>
 
       {showAnswer && (
-        <div className="mt-2 p-3 bg-white border rounded text-sm text-gray-700 whitespace-pre-wrap">
+        <div className="flex flex-col mt-2 p-3 bg-white border rounded text-sm text-gray-700 whitespace-pre-wrap">
+          <p className="ml-auto font-semibold">{} 님께 드리는 걱숭이의 답장</p>
           {answer}
         </div>
       )}

@@ -2,6 +2,7 @@ import { supabase } from './supabase';
 import browserClient from './client';
 import { Database } from '../../../../database.types';
 
+
 // 데이터베이스 타입 정의
 type Tables = Database['public']['Tables']; // Tables<'letters'>
 type User = Tables['users']['Row'];
@@ -88,4 +89,20 @@ export const fetchUserWorries = async (userId: string | null | undefined) => {
 
   if (error) throw new Error(error.message);
   return data || [];
+};
+
+//이미지 업로드
+export const uploadProfileImage = async (file: File, userId: string | null) => {
+  const fileName = `${userId}_${Date.now()}.png`;
+  const filePath = `profile-images/${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('image')
+    .upload(filePath, file, { upsert: false });
+
+  if (uploadError)
+    throw new Error('이미지 업로드 실패: ' + uploadError.message);
+
+  const { data } = supabase.storage.from('image').getPublicUrl(filePath);
+  return data.publicUrl;
 };

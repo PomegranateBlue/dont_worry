@@ -7,7 +7,8 @@ import { useFormState } from 'react-dom';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/store';
-import { useUserData } from '@/hooks/useMyPageQueries';
+import { useEffect } from 'react';
+import { fetchUser } from '@/app/utils/supabase/db';
 import Image from 'next/image';
 
 const initialState = { success: false, error: null };
@@ -22,7 +23,6 @@ const schema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const { data: user } = useUserData();
   const { setUser } = useUserStore();
   const {
     register,
@@ -35,13 +35,24 @@ export default function LoginPage() {
       password: ''
     }
   });
+
   const [state, formAction] = useFormState(login, initialState);
-  if (state.success) {
-    console.log(state);
-    setUser(user!);
-    console.log(user);
-    router.push('/');
-  }
+
+  useEffect(() => {
+    const afterLogin = async () => {
+      if (state.success) {
+        try {
+          const data = await fetchUser();
+          setUser(data);
+          console.log('$$$DATA:', data);
+          router.push('/');
+        } catch (error) {
+          console.error('유저 정보 불러오기 실패:', error);
+        }
+      }
+    };
+    afterLogin();
+  }, [state.success]); // success 상태 변화에만 반응
 
   return (
     <>

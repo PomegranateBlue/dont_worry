@@ -18,13 +18,10 @@ const NotePage = () => {
     const getUserNotes = async () => {
       try {
         const userId = await fetchUser(); // 로그인한 사용자 ID
-
-        const userInfo = await fetchUserInfo(userId); // 사용자 정보
-        console.log('✅ 사용자 정보:', userInfo);
         const userWorries = await fetchUserWorries(userId); // 걱정 노트 목록
         setNotes(userWorries);
       } catch (error) {
-        console.error('🚨 에러 발생:', error);
+        console.error(' 에러 발생:', error);
       }
     };
 

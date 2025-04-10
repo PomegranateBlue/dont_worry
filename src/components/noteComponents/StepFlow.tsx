@@ -64,8 +64,14 @@ const StepFlow = () => {
       )}
 
       {step === StepProps.MESSAGE && (
-        <div>
-          <MessageForm />
+        <div className="flex flex-col min-h-screen  overflow-hidden">
+          <div className="flex-1 flex flex-col">
+            <p className="font-semibold text-xl p-4 mr-auto">
+              오늘 나의 걱정을 작성해보세요
+            </p>
+            <MessageForm />
+          </div>
+
           <button
             onClick={handelSubmit}
             className="text-[#FFFFFF] bg-[#8573C9] w-full  font-semibold rounded-md py-2 mb-4"

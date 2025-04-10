@@ -1,13 +1,16 @@
 'use client';
-// import FilterModal from './FilterModal';
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-const sortOption = ['최신순', '주제별', '감정별'];
-// import { frameSteps } from 'framer-motion';.
 import FilterModal from './FilterModal';
+
+const sortOption = ['최신순', '주제별', '감정별'];
+
 const FilterBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+ 
+
+
 
   return (
     <>
@@ -17,7 +20,6 @@ const FilterBar = () => {
             {sortOption.map((label) => (
               <button
                 key={label}
-                onClick={() => setIsModalOpen(true)}
                 className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
               >
                 {label}
@@ -31,7 +33,11 @@ const FilterBar = () => {
         </button>
       </header>
 
-      <FilterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <FilterModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+    
+      />
     </>
   );
 };

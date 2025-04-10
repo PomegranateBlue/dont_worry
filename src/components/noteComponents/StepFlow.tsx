@@ -54,14 +54,24 @@ const StepFlow = () => {
             <EmotionCategoryForm />
           </div>
 
-          <button onClick={() => setStep(StepProps.MESSAGE)}>다음으로</button>
+          <button
+            className="text-[#FFFFFF] bg-[#8573C9] w-full  font-semibold rounded-md py-2 mb-4"
+            onClick={() => setStep(StepProps.MESSAGE)}
+          >
+            다음으로
+          </button>
         </div>
       )}
 
       {step === StepProps.MESSAGE && (
         <div>
           <MessageForm />
-          <button onClick={handelSubmit}>제출하기</button>
+          <button
+            onClick={handelSubmit}
+            className="text-[#FFFFFF] bg-[#8573C9] w-full  font-semibold rounded-md py-2 mb-4"
+          >
+            제출하기
+          </button>
         </div>
       )}
 

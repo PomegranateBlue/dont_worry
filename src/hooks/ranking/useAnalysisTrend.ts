@@ -12,7 +12,8 @@ const useAnalysisTrend = (year: number, month: number) => {
   const [error, setError] = useState<string>('');
   const { user } = useUserStore();
 
-  useEffect(() => { //todo: 날짜가 변할때 리랜더링이 되지 않는 부분 수정 + 월별 로직이 아니라 주별 로직도 추가되어야함
+  useEffect(() => {
+    //todo: 날짜가 변할때 리랜더링이 되지 않는 부분 수정 + 월별 로직이 아니라 주별 로직도 추가되어야함
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -29,7 +30,9 @@ const useAnalysisTrend = (year: number, month: number) => {
 
     fetchData();
 
-    return setData(null);
+    return () => {
+      setData(null);
+    };
   }, [year, month]);
 
   return { data, loading, error };

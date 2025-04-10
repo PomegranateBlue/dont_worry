@@ -20,7 +20,7 @@ const RankingLayout = ({
       {/*todo: 삭제 예정 및 드롭다운 리스트 형식으로 변경*/}
       <TimeFilterGroup />
       <FilterMenu />
-      <main className="">{children}</main>
+      {children}
       <MWreportCard />
     </div>
   );

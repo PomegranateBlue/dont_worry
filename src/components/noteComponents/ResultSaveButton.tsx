@@ -8,7 +8,7 @@ import { useUserStore } from '@/store/store';
 // import { useUserData } from '@/hooks/useMyPageQueries';
 
 const ResultSaveButton = () => {
-  const { selectedTopic, selectedEmotions, result } = useNoteStore();
+  const { selectedTopic, selectedEmotions, message, result } = useNoteStore();
   const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
   // const loginUser = useUserData();
@@ -17,14 +17,15 @@ const ResultSaveButton = () => {
 
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');
-    // console.log(result);
+    console.log(message);
+    console.log(result);
     // console.log(user);
 
     if (!user) {
       return;
     }
     const note: TablesInsert<'users_note'> = {
-      content: result,
+      content: JSON.stringify({ Question: message, Answer: result }),
       topic_category: selectedTopic,
       emotion_category: selectedEmotions.join(','),
       created_at: new Date().toISOString(),

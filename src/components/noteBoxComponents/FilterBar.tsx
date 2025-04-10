@@ -11,18 +11,21 @@ const FilterBar = () => {
 
   return (
     <>
-      <header className="w-full flex items-center justify-evenly p-4 bg-orange-400 ">
-        {sortOption.map((label) => (
-          <button
-            key={label}
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
-          >
-            {label}
-            <ChevronDown className="w-4 h-4" />
-          </button>
-        ))}
-
+      <header className="w-full flex items-center justify-between p-4">
+        <div className="flex-1 whitespace-nowrap scrollbar-hide overflow-x-auto flex pr-4">
+          <div className="flex gap-2 w-max">
+            {sortOption.map((label) => (
+              <button
+                key={label}
+                onClick={() => setIsModalOpen(true)}
+                className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
+              >
+                {label}
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            ))}
+          </div>
+        </div>
         <button className="ml-6 text-md text-black flex items-center ">
           편집
         </button>

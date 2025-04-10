@@ -29,7 +29,7 @@ const NoteCard = ({
   const answer = userNote.Answer;
 
   return (
-    <div id={note_id} className="bg-gray-100 p-4 rounded-xl">
+    <div id={note_id} className="bg-[#FFFFFF] p-4 rounded-xl shadow-xl">
       <div className="flex items-center">
         <div className="text-sm px-3 py-1 bg-gray rounded-full border-gray-400 border-[1px]">
           {emotion_category}
@@ -61,7 +61,7 @@ const NoteCard = ({
       </button>
 
       {showAnswer && (
-        <div className="flex flex-col mt-2 p-3 bg-white border rounded text-sm text-gray-700 whitespace-pre-wrap">
+        <div className="flex flex-col mt-2 p-3  bg-[#FFFFFF]   rounded text-sm text-gray-700 whitespace-pre-wrap">
           <p className="ml-auto font-semibold">{} 님께 드리는 걱숭이의 답장</p>
           {answer}
         </div>

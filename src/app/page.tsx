@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+
 const HomePage = () => {
   return (
     <main className="min-h-screen">

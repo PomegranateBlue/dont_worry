@@ -5,8 +5,12 @@ import { login } from '../action';
 import { useForm } from 'react-hook-form';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/store';
+import { useEffect } from 'react';
+import { fetchUser } from '@/app/utils/supabase/db';
 
-const initialState = { error: null };
+const initialState = { success: false, error: null };
 
 const schema = z.object({
   email: z
@@ -17,6 +21,8 @@ const schema = z.object({
 });
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { setUser } = useUserStore();
   const {
     register,
     formState: { errors }
@@ -28,7 +34,24 @@ export default function LoginPage() {
       password: ''
     }
   });
+
   const [state, formAction] = useFormState(login, initialState);
+
+  useEffect(() => {
+    const afterLogin = async () => {
+      if (state.success) {
+        try {
+          const data = await fetchUser();
+          setUser(data);
+          console.log('$$$DATA:', data);
+          router.push('/');
+        } catch (error) {
+          console.error('유저 정보 불러오기 실패:', error);
+        }
+      }
+    };
+    afterLogin();
+  }, [state.success]); // success 상태 변화에만 반응
 
   return (
     <>

@@ -4,7 +4,6 @@ import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
 import { useUserStore } from '@/store/store';
 import { AnalysisTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
-//월별 추이 로직
 
 const useAnalysisTrend = (year: number, month: number) => {
   const [data, setData] = useState<AnalysisTrendsResult | null>(null);

@@ -14,7 +14,8 @@ const NotePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: loginUser } = useUserData();
   const [notes, setNotes] = useState<any[]>([]);
-
+  console.log('사용자 노트', notes);
+  
   console.log('스토어 유저', loginUser);
   useEffect(() => {
     const getUserNotes = async () => {

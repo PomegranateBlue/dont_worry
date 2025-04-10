@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface NoteProps {
   selectedTopic: string | null; // 주제는 1개만
   selectedEmotions: string[]; // 감정은 최대 3개
+  
   toggleTopic: (topic: string) => void;
   toggleEmotion: (emotion: string) => void;
 

@@ -15,14 +15,14 @@ export const countMentionedKeyword = (
 
   userCategory.forEach((note) => {
     if (note.topic_category) {
-      const topics = note.topic_category.split(', ');
+      const topics = note.topic_category.split(/\s*,\s*/);
       topics.forEach((topic) => {
         topicCounts[topic] = (topicCounts[topic] || 0) + 1;
       });
     }
 
     if (note.emotion_category) {
-      const emotions = note.emotion_category.split(', ');
+      const emotions = note.emotion_category.split(/\s*,\s*/);
       emotions.forEach((emotion) => {
         emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
       });
@@ -35,7 +35,8 @@ export const countMentionedKeyword = (
   };
 };
 
-export const makeTopTen = (userCategory: UserNote[]): TopTenRanking => { //키워드별 상위 10개의 카테고리를 리턴하는 함수
+export const makeTopTen = (userCategory: UserNote[]): TopTenRanking => {
+  //키워드별 상위 10개의 카테고리를 리턴하는 함수
   const { topics, emotions } = countMentionedKeyword(userCategory);
 
   const topTopics: RankingItem[] = Object.entries(topics)

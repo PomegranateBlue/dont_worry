@@ -2,26 +2,25 @@
 
 import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 
+import LogOutButton from '@/components/loginComponents/LogOutButton';
 import ProfileImage from '@/components/mypage/ProfileImage';
 import {
   useUpdateUserInfo,
-  useUserData,
   useUserInfo,
   useUserLetters,
   useUserWorries
 } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, PencilLine } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
-import { useQueryClient } from '@tanstack/react-query';
-import LogOutButton from '@/components/loginComponents/LogOutButton';
 
 const MyPage = () => {
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user, setUser } = useUserStore();
+  const { user } = useUserStore();
   const { mutateAsync: updateUserInfo } = useUpdateUserInfo();
   const { data: letters, isLoading: lettersLoading } = useUserLetters();
   const { data: userInfo, isLoading: userDataLoading } = useUserInfo();
@@ -55,26 +54,25 @@ const MyPage = () => {
     }
   };
 
-  const {
-    data: userid,
-    isPending: isUserPending,
-    isError: isUserError
-  } = useUserData();
+  // const {
+  //   data: userid,
+  //   isPending: isUserPending,
+  //   isError: isUserError
+  // } = useUserData();
 
-  // userid가 로드되면 스토어에 저장
-  useEffect(() => {
-    if (userid) {
-      setUser(userid);
-    }
-  }, [userid, setUser]);
+  // // userid가 로드되면 스토어에 저장
+  // useEffect(() => {
+  //   if (userid) {
+  //     setUser(userid);
+  //   }
+  // }, [userid, setUser]);
 
-  const isLoading =
-    userDataLoading || lettersLoading || isUserPending || userWorriesLoading;
+  const isLoading = userDataLoading || lettersLoading || userWorriesLoading;
   console.log('page.tsx userInfo$$', userInfo);
 
-  if (isUserError) {
-    return <div>사용자 정보를 가져오는 중 오류가 발생했습니다.</div>;
-  }
+  // if (isUserError) {
+  //   return <div>사용자 정보를 가져오는 중 오류가 발생했습니다.</div>;
+  // }
 
   if (isLoading) {
     return <div>Loading...</div>;

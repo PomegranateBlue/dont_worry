@@ -32,8 +32,10 @@ const useAnaylsisTrendWeek = (year: number, month: number, week: number) => {
 
     fetchData();
 
-    return setData(null);
-  }, [year, month, week]);
+    return () => {
+      setData(null);
+    };
+  }, [year, month, week]); //로그인 중인 유저가 바뀐다는건 로그아웃했다는것이기에 의존성 배열에 user삽입할필요가 없다고 판단
 
   return { data, loading, error };
 };

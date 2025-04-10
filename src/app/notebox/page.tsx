@@ -1,19 +1,8 @@
-// const NoteBox = () => {
-//   return (
-//     <div className="mx-auto flex justify-center">
-//       <p className="text-2xl font-bold p-4">걱정 보관함</p>
-//     </div>
-//   );
-// };
-
-// export default NoteBox;
-// components/NotePage.tsx
 'use client';
 import { useState, useEffect } from 'react';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import { useUserData } from '@/hooks/useMyPageQueries';
-import useUserNote from '@/hooks/noteHooks/useUserNotes';
 import {
   fetchUserInfo,
   fetchUser,
@@ -34,7 +23,7 @@ const NotePage = () => {
         // console.log('✅ 로그인된 사용자 ID:', userId);
 
         const userInfo = await fetchUserInfo(userId); // 사용자 정보
-        // console.log('✅ 사용자 정보:', userInfo);
+        console.log('✅ 사용자 정보:', userInfo);
 
         const userWorries = await fetchUserWorries(userId); // 걱정 노트 목록
         setNotes(userWorries);

@@ -1,6 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
-import FilterModal from '@/components/noteBoxComponents/FilterModal';
+import { useEffect } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
@@ -9,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
 
 const NotePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { notes, setNotes } = useNoteListStore();
   console.log('note pages', notes);
 
@@ -47,13 +45,6 @@ const NotePage = () => {
           />
         ))}
       </main>
-
-      {isModalOpen && (
-        <FilterModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
     </div>
   );
 };

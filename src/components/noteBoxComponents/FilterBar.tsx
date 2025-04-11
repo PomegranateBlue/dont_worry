@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import FilterModal from './FilterModal';
 
-const sortOption = ['최신순', '주제별', '감정별'];
+const sortOption = ['정렬순', '주제별', '감정별'];
 
 const FilterBar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-
+  const handleFilterOption = (label: string) => {
+    if (label === '정렬순' || label === '주제별' || label === '감정별') {
+      setSelectedOption(label);
+    }
+  };
 
   return (
     <>
@@ -21,6 +24,7 @@ const FilterBar = () => {
               <button
                 key={label}
                 className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
+                onClick={() => handleFilterOption(label)}
               >
                 {label}
                 <ChevronDown className="w-4 h-4" />
@@ -33,11 +37,12 @@ const FilterBar = () => {
         </button>
       </header>
 
-      <FilterModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-    
-      />
+      {selectedOption && (
+        <FilterModal
+          onClose={() => setSelectedOption(null)}
+          filterOption={selectedOption}
+        />
+      )}
     </>
   );
 };

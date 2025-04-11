@@ -7,8 +7,6 @@ import ResultSaveButton from './ResultSaveButton';
 const ResultForm = () => {
   const router = useRouter();
   const { message, result } = useNoteStore();
-  // console.log(result);
-
   const goNoteBox = () => {
     router.push('/notebox');
   };

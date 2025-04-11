@@ -64,12 +64,12 @@ const FilterModal = ({
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-2  min-h-32">
+        <div className="grid grid-cols-3 gap-2 h-[200px] overflow-y-auto mb-6">
           {getOptions().map((option) => (
             <button
               key={option}
               onClick={() => handleToggle(option)}
-              className={`px-3 py-1 rounded-full border text-sm ${
+              className={`min-w-10 max-h-8 px-3 py-1 rounded-xl border text-md ${
                 selectedValues.includes(option)
                   ? 'bg-primary-4 text-white border-primary-4'
                   : 'border-gray-300 text-gray-700'

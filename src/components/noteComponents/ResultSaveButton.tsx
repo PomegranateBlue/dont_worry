@@ -8,10 +8,11 @@ import { useUserStore } from '@/store/store';
 import { ThumbsUp } from 'lucide-react';
 
 const ResultSaveButton = () => {
+
   const { selectedTopic, selectedEmotions, message, result } = useNoteStore();
   const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
-  // const [userId, setUserId] = useState<string | null>(null);
+
 
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');

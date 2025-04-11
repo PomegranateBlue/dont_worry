@@ -7,7 +7,7 @@ import FilterModal from './FilterModal';
 const sortOption = ['정렬순', '주제별', '감정별'];
 
 const FilterBar = () => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>('주제별');
 
   const handleFilterOption = (label: string) => {
     if (label === '정렬순' || label === '주제별' || label === '감정별') {
@@ -39,8 +39,8 @@ const FilterBar = () => {
 
       {selectedOption && (
         <FilterModal
-          onClose={() => setSelectedOption(null)}
-          filterOption={selectedOption}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
         />
       )}
     </>

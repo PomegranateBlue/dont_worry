@@ -12,3 +12,4 @@ export const useNoteListStore = create<NoteboxProps>((set) => ({
   notes: [],
   setNotes: (notes) => set({ notes })
 }));
+

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
-import { useNoteListStore } from '@/store/notebox/filterStore';
+import { useNoteListStore } from '@/store/notebox/noteboxStore';
 import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
 

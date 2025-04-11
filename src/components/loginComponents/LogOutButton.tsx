@@ -11,6 +11,10 @@ const LogOutButton = () => {
     localStorage.removeItem('auth-storage');
     alert('로그아웃');
   };
-  return <button onClick={signOut}>로그아웃</button>;
+  return (
+    <button onClick={signOut} className="underline md:no-underline">
+      로그아웃
+    </button>
+  );
 };
 export default LogOutButton;

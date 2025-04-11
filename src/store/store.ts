@@ -15,7 +15,9 @@ type UserState = {
 export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
-      user: null, //localStorage.getItem('auth-storage'), //이 부분이 의심
+
+      user: localStorage.getItem('auth-storage'),
+
       setUser: (user) => set({ user })
     }),
     {

@@ -1,13 +1,22 @@
+import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
 const VersionPage = () => {
   return (
-    <div>
-      <h1 className="text-xl m-4 text-center">version 0.2.8</h1>
-      <Link href="/mypage" className="border rounded-md p-2 mt-4 mb-4">
-        뒤로가기
-      </Link>
+    <div className="flex flex-col min-h-screen">
+      {/* 상단 바 */}
+      <div className="relative flex items-center justify-center h-16 border-b">
+        {/* 왼쪽 아이콘 */}
+        <Link href="/mypage" className="absolute left-4 p-2">
+          <ChevronLeft />
+        </Link>
+        {/* 가운데 제목 */}
+        <h1 className="text-xl font-semibold">Version 0.2.8</h1>
+      </div>
+
+      {/* 페이지 하단 여유 공간 */}
+      <div className="flex-1" />
     </div>
   );
 };

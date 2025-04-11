@@ -1,13 +1,11 @@
 'use client';
 
-import { useNoteStore } from '@/store/noteStore';
+import { useNoteStore } from '@/store/note/noteStore';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TablesInsert } from '../../../database.types';
 import { useUserStore } from '@/store/store';
 import { ThumbsUp } from 'lucide-react';
-// import { useUserData } from '@/hooks/useMyPageQueries';
-// import browserClient from '@/app/utils/supabase/client';
 
 const ResultSaveButton = () => {
   const { selectedTopic, selectedEmotions, message, result } = useNoteStore();

@@ -2,11 +2,7 @@
 import { useState, useEffect } from 'react';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
-import {
-  fetchUserInfo,
-  fetchUser,
-  fetchUserWorries
-} from '../utils/supabase/db';
+import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
 import { Tables } from '../../../database.types';
 
@@ -14,6 +10,7 @@ const NotePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<Tables<'users_note'>[]>([]);
 
+  console.log('note pages', notes);
   useEffect(() => {
     const getUserNotes = async () => {
       try {

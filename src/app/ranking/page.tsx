@@ -29,14 +29,14 @@ const RankingPage = () => {
     []
   );
 
-  console.log('user', user);
+  console.log('user', user); //1 ->정상
 
   useEffect(() => {
     if (mode === 'week') {
       const fetchData = async () => {
         try {
           setIsLoading(true);
-          console.log(user);
+          console.log(user); //2 -> null
           const userNotes = await fetchUserNotes(year, month, week, user);
 
           if (userNotes.length > 0) {

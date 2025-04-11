@@ -1,8 +1,7 @@
 'use client';
 
-import NicknameEditModal from '@/components/mypage/NicknameEditModal';
-
 import LogOutButton from '@/components/loginComponents/LogOutButton';
+import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
 import {
   useUpdateUserInfo,
@@ -54,25 +53,8 @@ const MyPage = () => {
     }
   };
 
-  // const {
-  //   data: userid,
-  //   isPending: isUserPending,
-  //   isError: isUserError
-  // } = useUserData();
-
-  // // userid가 로드되면 스토어에 저장
-  // useEffect(() => {
-  //   if (userid) {
-  //     setUser(userid);
-  //   }
-  // }, [userid, setUser]);
-
   const isLoading = userDataLoading || lettersLoading || userWorriesLoading;
   console.log('page.tsx userInfo$$', userInfo);
-
-  // if (isUserError) {
-  //   return <div>사용자 정보를 가져오는 중 오류가 발생했습니다.</div>;
-  // }
 
   if (isLoading) {
     return <div>Loading...</div>;

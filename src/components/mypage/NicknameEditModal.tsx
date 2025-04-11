@@ -84,7 +84,7 @@ const NicknameEditModal = ({
             </label>
             <input
               id="nickname"
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               {...register('nickname')}
             />
             {errors.nickname && (
@@ -98,14 +98,14 @@ const NicknameEditModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded"
+              className="px-4 py-2 border border-gray-300 hover:bg-gray-100 rounded-lg"
             >
               취소
             </button>
             <button
               type="submit"
               disabled={updateMutation.isPending}
-              className="px-4 py-2 bg-blue-500 text-white rounded"
+              className="px-4 py-2 bg-primaryPurple hover:bg-opacity-70 text-white rounded-lg transition duration-300"
             >
               {updateMutation.isPending ? '저장 중...' : '저장하기'}
             </button>

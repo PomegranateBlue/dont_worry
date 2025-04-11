@@ -5,24 +5,31 @@ import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
 import { useNoteListStore } from '@/store/notebox/filterStore';
+import { useQuery } from '@tanstack/react-query';
+import { Tables } from '../../../database.types';
 
 const NotePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { notes, setNotes } = useNoteListStore();
   console.log('note pages', notes);
 
+  const userQuery = useQuery<string | null, Error>({
+    queryKey: ['user'],
+    queryFn: fetchUser,
+    staleTime: Infinity
+  });
+
+  const userNotesQuery = useQuery<Tables<'users_note'>[], Error>({
+    queryKey: ['userNotes', userQuery.data],
+    queryFn: () => fetchUserWorries(userQuery.data),
+    enabled: !!userQuery.data
+  });
+
   useEffect(() => {
-    const getUserNotes = async () => {
-      try {
-        const userId = await fetchUser(); // 로그인한 사용자 ID
-        const userWorries = await fetchUserWorries(userId); // 걱정 노트 목록
-        setNotes(userWorries);
-      } catch (error) {
-        console.error(' 에러 발생:', error);
-      }
-    };
-    getUserNotes();
-  }, [setNotes]);
+    if (userNotesQuery.data) {
+      setNotes(userNotesQuery.data);
+    }
+  }, [userNotesQuery.data, setNotes]);
 
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">

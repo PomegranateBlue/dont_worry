@@ -40,7 +40,7 @@ export default function LoginPage() {
   useEffect(() => {
     const afterLogin = async () => {
       if (state.success) {
-        try {
+        try {//state변경을 위해 useEffect를 사용하는것은 좋지 않음(안티 패턴임)
           const data = await fetchUser();
           setUser(data);
           console.log('$$$DATA:', data);

@@ -105,7 +105,7 @@ const NicknameEditModal = ({
             <button
               type="submit"
               disabled={updateMutation.isPending}
-              className="px-4 py-2 bg-primaryPurple hover:bg-opacity-70 text-white rounded-lg transition duration-300"
+              className="px-4 py-2 bg-primary-4 hover:bg-opacity-70 text-white rounded-lg transition duration-300"
             >
               {updateMutation.isPending ? '저장 중...' : '저장하기'}
             </button>

@@ -1,7 +1,6 @@
 'use client';
 
-import { useNoteStore } from '@/store/noteStore';
-
+import { useNoteStore } from '@/store/note/noteStore';
 const MessageForm = () => {
   const { message, setMessage } = useNoteStore();
 

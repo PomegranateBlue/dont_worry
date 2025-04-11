@@ -1,7 +1,7 @@
 'use client';
 
-import { useNoteStore } from '@/store/noteStore';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { useNoteStore } from '@/store/note/noteStore';
+import { ThumbsDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import ResultSaveButton from './ResultSaveButton';
 const ResultForm = () => {

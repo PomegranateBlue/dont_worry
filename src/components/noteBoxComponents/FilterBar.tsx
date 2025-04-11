@@ -8,7 +8,7 @@ const sortOption = ['최신순', '주제별', '감정별'];
 
 const FilterBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
+  
 
 
 

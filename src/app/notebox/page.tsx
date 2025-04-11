@@ -49,7 +49,10 @@ const NotePage = () => {
       </main>
 
       {isModalOpen && (
-        <FilterModal isOpen onClose={() => setIsModalOpen(false)} />
+        <FilterModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
     </div>
   );

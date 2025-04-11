@@ -4,11 +4,23 @@ import {
   TOPIC_CATEGORIES,
   EMOTION_CATEGORIES
 } from '@/constants/openai/category';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RotateCw } from 'lucide-react';
+
 interface FilterModalProps {
   selectedOption: string | null;
   setSelectedOption: (option: string | null) => void;
+
+  selectedSort: '최신순' | '과거순';
+  setSelectedSort: React.Dispatch<React.SetStateAction<'최신순' | '과거순'>>;
+
+  selectedTopics: string[];
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedEmotions: string[];
+  setSelectedEmotions: React.Dispatch<React.SetStateAction<string[]>>;
+
+  onClose: () => void;
 }
 
 const sortTabs = ['정렬순', '주제별', '감정별'];
@@ -16,9 +28,28 @@ const sortOptions = ['최신순', '오래된순', '가나다순'];
 
 const FilterModal = ({
   selectedOption,
-  setSelectedOption
+  setSelectedOption,
+  selectedSort,
+  setSelectedSort,
+  selectedTopics,
+  setSelectedTopics,
+  selectedEmotions,
+  setSelectedEmotions,
+  onClose
 }: FilterModalProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (selectedOption === '정렬순') {
+      setSelectedValues([selectedSort === '최신순' ? '최신순' : '오래된순']);
+    } else if (selectedOption === '주제별') {
+      setSelectedValues(selectedTopics);
+    } else if (selectedOption === '감정별') {
+      setSelectedValues(selectedEmotions);
+    } else {
+      setSelectedValues([]);
+    }
+  }, [selectedOption]);
 
   const handleToggle = (value: string) => {
     if (selectedOption === '정렬순') {
@@ -45,10 +76,22 @@ const FilterModal = ({
     }
   };
 
+  const handleApply = () => {
+    if (selectedOption === '정렬순') {
+      if (selectedValues[0] === '최신순') setSelectedSort('최신순');
+      else if (selectedValues[0] === '오래된순') setSelectedSort('과거순');
+    } else if (selectedOption === '주제별') {
+      setSelectedTopics(selectedValues);
+    } else if (selectedOption === '감정별') {
+      setSelectedEmotions(selectedValues);
+    }
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end">
       <div className="bg-white w-full max-w-md rounded-t-2xl p-4 pb-6">
-        <div className="flex justify-between mb-4 border-b-[1px] ">
+        <div className="flex justify-between mb-4 border-b-[1px]">
           {sortTabs.map((tab) => (
             <button
               key={tab}
@@ -83,12 +126,13 @@ const FilterModal = ({
         <div className="flex justify-between items-center px-1">
           <button
             onClick={() => setSelectedValues([])}
-            className="flex items-center gap-4 px-4 py-3 bg-label-alternative bg-opacity-50 rounded-md  text-label-alternative text-xl"
+            className="flex items-center gap-4 px-4 py-3 bg-label-alternative bg-opacity-50 rounded-md text-label-alternative text-xl"
           >
             <RotateCw />
             초기화
           </button>
           <button
+            onClick={handleApply}
             className={`text-white text-xl px-8 py-3 rounded-md ${
               selectedValues.length === 0 ? 'bg-gray-300' : 'bg-purple-600'
             }`}

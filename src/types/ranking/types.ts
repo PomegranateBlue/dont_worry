@@ -11,7 +11,7 @@ export interface UserNote {
   content: string;
   note_img: string | null;
   note_id: string;
-  id: string;
+  user_id: string;
   topic_category: string;
   emotion_category: string;
 }

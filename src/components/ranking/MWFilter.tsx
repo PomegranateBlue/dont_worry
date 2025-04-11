@@ -4,7 +4,7 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MONTH, WEEK } from '@/constants/ranking/Line';
-
+//todo: timefilter.tsx완성 후 삭제하기
 const MWFilter = () => {
   const mode = useRankingStore((state) => state.mode);
   const setMode = useRankingStore((state) => state.setMode);

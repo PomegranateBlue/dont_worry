@@ -5,26 +5,28 @@ import { supabase } from '@/app/utils/supabase/supabase';
 import { useState } from 'react';
 import { TablesInsert } from '../../../database.types';
 import { useUserStore } from '@/store/store';
-import { useUserData } from '@/hooks/useMyPageQueries';
+import { ThumbsUp } from 'lucide-react';
+// import { useUserData } from '@/hooks/useMyPageQueries';
 
 const ResultSaveButton = () => {
-  const { selectedTopic, selectedEmotions, result } = useNoteStore();
+  const { selectedTopic, selectedEmotions, message, result } = useNoteStore();
   const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
-  const loginUser = useUserData();
+  // const loginUser = useUserData();
 
-  console.log(loginUser);
+  // console.log(loginUser);
 
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');
+    console.log(message);
     console.log(result);
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       return;
     }
     const note: TablesInsert<'users_note'> = {
-      content: result,
+      content: JSON.stringify({ Question: message, Answer: result }),
       topic_category: selectedTopic,
       emotion_category: selectedEmotions.join(','),
       created_at: new Date().toISOString(),
@@ -47,15 +49,13 @@ const ResultSaveButton = () => {
   };
 
   return (
-    <div className="mt-4">
-      <button
-        onClick={handleSaveMessage}
-        className="px-4 py-2 bg-black text-white rounded"
-      >
-        저장하기
-      </button>
-      {isSaved && <p className="text-green-600 mt-2">저장되었습니다!</p>}
-    </div>
+    <button onClick={handleSaveMessage} disabled={isSaved}>
+      <ThumbsUp
+        className={`w-5 h-5 ${
+          isSaved ? 'text-purple-500' : 'text-gray-500 hover:text-purple-500'
+        }`}
+      />
+    </button>
   );
 };
 

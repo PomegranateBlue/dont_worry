@@ -4,13 +4,13 @@ import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
-import { Tables } from '../../../database.types';
+import { useNoteListStore } from '@/store/notebox/filterStore';
 
 const NotePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [notes, setNotes] = useState<Tables<'users_note'>[]>([]);
-
+  const { notes, setNotes } = useNoteListStore();
   console.log('note pages', notes);
+
   useEffect(() => {
     const getUserNotes = async () => {
       try {
@@ -21,9 +21,8 @@ const NotePage = () => {
         console.error(' 에러 발생:', error);
       }
     };
-
     getUserNotes();
-  }, []);
+  }, [setNotes]);
 
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">

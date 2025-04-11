@@ -21,10 +21,10 @@ export const fetchUserNotes = async (
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('*')
+      .select('*') //todo: 필요한 칼럼 3개만 가져오기 (보안상 이슈가 있을 수 있음 딱 가져올려는것만 가져오는것이 성능상으로도 좋음)
       .gte('created_at', startDateStr)
       .lte('created_at', endDateStr)
-      .eq('id', id);
+      .eq('user_id', id);
 
     if (error) {
       throw error;
@@ -56,10 +56,10 @@ export const fetchMonthlyNotes = async (
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('*')
+      .select('*') //todo: 필요한것만 가져오기
       .gte('created_at', startDateStr)
       .lte('created_at', endDateStr)
-      .eq('id', id);
+      .eq('user_id', id);
 
     if (error) {
       throw error;

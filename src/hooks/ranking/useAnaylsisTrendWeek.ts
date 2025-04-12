@@ -1,12 +1,10 @@
-'use client';
-
-import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
+import { analyzeWeeklyCategoryTrends } from '@/app/utils/ranking/DataFetch';
 import { useUserStore } from '@/store/store';
-import { AnalysisTrendsResult } from '@/types/ranking/types';
+import { AnalysisWeekTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
 
-const useAnalysisTrend = (year: number, month: number) => {
-  const [data, setData] = useState<AnalysisTrendsResult | null>(null);
+const useAnaylsisTrendWeek = (year: number, month: number, week: number) => {
+  const [data, setData] = useState<AnalysisWeekTrendsResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const { user } = useUserStore();
@@ -16,7 +14,12 @@ const useAnalysisTrend = (year: number, month: number) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const result = await analyzeCategoryTrends(year, month, user);
+        const result = await analyzeWeeklyCategoryTrends(
+          year,
+          month,
+          week,
+          user
+        );
         setData(result);
         setError('');
       } catch (err) {
@@ -32,9 +35,9 @@ const useAnalysisTrend = (year: number, month: number) => {
     return () => {
       setData(null);
     };
-  }, [year, month]);
+  }, [year, month, week]); //로그인 중인 유저가 바뀐다는건 로그아웃했다는것이기에 의존성 배열에 user삽입할필요가 없다고 판단
 
   return { data, loading, error };
 };
 
-export default useAnalysisTrend;
+export default useAnaylsisTrendWeek;

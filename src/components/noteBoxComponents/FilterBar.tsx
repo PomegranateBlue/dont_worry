@@ -11,7 +11,7 @@ interface FilterBarProps {
 
 const FilterBar = ({ onClickFilter }: FilterBarProps) => {
   const [selectedOption, setSelectedOption] = useState<string | null>('주제별');
-
+  console.log(selectedOption);
   const handleFilterOption = (label: string) => {
     setSelectedOption(label);
     onClickFilter(label);

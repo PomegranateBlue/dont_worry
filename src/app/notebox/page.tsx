@@ -63,7 +63,6 @@ const NotePage = () => {
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
       <h1 className="text-xl font-bold text-center p-4">걱정 보관함</h1>
 
-      {/* ✅ 필터 클릭 시 모달 열기 */}
       <FilterBar
         onClickFilter={(label) => {
           setFilterType(label);
@@ -71,7 +70,6 @@ const NotePage = () => {
         }}
       />
 
-      {/* ✅ FilterModal 렌더링 */}
       {isModalOpen && (
         <FilterModal
           selectedOption={filterType}

@@ -1,24 +1,34 @@
 'use client';
 
-// import useAnalysisTrend from '@/app/utils/ranking/hooks/useAnalysisTrend';
-import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
-import { MOST_DECREASE_COMMENT } from '@/constants/ranking/Line';
+import {
+  MOST_DECREASE_COMMENT_MONTH,
+  MOST_DECREASE_COMMENT_WEEK
+} from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
+import { BetterThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 
-const BetterThing = () => {
-  const { year, month } = useRankingStore();
-  const { data, loading, error } = useAnalysisTrend(year, month);
-  if (loading) return <div className="p-4">데이터를 불러오는 중...</div>;
-  if (error) return <div className="p-4 text-red-500">{error}</div>;
-  if (!data) return <div className="p-4">표시할 데이터가 없습니다.</div>;
-
-  const { mostDecreased } = data;
+const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
+  const { mode } = useRankingStore();
+  const monthLowest = monthData?.mostDecreased;
+  const weekLowest = weekData?.mostDecreased;
 
   return (
     <>
-      <div>{`${mostDecreased.category + MOST_DECREASE_COMMENT}`}</div>
+      {mode === 'week' ? (
+        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
+          {weekLowest
+            ? `${weekLowest.category}${MOST_DECREASE_COMMENT_WEEK}`
+            : '데이터가 없습니다'}
+        </div>
+      ) : (
+        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
+          {monthLowest
+            ? `${monthLowest.category}${MOST_DECREASE_COMMENT_MONTH}`
+            : '데이터가 없습니다'}
+        </div>
+      )}
     </>
   );
 };

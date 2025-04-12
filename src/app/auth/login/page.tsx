@@ -5,8 +5,13 @@ import { login } from '../action';
 import { useForm } from 'react-hook-form';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/store';
+import { useEffect } from 'react';
+import { fetchUser } from '@/app/utils/supabase/db';
+import Image from 'next/image';
 
-const initialState = { error: null };
+const initialState = { success: false, error: null };
 
 const schema = z.object({
   email: z
@@ -17,6 +22,8 @@ const schema = z.object({
 });
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { setUser } = useUserStore();
   const {
     register,
     formState: { errors }
@@ -28,38 +35,115 @@ export default function LoginPage() {
       password: ''
     }
   });
+
   const [state, formAction] = useFormState(login, initialState);
+
+  useEffect(() => {
+    const afterLogin = async () => {
+      if (state.success) {
+        try {//state변경을 위해 useEffect를 사용하는것은 좋지 않음(안티 패턴임)
+          const data = await fetchUser();
+          setUser(data);
+          console.log('$$$DATA:', data);
+          router.push('/');
+        } catch (error) {
+          console.error('유저 정보 불러오기 실패:', error);
+        }
+      }
+    };
+    afterLogin();
+  }, [state.success]); // success 상태 변화에만 반응
 
   return (
     <>
-      <form action={formAction}>
-        <label>
-          Email:
-          <input
-            {...register('email')}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            required
-          />
-        </label>
-        {errors.email && <span>{errors.email.message}</span>}
-        <label>
-          Password:
-          <input
-            {...register('password')}
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-        </label>
-        {errors.password && <span>{errors.password.message}</span>}
+      <h2 className="m-4 text-center font-semibold text-xl">로그인</h2>
+      <form
+        action={formAction}
+        className="space-y-2 border-b border-b[#E0E0E2] pb-6"
+      >
+        <div>
+          <label>
+            <span className="font-semibold">이메일</span>
+            <input
+              {...register('email')}
+              type="email"
+              name="email"
+              id="email"
+              placeholder="ex)abc@email.com"
+              required
+              className={`w-full p-4 border-b-[1px] focus:outline-none ${
+                errors.email ? 'border-b-red-500' : 'border-b-[#D6D6D6]'
+              }`}
+            />
+            {errors.email && (
+              <p className="text-red-500 mt-1">{errors.email.message}</p>
+            )}
+          </label>
+        </div>
+        <div>
+          <label>
+            <span className="font-semibold">비밀번호</span>
+            <input
+              {...register('password')}
+              type="password"
+              name="password"
+              placeholder="비밀번호 입력"
+              required
+              className={`w-full p-4 border-b-[1px] focus:outline-none ${
+                errors.password ? 'border-b-red-500' : 'border-b-[#D6D6D6]'
+              }`}
+            />
+            {errors.password ? (
+              <p className="text-red-500 mt-1">{errors.password.message}</p>
+            ) : (
+              <p className="text-[#A3A3A3] text-sm mt-1">
+                영문 및 숫자, 12자 이내
+              </p>
+            )}
+          </label>
+        </div>
+
         {state.error && <p>{state.error}</p>}
-        <button type="submit">Log in</button>
+
+        <button
+          type="submit"
+          className="w-full bg-[#8573C9] p-3 rounded-md !mt-10 text-white text-lg font-medium"
+        >
+          로그인
+        </button>
       </form>
-      <Link href="/auth/signup">회원가입하러가기</Link>
+      <div className="mt-10">
+        <p className="text-lg text-center">소셜 계정으로 로그인</p>
+        <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
+          <Image
+            src="/images/login-kakao.svg"
+            width={56}
+            height={56}
+            alt="login-kakao"
+            priority
+          />
+          <Image
+            src="/images/login-naver.svg"
+            width={56}
+            height={56}
+            alt="login-naver"
+            priority
+          />
+          <Image
+            src="/images/login-google.svg"
+            width={56}
+            height={56}
+            alt="login-google"
+            priority
+          />
+        </div>
+      </div>
+      <Link
+        href="/auth/signup"
+        className="text-center mx-auto w-fit block underline"
+      >
+        회원가입
+      </Link>
     </>
   );
 }

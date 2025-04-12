@@ -1,18 +1,22 @@
 'use client';
+
+import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
+import { useUserStore } from '@/store/store';
 import { AnalysisTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
-// import { analyzeCategoryTrends } from '../DataFetch';
-import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
+
 const useAnalysisTrend = (year: number, month: number) => {
-  const [data, setData] = useState<AnalysisTrendsResult | null>(null); //todo: 이하 3개 스테이트 커스텀훅 리팩토링
+  const [data, setData] = useState<AnalysisTrendsResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
+  const { user } = useUserStore();
 
   useEffect(() => {
+    //todo: 날짜가 변할때 리랜더링이 되지 않는 부분 수정 + 월별 로직이 아니라 주별 로직도 추가되어야함
     const fetchData = async () => {
       try {
         setLoading(true);
-        const result = await analyzeCategoryTrends(year, month);
+        const result = await analyzeCategoryTrends(year, month, user);
         setData(result);
         setError('');
       } catch (err) {
@@ -24,6 +28,10 @@ const useAnalysisTrend = (year: number, month: number) => {
     };
 
     fetchData();
+
+    return () => {
+      setData(null);
+    };
   }, [year, month]);
 
   return { data, loading, error };

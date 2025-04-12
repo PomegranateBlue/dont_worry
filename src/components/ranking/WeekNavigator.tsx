@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect } from 'react';
@@ -22,11 +21,12 @@ export default function WeekNavigator() {
 
   return (
     <div>
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-4 pb-4">
         <div className="flex-shrink-0 w-6">
           <button
             onClick={goToPreviousWeek}
             className="text-600 hover:text-black"
+            style={{ fontSize: '1.5rem' }}
           >
             <ChevronLeft size={24} />
           </button>

@@ -6,6 +6,7 @@ import { createClient } from '@/app/utils/supabase/server';
 
 interface ErrorFormState {
   error: string | null;
+  success: boolean;
 }
 
 export async function login(
@@ -24,12 +25,13 @@ export async function login(
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    return { error: '이메일 또는 비밀번호가 틀렸습니다' };
+    return { error: '이메일 또는 비밀번호가 틀렸습니다', success: false };
     // redirect('/error');
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  // redirect('/');
+  return { success: true, error: null };
 }
 
 // export async function logout(

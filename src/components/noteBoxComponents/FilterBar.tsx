@@ -1,34 +1,43 @@
 'use client';
-// import FilterModal from './FilterModal';
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-const sortOption = ['최신순', '주제별', '감정별'];
-// import { frameSteps } from 'framer-motion';.
-import FilterModal from './FilterModal';
-const FilterBar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+const sortOption = ['정렬순', '주제별', '감정별'];
+
+interface FilterBarProps {
+  onClickFilter: (label: string) => void; // ⬅ 부모에게 전달할 콜백
+}
+
+const FilterBar = ({ onClickFilter }: FilterBarProps) => {
+  const [selectedOption, setSelectedOption] = useState<string | null>('주제별');
+  console.log(selectedOption);
+  const handleFilterOption = (label: string) => {
+    setSelectedOption(label);
+    onClickFilter(label);
+  };
 
   return (
     <>
-      <header className="flex items-center justify-evenly p-4">
-        {sortOption.map((label) => (
-          <button
-            key={label}
-            onClick={() => setIsModalOpen(true)}
-            className="flex items-center  font-bold  px-3 py-0.5 border-[2px] border-black rounded-full text-md"
-          >
-            {label}
-            <ChevronDown className="w-4 h-4" />
-          </button>
-        ))}
-
-        <button className="ml-6 text-md text-black flex items-center gap-1">
+      <header className="w-full flex items-center justify-between p-4">
+        <div className="flex-1 whitespace-nowrap scrollbar-hide overflow-x-auto flex pr-4">
+          <div className="flex gap-2 w-max">
+            {sortOption.map((label) => (
+              <button
+                key={label}
+                className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
+                onClick={() => handleFilterOption(label)}
+              >
+                {label}
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            ))}
+          </div>
+        </div>
+        <button className="ml-6 text-md text-black flex items-center ">
           편집
         </button>
       </header>
-
-      <FilterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 };

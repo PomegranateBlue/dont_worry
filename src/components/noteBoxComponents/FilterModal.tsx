@@ -70,7 +70,7 @@ const FilterModal = ({
       case '주제별':
         return TOPIC_CATEGORIES;
       case '감정별':
-        return EMOTION_CATEGORIES;
+        return EMOTION_CATEGORIES.map(({ label }) => label);
       default:
         return [];
     }
@@ -96,7 +96,7 @@ const FilterModal = ({
             <button
               key={tab}
               onClick={() => setSelectedOption(tab)}
-              className={`flex-1 text-center pb-2 text-lg font-semibold ${
+              className={`flex-1 text-center pb-2 py-[32px] text-[14px] font-semibold ${
                 selectedOption === tab
                   ? 'text-primary-4 border-b-2 border-primary-4'
                   : 'text-gray-400'
@@ -112,7 +112,7 @@ const FilterModal = ({
             <button
               key={option}
               onClick={() => handleToggle(option)}
-              className={`min-w-10 max-h-8 px-3 py-1 rounded-xl border text-md ${
+              className={` max-h-8 py-3 rounded-full border text-[16px] ${
                 selectedValues.includes(option)
                   ? 'bg-primary-4 text-white border-primary-4'
                   : 'border-gray-300 text-gray-700'

@@ -18,16 +18,17 @@ export const TOPIC_CATEGORIES = [
 //카테고리 내에서만 고르도록
 
 export const EMOTION_CATEGORIES = [
-  { label: '압박', emoji: '/images/stress.svg' },
-  { label: '무기력', emoji: '/images/lethargy.svg' },
-  { label: '외로움', emoji: '/images/lonely.svg' },
+  { label: '슬픔', emoji: '/images/sad.svg' },
   { label: '불쾌', emoji: '/images/discomfort.svg' },
+  { label: '압박', emoji: '/images/stress.svg' },
+  { label: '불안', emoji: '/images/anxiety.svg' },
   { label: '혼란', emoji: '/images/confusion.svg' },
+  { label: '분노', emoji: '/images/anger.svg' },
   { label: '우울', emoji: '/images/melancholy.svg' },
   { label: '짜증', emoji: '/images/annoying.svg' },
   { label: '후회', emoji: '/images/regret.svg' },
-  { label: '분노', emoji: '/images/anger.svg' },
-  { label: '불안', emoji: '/images/anxiety.svg' }
+  { label: '외로움', emoji: '/images/lonely.svg' },
+  { label: '무기력', emoji: '/images/lethargy.svg' }
 ] as const;
 
 // 카테고리 내에서만 고르도록하기

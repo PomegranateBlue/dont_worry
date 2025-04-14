@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
-import FilterModal from '@/components/noteBoxComponents/FilterModal'; // ✅ 추가
+import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
 import { useNoteListStore } from '@/store/notebox/noteboxStore';
@@ -11,8 +11,8 @@ import { Tables } from '../../../database.types';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
 
-  const [filterType, setFilterType] = useState<string | null>(null); // '주제별', '감정별', etc
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ 모달 열기 상태
+  const [filterType, setFilterType] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [selectedSort, setSelectedSort] = useState<'최신순' | '과거순'>(
@@ -63,7 +63,6 @@ const NotePage = () => {
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
       <h1 className="text-xl font-bold text-center p-4">걱정 보관함</h1>
 
-      {/* ✅ 필터 클릭 시 모달 열기 */}
       <FilterBar
         onClickFilter={(label) => {
           setFilterType(label);
@@ -71,7 +70,6 @@ const NotePage = () => {
         }}
       />
 
-      {/* ✅ FilterModal 렌더링 */}
       {isModalOpen && (
         <FilterModal
           selectedOption={filterType}

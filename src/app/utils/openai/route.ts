@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { COMMENT_PROMPT } from '@/constants/openai/commentConfig';
 
+import { COMMENT_PROMPT } from '../../../../src/constants/openai/commentConfig';
 const openai = new OpenAI();
 
 export async function POST(req: Request) {

@@ -9,7 +9,6 @@ import ResultForm from './ResultForm';
 import { fetchGPT } from '@/lib/api/gpt/gpt';
 import { useNoteStore } from '@/store/note/noteStore';
 
-
 enum StepProps {
   CATEGORY = 'category',
   EMOTION = 'emotion',
@@ -83,7 +82,6 @@ const StepFlow = () => {
       {step === StepProps.RESULT && (
         <div>
           <ResultForm />
-          {/* <ResultSaveButton /> */}
         </div>
       )}
     </div>

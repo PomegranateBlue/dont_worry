@@ -34,7 +34,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${pretendard.className}`}>
         <Header />
+
         <Providers>{children}</Providers>
+
       </body>
     </html>
   );

@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-// import { devtools } from 'zustand/middleware';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 type UserState = {
   user: string | null;
   setUser: (user: string | null) => void;
+  hydrated: boolean;
+  setHydrated: () => void;
 };
 
 // export const useUserStore = create<UserState>((set) => ({
@@ -13,15 +14,22 @@ type UserState = {
 // }));
 
 export const useUserStore = create<UserState>()(
-  persist( //todo: 데이터 생명주기 확인
+  persist(
     (set) => ({
-
-      user: localStorage.getItem('auth-storage'),
-
-      setUser: (user) => set({ user })
+      user: null,
+      setUser: (user) => set({ user }),
+      hydrated: false,
+      setHydrated: () => set({ hydrated: true })
     }),
     {
-      name: 'auth-storage'
+      name: 'auth-storage',
+      storage:
+        typeof window !== 'undefined'
+          ? createJSONStorage(() => localStorage)
+          : undefined,
+      onRehydrateStorage: () => (state) => {
+        state?.setHydrated();
+      }
     }
   )
 );

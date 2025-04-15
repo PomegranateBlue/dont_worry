@@ -21,12 +21,14 @@ const MWreportCard = () => {
   if (!weekData) return;
 
   return (
-    <section className="w-full max-w-screen-md mx-auto px-4 mt-10 mb-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b-[3px] border-black inline-block pb-1">
-        {mode === 'week' ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
-      </h2>
+    <section className="flex flex-col items-center gap-4 p-4 sm:p-5 w-full mx-auto mt-6 sm:mt-10 mb-4 sm:mb-6">
+      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
+        <div className="text-label-normal text-xl sm:text-2xl font-medium leading-tight w-full">
+          {mode === 'week' ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
+        </div>
+      </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 w-full">
         <BetterThing monthData={monthData} weekData={weekData} />
         <WorsenedThing monthData={monthData} weekData={weekData} />
       </div>

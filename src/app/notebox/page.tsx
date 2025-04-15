@@ -46,9 +46,12 @@ const NotePage = () => {
         );
       }
       if (filterType === '감정별') {
+        const emotions = note.emotion_category
+          ? note.emotion_category.split(',').map((emotion) => emotion.trim())
+          : [];
         return (
           selectedEmotions.length === 0 ||
-          selectedEmotions.includes(note.emotion_category!)
+          selectedEmotions.some((selected) => emotions.includes(selected))
         );
       }
       return true;

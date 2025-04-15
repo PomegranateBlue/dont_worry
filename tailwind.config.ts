@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
+
         error: '#fe5558',
         success: '#00bd78',
         white: '#ffffff',

@@ -1,39 +1,91 @@
 'use client';
-import { useState, useEffect } from 'react';
-import FilterModal from '@/components/noteBoxComponents/FilterModal';
+import { useEffect, useState } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
-import {
-  fetchUserInfo,
-  fetchUser,
-  fetchUserWorries
-} from '../utils/supabase/db';
+import FilterModal from '@/components/noteBoxComponents/FilterModal';
+import { fetchUser, fetchUserWorries } from '../utils/supabase/db';
 import NoteCard from '@/components/noteBoxComponents/NoteCard';
+import { useNoteListStore } from '@/store/notebox/noteboxStore';
+import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
 
 const NotePage = () => {
+  const { notes, setNotes } = useNoteListStore();
+
+  const [filterType, setFilterType] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [notes, setNotes] = useState<Tables<'users_note'>[]>([]);
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
+  const [selectedSort, setSelectedSort] = useState<'최신순' | '과거순'>(
+    '최신순'
+  );
+
+  const userQuery = useQuery<string | null, Error>({
+    queryKey: ['user'],
+    queryFn: fetchUser,
+    staleTime: Infinity
+  });
+
+  const userNotesQuery = useQuery<Tables<'users_note'>[], Error>({
+    queryKey: ['userNotes', userQuery.data],
+    queryFn: () => fetchUserWorries(userQuery.data),
+    enabled: !!userQuery.data
+  });
 
   useEffect(() => {
-    const getUserNotes = async () => {
-      try {
-        const userId = await fetchUser(); // 로그인한 사용자 ID
-        const userWorries = await fetchUserWorries(userId); // 걱정 노트 목록
-        setNotes(userWorries);
-      } catch (error) {
-        console.error(' 에러 발생:', error);
-      }
-    };
+    if (userNotesQuery.data) {
+      setNotes(userNotesQuery.data);
+    }
+  }, [userNotesQuery.data, setNotes]);
 
-    getUserNotes();
-  }, []);
+  const filteredNotes = notes
+    .filter((note) => {
+      if (filterType === '주제별') {
+        return (
+          selectedTopics.length === 0 ||
+          selectedTopics.includes(note.topic_category!)
+        );
+      }
+      if (filterType === '감정별') {
+        return (
+          selectedEmotions.length === 0 ||
+          selectedEmotions.includes(note.emotion_category!)
+        );
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      return selectedSort === '최신순'
+        ? new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        : new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    });
 
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
       <h1 className="text-xl font-bold text-center p-4">걱정 보관함</h1>
-      <FilterBar />
+
+      <FilterBar
+        onClickFilter={(label) => {
+          setFilterType(label);
+          setIsModalOpen(true);
+        }}
+      />
+
+      {isModalOpen && (
+        <FilterModal
+          selectedOption={filterType}
+          setSelectedOption={setFilterType}
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          selectedEmotions={selectedEmotions}
+          setSelectedEmotions={setSelectedEmotions}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+
       <main className="flex-1 overflow-y-auto px-4 py-2 space-y-4">
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <NoteCard
             key={note.note_id}
             content={note.content}
@@ -44,10 +96,6 @@ const NotePage = () => {
           />
         ))}
       </main>
-
-      {isModalOpen && (
-        <FilterModal isOpen onClose={() => setIsModalOpen(false)} />
-      )}
     </div>
   );
 };

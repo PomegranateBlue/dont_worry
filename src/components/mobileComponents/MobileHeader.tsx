@@ -71,6 +71,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                   </Link>
                 </div>
                 <div className="p-6 flex flex-col gap-4 ">
+
                   <Link href="/" className="py-3">
                     <Text variant="title2" color="label-neutral">
                       서비스 소개

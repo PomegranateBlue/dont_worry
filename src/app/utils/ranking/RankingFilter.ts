@@ -41,12 +41,12 @@ export const makeTopTen = (userCategory: UserNote[]): TopTenRanking => {
 
   const topTopics: RankingItem[] = Object.entries(topics)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
+    .slice(0, 6) //차트에 노출 시킬 데이터 수를 줄일거면 여기 참조
     .map(([name, count]) => ({ name, count }));
 
   const topEmotions: RankingItem[] = Object.entries(emotions)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
+    .slice(0, 6)
     .map(([name, count]) => ({ name, count }));
 
   return {

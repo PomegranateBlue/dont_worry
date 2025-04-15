@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  ABOUT,
   MOST_DECREASE_COMMENT_MONTH,
   MOST_DECREASE_COMMENT_WEEK
 } from '@/constants/ranking/Line';
@@ -17,16 +18,48 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
   return (
     <>
       {mode === 'week' ? (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {weekLowest
-            ? `${weekLowest.category}${MOST_DECREASE_COMMENT_WEEK}`
-            : '데이터가 없습니다'}
+        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-slpeum_bg text-label-normal shadow-sm">
+          {weekLowest ? (
+            <div className="w-full">
+              <div>
+                <span className="text-lg sm:text-xl font-semibold leading-tight">
+                  {weekLowest.category}
+                </span>
+                <span className="text-sm sm:text-base font-medium leading-normal">
+                  {ABOUT}
+                </span>
+              </div>
+              <div className="text-sm sm:text-base font-medium leading-normal">
+                {MOST_DECREASE_COMMENT_WEEK}
+              </div>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       ) : (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {monthLowest
-            ? `${monthLowest.category}${MOST_DECREASE_COMMENT_MONTH}`
-            : '데이터가 없습니다'}
+        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-slpeum_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+          {monthLowest ? (
+            <div className="w-full">
+              <div>
+                <span className="text-lg sm:text-xl font-semibold leading-tight">
+                  {monthLowest.category}
+                </span>
+                <span className="text-sm sm:text-base font-medium leading-normal">
+                  {ABOUT}
+                </span>
+              </div>
+              <div className="text-sm sm:text-base font-medium leading-normal">
+                {MOST_DECREASE_COMMENT_MONTH}
+              </div>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       )}
     </>

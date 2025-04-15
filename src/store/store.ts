@@ -13,9 +13,11 @@ type UserState = {
 // }));
 
 export const useUserStore = create<UserState>()(
-  persist(
+  persist( //todo: 데이터 생명주기 확인
     (set) => ({
+
       user: localStorage.getItem('auth-storage'),
+
       setUser: (user) => set({ user })
     }),
     {

@@ -11,7 +11,7 @@ export interface UserNote {
   content: string;
   note_img: string | null;
   note_id: string;
-  id: string;
+  user_id: string;
   topic_category: string;
   emotion_category: string;
 }
@@ -59,9 +59,47 @@ export interface CategoryResult {
 }
 
 export interface AnalysisTrendsResult {
-  mostIncreased: CategoryResult;
-  mostDecreased: CategoryResult;
+  mostIncreased: CategoryResult | null;
+  mostDecreased: CategoryResult | null;
   allChanges: Record<string, CategoryChangeData>;
   prevMonthName: string;
   currentMonthName: string;
+}
+
+export interface AnalysisWeekTrendsResult {
+  mostIncreased: CategoryResult | null;
+  mostDecreased: CategoryResult | null;
+  allChanges: Record<string, CategoryChangeData>;
+  prevWeekName: string;
+  currentWeekName: string;
+}
+
+export interface BetterThingProps {
+  monthData: {
+    mostDecreased: {
+      category: string;
+      data: {
+        change: number;
+        percentage: number;
+        current: number;
+        previous: number;
+      };
+    } | null;
+  } | null;
+  weekData: AnalysisWeekTrendsResult | null;
+}
+
+export interface WorsenedThingProps {
+  monthData: {
+    mostIncreased: {
+      category: string;
+      data: {
+        change: number;
+        percentage: number;
+        current: number;
+        previous: number;
+      };
+    } | null;
+  } | null;
+  weekData: AnalysisWeekTrendsResult | null;
 }

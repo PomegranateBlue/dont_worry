@@ -1,3 +1,5 @@
+//사용자 입력 상태 관리를 위한 스토어 정의
+
 import { create } from 'zustand';
 
 interface NoteProps {

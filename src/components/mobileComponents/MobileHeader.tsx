@@ -72,7 +72,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                 <div className="p-6 flex flex-col gap-4 ">
                   <Link href="/">서비스 소개</Link>
                   <Link href="/note">걱정 작성</Link>
-                  <Link href="/">걱정 보관함</Link>
+                  <Link href="/notebox">걱정 보관함</Link>
                   <Link href="/ranking">통계</Link>
                   <Link href="/letter">편지쓰기</Link>
                   <div className="mt-5 text-sm text-gray-500 ">

@@ -31,6 +31,6 @@ export const getIsLogin = async () => {
   const {
     data: { user }
   } = await serverClient.auth.getUser();
-  console.log(user);
+  // console.log(user);
   return !!user;
 };

@@ -15,6 +15,7 @@ import { ChevronRight, PencilLine } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
+import Text from '@/components/common/Text';
 
 const MyPage = () => {
   const queryClient = useQueryClient();
@@ -63,7 +64,10 @@ const MyPage = () => {
   return (
     <div className="px-4 pb-20">
       {/* 프로필 섹션 */}
-      <div className="flex flex-col items-center py-6">
+      <Text variant="title1" className="text-center py-4">
+        마이페이지
+      </Text>
+      <div className="flex flex-col items-center py-3">
         <ProfileImage
           imageUrl={userInfo?.profile_img || undefined}
           onUpload={handleUpload}
@@ -72,7 +76,9 @@ const MyPage = () => {
 
         {/* 닉네임 */}
         <div className="flex items-center gap-1 mt-4">
-          <span className="text-lg font-semibold">{userInfo?.nickname}</span>
+          <Text as="span" variant="title1" color="label-normal">
+            {userInfo?.nickname}
+          </Text>
           <button onClick={openModal}>
             <PencilLine color="gray" size={16} />
           </button>
@@ -80,25 +86,31 @@ const MyPage = () => {
         </div>
 
         {/* 이메일 */}
-        <span className="text-sm text-gray-500">{userInfo?.email}</span>
+        <Text variant="label1" color="label-alternative">
+          {userInfo?.email}
+        </Text>
       </div>
 
       {/* 작성글/편지 정보 */}
-      <div className="flex justify-center items-center rounded-2xl bg-gray-50 py-4 mb-6">
+      <div className="flex justify-center items-center rounded-md bg-backgroundSet-card py-4 mb-6">
         <div className="flex-1 text-center">
           <Link href="/notebox">
-            <p className="text-lg font-semibold">
+            <Text variant="title2">
               {/* 걱정 갯수 넣기 */}
               {userWorries?.length || 0}개
-            </p>
-            <p className="text-xs text-gray-500">작성한 걱정</p>
+            </Text>
+            <Text variant="body3" color="label-alternative">
+              작성한 걱정
+            </Text>
           </Link>
         </div>
-        <div className="w-px h-10 bg-gray-200" />
+        <div className="w-px h-10 bg-line-normal" />
         <div className="flex-1 text-center">
           <Link href="/letter">
-            <p className="text-lg font-semibold">{letters?.length || 0}개</p>
-            <p className="text-xs text-gray-500">미래 편지</p>
+            <Text variant="title2">{letters?.length || 0}개</Text>
+            <Text variant="body3" className="text-label-alternative">
+              미래 편지
+            </Text>
           </Link>
         </div>
       </div>

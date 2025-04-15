@@ -8,6 +8,16 @@
   }
 }
 
+@layer components {
+  .pretendard {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: normal;
+  }
+  .ibmSans {
+    font-family: 'IBMPlexSansKR-SemiBold', sans-serif;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

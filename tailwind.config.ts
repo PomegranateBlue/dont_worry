@@ -13,6 +13,13 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
+
+
+        error: '#fe5558',
+        success: '#00bd78',
+        white: '#ffffff',
+        black: '#000000',
+
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -84,6 +91,7 @@ const config: Config = {
           offwhite: '#EEEEF0'
         },
         mind: {
+
           honran: '#CAADC6', //혼란
           honran_bg: '#FCF2FB',
           moogiryeok: '#E7DDF2', //무기력
@@ -105,8 +113,13 @@ const config: Config = {
           bulkuea: '#F0ECAE', //불쾌
           bulkuea_bg: 'FBFAE2',
           apbak: '#EBB6C8', //압박
+
           apbak_bg: '#FFF1F6'
         }
+      },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        ibmSans: ['var(--font-ibmSans)']
       },
       borderRadius: {
         lg: 'var(--radius)',

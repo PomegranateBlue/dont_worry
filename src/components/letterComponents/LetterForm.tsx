@@ -22,7 +22,7 @@ const LetterForm = () => {
         data: { user },
         error
       } = await browserClient.auth.getUser();
-
+      console.log('letterForm', user);
       if (user) {
         setUserId(user.id);
       } else {
@@ -30,6 +30,7 @@ const LetterForm = () => {
         setMessage('로그인 상태를 확인할 수 없습니다. 다시 로그인해주세요.');
       }
     };
+
     fetchUser();
   }, []);
 

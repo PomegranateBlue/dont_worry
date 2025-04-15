@@ -139,11 +139,13 @@ const EmotionsRankginPage = () => {
       </div>
       <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">
         <FilterMenu />
-        {topThree.map((e) => (
-          <div key={e.name} className="w-full max-w-full">
-            <TopThreeCard topThree={e} />
-          </div>
-        ))}
+        <div className="flex flex-col w-full max-w-full gap-[12px]">
+          {topThree.map((e) => (
+            <div key={e.name}>
+              <TopThreeCard topThree={e} />
+            </div>
+          ))}
+        </div>
       </div>
       <MWreportCard />
 

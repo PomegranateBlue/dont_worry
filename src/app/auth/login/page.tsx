@@ -6,7 +6,7 @@ import GoogleLogin from '@/components/loginComponents/GoogleLogin';
 
 export default function LoginPage() {
   return (
-    <>
+    <div className="px-4">
       <h2 className="m-4 text-center font-semibold text-xl">로그인</h2>
       <LoginForm />
       <div className="mt-10">
@@ -23,6 +23,6 @@ export default function LoginPage() {
       >
         회원가입
       </Link>
-    </>
+    </div>
   );
 }

@@ -1,8 +1,6 @@
-{
-  "crons": [
-    {
-      "path": "/api/sendEmail",
-      "schedule": "0 0 * * *"
-    }
-  ]
-}
+[
+  {
+    "path": "/api/send-scheduled-letters",
+    "schedule": "*/5 * * * *"
+  }
+]

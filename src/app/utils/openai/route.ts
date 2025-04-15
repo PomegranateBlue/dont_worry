@@ -1,4 +1,3 @@
-import { COMMENT_PROMPT } from '@/constants/openai/commentconfig';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 

@@ -15,7 +15,7 @@ export default function AuthCallbackPage() {
     const handleOAuthLogin = async () => {
       const code = searchParams.get('code');
       if (code) {
-        // ✅ 세션 먼저 교환해야 유저 정보를 가져올 수 있음!
+        // 이로직 안타는듯?
         const { error } = await supabase.auth.exchangeCodeForSession(code);
         if (error) {
           console.error('세션 교환 실패:', error);
@@ -24,14 +24,13 @@ export default function AuthCallbackPage() {
         }
       }
 
-      // ✅ 세션이 있다면 이제 유저 정보를 가져올 수 있음!
       const {
         data: { user }
       } = await supabase.auth.getUser();
 
       if (user) {
         console.log('카카오유저', user);
-        setUser(user.id); // 필요 시 user 전체를 저장해도 됨
+        setUser(user.id);
         router.push('/');
       } else {
         console.error('유저 없음!');

@@ -1,6 +1,8 @@
-[
-  {
-    "path": "/api/send-scheduled-letters",
-    "schedule": "*/5 * * * *"
-  }
-]
+{
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}

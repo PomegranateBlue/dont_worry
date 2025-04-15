@@ -64,7 +64,7 @@ export default function Text({
 /*
 실제사용예시
 기본 p태그, 다른태그 사용시 as / variant : 텍스트속성 / color : 컬러
-<Text as="h1" variant="display1" color="danger">
+<Text as="h1" variant="display1" color="error">
   경고 메시지!
 </Text>
 */

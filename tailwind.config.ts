@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
 
 const config: Config = {
   darkMode: ['class'],
@@ -10,7 +11,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primaryPurple: '#8573C9',
+        // primaryPurple: '#8573C9',
+        //이거 일단은 주석처리했습니다
+        error: '#fe5558',
+        success: '#00bd78',
+        white: '#ffffff',
+        black: '#000000',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -23,7 +29,11 @@ const config: Config = {
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          foreground: 'hsl(var(--primary-foreground))',
+          1: '#EBE2FF',
+          2: '#C1B8E5',
+          3: '#A092D7',
+          4: '#8573C9'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -50,7 +60,59 @@ const config: Config = {
           '3': 'hsl(var(--chart-3))',
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
+        },
+
+        label: {
+          disable: '#DFDFED',
+          assistive: '#C7C8C9',
+          alternative: '#85858B',
+          neutral: '#47484C',
+          strong: '#000000',
+          normal: '#171719'
+        },
+        interaction: {
+          inactive: '#F4F4F5',
+          disabled: '#DBDCDF'
+        },
+        line: {
+          normal: '#E0E0E2',
+          alternative: '#F4F4F5'
+        },
+        status: {
+          positive: '#0DFBA8',
+          error: '#FF5558'
+        },
+        backgroundSet: {
+          normal: '#FFFFFF',
+          card: '#F7F7F8',
+          offwhite: '#EEEEF0'
+        },
+        mind: {
+          honran: '#CAADC6',
+          honran_bg: '#FCF2FB',
+          moogiryeok: '#E7DDF2',
+          moogiryeok_bg: '#F3EEFA',
+          sipeum: '#CCD5DD',
+          sipeum_bg: '#EAF3FA',
+          woowool: '#ACBCE5',
+          woowool_bg: '#E4EAFA',
+          yoerowooum: '#81A2B8',
+          yoerowooum_bg: '#EDF2F7',
+          boolan: '#AFC1B8',
+          boolan_bg: '#EBF5F0',
+          huhuea_bg: '#D4DFCD',
+          zzazeung: '#EAF9E0',
+          zzazeung_bg: '#FEF5BF',
+          bunno: '#E3BFA2',
+          bunno_bg: '#FACFC7',
+          butkuea: '#F0ECAE',
+          apbak: '#EBB6C8',
+          apbak_bg: '#FFF1F6'
         }
+      },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        ibmSans: ['var(--font-ibmSans)']
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -59,6 +121,7 @@ const config: Config = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [animate]
 };
+
 export default config;

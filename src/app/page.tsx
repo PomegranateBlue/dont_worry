@@ -1,16 +1,26 @@
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+import Text from '@/components/common/Text';
 
 const HomePage = () => {
   return (
     <main className="min-h-screen">
-      <section className="w-full h-[482px] bg-black">Hero section</section>
+      <section className="w-full h-[482px] bg-primary-1">
+        <Text variant="display3" color="primary4" className="text-center">
+          말 못할 걱정들..
+          <br />
+          어딘가 털어놓고 싶다면?
+        </Text>
+      </section>
       <section className="bg-gray-100 py-10 px-6 text-center">
-        <h2 className="flex justify-center text-center text-xl font-bold  p-10">
+        <Text
+          variant="display3"
+          className="flex justify-center text-center text-xl font-bold  p-10"
+        >
           마음의 고민을
           <br />
           이곳에서 묻어보세요
-        </h2>
+        </Text>
         <div className="flex flex-col justify-center items-center gap-[20px]">
           <Image
             src="/images/userInput.svg"

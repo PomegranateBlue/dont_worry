@@ -7,8 +7,15 @@
     text-wrap: balance;
   }
 }
-
-
+@layer components {
+  .pretendard {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: normal;
+  }
+  .ibmSans {
+    font-family: 'IBMPlexSansKR-SemiBold', sans-serif;
+  }
+}
 
 @layer base {
   :root {
@@ -65,8 +72,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

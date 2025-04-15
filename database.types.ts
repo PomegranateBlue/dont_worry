@@ -81,6 +81,7 @@ export type Database = {
           created_at: string
           email: string
           id: number
+          is_deleted: boolean | null
           nickname: string
           profile_img: string | null
           user_id: string
@@ -89,6 +90,7 @@ export type Database = {
           created_at?: string
           email: string
           id?: number
+          is_deleted?: boolean | null
           nickname: string
           profile_img?: string | null
           user_id?: string
@@ -97,6 +99,7 @@ export type Database = {
           created_at?: string
           email?: string
           id?: number
+          is_deleted?: boolean | null
           nickname?: string
           profile_img?: string | null
           user_id?: string

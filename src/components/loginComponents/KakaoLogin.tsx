@@ -9,13 +9,9 @@ const KakaoLogin = () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: `http://localhost:3000`
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
       }
     });
-    console.log('카카오로그인데이터', data);
-    if (error) {
-      console.log(error);
-    }
   }
 
   return (

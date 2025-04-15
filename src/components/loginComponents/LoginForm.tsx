@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import Text from '../common/Text';
 
 const initialState = { success: false, error: null };
 
@@ -53,11 +54,13 @@ const LoginForm = () => {
   return (
     <form
       action={formAction}
-      className="space-y-2 border-b border-b[#E0E0E2] pb-6"
+      className="space-y-5 border-b border-b-line-normal pb-9"
     >
       <div>
-        <label>
-          <span className="font-semibold">이메일</span>
+        <label className="space-y-2">
+          <Text variant="body2" color="label-normal">
+            이메일
+          </Text>
           <input
             {...register('email')}
             type="email"
@@ -65,17 +68,23 @@ const LoginForm = () => {
             id="email"
             placeholder="ex)abc@email.com"
             required
-            className={`w-full p-4 border-b-[1px] focus:outline-none ${
-              errors.email ? 'border-b-red-500' : 'border-b-[#D6D6D6]'
+            className={`w-full p-4 border-[1px] border-label-assistive rounded-md focus:outline-none placeholder-label-assistive ${
+              errors.email ? 'border-error' : ' border-label-assistive'
             }`}
           />
-          {errors.email && (
-            <p className="text-red-500 mt-1">{errors.email.message}</p>
+          {errors.email ? (
+            <Text variant="label1" color="error">
+              {errors.email.message}
+            </Text>
+          ) : (
+            <Text variant="label1" color="label-assistive">
+              헬퍼 텍스트
+            </Text>
           )}
         </label>
       </div>
       <div>
-        <label>
+        <label className="space-y-2">
           <span className="font-semibold">비밀번호</span>
           <input
             {...register('password')}
@@ -83,27 +92,35 @@ const LoginForm = () => {
             name="password"
             placeholder="비밀번호 입력"
             required
-            className={`w-full p-4 border-b-[1px] focus:outline-none ${
-              errors.password ? 'border-b-red-500' : 'border-b-[#D6D6D6]'
+            className={`w-full p-4 border-[1px] border-label-assistive rounded-md focus:outline-none placeholder-label-assistive ${
+              errors.email ? 'border-error' : ' border-label-assistive'
             }`}
           />
           {errors.password ? (
-            <p className="text-red-500 mt-1">{errors.password.message}</p>
+            <Text variant="label1" color="error">
+              {errors.password.message}
+            </Text>
           ) : (
-            <p className="text-[#A3A3A3] text-sm mt-1">
-              영문 및 숫자, 12자 이내
-            </p>
+            <Text variant="label1" color="label-assistive">
+              헬퍼 텍스트
+            </Text>
           )}
         </label>
       </div>
 
-      {state.error && <p className="text-red-500 !mt-4">{state.error}</p>}
+      {state.error && (
+        <Text color="error" className="!mt-4">
+          {state.error}
+        </Text>
+      )}
 
       <button
         type="submit"
-        className="w-full bg-[#8573C9] p-3 rounded-md !mt-10 text-white text-lg font-medium"
+        className="w-full bg-primary-4 p-3 rounded-md !mt-7"
       >
-        로그인
+        <Text as="span" variant="title2" color="white">
+          로그인
+        </Text>
       </button>
     </form>
   );

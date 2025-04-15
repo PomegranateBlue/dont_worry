@@ -3,11 +3,14 @@ import LoginForm from '@/components/loginComponents/LoginForm';
 import NaverLogin from '@/components/loginComponents/NaverLogin';
 import KakaoLogin from '@/components/loginComponents/KakaoLogin';
 import GoogleLogin from '@/components/loginComponents/GoogleLogin';
+import Text from '@/components/common/Text';
 
 export default function LoginPage() {
   return (
     <div className="px-4">
-      <h2 className="m-4 text-center font-semibold text-xl">로그인</h2>
+      <Text variant="title1" color="label-normal" className="my-4 text-center">
+        로그인
+      </Text>
       <LoginForm />
       <div className="mt-10">
         <p className="text-lg text-center">소셜 계정으로 로그인</p>

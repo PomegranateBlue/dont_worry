@@ -13,6 +13,11 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
+
+        error: '#fe5558',
+        success: '#00bd78',
+        white: '#ffffff',
+        black: '#000000',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -105,6 +110,10 @@ const config: Config = {
           apbak: '#EBB6C8',
           apbak_bg: '#FFF1F6'
         }
+      },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        ibmSans: ['var(--font-ibmSans)']
       },
       borderRadius: {
         lg: 'var(--radius)',

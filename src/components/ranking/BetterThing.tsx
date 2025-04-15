@@ -4,26 +4,30 @@ import {
   MOST_DECREASE_COMMENT_MONTH,
   MOST_DECREASE_COMMENT_WEEK
 } from '@/constants/ranking/Line';
-import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import { useRankingStore } from '@/store/ranking/rankingStore';
+import { BetterThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 
-const BetterThing = () => {
-  const { year, month, mode } = useRankingStore();
-  const { data, loading, error } = useAnalysisTrend(year, month);
-  if (loading) return <div className="p-4">데이터를 불러오는 중...</div>;
-  if (error) console.log(error);
-  if (!data) return;
-
-  const { mostDecreased } = data;
+const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
+  const { mode } = useRankingStore();
+  const monthLowest = monthData?.mostDecreased;
+  const weekLowest = weekData?.mostDecreased;
 
   return (
     <>
       {mode === 'week' ? (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">{`${mostDecreased.category}${MOST_DECREASE_COMMENT_WEEK}`}</div>
+        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
+          {weekLowest
+            ? `${weekLowest.category}${MOST_DECREASE_COMMENT_WEEK}`
+            : '데이터가 없습니다'}
+        </div>
       ) : (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">{`${mostDecreased.category}${MOST_DECREASE_COMMENT_MONTH}`}</div>
+        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
+          {monthLowest
+            ? `${monthLowest.category}${MOST_DECREASE_COMMENT_MONTH}`
+            : '데이터가 없습니다'}
+        </div>
       )}
     </>
   );

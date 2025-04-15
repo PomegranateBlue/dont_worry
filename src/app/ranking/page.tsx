@@ -12,6 +12,7 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
+import Solution from '@/components/ranking/Solution';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();
@@ -28,11 +29,14 @@ const RankingPage = () => {
     []
   );
 
+  console.log('user', user); //1 ->정상
+
   useEffect(() => {
     if (mode === 'week') {
       const fetchData = async () => {
         try {
           setIsLoading(true);
+          console.log(user); //2 -> null
           const userNotes = await fetchUserNotes(year, month, week, user);
 
           if (userNotes.length > 0) {
@@ -134,6 +138,7 @@ const RankingPage = () => {
           </div>
         );
       })}
+      <Solution topThree={topThree} />
     </div>
   );
 };

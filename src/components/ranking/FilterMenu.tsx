@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import React from 'react';
 import {
   CHART_FILTER_EMOTION,
@@ -14,33 +15,42 @@ const FilterMenu = () => {
   const isEmotion = pathName === '/ranking/emotions-rank';
 
   return (
-    <div className="w-full px-4 pb-6 bg-white mt-2">
-      <div className="flex justify-start gap-3 max-w-screen-md mx-auto">
-        <Link href="/ranking">
-          <button
-            className={`px-4 py-2 text-base font-semibold rounded-xl border transition-colors duration-200
-              ${
-                isTopic
-                  ? 'border-purple-500 text-purple-500'
-                  : 'border-gray-200 text-gray-700'
+    <div className="w-[335px]">
+      <div className="relative flex h-10 rounded-full bg-label-disable overflow-hidden">
+        {/* 애니메이션 바 */}
+        <motion.div
+          layout
+          layoutId="tabHighlight"
+          className="absolute top-0 h-full w-1/2 rounded-full bg-primary-4"
+          initial={false}
+          animate={{
+            left: isEmotion ? '50%' : '0%'
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        />
+        <div className="relative z-10 flex w-full text-sm font-semibold">
+          <Link href="/ranking" className="w-1/2">
+            <div
+              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200 ${
+                isTopic ? 'text-backgroundSet-normal' : 'text-label-alternative'
               }`}
-          >
-            {CHART_FILTER_TOPIC}
-          </button>
-        </Link>
+            >
+              {CHART_FILTER_TOPIC}
+            </div>
+          </Link>
 
-        <Link href="/ranking/emotions-rank">
-          <button
-            className={`px-4 py-2 text-base font-semibold rounded-xl border transition-colors duration-200
-              ${
+          <Link href="/ranking/emotions-rank" className="w-1/2">
+            <div
+              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200 ${
                 isEmotion
-                  ? 'border-purple-500 text-purple-500'
-                  : 'border-gray-200 text-gray-700'
+                  ? 'text-backgroundSet-normal'
+                  : 'text-label-alternative'
               }`}
-          >
-            {CHART_FILTER_EMOTION}
-          </button>
-        </Link>
+            >
+              {CHART_FILTER_EMOTION}
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

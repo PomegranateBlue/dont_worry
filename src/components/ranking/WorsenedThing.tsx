@@ -21,16 +21,42 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
   return (
     <>
       {mode === 'week' ? (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {weekBest
-            ? `${weekBest.category}${MOST_INCREASE_COMMENT_WEEK}`
-            : '데이터가 없습니다'}
+        <div className="flex w-full whitespace-normal break-words items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+          {weekBest ? (
+            <div className="w-full">
+              <div className="flex flex-col w-full">
+                <span className="text-label-normal text-lg sm:text-xl font-semibold leading-tight">
+                  {weekBest.category}
+                </span>
+                <span className="text-label-normal text-sm sm:text-base font-medium leading-normal">
+                  {MOST_INCREASE_COMMENT_WEEK}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       ) : (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {monthBest
-            ? `${monthBest.category}${MOST_INCREASE_COMMENT_MONTH}`
-            : '데이터가 없습니다'}
+        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+          {monthBest ? (
+            <div className="w-full">
+              <div className="flex flex-col w-full">
+                <span className="text-label-normal text-lg sm:text-xl font-semibold leading-tight">
+                  {monthBest.category}
+                </span>
+                <span className="text-label-normal text-sm sm:text-base font-medium leading-normal">
+                  {MOST_INCREASE_COMMENT_MONTH}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       )}
     </>

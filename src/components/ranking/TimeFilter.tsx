@@ -34,7 +34,7 @@ const TimeFilter = ({ type, options, onChange, selected }: Props) => {
           isNaN(+e.target.value) ? e.target.value : +e.target.value
         )
       }
-      className="border border-gray-300 rounded-full px-4 py-2 text-center text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+      className="flex justify-center items-center h-[32px] px-[12px] py-[6px] gap-[4px] border border-line-noraml rounded-[16px] text-center text-label-neutral focus:outline-none focus:ring-2 focus:ring-purple-400"
     >
       {options.map((opt) => (
         <option key={opt} value={opt}>

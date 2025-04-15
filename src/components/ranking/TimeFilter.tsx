@@ -1,3 +1,5 @@
+import { ChevronDown } from 'lucide-react';
+
 type Props = {
   type: 'year' | 'month' | 'week';
   options: (number | string)[];
@@ -26,22 +28,32 @@ const getLabel = (type: 'year' | 'month' | 'week', value: number | string) => {
 
 const TimeFilter = ({ type, options, onChange, selected }: Props) => {
   return (
-    <select
-      value={selected}
-      onChange={(e) =>
-        onChange(
-          type,
-          isNaN(+e.target.value) ? e.target.value : +e.target.value
-        )
-      }
-      className="flex justify-center items-center h-[32px] px-[12px] py-[6px] gap-[4px] border border-line-noraml rounded-[16px] text-center text-label-neutral focus:outline-none focus:ring-2 focus:ring-purple-400"
-    >
-      {options.map((opt) => (
-        <option key={opt} value={opt}>
-          {getLabel(type, opt)}
-        </option>
-      ))}
-    </select>
+    <div className="relative inline-block">
+      <select
+        value={selected}
+        onChange={(e) =>
+          onChange(
+            type,
+            isNaN(+e.target.value) ? e.target.value : +e.target.value
+          )
+        }
+        className="appearance-none h-[32px] px-[16px] py-[6px] border border-line-noraml rounded-[16px] text-label-neutral focus:outline-none focus:ring-2 focus:ring-purple-400 pr-[32px] text-center"
+        style={{
+          textAlignLast: 'center',
+          textAlign: 'center',
+          lineHeight: '1.2'
+        }}
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt} className="text-center">
+            {getLabel(type, opt)}
+          </option>
+        ))}
+      </select>
+      <div className="absolute inset-y-0 right-0 flex items-center px-[12px] pointer-events-none">
+        <ChevronDown size={16} className="text-gray-400" />
+      </div>
+    </div>
   );
 };
 

@@ -2,8 +2,10 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
+import { SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type TopThreeItem = {
   name: string;
@@ -15,48 +17,60 @@ type SolutionProps = {
 };
 
 const stringifyTopThree = (list: TopThreeItem[]) => {
-  return list.map((item) => item.name).join(',');
+  //props로 받은 topthree 정렬
+  return list
+    .map((item) => item.name)
+    .sort()
+    .join(',');
+};
+
+const parseAndSort = (str: string) => {
+  //슈베에서 받은 topthree 정렬
+  return str
+    .split(',')
+    .map((s) => s.trim())
+    .sort()
+    .join(',');
 };
 
 const Solution = ({ topThree }: SolutionProps) => {
   const [solution, setSolution] = useState<string | null>(null);
   const { user } = useUserStore();
+  const { data: userInfo } = useUserInfo();
+
+  const prevKeywordsRef = useRef<string | null>(null);
 
   useEffect(() => {
     const makeSolution = async () => {
       const keywords = stringifyTopThree(topThree);
       if (!user) {
-        console.error('사용자 ID가 없습니다.');
+        console.error('solution: 사용자 ID가 없습니다.'); //del
         return;
       }
 
       try {
-        const { data, error } = await supabase //블로킹 하기 위해 최근 데이터 조회
+        const { data, error } = await supabase
           .from('user_statistics')
-          .select('comment, top_three')
+          .select('comment, top_three, created_at')
           .eq('user_id', user)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .maybeSingle();
+          .order('created_at', { ascending: false });
 
         if (error) {
           console.error('Supabase 에러 발생:', error);
         }
 
-        if (data?.comment && data.top_three) {
-          const serverTopThree = data.top_three.replace(/\s/g, ''); //슈베에서 불러온 top3
-          const currentTopThree = keywords.replace(/\s/g, ''); //페이지에서 계산된 top3
+        // 기존 데이터 중 같은 키워드가 있는지 확인 (내용 일치 기준)
+        const matchingEntry = data?.find((entry) => {
+          return entry.top_three && parseAndSort(entry.top_three) === keywords;
+        });
 
-          if (serverTopThree === currentTopThree) {
-            //이미 동일 내용으로 생성된 멘트가 있다면 재활용
-            setSolution(data.comment);
-            return;
-          }
+        if (matchingEntry) {
+          setSolution(matchingEntry.comment);
+          return;
         }
 
         console.log('GPT 요청 실행 중...');
         const res = await fetch('/utils/rankingSolution', {
-          //멘트가 없거나 중복되지 않은경우 새로운 답변 생성
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ keywords })
@@ -69,21 +83,31 @@ const Solution = ({ topThree }: SolutionProps) => {
         const gptData = await res.json();
 
         if (typeof gptData === 'string') {
-          //생성한 답변과 top3를 저장
           setSolution(gptData);
-          console.log('1', user);
-          const { error: serror } = await browserClient
+
+          // 중복 저장 방지
+          const { data: existing } = await browserClient
             .from('user_statistics')
-            .insert([
-              {
-                user_id: user,
-                comment: gptData,
-                top_three: keywords,
-                created_at: new Date().toISOString()
-              }
-            ]);
-          if (serror) {
-            console.log(serror);
+            .select('id')
+            .eq('user_id', user)
+            .eq('top_three', keywords)
+            .maybeSingle();
+
+          if (!existing) {
+            const { error: insertError } = await browserClient
+              .from('user_statistics')
+              .insert([
+                {
+                  user_id: user,
+                  comment: gptData,
+                  top_three: keywords,
+                  created_at: new Date().toISOString()
+                }
+              ]);
+
+            if (insertError) {
+              console.log('삽입 에러:', insertError);
+            }
           }
         } else {
           setSolution('예상하지 못한 GPT 응답 형식입니다.');
@@ -94,16 +118,23 @@ const Solution = ({ topThree }: SolutionProps) => {
       }
     };
 
-    if (topThree.length > 0) {
+    const keywords = stringifyTopThree(topThree);
+
+    if (topThree.length > 0 && prevKeywordsRef.current !== keywords) {
+      prevKeywordsRef.current = keywords;
       makeSolution();
     }
-  }, [topThree]);
+  }, [topThree, user]);
 
   return (
-    <div className="p-4 mt-6 rounded-lg bg-slate-50">
-      <h2 className="text-xl font-semibold mb-2">GPT 솔루션</h2>
+    <div className="flex flex-col gap-4 p-4 w-full">
+      <h2 className="text-xl items-start text-label-normal font-semibold mb-2">
+        {userInfo?.nickname + SOLUTION_TITLE}
+      </h2>
       {solution ? (
-        <p className="whitespace-pre-line">{solution}</p>
+        <p className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
+          {solution}
+        </p>
       ) : (
         <p>솔루션을 생성 중입니다...</p>
       )}

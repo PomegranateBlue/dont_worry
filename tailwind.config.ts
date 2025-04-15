@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
 
 const config: Config = {
   darkMode: ['class'],
@@ -10,7 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primaryPurple: '#8573C9',
+        // primaryPurple: '#8573C9',
+        //이거 일단은 주석처리했습니다
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -23,7 +25,11 @@ const config: Config = {
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          foreground: 'hsl(var(--primary-foreground))',
+          1: '#EBE2FF',
+          2: '#C1B8E5',
+          3: '#A092D7',
+          4: '#8573C9'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -50,6 +56,56 @@ const config: Config = {
           '3': 'hsl(var(--chart-3))',
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
+        },
+
+        label: {
+          disable: '#DFDFED',
+          assistive: '#C7C8C9',
+          alternative: '#85858B',
+          neutral: '#47484C',
+          strong: '#000000',
+          normal: '#171719'
+        },
+        interaction: {
+          inactive: '#F4F4F5',
+          disabled: '#DBDCDF'
+        },
+        line: {
+          normal: '#E0E0E2',
+          alternative: '#F4F4F5'
+        },
+        status: {
+          positive: '#0DFBA8',
+          error: '#FF5558'
+        },
+        backgroundSet: {
+          normal: '#FFFFFF',
+          card: '#F7F7F8',
+          offwhite: '#EEEEF0'
+        },
+        mind: {
+          honran: '#CAADC6', //혼란
+          honran_bg: '#FCF2FB',
+          moogiryeok: '#E7DDF2', //무기력
+          moogiryeok_bg: '#F3EEFA',
+          slpeum: '#CCD5DD', //슬픔
+          slpeum_bg: '#EAF3FA',
+          woowool: '#ACBCE5', //우울
+          woowool_bg: '#E4EAFA',
+          yoerowooum: '#81A2B8', //외로움
+          yoerowooum_bg: '#EDF2F7',
+          boolan: '#AFC1B8', //불안
+          boolan_bg: '#EBF5F0',
+          huhuea: '#D4DFCD', //후회
+          huhuea_bg: '#D4DFCD',
+          zzazeung: '#EAF9E0', //짜증
+          zzazeung_bg: '#FEF5BF',
+          bunno: '#E3BFA2', //분노
+          bunno_bg: '#FACFC7',
+          bulkuea: '#F0ECAE', //불쾌
+          bulkuea_bg: 'FBFAE2',
+          apbak: '#EBB6C8', //압박
+          apbak_bg: '#FFF1F6'
         }
       },
       borderRadius: {
@@ -59,6 +115,7 @@ const config: Config = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [animate]
 };
+
 export default config;

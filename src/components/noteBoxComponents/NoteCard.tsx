@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
+import { EMOTION_CATEGORIES } from '@/constants/openai/category';
+import Image from 'next/image';
 interface NoteCardProps {
   content: string;
   created_at: string;
   note_id: string;
   topic_category: string | null;
-  emotion_category: string | null;
+  emotion_category: string[] | null;
 }
 
 const NoteCard = ({
@@ -27,13 +28,30 @@ const NoteCard = ({
   const userNote = JSON.parse(content);
   const message = userNote.Question;
   const answer = userNote.Answer;
+  console.log('emotion_category:', emotion_category);
 
   return (
     <div id={note_id} className="bg-[#FFFFFF] p-4 rounded-xl shadow-xl">
       <div className="flex items-center">
-        <div className="text-sm px-3 py-1 bg-gray rounded-full border-gray-400 border-[1px]">
-          {emotion_category}
-        </div>
+        {emotion_category?.map((emotionLabel) => {
+          const emotionData = EMOTION_CATEGORIES.find(
+            (emotion) => emotion.label === emotionLabel
+          );
+
+          return (
+            emotionData && (
+              <div key={emotionLabel}>
+                <Image
+                  src={emotionData.emoji}
+                  width={40}
+                  height={40}
+                  alt={emotionData.label}
+                  unoptimized
+                />
+              </div>
+            )
+          );
+        })}
         <div className="ml-1 px-3 py-1 text-sm bg-white border-gray-400 border-[1px] text-black rounded-full">
           {topic_category}
         </div>

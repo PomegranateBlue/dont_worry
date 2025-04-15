@@ -85,7 +85,11 @@ export const useRankingStore = create<RankingState>((set) => {
       }));
     },
 
-    setMode: (mode) => set({ mode }),
+    setMode: (mode) =>
+      set((state) => ({
+        mode,
+        formattedDate: updateFormattedDate(state.currentDate, mode)
+      })),
 
     goToPreviousWeek: () =>
       set((state) => {

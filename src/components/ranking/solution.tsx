@@ -2,7 +2,7 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
 import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
 import React, { useEffect, useRef, useState } from 'react';
@@ -44,7 +44,7 @@ const Solution = ({ topThree }: SolutionProps) => {
     const makeSolution = async () => {
       const keywords = stringifyTopThree(topThree);
       if (!user) {
-        console.error('solution: 사용자 ID가 없습니다.'); //del
+        console.error(NO_ID); //del
         return;
       }
 

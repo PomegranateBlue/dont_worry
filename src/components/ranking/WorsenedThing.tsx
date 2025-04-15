@@ -1,10 +1,12 @@
 'use client';
 
+import { NO_DATA } from '@/constants/ranking/ErrorConstants';
 import {
   ABOUT,
   MOST_INCREASE_COMMENT_MONTH,
   MOST_INCREASE_COMMENT_WEEK
 } from '@/constants/ranking/Line';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { WorsenedThingProps } from '@/types/ranking/types';
 
@@ -21,7 +23,7 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
 
   return (
     <>
-      {mode === 'week' ? (
+      {mode === WEEK_MODE ? (
         <div className="flex w-full whitespace-normal break-words items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
           {weekBest ? (
             <div className="w-full">
@@ -39,7 +41,7 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">
-              데이터가 없습니다
+              {NO_DATA}
             </span>
           )}
         </div>
@@ -61,7 +63,7 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">
-              데이터가 없습니다
+              {NO_DATA}
             </span>
           )}
         </div>

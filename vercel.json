@@ -1,0 +1,6 @@
+[
+  {
+    "path": "/api/send-scheduled-letters",
+    "schedule": "*/5 * * * *"
+  }
+]

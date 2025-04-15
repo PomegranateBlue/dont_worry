@@ -6,10 +6,9 @@ import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
-
 import { fetchGPT } from '@/lib/api/gpt/gpt';
-import { useNoteStore } from '@/store/noteStore';
-import ResultSaveButton from './ResultSaveButton';
+import { useNoteStore } from '@/store/note/noteStore';
+
 
 enum StepProps {
   CATEGORY = 'category',

@@ -12,7 +12,8 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
-import Solution from '@/components/ranking/Solution';
+// import Solution from '@/components/ranking/Solution';
+import Solution from '@/components/ranking/solution';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();

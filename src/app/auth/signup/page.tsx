@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signup } from '../action';
 
-const initialState = { error: null };
+const initialState = { success: false, error: null };
 
 const schema = z.object({
   email: z

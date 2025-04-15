@@ -1,7 +1,7 @@
 'use client';
 
 import { TOPIC_CATEGORIES } from '@/constants/openai/category';
-import { useNoteStore } from '@/store/noteStore';
+import { useNoteStore } from '@/store/note/noteStore';
 
 interface Props {
   onSelectCategory: (topic: string) => void;

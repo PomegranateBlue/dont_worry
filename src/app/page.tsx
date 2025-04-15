@@ -47,7 +47,7 @@ const HomePage = () => {
           height={80}
           alt="mail"
         />
-        <button className="flex justify-center items-center mx-auto px-6 py-3 bg-black text-white rounded-xl font-semibold">
+        <button className="flex justify-center items-center mx-auto px-6 py-3 bg-primary-4 text-white rounded-xl font-semibold">
           <Plus />
           서비스 시작하기
         </button>

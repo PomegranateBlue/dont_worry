@@ -2,7 +2,6 @@ import { supabase } from './supabase';
 import browserClient from './client';
 import { Database } from '../../../../database.types';
 
-
 // 데이터베이스 타입 정의
 type Tables = Database['public']['Tables']; // Tables<'letters'>
 type User = Tables['users']['Row'];
@@ -84,7 +83,7 @@ export const fetchUserWorries = async (userId: string | null | undefined) => {
   const { data, error } = await supabase
     .from('users_note')
     .select('*')
-    .eq('id', userId)
+    .eq('user_id', userId)
     .order('created_at', { ascending: false });
 
   if (error) throw new Error(error.message);

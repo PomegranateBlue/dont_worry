@@ -2,15 +2,20 @@
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import FilterModal from './FilterModal';
 
-const sortOption = ['최신순', '주제별', '감정별'];
+const sortOption = ['정렬순', '주제별', '감정별'];
 
-const FilterBar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
- 
+interface FilterBarProps {
+  onClickFilter: (label: string) => void; // ⬅ 부모에게 전달할 콜백
+}
 
+const FilterBar = ({ onClickFilter }: FilterBarProps) => {
+  const [selectedOption, setSelectedOption] = useState<string | null>('주제별');
 
+  const handleFilterOption = (label: string) => {
+    setSelectedOption(label);
+    onClickFilter(label);
+  };
 
   return (
     <>
@@ -21,6 +26,7 @@ const FilterBar = () => {
               <button
                 key={label}
                 className="flex items-center  font-medium  px-3 py-1 border-[1px] border-black rounded-full text-sm"
+                onClick={() => handleFilterOption(label)}
               >
                 {label}
                 <ChevronDown className="w-4 h-4" />
@@ -32,12 +38,6 @@ const FilterBar = () => {
           편집
         </button>
       </header>
-
-      <FilterModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-    
-      />
     </>
   );
 };

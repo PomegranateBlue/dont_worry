@@ -21,10 +21,10 @@ export const fetchUserNotes = async (
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('*')
+      .select('*') //todo: 필요한 칼럼 3개만 가져오기 (보안상 이슈가 있을 수 있음 딱 가져올려는것만 가져오는것이 성능상으로도 좋음)
       .gte('created_at', startDateStr)
       .lte('created_at', endDateStr)
-      .eq('id', id);
+      .eq('user_id', id);
 
     if (error) {
       throw error;
@@ -56,10 +56,10 @@ export const fetchMonthlyNotes = async (
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('*')
+      .select('*') //todo: 필요한것만 가져오기
       .gte('created_at', startDateStr)
       .lte('created_at', endDateStr)
-      .eq('id', id);
+      .eq('user_id', id);
 
     if (error) {
       throw error;
@@ -180,11 +180,147 @@ export const analyzeCategoryTrends = async (
     throw new Error('카테고리 변화를 분석하는 중 오류가 발생했습니다.');
   }
 };
+//주단위
+export const analyzeWeeklyCategoryTrends = async (
+  currentYear: number,
+  currentMonth: number,
+  currentWeek: number,
+  id: string | null
+) => {
+  try {
+    if (!id) {
+      throw new Error('사용자 ID가 없습니다.');
+    }
 
-// 사용 예시:
-// useRankginStore에서 year, month를 가져와서 아래 함수에 삽입
-// analyzeCategoryTrends(2025, 4).then(result => {
-//   console.log(`${result.prevMonthName}에서 ${result.currentMonthName}까지의 변화:`);
-//   console.log(`가장 많이 증가한 카테고리: "${result.mostIncreased.category}" (${result.mostIncreased.data.change}회 증가, ${result.mostIncreased.data.percentage}%)`);
-//   console.log(`가장 많이 감소한 카테고리: "${result.mostDecreased.category}" (${result.mostDecreased.data.change}회 감소, ${result.mostDecreased.data.percentage}%)`);
-// });
+    // 이전 주 계산
+    const prevWeek = currentWeek - 1;
+    let prevMonth = currentMonth;
+    let prevYear = currentYear;
+
+    // 이전 주가 0이면 이전 달의 마지막 주로 설정
+    if (prevWeek === 0) {
+      prevMonth = currentMonth - 1;
+
+      // 이전 달이 0이면 이전 년도의 12월로 설정
+      if (prevMonth === 0) {
+        prevMonth = 12;
+        prevYear = currentYear - 1;
+      }
+    }
+
+    // 현재 주와 이전 주의 데이터 가져오기
+    const currentWeekData = await fetchUserNotes(
+      currentYear,
+      currentMonth,
+      currentWeek,
+      id
+    );
+    const prevWeekData = await fetchUserNotes(
+      prevYear,
+      prevMonth,
+      prevWeek,
+      id
+    );
+
+    // 카테고리별 언급 횟수 집계 함수
+    const countAllCategoryMentions = (data: UserNote[]) => {
+      const counts: Record<string, number> = {};
+
+      data.forEach((note) => {
+        // 주제 카테고리 처리
+        const topicCategories =
+          note.topic_category?.split(',').map((e) => e.trim()) || [];
+        // 감정 카테고리 처리
+        const emotionCategories =
+          note.emotion_category?.split(',').map((e) => e.trim()) || [];
+
+        // 모든 카테고리 합치기
+        const allCategories = [...topicCategories, ...emotionCategories];
+
+        allCategories.forEach((category) => {
+          if (category) {
+            counts[category] = (counts[category] || 0) + 1;
+          }
+        });
+      });
+
+      return counts;
+    };
+
+    // 현재 주와 이전 주의 카테고리별 언급 횟수 집계
+    const currentCounts = countAllCategoryMentions(currentWeekData);
+    const prevCounts = countAllCategoryMentions(prevWeekData);
+
+    // 모든 카테고리의 변화 계산
+    const changes: Record<
+      string,
+      {
+        change: number;
+        percentage: number;
+        current: number;
+        previous: number;
+      }
+    > = {};
+
+    const allCategories = new Set<string>([
+      ...Object.keys(currentCounts),
+      ...Object.keys(prevCounts)
+    ]);
+
+    allCategories.forEach((category) => {
+      const current = currentCounts[category] || 0;
+      const previous = prevCounts[category] || 0;
+      const change = current - previous;
+
+      let percentage = 0;
+      if (previous === 0) {
+        percentage = current > 0 ? 100 : 0;
+      } else {
+        percentage = ((current - previous) / previous) * 100;
+      }
+
+      changes[category] = {
+        change,
+        percentage: Math.round(percentage * 10) / 10,
+        current,
+        previous
+      };
+    });
+
+    // 변화량에 따라 정렬
+    const sortedChanges = Object.entries(changes).sort(
+      (a, b) => b[1].change - a[1].change
+    );
+
+    // 데이터가 없는 경우 처리
+    if (sortedChanges.length === 0) {
+      return {
+        mostIncreased: null,
+        mostDecreased: null,
+        allChanges: changes,
+        prevWeekName: `${prevYear}년 ${prevMonth}월 ${prevWeek}주차`,
+        currentWeekName: `${currentYear}년 ${currentMonth}월 ${currentWeek}주차`
+      };
+    }
+
+    const mostIncreased = sortedChanges[0];
+    const mostDecreased = sortedChanges[sortedChanges.length - 1];
+
+    return {
+      mostIncreased: {
+        category: mostIncreased[0],
+        data: mostIncreased[1]
+      },
+      mostDecreased: {
+        category: mostDecreased[0],
+        data: mostDecreased[1]
+      },
+      allChanges: changes, // 필요시 전체 변화 데이터도 반환
+      prevWeekName: `${prevYear}년 ${prevMonth}월 ${prevWeek}주차`,
+      currentWeekName: `${currentYear}년 ${currentMonth}월 ${currentWeek}주차`
+    };
+  } catch (err) {
+    console.error('주간 분석 오류:', err);
+    throw new Error('주간 카테고리 변화를 분석하는 중 오류가 발생했습니다.');
+  }
+};

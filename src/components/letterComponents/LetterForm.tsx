@@ -35,7 +35,7 @@ const LetterForm = () => {
   }, []);
 
   return (
-    <section className="max-w-sm mx-auto px-4 py-6">
+    <section className="w-full max-w-sm mx-auto flex flex-col justify-between overflow-hidden">
       <header>
         <h1 className="text-lg font-semibold text-center mb-4">
           미래 편지 작성

@@ -22,34 +22,36 @@ const CalendarStep = ({ sendAt, setSendAt, onNext }: CalendarStepProps) => {
   const selectedDate = sendAt ? new Date(sendAt) : undefined;
 
   return (
-    <section className="sm:w-[375px] h-[812px] flex flex-col bg-backgroundSet-normal overflow-hidden">
-      <header className="p-4 text-xl text-center">
-        <h1>{formatDateText(sendAt) ?? '미래'}의 나에게 편지를 보내요</h1>
-      </header>
-      <main className="px-4 flex-grow-0 pb-16">
-        <Calendar
-          mode="single"
-          selected={selectedDate}
-          onSelect={(date) => {
-            if (date) {
-              const iso = dayjs(date).format('YYYY-MM-DD');
-              setSendAt(iso);
-            }
-          }}
-          disabled={(date) => {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // 오늘 날짜의 00:00시로 설정
-            return date < today; // 오늘 이전 날짜는 비활성화
-          }}
-          className="w-full rounded-md border shadow-lg"
-        />
-      </main>
+    <section className="w-full flex flex-col justify-between items-center bg-backgroundSet-normal">
+      <div className="w-full max-w-sm flex flex-col flex-grow">
+        <header className="p-4 text-xl text-center">
+          <h1>{formatDateText(sendAt) ?? '미래'}의 나에게 편지를 보내요</h1>
+        </header>
 
-      <footer className="absolute bottom-0 left-0 w-full p-4">
+        <main className="flex-grow px-4">
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={(date) => {
+              if (date) {
+                const iso = dayjs(date).format('YYYY-MM-DD');
+                setSendAt(iso);
+              }
+            }}
+            disabled={(date) => {
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              return date < today;
+            }}
+            className="w-full rounded-md border shadow-lg"
+          />
+        </main>
+      </div>
+      <footer className="flex absolute bottom-0 w-full px-4 py-4 items-center justify-center">
         <button
           type="button"
           onClick={onNext}
-          className="bg-primary-4 text-white px-4 py-2 rounded-lg w-full"
+          className="bg-primary-4 text-white py-2 px-4 w-full md:w-auto rounded-lg"
           disabled={!sendAt}
         >
           다음으로

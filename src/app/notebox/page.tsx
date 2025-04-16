@@ -12,7 +12,7 @@ const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
 
   const [filterType, setFilterType] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [selectedSort, setSelectedSort] = useState<'최신순' | '과거순'>(

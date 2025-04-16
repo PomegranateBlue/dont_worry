@@ -11,6 +11,7 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { WorsenedThingProps } from '@/types/ranking/types';
 
 import React from 'react';
+import Text from '../common/Text';
 
 const WorsenedThing: React.FC<WorsenedThingProps> = ({
   monthData,
@@ -28,16 +29,16 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
           {weekBest ? (
             <div className="w-full">
               <div>
-                <span className="text-lg sm:text-xl font-semibold leading-tight">
+                <Text as="span" variant="title2" color="label-normal">
                   {weekBest.category}
-                </span>
-                <span className="text-sm sm:text-base font-medium leading-normal">
+                </Text>
+                <Text as="span" variant="body3" color="label-normal">
                   {ABOUT}
-                </span>
+                </Text>
               </div>
-              <div className="text-sm sm:text-base font-medium leading-normal">
+              <Text as="span" variant="body3" color="label-normal">
                 {MOST_INCREASE_COMMENT_WEEK}
-              </div>
+              </Text>
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">
@@ -50,16 +51,16 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
           {monthBest ? (
             <div className="w-full">
               <div>
-                <span className="text-lg sm:text-xl font-semibold leading-tight">
+                <Text as="span" variant="title2" color="label-normal">
                   {monthBest.category}
-                </span>
-                <span className="text-sm sm:text-base font-medium leading-normal">
+                </Text>
+                <Text as="span" variant="body3" color="label-normal">
                   {ABOUT}
-                </span>
+                </Text>
               </div>
-              <div className="text-sm sm:text-base font-medium leading-normal">
+              <Text as="span" variant="body3" color="label-normal">
                 {MOST_INCREASE_COMMENT_MONTH}
-              </div>
+              </Text>
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">

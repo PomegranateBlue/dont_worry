@@ -12,32 +12,44 @@ const supabase = createClient(
 );
 //오늘 날짜 기준으로 발송할 편지 조회
 export async function GET() {
+  console.log('GET 메소드 실행됨');
   const today = new Date().toISOString().split('T')[0];
 
   const { data: letters, error } = await supabase
     .from('letter')
     .select('*')
-    .eq('send_at', today) // 오늘 발송 예정인 편지만
-    .eq('isSent', false); // 아직 발송되지 않은 편지만
+    .gte('send_at', `${today}T00:00:00.000Z`) // 오늘 0시 이후
+    .lt('send_at', `${today}T23:59:59.999Z`) // 오늘 23시 59분 전까지
+    .eq('isSent', false);
 
   if (error) {
     console.error('Fetch error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-
+  console.log(`📨 ${letters.length}개의 편지를 찾았습니다`);
   // 📩 편지 하나씩 순회하며 메일 발송
   for (const letter of letters) {
     try {
+      // 📆 날짜 비교 로그 추가
+      const letterDate = new Date(letter.send_at).toISOString().split('T')[0];
+      console.log('📅 편지 날짜:', letterDate, 'vs 오늘 날짜:', today); // 로그 추가
+
       // 📧 해당 편지 작성자의 이메일 조회
       const { data, error } = await supabase
         .from('users') // 사용자 이메일 정보가 있는 테이블 (예: 'users')
         .select('email')
-        .eq('id', letter.user_id)
+        .eq('user_id', letter.user_id)
         .single();
 
-      if (error || !data?.email) continue;
+      if (error) {
+        console.error('User email fetch error:', error);
+        continue; // 이메일이 없으면 다음으로 넘어감
+      }
+
+      console.log('사용자 이메일:', data?.email);
 
       // 💌 Resend로 이메일 발송
+      console.log('📤 이메일 보내는 중:', data.email);
       await resend.emails.send({
         from: 'team@dontworry.io.kr', // Resend에서 인증한 발신자 주소
         to: data.email,
@@ -67,3 +79,16 @@ export async function GET() {
   // 🟢 모든 작업 완료 응답
   return NextResponse.json({ message: 'Emails sent if conditions met' });
 }
+// app/api/run-command/route.ts
+// import { NextResponse } from 'next/server';
+// import { exec } from 'child_process';
+// import util from 'util';
+// const execPromise = util.promisify(exec);
+// export async function GET() {
+//   try {
+//     const { stdout, stderr } = await execPromise('crontab -l');
+//     return NextResponse.json({ stdout, stderr });
+//   } catch (error) {
+//     return NextResponse.json({ error: String(error) }, { status: 500 });
+//   }
+// }

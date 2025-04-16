@@ -74,21 +74,43 @@ const LetterStep = ({
     const { data, error } = await browserClient
       .from('letter')
       .insert([
-        { user_id: userId, content, send_at: sendAt, img_url: imageUrl }
-      ]);
+        {
+          user_id: userId,
+          content,
+          send_at: sendAt,
+          img_url: imageUrl,
+          isSent: false
+        }
+      ])
+      .select();
     if (error) {
       console.error('편지 저장 실패', error);
       setMessage('저장에 실패했습니다.');
-    } else {
-      console.log('저장된 편지 =>', data);
-      setMessage('편지를 저장했습니다!');
-      //저장 했으면 입력 필드 초기화
-      setContent('');
-      setSendAt('');
-      setImageFile(null);
-      setImagePreview(null);
-      onBack();
+      return;
     }
+
+    // 저장 성공 후 → crontest API 호출
+    try {
+      const res = await fetch('/api/crontest');
+      const result = await res.json();
+
+      if (res.ok) {
+        console.log('저장 성공=>', data);
+        setMessage('편지를 저장하고 이메일을 보냈습니다!');
+      } else {
+        console.error('crontest 호출 실패:', result);
+        setMessage('편지는 저장했지만 이메일 전송에 실패했습니다.');
+      }
+    } catch (err) {
+      console.error('API 호출 중 오류:', err);
+      setMessage('편지는 저장했지만 이메일 전송 중 오류가 발생했습니다.');
+    }
+    //저장 했으면 입력 필드 초기화
+    setContent('');
+    setSendAt('');
+    setImageFile(null);
+    setImagePreview(null);
+    onBack();
   };
   return (
     <form onSubmit={handleLetterSubmit} className="space-y-4">

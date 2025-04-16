@@ -23,18 +23,25 @@
 
 ## 프로젝트 미리보기👑
 
-- SoraX </br></br>
-  <img src='https://ifh.cc/g/jqRYsc.jpg' width="700" alt="Image">
-- 마이페이지 </br></br>
-  <img src='https://ifh.cc/g/KR0vtX.jpg' width="700" alt="Image">
+- Don't worry </br></br>
+  <img src='https://ifh.cc/g/bpmXSp.jpg' width="200" alt="Image">
 - 회원가입 / 로그인 </br></br>
-  <img src='https://ifh.cc/g/Zq7W21.jpg' width="700" alt="Image">
-- 커뮤니티 보드 </br></br>
-  <img src='https://ifh.cc/g/GnCPVR.jpg' width="700" alt="Image">
-- 랭킹 페이지 </br></br>
-  <img src='https://ifh.cc/g/WZTJ41.jpg' width="700" alt="Image">
-- 상세 페이지 </br></br>
-  <img src='https://ifh.cc/g/CHWSh4.jpg' width="700" alt="Image" >
+  <img src='https://ifh.cc/g/QFKOCx.png' width="200" alt="Image">
+  <img src='https://ifh.cc/g/mpqvQQ.png' width="200" alt="Image">
+- 걱정 작성 페이지 </br></br>
+  <img src='https://ifh.cc/g/HVSGV3.jpg' width="200" alt="Image">
+  <img src='https://ifh.cc/g/SMjQ4B.jpg' width="200" alt="Image">
+  <img src='https://ifh.cc/g/GO0dKY.jpg' width="200" alt="Image">
+
+- 통계 페이지 </br></br>
+  <img src='https://ifh.cc/g/OHSrNK.png' width="200" alt="Image">
+  <img src='https://ifh.cc/g/WF1QBN.jpg' width="200" alt="Image">
+- 편지 쓰기 페이지 </br></br>
+  <img src='https://ifh.cc/g/hY2rHz.jpg' width="200" alt="Image">
+  <img src='https://ifh.cc/g/cSOOpv.jpg' width="200" alt="Image">
+  <img src='https://ifh.cc/g/4q5KWj.jpg' width="200" alt="Image">
+- 마이 페이지 </br></br>
+  <img src='https://ifh.cc/g/vFs4CZ.jpg' width="200" alt="Image" >
 
 <br><br>
 
@@ -94,19 +101,17 @@
 - supabase를 활용하여 데이터베이스를 구축하였습니다.
 - `react-hook-form` 라이브러리를 사용하여 사용자 input을 효율적으로 관리합니다.
 
-
   <br><br>
 
 ## 팀 구성🫂
 
-|  팀원  | 담당파트                                                                          |                    GitHub                    |                       블로그                        |
-| :----: | --------------------------------------------------------------------------------- | :------------------------------------------: | :-------------------------------------------------: |
-| 오원택 |  통계 페이지 작성                                                              | [원택 Github](https://github.com/dhdnjs0702) | [원택 블로그](https://ihatecoding3636.tistory.com/) |
-| 송제우 | 소개페이지, 걱정작성 페이지, 걱정 보관함 페이지 작성                                                            |  [제우 Github](https://github.com/PomegranateBlue)  |   [제우 블로그](https://velog.io/@wpdn98/posts)   |
-| 유익환 | 마이페이지 작성                                                           |  [익환 Github](https://github.com/ick-web/)  |    [익환 블로그](https://devyu0001.tistory.com/)    |
-| 문정빈 | 편지 쓰기 페이지 작성 | [정빈 Github](https://github.com/answq)  |  [정빈 블로그](https://blog.naver.com/answq_)   |
-| 강혜린 | 로그인, 회원가입 담당                                           |  [혜린 Github](https://github.com/hyerin-kang)  |   [혜린 블로그](https://rinny01.tistory.com/)   |
-
+|  팀원  | 담당파트                                             |                      GitHub                       |                       블로그                        |
+| :----: | ---------------------------------------------------- | :-----------------------------------------------: | :-------------------------------------------------: |
+| 오원택 | 통계 페이지 작성                                     |   [원택 Github](https://github.com/dhdnjs0702)    | [원택 블로그](https://ihatecoding3636.tistory.com/) |
+| 송제우 | 소개페이지, 걱정작성 페이지, 걱정 보관함 페이지 작성 | [제우 Github](https://github.com/PomegranateBlue) |    [제우 블로그](https://velog.io/@wpdn98/posts)    |
+| 유익환 | 마이페이지 작성                                      |    [익환 Github](https://github.com/ick-web/)     |    [익환 블로그](https://devyu0001.tistory.com/)    |
+| 문정빈 | 편지 쓰기 페이지 작성                                |      [정빈 Github](https://github.com/answq)      |    [정빈 블로그](https://blog.naver.com/answq_)     |
+| 강혜린 | 로그인, 회원가입 담당                                |   [혜린 Github](https://github.com/hyerin-kang)   |     [혜린 블로그](https://rinny01.tistory.com/)     |
 
 <br />
 

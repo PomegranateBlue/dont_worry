@@ -1,0 +1,1 @@
+import { EMOTION_CATEGORIES } from "@/constants/openai/category";

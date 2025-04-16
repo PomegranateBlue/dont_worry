@@ -6,7 +6,7 @@ import {
 } from '@/constants/openai/category';
 import { useState, useEffect } from 'react';
 import { RotateCw } from 'lucide-react';
-
+import Text from '../common/Text';
 interface FilterModalProps {
   selectedOption: string | null;
   setSelectedOption: (option: string | null) => void;
@@ -51,6 +51,13 @@ const FilterModal = ({
     }
   }, [selectedOption]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   const handleToggle = (value: string) => {
     if (selectedOption === '정렬순') {
       setSelectedValues([value]);
@@ -90,54 +97,83 @@ const FilterModal = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end">
-      <div className="bg-white w-full max-w-md rounded-t-2xl p-4 pb-6">
-        <div className="flex justify-between mb-4 border-b-[1px]">
+      <div
+        className="bg-backgroundSet-normal w-full   rounded-tl-[20px] rounded-tr-[20px] rounded-br-[0px] rounded-bl-[0px] p-5 "
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between w-full py-6   ">
           {sortTabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setSelectedOption(tab)}
-              className={`flex-1 text-center pb-2 py-[32px] text-[14px] font-semibold ${
+              className={`flex-1 text-center  h-[48px] p-2 border-b-2 ${
                 selectedOption === tab
-                  ? 'text-primary-4 border-b-2 border-primary-4'
-                  : 'text-gray-400'
+                  ? 'text-primary-4  border-primary-4 '
+                  : 'text-primary-4 border-label-disable'
               }`}
             >
-              {tab}
+              <Text
+                variant="title2"
+                as="p"
+                className={`transition-colors duration-200 ${
+                  selectedOption === tab ? 'text-primary-4  ' : 'text-gray-400 '
+                }`}
+              >
+                {tab}
+              </Text>
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-2 h-[200px] overflow-y-auto mb-6">
-          {getOptions().map((option) => (
-            <button
-              key={option}
-              onClick={() => handleToggle(option)}
-              className={` max-h-8 py-3 rounded-full border text-[16px] ${
-                selectedValues.includes(option)
-                  ? 'bg-primary-4 text-white border-primary-4'
-                  : 'border-gray-300 text-gray-700'
-              }`}
-            >
-              {option}
-            </button>
-          ))}
+        <div className="flex flex-wrap pb-6 h-[150px] ">
+          <div className=" overflow-y-auto flex flex-wrap gap-2">
+            {getOptions().map((option) => {
+              const isSelected = selectedValues.includes(option);
+              return (
+                <button
+                  key={option}
+                  onClick={() => handleToggle(option)}
+                  className={`whitespace-nowrap flex  gap-2 justify-center items-center rounded-[16px] px-3 py-[6px] border h-[32px] ${
+                    isSelected ? 'bg-primary-4  ' : 'bg-backgroundSet-normal'
+                  }`}
+                >
+                  <Text
+                    variant="body3"
+                    color="label-neutral"
+                    className={
+                      isSelected
+                        ? 'text-backgroundSet-normal'
+                        : 'text-label-neutral'
+                     }
+                  >
+                    {option}
+                  </Text>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex justify-between items-center px-1">
+        <div className="flex gap-x-2 w-full justify-between ">
           <button
             onClick={() => setSelectedValues([])}
-            className="flex items-center gap-4 px-4 py-3 bg-label-alternative bg-opacity-50 rounded-md text-label-alternative text-xl"
+            className="flex items-center w-auto justify-center   px-5 py-3 bg-[#F4F4F5] bg-opacity-50 rounded-[8px]  "
           >
-            <RotateCw />
-            초기화
+            <RotateCw className="text-label-disable" />
+            <Text color="label-alternative" variant="title2">
+              초기화
+            </Text>
           </button>
+
           <button
             onClick={handleApply}
-            className={`text-white text-xl px-8 py-3 rounded-md ${
-              selectedValues.length === 0 ? 'bg-gray-300' : 'bg-purple-600'
+            className={`flex flex-1 justify-center  items-center px-5 py-4 rounded-[8px] w-auto h-12 ${
+              selectedValues.length === 0 ? 'bg-label-disable' : 'bg-primary-4'
             }`}
           >
-            {selectedValues.length}개 결과보기
+            <Text variant="title2" color="white">
+              {selectedValues.length}개 결과보기
+            </Text>
           </button>
         </div>
       </div>

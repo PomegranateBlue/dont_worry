@@ -36,7 +36,6 @@ export const countMentionedKeyword = (
 };
 
 export const makeTopTen = (userCategory: UserNote[]): TopTenRanking => {
-  //키워드별 상위 10개의 카테고리를 리턴하는 함수
   const { topics, emotions } = countMentionedKeyword(userCategory);
 
   const topTopics: RankingItem[] = Object.entries(topics)

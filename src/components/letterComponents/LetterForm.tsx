@@ -38,7 +38,7 @@ const LetterForm = () => {
     <section className="max-w-sm mx-auto px-4 py-6">
       <header>
         <h1 className="text-xl font-semibold text-center mb-4">
-          미래의 나에게 하고싶은 말
+          미래 편지 작성
         </h1>
       </header>
       {step === 'calendar' ? (

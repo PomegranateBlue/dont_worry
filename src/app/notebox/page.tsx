@@ -46,9 +46,12 @@ const NotePage = () => {
         );
       }
       if (filterType === '감정별') {
+        const emotions = note.emotion_category
+          ? note.emotion_category.split(',').map((emotion) => emotion.trim())
+          : [];
         return (
           selectedEmotions.length === 0 ||
-          selectedEmotions.includes(note.emotion_category!)
+          selectedEmotions.some((selected) => emotions.includes(selected))
         );
       }
       return true;
@@ -92,7 +95,13 @@ const NotePage = () => {
             created_at={note.created_at}
             note_id={note.note_id}
             topic_category={note.topic_category}
-            emotion_category={note.emotion_category}
+            emotion_category={
+              note.emotion_category
+                ? note.emotion_category
+                    ?.split(',')
+                    .map((emotion) => emotion.trim())
+                : null
+            }
           />
         ))}
       </main>

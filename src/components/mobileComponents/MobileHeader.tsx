@@ -9,6 +9,8 @@ import Text from '../common/Text';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useUserInfo } from '@/hooks/useMyPageQueries';
+import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
+import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
 
 interface MobileHeaderProps {
   isLogin: boolean;
@@ -52,15 +54,16 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
     }
   };
 
-  const handleMenuItemClick = (href: string) => (e: React.MouseEvent) => {
-    toggleMenu();
-    if (!isLogin) {
-      e.preventDefault();
-      alert('로그인 후 이용 가능합니다!');
-      router.push('/auth/login');
-    }
-    toggleMenu();
-  };
+  //다시 얘 필요없고
+  // const handleMenuItemClick = (href: string) => (e: React.MouseEvent) => {
+  //   toggleMenu();
+  //   if (!isLogin) {
+  //     e.preventDefault();
+  //     alert('로그인 후 이용 가능합니다!');
+  //     router.push('/auth/login');
+  //   }
+  //   toggleMenu();
+  // };
 
   return (
     <div className="md:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
@@ -127,27 +130,16 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                   />
                 </Link>
               </div>
-              <div className="p-6 flex flex-col gap-4">
-                <Link href="/" className="py-3">
+              <div className="p-6 flex flex-col gap-1">
+                <Link href="/" className="py-4">
                   <Text variant="title2" color="label-neutral">
                     서비스 소개
                   </Text>
                 </Link>
-                {menuItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={handleMenuItemClick(item.href)}
-                    className="py-3"
-                  >
-                    <Text variant="title2" color="label-neutral">
-                      {item.label}
-                    </Text>
-                  </Link>
-                ))}
+                {isLogin ? <IsLoginMenu /> : <IsNotLoginMenu />}
 
                 {isLogin && (
-                  <div className="mt-5 text-sm text-gray-500">
+                  <div className="mt-10 text-sm text-gray-500 p-2">
                     <LogOutButton />
                   </div>
                 )}

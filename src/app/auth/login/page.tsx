@@ -13,18 +13,19 @@ export default function LoginPage() {
       </Text>
       <LoginForm />
       <div className="mt-10">
-        <p className="text-lg text-center">소셜 계정으로 로그인</p>
+        <Text variant="body3" color="label-normal" className="text-center">
+          소셜 계정으로 로그인
+        </Text>
         <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
           <KakaoLogin />
           <NaverLogin />
           <GoogleLogin />
         </div>
       </div>
-      <Link
-        href="/auth/signup"
-        className="text-center mx-auto w-fit block underline"
-      >
-        회원가입
+      <Link href="/auth/signup" className="text-center mx-auto w-fit block">
+        <Text variant="body3" color="label-alternative" className=" underline">
+          회원가입
+        </Text>
       </Link>
     </div>
   );

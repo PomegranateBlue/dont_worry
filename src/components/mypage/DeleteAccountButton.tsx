@@ -12,7 +12,7 @@ export default function DeleteAccountButton() {
 
   const handleDeleteAccount = async () => {
     const confirmed = confirm(
-      '정말로 회원탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
+      '정말로 회원탈퇴 하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
     );
     if (!confirmed || !user) return;
 
@@ -21,7 +21,7 @@ export default function DeleteAccountButton() {
     const { error } = await browserClient
       .from('users')
       .update({ is_deleted: true }) // 소프트 삭제
-      .eq('id', user);
+      .eq('user_id', user);
 
     if (error) {
       alert('회원탈퇴 중 오류가 발생했습니다.');
@@ -38,7 +38,9 @@ export default function DeleteAccountButton() {
 
   return (
     <button onClick={handleDeleteAccount} disabled={loading}>
-      {loading ? '탈퇴 처리 중...' : '회원탈퇴'}
+      <span className="underline">
+        {loading ? '탈퇴 처리 중...' : '회원탈퇴'}
+      </span>
     </button>
   );
 }

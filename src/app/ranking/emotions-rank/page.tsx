@@ -6,7 +6,7 @@ import {
   fetchMonthlyNotes,
   fetchUserNotes
 } from '@/app/utils/ranking/DataFetch';
-import Report from '@/components/ranking/Report';
+
 import { Most } from '@/types/ranking/types';
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
@@ -17,6 +17,12 @@ import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import Solution from '@/components/ranking/Solution';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
+import {
+  DATA_FETCHING,
+  DATA_FETHCING_ERROR
+} from '@/constants/ranking/ErrorConstants';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+import Report from '@/components/ranking/Report';
 
 const EmotionsRankginPage = () => {
   const { year, month, week, mode } = useRankingStore();
@@ -35,7 +41,7 @@ const EmotionsRankginPage = () => {
   useEffect(() => {
     if (!hydrated) return;
 
-    if (mode === 'week') {
+    if (mode === WEEK_MODE) {
       const fetchData = async () => {
         try {
           setIsLoading(true);
@@ -51,8 +57,8 @@ const EmotionsRankginPage = () => {
             setTopEmotions([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -74,8 +80,8 @@ const EmotionsRankginPage = () => {
             setTopEmotions([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -119,7 +125,7 @@ const EmotionsRankginPage = () => {
   }, [topEmotions]);
 
   if (isLoading) {
-    return <div>데이터를 불러오는 중입니다...</div>;
+    return <div>{DATA_FETCHING}</div>;
   }
 
   if (error) {

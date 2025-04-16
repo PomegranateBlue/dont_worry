@@ -21,6 +21,7 @@ import {
   topicBackgroundColor,
   topicBorderColor
 } from '@/constants/ranking/ChartOptions';
+import Text from '../common/Text';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -74,12 +75,20 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
   return (
     <>
       <div className="flex w-[258px] flex-col items-center gap-[12px]">
-        <h2 className="text-primary-4 text-center text-[22px] font-medium leading-[135%]">
+        <Text
+          as="h2"
+          variant="heading3"
+          className="text-primary-4 text-center leading-[135%]"
+        >
           {TOPIC_FILTER_DESCRIPTION}
-        </h2>
-        <p className="text-label-normal text-center text-[14px] font-medium leading-[150%]">
+        </Text>
+        <Text
+          variant="body3"
+          color="label-alternative"
+          className="text-center leading-[150%] w-[258px] h-[21px]"
+        >
           {TOPIC_FILTER_DESCRIPTION2}
-        </p>
+        </Text>
       </div>
 
       <div className="w-[217.8px] h-[198px] sm:w-[320px] sm:h-[320px]">

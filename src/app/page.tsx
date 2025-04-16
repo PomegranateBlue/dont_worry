@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Text from '@/components/common/Text';
 import StartButton from '@/components/introComponents/StartButton';
 import StartButtonBottom from '@/components/introComponents/StartButtonBottom';
+
+import Carousel from '@/components/introComponents/Carousel';
 const HomePage = () => {
   return (
     <main className="min-h-screen">
@@ -25,6 +27,9 @@ const HomePage = () => {
             alt="main"
           />
           <StartButton />
+          <div className="flex pt-[88px]">
+            <Carousel />
+          </div>
         </div>
       </section>
 
@@ -39,7 +44,7 @@ const HomePage = () => {
           <br /> 정서 기반 감정 기록 플랫폼입니다.
         </Text>
         <Image
-          src={'/images/ver-default.svg'}
+          src={'/images/logo-emoticon.svg'}
           width={160}
           height={123}
           alt="logo"
@@ -62,28 +67,79 @@ const HomePage = () => {
         >
           가벼운 한 마디로 시작해보세요
         </Text>
-        <Image
-          src={'/images/note-step1.svg'}
-          width={300}
-          height={300}
-          alt="step1"
-        ></Image>
-        <Image
-          src={'/images/note-step2.svg'}
-          width={300}
-          height={300}
-          alt="step2"
-        ></Image>
-        <Image
-          src={'/images/note-step3.svg'}
-          width={300}
-          height={300}
-          alt="step3"
-        ></Image>
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col pb-5">
+            <Text variant="title2" color="primary4" className="pr-[12px]">
+              Step 1
+            </Text>
+            <Text variant="body2" color="label-normal">
+              걱정의 주제와 지금 느끼는 감정을
+              <br /> 선택해요
+            </Text>
+          </div>
+          <Image
+            src={'/images/today-emotion.svg'}
+            width={300}
+            height={300}
+            alt="step1"
+            className="rounded-[8px] shadow-xl"
+          />
+        </div>
+
+        <div className="flex flex-col  items-center justify-center">
+          <div className="flex flex-col flex-start pt-10 pb-5">
+            <Text variant="title2" color="primary4" className="pr-[12px]">
+              Step 2
+            </Text>
+            <Text variant="body2" color="label-normal">
+              내 걱정과 속마음을 작성해요
+            </Text>
+          </div>
+          <Image
+            src={'/images/today-worry.svg'}
+            width={300}
+            height={300}
+            alt="step1"
+            className="rounded-[8px] shadow-xl"
+          />
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col pt-10 pb-5">
+            <Text variant="title2" color="primary4" className="pr-[12px]">
+              Step 3
+            </Text>
+            <Text variant="body2" color="label-normal">
+              돈워리가 건네는 위로와 조언을 통해 스스로 성장해요
+            </Text>
+          </div>
+          <div className="h-[300px] w-full bg-primary-3 rounded-[8px]">
+            <Image
+              src={'/images/ver-default.svg'}
+              width={80}
+              height={80}
+              alt="dontworry"
+              className="relative top-[175px] left-[48px]"
+            />
+            <Image
+              src={'/images/intro-answer.svg'}
+              width={240}
+              height={120}
+              alt="step3"
+              className="relative top-[-25px] left-[96px]"
+            />
+          </div>
+        </div>
       </section>
 
       <section className="flex flex-col justify-center items-center h-[630px] bg-backgroundSet-normal">
-        <Text variant="heading2" color="primary4" className="text-center">
+        <div className="flex  items-center justify-center w-auto px-3 h-[30px] rounded-[16px] bg-primary-4">
+          <Text variant="body3" color="white">
+            통계
+          </Text>
+        </div>
+
+        <Text variant="heading2" color="primary4" className="text-center pt-3">
           통계 데이터를 통해
           <br />
           파악하는 기록
@@ -95,6 +151,11 @@ const HomePage = () => {
       </section>
 
       <section className="flex flex-col items-center justify-center h-[630px] bg-primary-1">
+        <div className="flex  items-center justify-center w-auto px-3 h-[30px] rounded-[16px] bg-primary-4">
+          <Text variant="body3" color="white">
+            미래 편지
+          </Text>
+        </div>
         <Text variant="heading2" color="primary4">
           미래의 나에게 보내는 편지
         </Text>
@@ -102,9 +163,21 @@ const HomePage = () => {
           지금의 내가 느끼는 감정, 바라는 변화, 그리고 전하고 싶은 말들을 미래의
           나에게 편지로 남겨보세요
         </Text>
+        <Image
+          src={'/images/future-letter.svg'}
+          width={300}
+          height={300}
+          alt="future-letter"
+          className="pt-5"
+        />
       </section>
 
       <section className="flex flex-col h-[630px] justify-center items-center">
+        <div className="flex  items-center justify-center w-auto h-[30px] px-3 rounded-[16px] bg-primary-4">
+          <Text variant="body3" color="white">
+            커뮤니티
+          </Text>
+        </div>
         <Text variant="heading2" color="primary4">
           다른 사람들의 이야기
         </Text>

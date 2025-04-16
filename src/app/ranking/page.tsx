@@ -6,18 +6,27 @@ import TopicChart from '@/components/ranking/TopicChart';
 
 import { fetchMonthlyNotes, fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
-import Report from '@/components/ranking/Report';
+
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
 import Solution from '@/components/ranking/Solution';
+import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
+import FilterMenu from '@/components/ranking/FilterMenu';
+import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
+import {
+  DATA_FETCHING,
+  DATA_FETHCING_ERROR
+} from '@/constants/ranking/ErrorConstants';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+import Report from '@/components/ranking/Report';
 
 const RankingPage = () => {
   const { year, month, week } = useRankingStore();
   const { year: Myear, month: Mmonth } = useMRankingStore();
-  const { user } = useUserStore();
+  const { user, hydrated } = useUserStore();
   const { mode } = useRankingStore();
   const [topTopics, setTopTopics] = useState<{ name: string; count: number }[]>(
     []
@@ -32,7 +41,9 @@ const RankingPage = () => {
   console.log('user', user); //1 ->정상
 
   useEffect(() => {
-    if (mode === 'week') {
+    if (!hydrated) return;
+
+    if (mode === WEEK_MODE) {
       const fetchData = async () => {
         try {
           setIsLoading(true);
@@ -42,15 +53,15 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopTopics(result.topTopics);
-            const topthree = result.topTopics.slice(0, 3);
+            const topthree = result.topTopics.slice(0, 6);
             setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`); //todo: del
             setTopTopics([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -65,7 +76,7 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopTopics(result.topTopics);
-            const topthree = result.topTopics.slice(0, 3);
+            const topthree = result.topTopics.slice(0, 6);
             setTopThree(topthree);
             console.log(result);
           } else {
@@ -73,8 +84,8 @@ const RankingPage = () => {
             setTopTopics([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -86,7 +97,7 @@ const RankingPage = () => {
     return () => {
       setMost(null);
     };
-  }, [year, month, week, mode, Mmonth, Myear]);
+  }, [year, month, week, mode, Mmonth, Myear, hydrated]);
 
   useEffect(() => {
     if (topTopics.length === 0) return;
@@ -116,7 +127,7 @@ const RankingPage = () => {
   console.log(topThree);
 
   if (isLoading) {
-    return <div>데이터를 불러오는 중입니다...</div>;
+    return <div>{DATA_FETCHING}</div>;
   }
 
   if (error) {
@@ -129,15 +140,23 @@ const RankingPage = () => {
 
   return (
     <div>
-      <TopicChart topTopics={topTopics} />
-      <Report most={most} />
-      {topThree.map((e) => {
-        return (
-          <div key={e.name}>
-            <TopThreeCard topThree={e} />
-          </div>
-        );
-      })}
+      <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[55px] self-stretch">
+        <TimeFilterGroup />
+        <TopicChart topTopics={topTopics} />
+        <Report most={most} />
+      </div>
+      <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">
+        <FilterMenu />
+        <div className="flex flex-col w-full max-w-full gap-[12px]">
+          {topThree.map((e) => (
+            <div key={e.name}>
+              <TopThreeCard topThree={e} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <MWreportCard />
+
       <Solution topThree={topThree} />
     </div>
   );

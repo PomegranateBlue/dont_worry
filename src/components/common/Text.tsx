@@ -8,9 +8,9 @@ const textVariants = cva('', {
       display1: `text-[40px] leading-[135%] font-[600] ibmSans`, // ibmSans 폰트 적용
       display2: `text-[36px] leading-[135%] font-[600] ibmSans`,
       display3: `text-[32px] leading-[135%] font-[600] ibmSans`,
-      heading1: `text-[28px] leading-[135%] font-[600] pretendard`, // pretendard 폰트 적용
-      heading2: `text-[24px] leading-[135%] font-[600] pretendard`,
-      heading3: `text-[22px] leading-[135%] font-[600] pretendard`,
+      heading1: `text-[28px] leading-[135%] font-[600] ibmSans`, // pretendard 폰트 적용
+      heading2: `text-[24px] leading-[135%] font-[600] ibmSans`,
+      heading3: `text-[22px] leading-[135%] font-[600] ibmSans`,
       title1: `text-[20px] leading-[135%] font-[600] pretendard`,
       title2: `text-[18px] leading-[135%] font-[600] pretendard`,
       body1: `text-[18px] leading-[150%] font-medium pretendard`,

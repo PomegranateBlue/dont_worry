@@ -13,17 +13,17 @@ import {
 import Link from 'next/link';
 
 const LoginProfile = () => {
-  const { data: userData, isLoading: userDataLoading } = useUserInfo();
+  const { data: userData } = useUserInfo();
+  console.log('userData', userData);
   return (
     <div className="flex items-center gap-3">
       <Image
-        src={userData?.profile_img || '/images/default-profile.svg'}
+        src={userData?.profile_img || '/images/profile-default-image.svg'}
         alt="프로필 이미지"
         width={32}
         height={32}
         className="rounded-full"
       />
-
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center">

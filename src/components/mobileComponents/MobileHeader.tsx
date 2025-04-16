@@ -11,23 +11,15 @@ import { useRouter } from 'next/navigation';
 import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
+import { useUserStore } from '@/store/store';
 
 interface MobileHeaderProps {
   isLogin: boolean;
 }
-interface MenuItem {
-  label: string;
-  href: string;
-}
 
-const menuItems: MenuItem[] = [
-  { label: '걱정 작성', href: '/note' },
-  { label: '걱정 보관함', href: '/notebox' },
-  { label: '통계', href: '/ranking' },
-  { label: '미래편지', href: '/letter' }
-];
 export default function MobileHeader({ isLogin }: MobileHeaderProps) {
   const { data: userData, isLoading: userDataLoading } = useUserInfo();
+  const { user } = useUserStore();
   // console.log(userData);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,17 +45,6 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
       toggleMenu();
     }
   };
-
-  //다시 얘 필요없고
-  // const handleMenuItemClick = (href: string) => (e: React.MouseEvent) => {
-  //   toggleMenu();
-  //   if (!isLogin) {
-  //     e.preventDefault();
-  //     alert('로그인 후 이용 가능합니다!');
-  //     router.push('/auth/login');
-  //   }
-  //   toggleMenu();
-  // };
 
   return (
     <div className="md:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
@@ -108,7 +89,8 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                     {isLogin && (
                       <Image
                         src={
-                          userData?.profile_img || '/images/default-profile.svg'
+                          userData?.profile_img ||
+                          '/images/profile-default-image.svg'
                         }
                         alt="프로필 이미지"
                         width={60}

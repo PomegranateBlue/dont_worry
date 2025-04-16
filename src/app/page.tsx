@@ -19,7 +19,7 @@ const HomePage = () => {
           </Text>
           <Image
             className="pt-20 pb-20"
-            src={'/images/introEmoticon.svg'}
+            src={'/images/intro-emoticon.svg'}
             width={253}
             height={160}
             alt="main"
@@ -38,13 +38,13 @@ const HomePage = () => {
         </Text>
         <div className="flex flex-col justify-center items-center gap-[20px]">
           <Image
-            src="/images/userInput.svg"
+            src="/images/user-input.svg"
             width={280}
             height={60}
             alt="userInput"
           />
           <Image
-            src="/images/gptAnswer.svg"
+            src="/images/gpt-answer.svg"
             width={280}
             height={60}
             alt="gptAnswer"

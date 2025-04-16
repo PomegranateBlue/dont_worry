@@ -5,13 +5,28 @@ import Text from '@/components/common/Text';
 const HomePage = () => {
   return (
     <main className="min-h-screen">
-      <section className="w-full h-[482px] bg-primary-1">
-        <Text variant="display3" color="primary4" className="text-center">
-          말 못할 걱정들..
-          <br />
-          어딘가 털어놓고 싶다면?
-        </Text>
+      <section
+        className="w-full h-[630px] "
+        style={{
+          background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 100%)'
+        }}
+      >
+        <div className="flex flex-col items-center justify-center">
+          <Text variant="display3" className="text-center text-[#FFFFFF]">
+            말 못할 걱정들..
+            <br />
+            어딘가 털어놓고 싶다면?
+          </Text>
+          <Image
+            className="pt-20 pb-20"
+            src={'/images/introEmoticon.svg'}
+            width={253}
+            height={160}
+            alt="main"
+          />
+        </div>
       </section>
+
       <section className="bg-gray-100 py-10 px-6 text-center">
         <Text
           variant="display3"

@@ -144,7 +144,7 @@ const FilterModal = ({
                       isSelected
                         ? 'text-backgroundSet-normal'
                         : 'text-label-neutral'
-                    }
+                     }
                   >
                     {option}
                   </Text>

@@ -18,8 +18,8 @@ export async function GET() {
   const { data: letters, error } = await supabase
     .from('letter')
     .select('*')
-    .gte('send_at', `${today}T00:00:00.000Z`) // 오늘 0시 이후
-    .lt('send_at', `${today}T23:59:59.999Z`) // 오늘 23시 59분 전까지
+    .gte('send_at', `${today}T00:00:00.000Z`) // 오늘 00시 00분
+    .lt('send_at', `${today}T23:59:59.999Z`) // 오늘 23시 59분
     .eq('isSent', false);
 
   if (error) {

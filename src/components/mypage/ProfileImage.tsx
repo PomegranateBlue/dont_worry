@@ -53,7 +53,7 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
         />
       ) : (
         <Image
-          src="/images/profileDefaultImage.svg"
+          src="/images/profile-default-image.svg"
           alt="프로필 이미지"
           className="object-cover w-full h-full"
           width={100}

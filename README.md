@@ -17,7 +17,7 @@
 
 <br>
 
-### [프로젝트 URL 바로가기 💻]()
+### [프로젝트 URL 바로가기 💻](https://dontworry.io.kr/)
 
 <br>
 

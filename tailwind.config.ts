@@ -10,6 +10,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' }
+        }
+      },
+      animation: {
+        slide: 'slide 20s linear infinite'
+      },
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다

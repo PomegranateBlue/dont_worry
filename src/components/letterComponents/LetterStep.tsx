@@ -66,7 +66,7 @@ const LetterStep = ({
       }
     }
 
-    const { data, error } = await browserClient
+    const { error } = await browserClient
       .from('letter')
       .insert([
         {

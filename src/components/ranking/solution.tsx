@@ -133,7 +133,11 @@ const Solution = ({ topThree }: SolutionProps) => {
         {userInfo?.nickname + SOLUTION_TITLE}
       </Text>
       {solution ? (
-        <Text variant='body3' color='label-normal' className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
+        <Text
+          variant="body3"
+          color="label-normal"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words"
+        >
           {solution}
         </Text>
       ) : (

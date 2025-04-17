@@ -8,11 +8,6 @@ type UserState = {
   setHydrated: () => void;
 };
 
-// export const useUserStore = create<UserState>((set) => ({
-//   user: null,
-//   setUser: (user) => set({ user })
-// }));
-
 export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
@@ -33,18 +28,3 @@ export const useUserStore = create<UserState>()(
     }
   )
 );
-// export const useUserStore = create<UserState>()(
-//   if(typeof window!=="undefiend"){
-//     persist(
-//       //todo: 데이터 생명주기 확인
-//       (set) => ({
-//         user: localStorage.getItem('auth-storage'),
-
-//         setUser: (user) => set({ user })
-//       }),
-//       {
-//         name: 'auth-storage',
-//       }
-//     )
-//   }
-// );

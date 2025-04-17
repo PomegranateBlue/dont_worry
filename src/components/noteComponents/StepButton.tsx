@@ -8,7 +8,7 @@ interface StepButtonProps {
 const StepButton = ({ stepText, buttonEvent }: StepButtonProps) => {
   return (
     <button
-      className="px-[343px] py-[60px] text-base text-white bg-black  "
+      className="w-[375px] h-[64px] items-center text-backgroundSet-offwhite bg-black  "
       onClick={buttonEvent}
     >
       {stepText}

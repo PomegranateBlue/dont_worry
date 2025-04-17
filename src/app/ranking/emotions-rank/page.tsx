@@ -6,29 +6,42 @@ import {
   fetchMonthlyNotes,
   fetchUserNotes
 } from '@/app/utils/ranking/DataFetch';
-import Report from '@/components/ranking/Report';
+
 import { Most } from '@/types/ranking/types';
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
+import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
+import Solution from '@/components/ranking/Solution';
+import FilterMenu from '@/components/ranking/FilterMenu';
+import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
+import {
+  DATA_FETCHING,
+  DATA_FETHCING_ERROR
+} from '@/constants/ranking/ErrorConstants';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+import Report from '@/components/ranking/Report';
 
 const EmotionsRankginPage = () => {
   const { year, month, week, mode } = useRankingStore();
   const { year: Myear, month: Mmonth } = useMRankingStore();
-  const { user } = useUserStore();
+  const { user, hydrated } = useUserStore();
   const [topEmotions, setTopEmotions] = useState<
     { name: string; count: number }[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [most, setMost] = useState<Most | null>(null);
-  const [topThree, setTopThree] = useState<
-    { name: string; count: number }[] | null
-  >([]);
+  const [topThree, setTopThree] = useState<{ name: string; count: number }[]>(
+    []
+  );
+
   useEffect(() => {
-    if (mode === 'week') {
+    if (!hydrated) return;
+
+    if (mode === WEEK_MODE) {
       const fetchData = async () => {
         try {
           setIsLoading(true);
@@ -37,15 +50,15 @@ const EmotionsRankginPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopEmotions(result.topEmotions);
-            const topthree = result.topEmotions.slice(0, 3);
+            const topthree = result.topEmotions.slice(0, 6);
             setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`); //todo: del
             setTopEmotions([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -60,15 +73,15 @@ const EmotionsRankginPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
             setTopEmotions(result.topEmotions);
-            const topthree = result.topEmotions.slice(0, 3);
+            const topthree = result.topEmotions.slice(0, 6);
             setTopThree(topthree);
           } else {
             console.log(`${year}년 ${month}월 ${week}째주 데이터가 없습니다.`);
             setTopEmotions([]);
           }
         } catch (err) {
-          console.error('데이터 조회 오류:', err);
-          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+          console.error(DATA_FETHCING_ERROR, err);
+          setError(DATA_FETHCING_ERROR);
         } finally {
           setIsLoading(false);
         }
@@ -79,9 +92,8 @@ const EmotionsRankginPage = () => {
 
     return () => {
       setMost(null);
-      setTopThree(null);
     };
-  }, [year, month, week, mode, Mmonth, Myear]);
+  }, [year, month, week, mode, Mmonth, Myear, hydrated]);
 
   useEffect(() => {
     if (topEmotions.length === 0) return;
@@ -113,7 +125,7 @@ const EmotionsRankginPage = () => {
   }, [topEmotions]);
 
   if (isLoading) {
-    return <div>데이터를 불러오는 중입니다...</div>;
+    return <div>{DATA_FETCHING}</div>;
   }
 
   if (error) {
@@ -126,15 +138,24 @@ const EmotionsRankginPage = () => {
 
   return (
     <div>
-      <EmotionChart topEmotions={topEmotions} />
-      <Report most={most} />
-      {topThree?.map((e) => {
-        return (
-          <div key={e.name}>
-            <TopThreeCard topThree={e} />
-          </div>
-        );
-      })}
+      <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[40px] self-stretch">
+        <TimeFilterGroup />
+        <EmotionChart topEmotions={topEmotions} />
+        <Report most={most} />
+      </div>
+      <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">
+        <FilterMenu />
+        <div className="flex flex-col w-full max-w-full gap-[12px]">
+          {topThree.map((e) => (
+            <div key={e.name}>
+              <TopThreeCard topThree={e} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <MWreportCard />
+
+      <Solution topThree={topThree} />
     </div>
   );
 };

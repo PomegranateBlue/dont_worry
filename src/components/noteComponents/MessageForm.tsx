@@ -5,9 +5,9 @@ const MessageForm = () => {
   const { message, setMessage } = useNoteStore();
 
   return (
-    <div className="relative w-full">
+    <div className="p-5">
       <textarea
-        className="p-2 border-[1px] border-black text-black resize-none w-full h-96 rounded-lg"
+        className="p-5 border-[1px] border-label-assistive text-black resize-none w-[335px] h-[300px] rounded-lg"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         maxLength={150}

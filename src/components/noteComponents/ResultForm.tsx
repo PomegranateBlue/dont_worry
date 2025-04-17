@@ -13,24 +13,27 @@ const ResultForm = () => {
 
   return (
     <div className="flex flex-col min-h-screen  ">
-      <h1 className="text-center text-lg font-semibold w-full bg-[#FFFFFF]">
-        감정 작성
-      </h1>
+      <p className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal text-[20px] font-semibold px-[6px]">
+        상담 결과
+      </p>
 
-      <div className="flex flex-col gap-4 flex-1">
-        <div className="flex flex-col items-end">
-          <div className="bg-white rounded-xl px-4 py-2 max-w-[75%] text-md shadow-lg font-semibold">
-            {message}
+      <div className="p-5">
+        <div className="flex flex-col gap-4 flex-1">
+          <div className="flex flex-col items-end">
+            <div className="bg-white  px-4 py-2 w-[280px] text-[14px]  font-medium [border-radius:16px_16px_0px_16px]">
+              {message}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start">
+            <div className="bg-backgroundSet-normal  px-4 py-2 w-[280px] text-[14px] font-medium [border-radius:16px_16px_16px_0px] ">
+              {result || '...같이 고민하는 중'}
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-start">
-          <div className="bg-white rounded-xl px-4 py-2 max-w-[75%] text-md font-semibold shadow-lg">
-            {result || '...같이 고민하는 중'}
-          </div>
-        </div>
-
-        <div className="text-center mt-8 text-sm text-gray-500">
+        {/*저장 버튼 */}
+        <div className="text-center mt-8 text-[12px] text-label-alternative">
           이 답장이 마음에 드셨나요?
           <div className="flex justify-center gap-6 mt-2">
             <ResultSaveButton />
@@ -39,12 +42,14 @@ const ResultForm = () => {
         </div>
       </div>
 
-      <button
-        onClick={goNoteBox}
-        className="mt-6 w-full py-3 bg-[#8573C9] text-white text-sm font-semibold rounded-xl"
-      >
-        보관함으로 가기
-      </button>
+      <div className="px-5 py-2">
+        <button
+          onClick={goNoteBox}
+          className="w-[335px] h-[48px] text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
+        >
+          보관함으로 가기
+        </button>
+      </div>
     </div>
   );
 };

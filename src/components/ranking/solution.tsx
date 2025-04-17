@@ -7,6 +7,7 @@ import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
+import Image from 'next/image';
 
 type TopThreeItem = {
   name: string;
@@ -128,12 +129,25 @@ const Solution = ({ topThree }: SolutionProps) => {
   }, [topThree, user]);
 
   return (
-    <div className="flex flex-col gap-4 p-4 w-full">
-      <Text as="div" variant="title2" color="label-normal">
-        {userInfo?.nickname + SOLUTION_TITLE}
-      </Text>
+    <div className="flex flex-col gap-4 p-5 w-full">
+      <div className="flex w-[335px] h-[40px] justify-start items-center gap-2">
+        <Image
+          src="/images/ver-default.svg"
+          alt="이미지 없음"
+          width={27}
+          height={32}
+          className="w-[27px] h-[32px] flex-shrink-0 aspect-[27/32]"
+        />
+        <Text as="div" variant="title2" color="label-normal">
+          {userInfo?.nickname + SOLUTION_TITLE}
+        </Text>
+      </div>
       {solution ? (
-        <Text variant='body3' color='label-normal' className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
+        <Text
+          variant="body3"
+          color="label-normal"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words"
+        >
           {solution}
         </Text>
       ) : (

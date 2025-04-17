@@ -1,5 +1,10 @@
+import { NO_ID } from '@/constants/ranking/Line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
+import {
+  ANALYZE_ERROR,
+  DATA_FETHCING_ERROR
+} from '@/constants/ranking/ErrorConstants';
 
 //주 단위 데이터를 패칭
 export const fetchUserNotes = async (
@@ -9,7 +14,7 @@ export const fetchUserNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error('사용자 ID가 없습니다.');
+    throw new Error(NO_ID);
   }
 
   try {
@@ -32,8 +37,8 @@ export const fetchUserNotes = async (
 
     return data as UserNote[];
   } catch (err) {
-    console.error('데이터 조회 오류:', err);
-    throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
+    console.error(DATA_FETHCING_ERROR, err);
+    throw new Error(DATA_FETHCING_ERROR);
   }
 };
 
@@ -44,7 +49,7 @@ export const fetchMonthlyNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error('사용자 ID가 없습니다.');
+    throw new Error(NO_ID);
   }
 
   try {
@@ -67,8 +72,8 @@ export const fetchMonthlyNotes = async (
 
     return data as UserNote[];
   } catch (err) {
-    console.error('데이터 조회 오류:', err);
-    throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
+    console.error(DATA_FETHCING_ERROR, err);
+    throw new Error(DATA_FETHCING_ERROR);
   }
 };
 
@@ -176,8 +181,8 @@ export const analyzeCategoryTrends = async (
       currentMonthName: `${currentYear}년 ${currentMonth}월`
     };
   } catch (err) {
-    console.error('분석 오류:', err);
-    throw new Error('카테고리 변화를 분석하는 중 오류가 발생했습니다.');
+    console.error(ANALYZE_ERROR, err);
+    throw new Error(ANALYZE_ERROR);
   }
 };
 //주단위
@@ -189,7 +194,7 @@ export const analyzeWeeklyCategoryTrends = async (
 ) => {
   try {
     if (!id) {
-      throw new Error('사용자 ID가 없습니다.');
+      throw new Error(NO_ID);
     }
 
     // 이전 주 계산

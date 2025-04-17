@@ -5,6 +5,7 @@ import Link from 'next/link';
 import LogOutButton from '../loginComponents/LogOutButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlignJustify, X } from 'lucide-react';
+import Text from '../common/Text';
 // import { useUserInfo } from '@/hooks/useMyPageQueries';
 
 interface MobileHeaderProps {
@@ -70,11 +71,34 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                   </Link>
                 </div>
                 <div className="p-6 flex flex-col gap-4 ">
-                  <Link href="/">서비스 소개</Link>
-                  <Link href="/note">걱정 작성</Link>
-                  <Link href="/notebox">걱정 보관함</Link>
-                  <Link href="/ranking">통계</Link>
-                  <Link href="/letter">편지쓰기</Link>
+
+                  <Link href="/" className="py-3">
+                    <Text variant="title2" color="label-neutral">
+                      서비스 소개
+                    </Text>
+                  </Link>
+                  <Link href="/note" className="py-3">
+                    <Text variant="title2" color="label-neutral">
+                      걱정 작성
+                    </Text>
+                  </Link>
+
+                  <Link href="/notebox" className="py-3">
+                    <Text variant="title2" color="label-neutral">
+                      걱정 보관함
+                    </Text>
+                  </Link>
+
+                  <Link href="/ranking" className="py-3">
+                    <Text variant="title2" color="label-neutral">
+                      통계
+                    </Text>
+                  </Link>
+                  <Link href="/letter" className="py-3">
+                    <Text variant="title2" color="label-neutral">
+                      편지쓰기
+                    </Text>
+                  </Link>
                   <div className="mt-5 text-sm text-gray-500 ">
                     <LogOutButton />
                   </div>
@@ -82,9 +106,21 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
               </div>
             ) : (
               <div className="p-6 flex flex-col gap-4">
-                <Link href="/">서비스 소개</Link>
-                <Link href="/auth/login">로그인</Link>
-                <Link href="/auth/signup">회원가입</Link>
+                <Link href="/" className="py-3">
+                  <Text variant="title2" color="label-neutral">
+                    서비스 소개
+                  </Text>
+                </Link>
+                <Link href="/auth/login" className="py-3">
+                  <Text variant="title2" color="label-neutral">
+                    로그인
+                  </Text>
+                </Link>
+                <Link href="/auth/signup" className="py-3">
+                  <Text variant="title2" color="label-neutral">
+                    회원가입
+                  </Text>
+                </Link>
               </div>
             )}
           </motion.nav>

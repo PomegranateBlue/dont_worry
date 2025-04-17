@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  ABOUT,
   MOST_DECREASE_COMMENT_MONTH,
   MOST_DECREASE_COMMENT_WEEK
 } from '@/constants/ranking/Line';
@@ -8,6 +9,8 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { BetterThingProps } from '@/types/ranking/types';
 
 import React from 'react';
+import Text from '../common/Text';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 
 const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
   const { mode } = useRankingStore();
@@ -16,17 +19,49 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
 
   return (
     <>
-      {mode === 'week' ? (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {weekLowest
-            ? `${weekLowest.category}${MOST_DECREASE_COMMENT_WEEK}`
-            : '데이터가 없습니다'}
+      {mode === WEEK_MODE ? (
+        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-slpeum_bg text-label-normal shadow-sm">
+          {weekLowest ? (
+            <div className="w-full">
+              <div>
+                <Text as="span" variant="title2" color="label-normal">
+                  {weekLowest.category}
+                </Text>
+                <Text as="span" variant="body3" color="label-normal">
+                  {ABOUT}
+                </Text>
+              </div>
+              <Text as="span" variant="body3" color="label-normal">
+                {MOST_DECREASE_COMMENT_WEEK}
+              </Text>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       ) : (
-        <div className="mx-4 my-6 px-6 py-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-900 text-base sm:text-lg md:text-xl font-medium text-center shadow-sm">
-          {monthLowest
-            ? `${monthLowest.category}${MOST_DECREASE_COMMENT_MONTH}`
-            : '데이터가 없습니다'}
+        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-slpeum_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+          {monthLowest ? (
+            <div className="w-full">
+              <div>
+                <Text as="span" variant="title2" color="label-normal">
+                  {monthLowest.category}
+                </Text>
+                <Text as="span" variant="body3" color="label-normal">
+                  {ABOUT}
+                </Text>
+              </div>
+              <Text as="span" variant="body3" color="label-normal">
+                {MOST_DECREASE_COMMENT_MONTH}
+              </Text>
+            </div>
+          ) : (
+            <span className="text-label-normal text-sm sm:text-base font-medium">
+              데이터가 없습니다
+            </span>
+          )}
         </div>
       )}
     </>

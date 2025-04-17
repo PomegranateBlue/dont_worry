@@ -1,13 +1,14 @@
-# .coderabbit.yaml
-version: 2
-
+language: 'ko-KR'
+early_access: false
 reviews:
-  enabled: true
-  base_branches: # ✅ 디폴트 브랜치 외에도 리뷰를 작동시킬 브랜치 지정
-    - '**' # ← 모든 브랜치에서 PR 타겟 가능 (wildcard 지원)
+  profile: 'chill'
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: true
   review_status: true
-
-rules:
-  - match: '**'
-    reviewers:
-      - coderabbit
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+chat:
+  auto_reply: true

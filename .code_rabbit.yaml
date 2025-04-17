@@ -1,0 +1,13 @@
+# .coderabbit.yaml
+version: 2
+
+reviews:
+  enabled: true
+  base_branches: # ✅ 디폴트 브랜치 외에도 리뷰를 작동시킬 브랜치 지정
+    - '**' # ← 모든 브랜치에서 PR 타겟 가능 (wildcard 지원)
+  review_status: true
+
+rules:
+  - match: '**'
+    reviewers:
+      - coderabbit

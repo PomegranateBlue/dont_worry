@@ -6,7 +6,7 @@ import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
-import { fetchGPT } from '@/lib/api/gpt/gpt';
+import { fetchGPT } from '@/app/utils/openai/route';
 import { useNoteStore } from '@/store/note/noteStore';
 
 enum StepProps {

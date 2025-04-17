@@ -6,7 +6,7 @@ import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
-import { fetchGPT } from '@/app/utils/openai/route';
+// import { fetchGPT } from '@/app/utils/openai/route';
 import { useNoteStore } from '@/store/note/noteStore';
 
 enum StepProps {
@@ -40,6 +40,31 @@ const StepFlow = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const fetchGPT = async ({
+    topic,
+    emotions,
+    message
+  }: {
+    topic: string | null;
+    emotions: string[];
+    message: string;
+  }) => {
+    const res = await fetch('/api/utils/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        content: `주제: ${topic}, 감정: ${emotions.join(
+          ', '
+        )}, 메시지: ${message}`
+      })
+    });
+
+    const data = await res.json();
+    return data.content;
   };
 
   return (

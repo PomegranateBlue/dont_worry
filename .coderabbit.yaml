@@ -1,5 +1,8 @@
+version: 2
+
 language: 'ko-KR'
 early_access: false
+
 reviews:
   profile: 'chill'
   request_changes_workflow: false
@@ -7,8 +10,19 @@ reviews:
   poem: true
   review_status: true
   collapse_walkthrough: false
+
   auto_review:
     enabled: true
     drafts: false
+
+  # ✅ 기본 브랜치 외에도 리뷰 수행하도록 설정
+  base_branches:
+    - '**' # 모든 브랜치를 대상으로 리뷰 허용
+
+rules:
+  - match: '**'
+    reviewers:
+      - coderabbit
+
 chat:
   auto_reply: true

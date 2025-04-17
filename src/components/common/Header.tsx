@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { getIsLogin } from '@/app/utils/supabase/server';
-// import MobileHeader from './mobileComponents/MobileHeader';
-import LoginProfile from './loginComponents/LoginProfile';
 import Image from 'next/image';
-import { IsLoginMenu } from './loginComponents/IsLoginMenu';
-import { IsNotLoginMenu } from './loginComponents/IsNotLoginMenu';
-import MobileHeader from './mobileComponents/MobileHeader';
+import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
+import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
+import LoginProfile from '../loginComponents/LoginProfile';
+import MobileHeader from '../mobileComponents/MobileHeader';
 
 export default async function Header() {
   const isLogin = await getIsLogin();

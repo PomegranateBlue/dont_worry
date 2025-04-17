@@ -16,7 +16,6 @@ import TopThreeCard from '@/components/ranking/TopThreeCard';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import Solution from '@/components/ranking/Solution';
 import FilterMenu from '@/components/ranking/FilterMenu';
-import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
 import {
   DATA_FETCHING,
   DATA_FETHCING_ERROR
@@ -139,7 +138,6 @@ const EmotionsRankginPage = () => {
   return (
     <div>
       <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[40px] self-stretch">
-        <TimeFilterGroup />
         <EmotionChart topEmotions={topEmotions} />
         <Report most={most} />
       </div>

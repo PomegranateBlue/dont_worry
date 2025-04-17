@@ -15,7 +15,6 @@ import TopThreeCard from '@/components/ranking/TopThreeCard';
 import Solution from '@/components/ranking/Solution';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
-import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
 import {
   DATA_FETCHING,
   DATA_FETHCING_ERROR
@@ -39,7 +38,6 @@ const RankingPage = () => {
   );
 
   console.log('user', user); //1 ->정상
-
   useEffect(() => {
     if (!hydrated) return;
 
@@ -141,7 +139,6 @@ const RankingPage = () => {
   return (
     <div>
       <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[55px] self-stretch">
-        <TimeFilterGroup />
         <TopicChart topTopics={topTopics} />
         <Report most={most} />
       </div>

@@ -2,10 +2,11 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
 import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
 import React, { useEffect, useRef, useState } from 'react';
+import Text from '../common/Text';
 
 type TopThreeItem = {
   name: string;
@@ -44,7 +45,7 @@ const Solution = ({ topThree }: SolutionProps) => {
     const makeSolution = async () => {
       const keywords = stringifyTopThree(topThree);
       if (!user) {
-        console.error('solution: 사용자 ID가 없습니다.'); //del
+        console.error(NO_ID); //del
         return;
       }
 
@@ -128,13 +129,13 @@ const Solution = ({ topThree }: SolutionProps) => {
 
   return (
     <div className="flex flex-col gap-4 p-4 w-full">
-      <h2 className="text-xl items-start text-label-normal font-semibold mb-2">
+      <Text as="div" variant="title2" color="label-normal">
         {userInfo?.nickname + SOLUTION_TITLE}
-      </h2>
+      </Text>
       {solution ? (
-        <p className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
+        <Text variant='body3' color='label-normal' className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
           {solution}
-        </p>
+        </Text>
       ) : (
         <p>솔루션을 생성 중입니다...</p>
       )}

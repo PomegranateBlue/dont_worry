@@ -14,11 +14,11 @@ enum StepProps {
   MESSAGE = 'message',
   RESULT = 'result'
 }
+
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
     useNoteStore();
-
   const emotionRef = useRef<HTMLDivElement | null>(null);
 
   const handleCategorySelect = (topic: string) => {
@@ -67,11 +67,13 @@ const StepFlow = () => {
       {step === StepProps.MESSAGE && (
         <div className="flex flex-col min-h-screen  overflow-hidden">
           <div className="relative h-[56px] w-full px-[6px]">
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2"
-              onClick={() => setStep(StepProps.CATEGORY)}
-            >
-              <ChevronLeft />
+            <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+              <ChevronLeft
+                onClick={() => {
+                  console.log('뒤로가기');
+                  setStep(StepProps.CATEGORY);
+                }}
+              />
             </button>
             <div className="absolute inset-0 flex justify-center items-center">
               <p className="text-[20px] font-semibold">감정 작성</p>

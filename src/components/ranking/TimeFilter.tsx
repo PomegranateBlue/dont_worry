@@ -1,3 +1,12 @@
+import { ALL } from '@/constants/ranking/Line';
+import {
+  FIFTH_WEEK,
+  FIRST_WEEK,
+  FOURTH_WEEK,
+  SECOND_WEEK,
+  SIXTH_WEEK,
+  THIRD_WEEK
+} from '@/constants/ranking/WeekConstants';
 import { ChevronDown } from 'lucide-react';
 
 type Props = {
@@ -12,14 +21,14 @@ const getLabel = (type: 'year' | 'month' | 'week', value: number | string) => {
     return `${value}월`;
   }
   if (type === 'week') {
-    if (value === '전체') return '전체';
+    if (value === ALL) return ALL;
     const weekLabels = [
-      '첫째주',
-      '둘째주',
-      '셋째주',
-      '넷째주',
-      '다섯째주',
-      '여섯째주'
+      FIRST_WEEK,
+      SECOND_WEEK,
+      THIRD_WEEK,
+      FOURTH_WEEK,
+      FIFTH_WEEK,
+      SIXTH_WEEK
     ];
     return weekLabels[Number(value) - 1] || `${value}주차`;
   }

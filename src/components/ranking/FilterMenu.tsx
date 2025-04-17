@@ -8,6 +8,7 @@ import {
   CHART_FILTER_EMOTION,
   CHART_FILTER_TOPIC
 } from '@/constants/ranking/Line';
+import Text from '../common/Text';
 
 const FilterMenu = () => {
   const pathName = usePathname();
@@ -35,19 +36,20 @@ const FilterMenu = () => {
                 isTopic ? 'text-backgroundSet-normal' : 'text-label-alternative'
               }`}
             >
-              {CHART_FILTER_TOPIC}
+              <Text variant="body2" color="white">
+                {CHART_FILTER_TOPIC}
+              </Text>
             </div>
           </Link>
 
           <Link href="/ranking/emotions-rank" className="w-1/2">
             <div
-              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200 ${
-                isEmotion
-                  ? 'text-backgroundSet-normal'
-                  : 'text-label-alternative'
-              }`}
+              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200`}
             >
-              {CHART_FILTER_EMOTION}
+              <Text variant="body2" color="label-alternative">
+                {CHART_FILTER_EMOTION}
+              </Text>
+              {/*색추가해야함*/}
             </div>
           </Link>
         </div>

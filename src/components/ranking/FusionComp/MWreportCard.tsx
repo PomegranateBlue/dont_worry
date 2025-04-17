@@ -10,6 +10,8 @@ import {
 } from '@/constants/ranking/Line';
 import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import useAnaylsisTrendWeek from '@/hooks/ranking/useAnaylsisTrendWeek';
+import Text from '@/components/common/Text';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 
 const MWreportCard = () => {
   const { year, month, mode, week } = useRankingStore();
@@ -23,15 +25,13 @@ const MWreportCard = () => {
   return (
     <section className="flex flex-col items-center gap-4 p-4 sm:p-5 w-full mx-auto mt-6 sm:mt-10 mb-4 sm:mb-6">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
-        <div className="text-label-normal text-xl sm:text-2xl font-medium leading-tight w-full">
-          {mode === 'week' ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
-        </div>
+        <Text as="div" variant="heading3" color="label-normal">
+          {mode === WEEK_MODE ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
+        </Text>
       </div>
 
-      <div className="space-y-4 w-full">
-        <BetterThing monthData={monthData} weekData={weekData} />
-        <WorsenedThing monthData={monthData} weekData={weekData} />
-      </div>
+      <BetterThing monthData={monthData} weekData={weekData} />
+      <WorsenedThing monthData={monthData} weekData={weekData} />
     </section>
   );
 };

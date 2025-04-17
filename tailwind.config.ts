@@ -13,6 +13,13 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
+
+
+        error: '#fe5558',
+        success: '#00bd78',
+        white: '#ffffff',
+        black: '#000000',
+
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -84,27 +91,35 @@ const config: Config = {
           offwhite: '#EEEEF0'
         },
         mind: {
-          honran: '#CAADC6',
+
+          honran: '#CAADC6', //혼란
           honran_bg: '#FCF2FB',
-          moogiryeok: '#E7DDF2',
+          moogiryeok: '#E7DDF2', //무기력
           moogiryeok_bg: '#F3EEFA',
-          sipeum: '#CCD5DD',
-          sipeum_bg: '#EAF3FA',
-          woowool: '#ACBCE5',
+          slpeum: '#CCD5DD', //슬픔
+          slpeum_bg: '#EAF3FA',
+          woowool: '#ACBCE5', //우울
           woowool_bg: '#E4EAFA',
-          yoerowooum: '#81A2B8',
+          yoerowooum: '#81A2B8', //외로움
           yoerowooum_bg: '#EDF2F7',
-          boolan: '#AFC1B8',
+          boolan: '#AFC1B8', //불안
           boolan_bg: '#EBF5F0',
+          huhuea: '#D4DFCD', //후회
           huhuea_bg: '#D4DFCD',
-          zzazeung: '#EAF9E0',
+          zzazeung: '#EAF9E0', //짜증
           zzazeung_bg: '#FEF5BF',
-          bunno: '#E3BFA2',
+          bunno: '#E3BFA2', //분노
           bunno_bg: '#FACFC7',
-          butkuea: '#F0ECAE',
-          apbak: '#EBB6C8',
+          bulkuea: '#F0ECAE', //불쾌
+          bulkuea_bg: 'FBFAE2',
+          apbak: '#EBB6C8', //압박
+
           apbak_bg: '#FFF1F6'
         }
+      },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+        ibmSans: ['var(--font-ibmSans)']
       },
       borderRadius: {
         lg: 'var(--radius)',

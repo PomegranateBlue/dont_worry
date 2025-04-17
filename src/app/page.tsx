@@ -1,25 +1,50 @@
 import Image from 'next/image';
 import { Plus } from 'lucide-react';
+import Text from '@/components/common/Text';
 
 const HomePage = () => {
   return (
     <main className="min-h-screen">
-      <section className="w-full h-[482px] bg-black">Hero section</section>
+      <section
+        className="w-full h-[630px] "
+        style={{
+          background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 100%)'
+        }}
+      >
+        <div className="flex flex-col items-center justify-center">
+          <Text variant="display3" className="text-center text-[#FFFFFF]">
+            말 못할 걱정들..
+            <br />
+            어딘가 털어놓고 싶다면?
+          </Text>
+          <Image
+            className="pt-20 pb-20"
+            src={'/images/intro-emoticon.svg'}
+            width={253}
+            height={160}
+            alt="main"
+          />
+        </div>
+      </section>
+
       <section className="bg-gray-100 py-10 px-6 text-center">
-        <h2 className="flex justify-center text-center text-xl font-bold  p-10">
+        <Text
+          variant="display3"
+          className="flex justify-center text-center text-xl font-bold  p-10"
+        >
           마음의 고민을
           <br />
           이곳에서 묻어보세요
-        </h2>
+        </Text>
         <div className="flex flex-col justify-center items-center gap-[20px]">
           <Image
-            src="/images/userInput.svg"
+            src="/images/user-input.svg"
             width={280}
             height={60}
             alt="userInput"
           />
           <Image
-            src="/images/gptAnswer.svg"
+            src="/images/gpt-answer.svg"
             width={280}
             height={60}
             alt="gptAnswer"

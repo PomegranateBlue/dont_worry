@@ -1,3 +1,14 @@
+import { ALL } from '@/constants/ranking/Line';
+import {
+  FIFTH_WEEK,
+  FIRST_WEEK,
+  FOURTH_WEEK,
+  SECOND_WEEK,
+  SIXTH_WEEK,
+  THIRD_WEEK
+} from '@/constants/ranking/WeekConstants';
+import { ChevronDown } from 'lucide-react';
+
 type Props = {
   type: 'year' | 'month' | 'week';
   options: (number | string)[];
@@ -10,14 +21,14 @@ const getLabel = (type: 'year' | 'month' | 'week', value: number | string) => {
     return `${value}월`;
   }
   if (type === 'week') {
-    if (value === '전체') return '전체';
+    if (value === ALL) return ALL;
     const weekLabels = [
-      '첫째주',
-      '둘째주',
-      '셋째주',
-      '넷째주',
-      '다섯째주',
-      '여섯째주'
+      FIRST_WEEK,
+      SECOND_WEEK,
+      THIRD_WEEK,
+      FOURTH_WEEK,
+      FIFTH_WEEK,
+      SIXTH_WEEK
     ];
     return weekLabels[Number(value) - 1] || `${value}주차`;
   }
@@ -26,22 +37,32 @@ const getLabel = (type: 'year' | 'month' | 'week', value: number | string) => {
 
 const TimeFilter = ({ type, options, onChange, selected }: Props) => {
   return (
-    <select
-      value={selected}
-      onChange={(e) =>
-        onChange(
-          type,
-          isNaN(+e.target.value) ? e.target.value : +e.target.value
-        )
-      }
-      className="border border-gray-300 rounded-full px-4 py-2 text-center text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
-    >
-      {options.map((opt) => (
-        <option key={opt} value={opt}>
-          {getLabel(type, opt)}
-        </option>
-      ))}
-    </select>
+    <div className="relative inline-block">
+      <select
+        value={selected}
+        onChange={(e) =>
+          onChange(
+            type,
+            isNaN(+e.target.value) ? e.target.value : +e.target.value
+          )
+        }
+        className="appearance-none h-[32px] px-[16px] py-[6px] border border-line-noraml rounded-[16px] text-label-neutral focus:outline-none focus:ring-2 focus:ring-purple-400 pr-[32px] text-center"
+        style={{
+          textAlignLast: 'center',
+          textAlign: 'center',
+          lineHeight: '1.2'
+        }}
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt} className="text-center">
+            {getLabel(type, opt)}
+          </option>
+        ))}
+      </select>
+      <div className="absolute inset-y-0 right-0 flex items-center px-[12px] pointer-events-none">
+        <ChevronDown size={16} className="text-gray-400" />
+      </div>
+    </div>
   );
 };
 

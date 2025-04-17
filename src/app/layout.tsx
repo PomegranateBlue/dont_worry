@@ -14,7 +14,7 @@ import Header from '@/components/header';
 //   weight: '100 900'
 // });
 
-export const pretendard = localFont({
+const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
   display: 'swap',
   weight: '400',

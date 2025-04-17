@@ -7,7 +7,7 @@ const TermsPage = () => {
   const { mainTerms } = termsOfServiceData;
 
   return (
-    <div className="flex flex-col min-h-screen px-4">
+    <div className="flex flex-col min-h-screen">
       {/* 상단 바 */}
       <div className="relative flex items-center justify-center h-16 border-b">
         {/* 왼쪽 아이콘 */}

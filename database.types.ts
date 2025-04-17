@@ -9,11 +9,47 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      community_posts: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: number
+          img_url: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          img_url?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          img_url?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_posts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       letter: {
         Row: {
           content: string
           created_at: string
           img_url: string | null
+          isSent: boolean | null
           letter_id: string
           send_at: string | null
           user_id: string
@@ -22,6 +58,7 @@ export type Database = {
           content: string
           created_at?: string
           img_url?: string | null
+          isSent?: boolean | null
           letter_id?: string
           send_at?: string | null
           user_id?: string
@@ -30,6 +67,7 @@ export type Database = {
           content?: string
           created_at?: string
           img_url?: string | null
+          isSent?: boolean | null
           letter_id?: string
           send_at?: string | null
           user_id?: string

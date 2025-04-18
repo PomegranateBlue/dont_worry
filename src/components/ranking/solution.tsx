@@ -2,7 +2,7 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { SOLUTION_TITLE } from '@/constants/ranking/Line';
 import { useUserInfo } from '@/hooks/useMyPageQueries';
 import { useUserStore } from '@/store/store';
 import React, { useEffect, useRef, useState } from 'react';
@@ -46,7 +46,6 @@ const Solution = ({ topThree }: SolutionProps) => {
     const makeSolution = async () => {
       const keywords = stringifyTopThree(topThree);
       if (!user) {
-        console.error(NO_ID); //del
         return;
       }
 
@@ -71,7 +70,6 @@ const Solution = ({ topThree }: SolutionProps) => {
           return;
         }
 
-        console.log('GPT 요청 실행 중...');
         const res = await fetch('/utils/rankingSolution', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

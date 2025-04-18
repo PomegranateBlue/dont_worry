@@ -13,12 +13,12 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
-import Solution from '@/components/ranking/Solution';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import { DATA_FETHCING_ERROR } from '@/constants/ranking/ErrorConstants';
 import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 import Report from '@/components/ranking/Report';
+import Solution from '@/components/ranking/solution';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore(); // chartMode 추가
@@ -31,14 +31,13 @@ const RankingPage = () => {
   const [topEmotions, setTopEmotions] = useState<
     { name: string; count: number }[]
   >([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
   const [most, setMost] = useState<Most | null>(null);
-  const [topThreeTopic, setTopThreeTopic] = useState<
+  const [topSixTopic, setTopSixTopic] = useState<
     { name: string; count: number }[]
   >([]);
 
-  const [topThreeEmotion, setTopThreeEmotion] = useState<
+  const [topSixEmotion, setTopSixEmotion] = useState<
     { name: string; count: number }[]
   >([]);
   // 데이터 가져오기 로직
@@ -48,23 +47,19 @@ const RankingPage = () => {
     if (mode === WEEK_MODE) {
       const fetchData = async () => {
         try {
-          setIsLoading(true);
           const userNotes = await fetchUserNotes(year, month, week, user);
 
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
 
             setTopTopics(result.topTopics);
-            setTopThreeTopic(result.topTopics.slice(0, 6));
+            setTopSixTopic(result.topTopics.slice(0, 6));
 
             setTopEmotions(result.topEmotions);
-            setTopThreeEmotion(result.topEmotions.slice(0, 6));
+            setTopSixEmotion(result.topEmotions.slice(0, 6));
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
-          setError(DATA_FETHCING_ERROR);
-        } finally {
-          setIsLoading(false);
         }
       };
 
@@ -72,7 +67,6 @@ const RankingPage = () => {
     } else {
       const fetchMonthData = async () => {
         try {
-          setIsLoading(true);
           const userNotes = await fetchMonthlyNotes(Myear, Mmonth, user);
 
           if (userNotes.length > 0) {
@@ -81,15 +75,12 @@ const RankingPage = () => {
             // chartMode에 따라 다른 데이터 설정
 
             setTopTopics(result.topTopics);
-            setTopThreeTopic(result.topTopics.slice(0, 6));
+            setTopSixTopic(result.topTopics.slice(0, 6));
             setTopEmotions(result.topEmotions);
-            setTopThreeEmotion(result.topEmotions.slice(0, 6));
+            setTopSixEmotion(result.topEmotions.slice(0, 6));
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
-          setError(DATA_FETHCING_ERROR);
-        } finally {
-          setIsLoading(false);
         }
       };
 
@@ -130,14 +121,6 @@ const RankingPage = () => {
     calculatePercentage();
   }, [topTopics, topEmotions, chartMode]);
 
-  // if (isLoading) {
-  //   return <div>{DATA_FETCHING}</div>;
-  // }
-
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-
   const currentData = chartMode === 'topic' ? topTopics : topEmotions;
   if (currentData.length === 0) {
     return <div>{NO_DATA_CHART}</div>;
@@ -159,7 +142,7 @@ const RankingPage = () => {
 
         {chartMode === 'topic' ? (
           <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topThreeTopic.map((e) => (
+            {topSixTopic.map((e) => (
               <div key={e.name}>
                 <TopThreeCard topThree={e} />
               </div>
@@ -167,7 +150,7 @@ const RankingPage = () => {
           </div>
         ) : (
           <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topThreeEmotion.map((e) => (
+            {topSixEmotion.map((e) => (
               <div key={e.name}>
                 <TopThreeCard topThree={e} />
               </div>
@@ -178,11 +161,11 @@ const RankingPage = () => {
       <MWreportCard />
       {chartMode === 'topic' ? (
         <>
-          <Solution topThree={topThreeTopic} />
+          <Solution topThree={topSixTopic} />
         </>
       ) : (
         <>
-          <Solution topThree={topThreeEmotion} />
+          <Solution topThree={topSixEmotion} />
         </>
       )}
     </div>

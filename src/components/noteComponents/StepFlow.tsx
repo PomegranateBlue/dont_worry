@@ -17,7 +17,7 @@ enum StepProps {
 }
 
 const StepFlow = () => {
-  const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
+  const [step, setStep] = useState<StepProps>(StepProps.MESSAGE);
   const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
     useNoteStore();
   const emotionRef = useRef<HTMLDivElement | null>(null);
@@ -93,7 +93,7 @@ const StepFlow = () => {
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col">
+          <div className=" flex flex-col justify-center items-center">
             <MessageForm />
           </div>
 

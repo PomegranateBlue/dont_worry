@@ -11,6 +11,20 @@ interface NoteCardProps {
   emotion_category: string[] | null;
 }
 
+const emotionBgClassMap: Record<string, string> = {
+  slpeum: 'bg-mind-slpeum_bg',
+  bulkuea: 'bg-mind-bulkuea_bg',
+  apbak: 'bg-mind-apbak_bg',
+  boolan: 'bg-mind-boolan_bg',
+  honran: 'bg-mind-honran_bg',
+  bunno: 'bg-mind-bunno_bg',
+  woowool: 'bg-mind-woowool_bg',
+  zzazeung: 'bg-mind-zzazeung_bg',
+  huhuea: 'bg-mind-huhuea_bg',
+  yoerowooum: 'bg-mind-yoerowooum_bg',
+  moogiryeok: 'bg-mind-moogiryeok_bg'
+};
+
 const NoteCard = ({
   content,
   created_at,
@@ -37,12 +51,14 @@ const NoteCard = ({
           const emotionData = EMOTION_CATEGORIES.find(
             (emotion) => emotion.label === emotionLabel
           );
+          if (!emotionData) return null;
 
+          const bgClass = `bg-mind-${emotionData.bgcolor}`;
           return (
             emotionData && (
               <div
                 key={emotionLabel}
-                className="flex rounded-[16px] border-[1px] gap-1 px-3 py-[6px]  "
+                className={`flex rounded-[16px] border-[1px] gap-1 px-3 py-[6px] ${bgClass}`}
               >
                 <Image
                   src={emotionData.emoji}

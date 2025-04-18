@@ -9,10 +9,11 @@ import { Most } from '@/types/ranking/types';
 
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
 import Solution from '@/components/ranking/Solution';
+
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';

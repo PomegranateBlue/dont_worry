@@ -29,7 +29,6 @@ const NoteCard = ({
   const userNote = JSON.parse(content);
   const message = userNote.Question;
   const answer = userNote.Answer;
-  console.log('emotion_category:', emotion_category);
 
   return (
     <div id={note_id} className="bg-[#FFFFFF] p-4 rounded-xl shadow-[]">

@@ -14,6 +14,7 @@ export type Database = {
           content: string
           created_at: string
           img_url: string | null
+          isSent: boolean | null
           letter_id: string
           send_at: string | null
           user_id: string
@@ -22,6 +23,7 @@ export type Database = {
           content: string
           created_at?: string
           img_url?: string | null
+          isSent?: boolean | null
           letter_id?: string
           send_at?: string | null
           user_id?: string
@@ -30,6 +32,7 @@ export type Database = {
           content?: string
           created_at?: string
           img_url?: string | null
+          isSent?: boolean | null
           letter_id?: string
           send_at?: string | null
           user_id?: string

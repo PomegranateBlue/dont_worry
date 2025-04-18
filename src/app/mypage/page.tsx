@@ -3,13 +3,11 @@
 import LogOutButton from '@/components/loginComponents/LogOutButton';
 import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
-import {
-  useUpdateUserInfo,
-  useUserInfo,
-  useUserLetters,
-  useUserWorries
-} from '@/hooks/useMyPageQueries';
-import { useUserStore } from '@/store/store';
+import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
+import { useUserStore } from '@/store/auth/store';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, PencilLine } from 'lucide-react';
 import Link from 'next/link';

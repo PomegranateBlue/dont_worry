@@ -8,10 +8,10 @@ import { AlignJustify, X } from 'lucide-react';
 import Text from '../common/Text';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 
 interface MobileHeaderProps {
   isLogin: boolean;

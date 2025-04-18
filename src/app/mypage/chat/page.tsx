@@ -19,7 +19,7 @@ const ChatPage = () => {
         <Image
           width={150}
           height={100}
-          src="/images/Sad.svg"
+          src="/images/sad.svg"
           alt="슬픔 이미지"
           priority
         />

@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import Image from 'next/image';
 import Text from '@/components/common/Text';
 import StartButton from '@/components/introComponents/StartButton';

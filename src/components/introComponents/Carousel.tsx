@@ -1,4 +1,3 @@
-'use client';
 import Text from '../common/Text';
 import Image from 'next/image';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';

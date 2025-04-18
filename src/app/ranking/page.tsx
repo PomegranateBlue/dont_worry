@@ -9,7 +9,7 @@ import { Most } from '@/types/ranking/types';
 
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
 import Solution from '@/components/ranking/Solution';

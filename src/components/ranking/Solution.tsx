@@ -3,8 +3,8 @@
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
 import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
-import { useUserStore } from '@/store/store';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
 
@@ -133,7 +133,11 @@ const Solution = ({ topThree }: SolutionProps) => {
         {userInfo?.nickname + SOLUTION_TITLE}
       </Text>
       {solution ? (
-        <Text variant='body3' color='label-normal' className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words">
+        <Text
+          variant="body3"
+          color="label-normal"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words"
+        >
           {solution}
         </Text>
       ) : (

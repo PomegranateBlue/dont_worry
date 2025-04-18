@@ -2,7 +2,7 @@
 import browserClient from '@/app/utils/supabase/client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 const LogOutButton = () => {
   const { setUser } = useUserStore();
   const router = useRouter();

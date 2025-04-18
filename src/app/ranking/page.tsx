@@ -10,7 +10,7 @@ import { Most } from '@/types/ranking/types';
 
 import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopThreeCard from '@/components/ranking/TopThreeCard';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
@@ -18,7 +18,7 @@ import FilterMenu from '@/components/ranking/FilterMenu';
 import { DATA_FETHCING_ERROR } from '@/constants/ranking/ErrorConstants';
 import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 import Report from '@/components/ranking/Report';
-import Solution from '@/components/ranking/solution';
+import Solution from '@/components/ranking/Solution';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore(); // chartMode 추가

@@ -2,12 +2,11 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { SOLUTION_TITLE } from '@/constants/ranking/Line';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
-import { useUserStore } from '@/store/store';
+import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
-import Image from 'next/image';
 
 type TopThreeItem = {
   name: string;
@@ -46,6 +45,7 @@ const Solution = ({ topThree }: SolutionProps) => {
     const makeSolution = async () => {
       const keywords = stringifyTopThree(topThree);
       if (!user) {
+        console.error(NO_ID); //del
         return;
       }
 
@@ -70,6 +70,7 @@ const Solution = ({ topThree }: SolutionProps) => {
           return;
         }
 
+        console.log('GPT 요청 실행 중...');
         const res = await fetch('/utils/rankingSolution', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -127,19 +128,10 @@ const Solution = ({ topThree }: SolutionProps) => {
   }, [topThree, user]);
 
   return (
-    <div className="flex flex-col gap-4 p-5 w-full">
-      <div className="flex w-[335px] h-[40px] justify-start items-center gap-2">
-        <Image
-          src="/images/ver-default.svg"
-          alt="이미지 없음"
-          width={27}
-          height={32}
-          className="w-[27px] h-[32px] flex-shrink-0 aspect-[27/32]"
-        />
-        <Text as="div" variant="title2" color="label-normal">
-          {userInfo?.nickname + SOLUTION_TITLE}
-        </Text>
-      </div>
+    <div className="flex flex-col gap-4 p-4 w-full">
+      <Text as="div" variant="title2" color="label-normal">
+        {userInfo?.nickname + SOLUTION_TITLE}
+      </Text>
       {solution ? (
         <Text
           variant="body3"

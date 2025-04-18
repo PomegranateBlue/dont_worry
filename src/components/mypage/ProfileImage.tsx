@@ -48,6 +48,7 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
           src={preview}
           alt="프로필 이미지"
           priority
+          unoptimized
           className="object-cover rounded-full w-full h-full"
         />
       ) : (
@@ -57,6 +58,7 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
           className="object-cover w-full h-full"
           width={100}
           height={200}
+          unoptimized
           priority
         />
       )}

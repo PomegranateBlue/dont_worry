@@ -64,7 +64,7 @@ const NotePage = () => {
 
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
-      <h1 className="text-xl font-bold text-center p-4">걱정 보관함</h1>
+      <h1 className="text-xl font-bold text-center p-5">걱정 보관함</h1>
 
       <FilterBar
         onClickFilter={(label) => {
@@ -87,7 +87,7 @@ const NotePage = () => {
         />
       )}
 
-      <main className="flex-1 overflow-y-auto px-4 py-2 space-y-4">
+      <main className="flex-1 overflow-y-auto px-5 py-2 space-y-4">
         {filteredNotes.map((note) => (
           <NoteCard
             key={note.note_id}

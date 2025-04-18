@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/provider/providers';
-import Header from '@/components/header';
+import Header from '@/components/common/Header';
+
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
 //   variable: '--font-geist-sans',
@@ -49,9 +50,10 @@ export default function RootLayout({
         {/*파비콘 url 설정하기*/}
       </head>
       <body className={`${pretendard.className}`}>
-        <Header />
-
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

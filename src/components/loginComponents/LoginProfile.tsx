@@ -1,5 +1,6 @@
 'use client';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
+// import { useUserInfo } from '@/hooks/useMyPageQueries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import Image from 'next/image';
 import React from 'react';
 import Text from '../common/Text';

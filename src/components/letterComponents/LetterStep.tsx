@@ -1,4 +1,5 @@
-import { getImageUrl, uploadImage } from '@/actions/storageActions';
+import { getImageUrl, uploadImage } from '@/app/utils/letter/imageAction';
+
 import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React from 'react';

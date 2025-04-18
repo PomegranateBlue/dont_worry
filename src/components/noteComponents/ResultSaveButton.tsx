@@ -4,15 +4,13 @@ import { useNoteStore } from '@/store/note/noteStore';
 import { supabase } from '@/app/utils/supabase/supabase';
 import { useState } from 'react';
 import { TablesInsert } from '../../../database.types';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { ThumbsUp } from 'lucide-react';
 
 const ResultSaveButton = () => {
-
   const { selectedTopic, selectedEmotions, message, result } = useNoteStore();
   const { user } = useUserStore();
   const [isSaved, setIsSaved] = useState(false);
-
 
   const handleSaveMessage = async () => {
     console.log('저장되었습니다');

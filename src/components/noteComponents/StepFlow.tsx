@@ -6,13 +6,19 @@ import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
 import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
-// import { fetchGPT } from '@/app/utils/openai/route';
+import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
 
 enum StepProps {
   CATEGORY = 'category',
   MESSAGE = 'message',
   RESULT = 'result'
+}
+
+interface GPTRouteProps {
+  topic: string | null;
+  emotions: string[];
+  message: string;
 }
 
 const StepFlow = () => {
@@ -28,7 +34,7 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const handelSubmit = async () => {
+  const handleSubmit = async () => {
     try {
       const userInput = await fetchGPT({
         topic: selectedTopic,
@@ -42,38 +48,45 @@ const StepFlow = () => {
     }
   };
 
-  const fetchGPT = async ({
-    topic,
-    emotions,
-    message
-  }: {
-    topic: string | null;
-    emotions: string[];
-    message: string;
-  }) => {
-    const res = await fetch('/api/utils/openai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+  const fetchGPT = async ({ topic, emotions, message }: GPTRouteProps) => {
+    try {
+      const content = JSON.stringify({
         content: `주제: ${topic}, 감정: ${emotions.join(
           ', '
         )}, 메시지: ${message}`
-      })
-    });
+      });
 
-    const data = await res.json();
-    return data.content;
+      const res = await fetch('/api/utils/openai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: content
+      });
+
+      if (!res.ok) {
+        throw new Error(`GPT 요청 실패: ${res.status}`);
+      }
+
+      const data: { content: string } = await res.json();
+      return data.content;
+    } catch (error) {
+      console.error('fetchGPT 에러:', error);
+      return 'GPT 응답에 실패했습니다.';
+    }
   };
 
   return (
     <div>
       {step === StepProps.CATEGORY && (
         <div>
-          <p className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal text-[20px] font-semibold px-[6px]">
+          <Text
+            variant="title1"
+            color="label-normal"
+            className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px]"
+          >
             걱정 작성
-          </p>
+          </Text>
           <TopicCategoryForm onSelectCategory={handleCategorySelect} />
           <div ref={emotionRef}>
             <EmotionCategoryForm />
@@ -114,7 +127,7 @@ const StepFlow = () => {
 
           <div className="px-5 py-2 w-full">
             <button
-              onClick={handelSubmit}
+              onClick={handleSubmit}
               className="w-full h-[48px] text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
             >
               제출하기

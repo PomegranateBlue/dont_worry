@@ -3,8 +3,8 @@
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
 import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
-import { useUserInfo } from '@/hooks/useMyPageQueries';
-import { useUserStore } from '@/store/store';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
 

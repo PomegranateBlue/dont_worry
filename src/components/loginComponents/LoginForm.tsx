@@ -1,7 +1,7 @@
 'use client';
 import { login } from '@/app/auth/action';
 import { fetchUser } from '@/app/utils/supabase/db';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';

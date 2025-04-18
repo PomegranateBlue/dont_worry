@@ -1,4 +1,4 @@
-import { FieldError, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 import Text from '../common/Text';
 
 interface InputFormProps {
@@ -37,13 +37,10 @@ export const InputForm = ({
             error ? 'border-error' : 'border-label-assistive'
           }`}
         />
-        {error ? (
+        {/* 헬퍼텍스트 오류시에만 나타나게 하는지? */}
+        {error && (
           <Text variant="label1" color="error">
             {error.message}
-          </Text>
-        ) : (
-          <Text variant="label1" color="label-assistive">
-            {helperText}
           </Text>
         )}
       </label>

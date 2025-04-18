@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { signup } from '../action';
 import Text from '@/components/common/Text';
 import LoginForm from '@/components/loginComponents/LoginForm';
+import Image from 'next/image';
 
 // const initialState = { success: false, error: null };
 
@@ -38,6 +39,7 @@ const SignupPage = () => {
       <Text variant="title1" color="label-normal" className="my-4 text-center">
         회원가입
       </Text>
+
       <LoginForm mode="signup" />
       <Link href="/auth/login" className="mx-auto mt-4 block w-fit">
         이미 계정이 있어요

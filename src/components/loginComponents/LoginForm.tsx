@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { userInfo } from 'os';
 
 interface LoginFormProps {
   mode: string;
@@ -25,13 +27,21 @@ interface FormData {
 const loginSchema = z.object({
   email: z
     .string()
-    .email('이메일 형식이 아닙니다.')
-    .nonempty('이메일을 입력하세요'),
+    .nonempty('이메일을 입력하세요')
+    .email('이메일 형식이 아닙니다.'),
   password: z.string().nonempty('비밀번호를 입력하세요')
 });
 
 const signupSchema = loginSchema.extend({
-  fullName: z.string().nonempty('닉네임을 입력하세요')
+  fullName: z
+    .string()
+    .nonempty('닉네임을 입력하세요')
+    .min(2, '닉네임은 2자 이상이어야 합니다.')
+    .max(10, '닉네임은 10자 이하여야 합니다.')
+    .regex(
+      /^[가-힣a-zA-Z0-9]+$/,
+      '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.'
+    )
 });
 
 const initialState = { success: false, error: null };
@@ -39,6 +49,7 @@ const initialState = { success: false, error: null };
 const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
+  const { data: userData } = useUserInfo();
 
   const schema = mode === 'signup' ? signupSchema : loginSchema;
   const actionFn = mode === 'signup' ? signup : login;
@@ -52,6 +63,8 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           const data = await fetchUser();
           setUser(data);
           console.log('$$$DATA:', data);
+          alert(`${userData?.nickname}님 환영합니다`);
+          // alert(`${data.}`)
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);

@@ -4,6 +4,7 @@ import NaverLogin from '@/components/loginComponents/NaverLogin';
 import KakaoLogin from '@/components/loginComponents/KakaoLogin';
 import GoogleLogin from '@/components/loginComponents/GoogleLogin';
 import Text from '@/components/common/Text';
+import Image from 'next/image';
 
 export default function LoginPage() {
   return (
@@ -11,6 +12,13 @@ export default function LoginPage() {
       <Text variant="title1" color="label-normal" className="my-4 text-center">
         로그인
       </Text>
+      <Image
+        src="/images/header-logo.svg"
+        alt="logo"
+        width={206}
+        height={32}
+        className="mx-auto my-10"
+      />
       <LoginForm mode="login" />
       <div className="mt-10">
         <Text variant="body3" color="label-normal" className="text-center">

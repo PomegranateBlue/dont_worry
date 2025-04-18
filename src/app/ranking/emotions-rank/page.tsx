@@ -63,7 +63,7 @@ const EmotionsRankginPage = () => {
         }
       };
 
-      fetchData();
+      fetchData();//여기까지 동일 
     } else {
       const fetchMonthData = async () => {
         try {
@@ -138,7 +138,7 @@ const EmotionsRankginPage = () => {
   return (
     <div>
       <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[40px] self-stretch">
-        <EmotionChart topEmotions={topEmotions} />
+        <EmotionChart topEmotions={topEmotions} />{/*딱 이 줄만 다름*/}
         <Report most={most} />
       </div>
       <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">

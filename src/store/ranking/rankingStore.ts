@@ -9,6 +9,7 @@ dayjs.extend(weekOfYear);
 
 // mode 타입 정의
 type RankingMode = 'month' | 'week';
+type ChartMode = 'topic' | 'emotion';
 
 interface RankingState {
   //통계페이지 타입
@@ -18,11 +19,13 @@ interface RankingState {
   month: number;
   week: number;
   mode: RankingMode; // mode 상태 추가
+  chartMode: ChartMode;
 
   initialize: (year: number, month: number, week: number) => void;
   goToPreviousWeek: () => void;
   goToNextWeek: () => void;
   setMode: (mode: RankingMode) => void; // mode 변경 함수 추가
+  setChartMode: (chartMode: ChartMode) => void;
 }
 
 // 해당 날짜가 몇 번째 주인지 계산하는 함수
@@ -58,6 +61,7 @@ const updateFormattedDate = (date: dayjs.Dayjs, mode: RankingMode) => {
 export const useRankingStore = create<RankingState>((set) => {
   const currentDate = dayjs();
   const initialMode: RankingMode = 'week'; // 기본 모드 설정
+  const initialChartMode: ChartMode = 'topic';
 
   return {
     formattedDate: updateFormattedDate(currentDate, initialMode),
@@ -66,6 +70,7 @@ export const useRankingStore = create<RankingState>((set) => {
     month: currentDate.month() + 1,
     week: getWeekOfMonth(currentDate),
     mode: initialMode, // 초기 mode 설정
+    chartMode: initialChartMode,
 
     initialize: (year, month, week) => {
       // 해당 년월의 첫째날로 설정
@@ -89,6 +94,11 @@ export const useRankingStore = create<RankingState>((set) => {
       set((state) => ({
         mode,
         formattedDate: updateFormattedDate(state.currentDate, mode)
+      })),
+
+    setChartMode: (chartMode: ChartMode) =>
+      set(() => ({
+        chartMode
       })),
 
     goToPreviousWeek: () =>

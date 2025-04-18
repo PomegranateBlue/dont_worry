@@ -81,7 +81,7 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
           {EMOTION_FILTER_DESCRIPTION2}
         </p>
       </div>
-      <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]">
+      <div className="w-[217.8px] h-[198px] sm:w-[320px] sm:h-[320px]">
         <Doughnut options={options} data={emotionChartData} />
       </div>
     </>

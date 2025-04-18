@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/provider/providers';
-import Header from '@/components/header';
+import Header from '@/components/Header';
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
 //   variable: '--font-geist-sans',
@@ -14,7 +14,7 @@ import Header from '@/components/header';
 //   weight: '100 900'
 // });
 
-const pretendard = localFont({
+export const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
   display: 'swap',
   weight: '400',
@@ -33,9 +33,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className}`}>
-        <Header />
-
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

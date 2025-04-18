@@ -7,11 +7,11 @@ import Text from '@/components/common/Text';
 
 export default function LoginPage() {
   return (
-    <div className="px-4">
+    <div className="px-5">
       <Text variant="title1" color="label-normal" className="my-4 text-center">
         로그인
       </Text>
-      <LoginForm />
+      <LoginForm mode="login" />
       <div className="mt-10">
         <Text variant="body3" color="label-normal" className="text-center">
           소셜 계정으로 로그인

@@ -8,17 +8,12 @@ import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
 import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
+import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
 
 enum StepProps {
   CATEGORY = 'category',
   MESSAGE = 'message',
   RESULT = 'result'
-}
-
-interface GPTRouteProps {
-  topic: string | null;
-  emotions: string[];
-  message: string;
 }
 
 const StepFlow = () => {
@@ -34,46 +29,24 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const handleSubmit = async () => {
-    try {
-      const userInput = await fetchGPT({
+  const { mutate: submitGPT } = useGPTSubmit();
+  const handleSubmit = () => {
+    submitGPT(
+      {
         topic: selectedTopic,
         emotions: selectedEmotions,
         message
-      });
-      setResult(userInput);
-      setStep(StepProps.RESULT);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchGPT = async ({ topic, emotions, message }: GPTRouteProps) => {
-    try {
-      const content = JSON.stringify({
-        content: `주제: ${topic}, 감정: ${emotions.join(
-          ', '
-        )}, 메시지: ${message}`
-      });
-
-      const res = await fetch('/api/utils/openai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+      },
+      {
+        onSuccess: (res) => {
+          setResult(res.content);
+          setStep(StepProps.RESULT);
         },
-        body: content
-      });
-
-      if (!res.ok) {
-        throw new Error(`GPT 요청 실패: ${res.status}`);
+        onError: (err) => {
+          console.error('GPT 요청 실패:', err.message);
+        }
       }
-
-      const data: { content: string } = await res.json();
-      return data.content;
-    } catch (error) {
-      console.error('fetchGPT 에러:', error);
-      return 'GPT 응답에 실패했습니다.';
-    }
+    );
   };
 
   return (

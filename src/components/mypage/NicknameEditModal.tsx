@@ -2,7 +2,9 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useUpdateUserInfo, useUserInfo } from '@/hooks/useMyPageQueries';
+// import {  useUserInfo } from '@/hooks/useMyPageQueries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 import { useEffect } from 'react';
 
 // 닉네임만을 위한 유효성 검증 스키마

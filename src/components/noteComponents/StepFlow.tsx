@@ -66,10 +66,12 @@ const StepFlow = () => {
           </div>
           <div className="px-5 py-2 w-full">
             <button
-              className="flex items-center justify-center mx-auto w-full h-[48px]  text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
+              className="flex items-center justify-center mx-auto w-full h-[48px]  text-[#FFFFFF] bg-[#8573C9]   rounded-[8px] px-5 py-4"
               onClick={() => setStep(StepProps.MESSAGE)}
             >
-              다음으로
+              <Text variant="title2" className="text-backgroundSet-normal">
+                다음으로
+              </Text>
             </button>
           </div>
         </div>
@@ -92,9 +94,6 @@ const StepFlow = () => {
           </div>
 
           <div className="flex-1 flex flex-col">
-            <p className="font-semibold text-[22px] px-5 py-2  ">
-              오늘 나의 걱정을 작성해보세요
-            </p>
             <MessageForm />
           </div>
 

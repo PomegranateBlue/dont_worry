@@ -12,6 +12,8 @@ const KakaoLogin = () => {
         redirectTo: 'http://localhost:3000/auth/callback'
       }
     });
+    // console.log('data', data);
+    // console.log('error', error);
   }
 
   return (

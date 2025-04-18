@@ -10,9 +10,9 @@ export async function GET(request: Request) {
   // const searchParams = useSearchParams();
   console.log('searchParams', searchParams); // {}
   const code = searchParams.get('code');
+  console.log('code', code); // null
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get('next') ?? '/';
-  console.log('code', code); // null
   if (code) {
     const supabase = createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
@@ -36,5 +36,5 @@ export async function GET(request: Request) {
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  // return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }

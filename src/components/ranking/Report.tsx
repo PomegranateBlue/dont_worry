@@ -6,7 +6,7 @@ interface ReportProps {
   most: Most | null;
 }
 
-const Report: React.FC<ReportProps> = ({ most }) => {
+const Report = ({ most }: ReportProps) => {
   //주차별 차트 하단에 간단 요약
   return (
     <>
@@ -25,4 +25,4 @@ const Report: React.FC<ReportProps> = ({ most }) => {
   );
 };
 
-export default Report;
+export default React.memo(Report);

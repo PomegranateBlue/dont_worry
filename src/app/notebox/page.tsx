@@ -113,24 +113,29 @@ const NotePage = () => {
         </Text>
       </div>
 
-      <div className="sticky top-0 z-10 bg-backgroundSet-normal">
-        <FilterBar
-          onClickFilter={(label) => {
-            setFilterType(label);
-            setIsModalOpen(true);
-          }}
-          selectedOption={filterType}
-          selectedTopic={selectedTopics[0] || ''}
-          selectedEmotions={selectedEmotions}
-          selectedSort={selectedSort}
-          onRemoveFilter={handleRemoveFilter}
-        />
-        <EditBar
-          isEdit={isEdit}
-          selectedNoteIds={selectedNoteIds}
-          onToggleEdit={onToggleEdit}
-          onDelete={handleDeleteNote}
-        />
+      <div className="flex justify-center whitespace-nowrap scrollbar-hide overflow-x-auto items-center sticky top-0 z-10 bg-backgroundSet-normal">
+        <div>
+          <FilterBar
+            onClickFilter={(label) => {
+              setFilterType(label);
+              setIsModalOpen(true);
+            }}
+            selectedOption={filterType}
+            selectedTopic={selectedTopics[0] || ''}
+            selectedEmotions={selectedEmotions}
+            selectedSort={selectedSort}
+            onRemoveFilter={handleRemoveFilter}
+          />
+        </div>
+
+        <div>
+          <EditBar
+            isEdit={isEdit}
+            selectedNoteIds={selectedNoteIds}
+            onToggleEdit={onToggleEdit}
+            onDelete={handleDeleteNote}
+          />
+        </div>
       </div>
 
       {isModalOpen && (

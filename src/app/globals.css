@@ -73,7 +73,15 @@
     --chart-5: 340 75% 55%;
   }
 }
-
+/* .custom-toast 클래스 추가 */
+@layer base {
+  .custom-toast {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+}
 @layer base {
   * {
     @apply border-border;

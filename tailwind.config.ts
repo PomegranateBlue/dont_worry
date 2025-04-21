@@ -8,6 +8,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
+  safelist: ['custom-toast'],
   theme: {
     extend: {
       keyframes: {
@@ -22,7 +23,6 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
-
 
         error: '#fe5558',
         success: '#00bd78',
@@ -100,7 +100,6 @@ const config: Config = {
           offwhite: '#EEEEF0'
         },
         mind: {
-
           honran: '#CAADC6', //혼란
           honran_bg: '#FCF2FB',
           moogiryeok: '#E7DDF2', //무기력

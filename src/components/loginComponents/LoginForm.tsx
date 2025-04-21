@@ -12,7 +12,7 @@ import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
-import Swal from 'sweetalert2';
+import Toastify from 'toastify-js';
 
 interface LoginFormProps {
   mode: string;
@@ -63,22 +63,14 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           const data = await fetchUser();
           setUser(data);
           console.log('$$$DATA:', data);
-          //모달창 보류
-          // Swal.fire({
-          //   title: `${userData?.nickname}님 환영합니다`,
-          //   text: '마음의 고민을 이곳에서 묻어보세요',
-          //   showCancelButton: true,
-          //   cancelButtonText: '서비스 둘러보기',
-          //   confirmButtonText: '걱정 작성하기',
-          //   reverseButtons: true
-          // }).then((result) => {
-          //   if (result.isConfirmed) {
-          //     router.push('/note'); // 확인 버튼 클릭 시 걱정작성 페이지로
-          //   } else if (result.isDismissed) {
-          //     router.push('/'); // 취소 버튼 클릭 시 메인으로
-          //   }
-          // });
-          alert(`${userData?.nickname}님 환영합니다`);
+          Toastify({
+            text: `🎉 환영합니다!`,
+            duration: 1000,
+            gravity: 'top',
+            position: 'right',
+            stopOnFocus: true,
+            className: 'custom-toast'
+          }).showToast();
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);

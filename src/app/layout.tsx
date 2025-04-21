@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import 'toastify-js/src/toastify.css';
 import './globals.css';
 import Providers from '@/provider/providers';
 import Header from '@/components/common/Header';

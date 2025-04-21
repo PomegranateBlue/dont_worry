@@ -9,6 +9,9 @@ import ResultForm from './ResultForm';
 import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
 import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
+import { useUserStore } from '@/store/auth/store';
+import { supabase } from '@/app/utils/supabase/supabase';
+import { TablesInsert } from '../../../database.types';
 
 enum StepProps {
   CATEGORY = 'category',
@@ -17,10 +20,12 @@ enum StepProps {
 }
 
 const StepFlow = () => {
-  const [step, setStep] = useState<StepProps>(StepProps.MESSAGE);
+  const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
     useNoteStore();
   const emotionRef = useRef<HTMLDivElement | null>(null);
+  const { mutate: submitGPT } = useGPTSubmit();
+  const { user } = useUserStore();
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);
@@ -29,7 +34,6 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const { mutate: submitGPT } = useGPTSubmit();
   const handleSubmit = () => {
     submitGPT(
       {
@@ -38,8 +42,35 @@ const StepFlow = () => {
         message
       },
       {
-        onSuccess: (res) => {
+        onSuccess: async (res) => {
           setResult(res.content);
+
+          if (!user) {
+            console.error('로그인된 사용자가 없습니다.');
+            setStep(StepProps.RESULT);
+            return;
+          }
+
+          const note: TablesInsert<'users_note'> = {
+            content: JSON.stringify({
+              Question: message,
+              Answer: res.content
+            }),
+            topic_category: selectedTopic,
+            emotion_category: selectedEmotions.join(','),
+            created_at: new Date().toISOString(),
+            note_img: null,
+            user_id: user
+          };
+
+          const { error } = await supabase.from('users_note').insert([note]);
+
+          if (error) {
+            console.error('저장 실패:', error);
+          } else {
+            console.log('저장 완료');
+          }
+
           setStep(StepProps.RESULT);
         },
         onError: (err) => {
@@ -97,12 +128,16 @@ const StepFlow = () => {
             <MessageForm />
           </div>
 
-          <div className="px-5 py-2 w-full">
+          <div className="h-[128px] " />
+
+          <div className="flex px-5 py-2 w-full">
             <button
               onClick={handleSubmit}
-              className="w-full h-[48px] text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
+              className="flex items-center justify-center px-5 py-4 w-full h-[48px]  bg-primary-4   rounded-[8px] mt-auto"
             >
-              제출하기
+              <Text variant="title2" className="text-backgroundSet-normal">
+                제출하기
+              </Text>
             </button>
           </div>
         </div>

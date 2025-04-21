@@ -4,6 +4,7 @@ import { useNoteStore } from '@/store/note/noteStore';
 import Text from '../common/Text';
 const MessageForm = () => {
   const { message, setMessage } = useNoteStore();
+  const maxLength = 150;
 
   return (
     <div>
@@ -12,15 +13,20 @@ const MessageForm = () => {
           오늘 나의 걱정을 작성해보세요
         </Text>
       </div>
-      <div className="flex px-4 py-3">
-        <div></div>
+
+      <div className="relative flex flex-col px-4 py-3">
         <textarea
-          className=" border-[1px] border-label-assistive text-label-neutral resize-none w-[335px] h-[300px] rounded-[8px]"
+          className=" border-[1px] border-label-assistive text-label-neutral resize-none w-[335px] h-[300px] rounded-[8px] px-5 py-4"
           value={message}
+          maxLength={149}
           onChange={(e) => setMessage(e.target.value)}
-          maxLength={150}
-          placeholder="최대 150자 입력 가능합니다"
+          placeholder="무엇때문에 힘드셨나요?"
         ></textarea>
+        <div className=" absolute text-right bottom-[12px] right-[16px] px-5 py-3">
+          <Text variant="label1" color="label-assistive">
+            {message.length} / {maxLength}
+          </Text>
+        </div>
       </div>
     </div>
   );

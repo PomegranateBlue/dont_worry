@@ -10,11 +10,6 @@ interface FilterBarProps {
   selectedEmotions: string[];
   selectedSort: string;
   onRemoveFilter: (type: '주제별' | '감정별' | '정렬순', value: string) => void;
-
-  isEditMode: boolean;
-  selectedNoteIds: string[];
-  onToggleEdit: () => void;
-  onDelete: () => void;
 }
 
 const FilterBar = ({
@@ -23,11 +18,7 @@ const FilterBar = ({
   selectedTopic,
   selectedEmotions,
   selectedSort,
-  onRemoveFilter,
-  isEditMode,
-  selectedNoteIds,
-  onToggleEdit,
-  onDelete
+  onRemoveFilter
 }: FilterBarProps) => {
   const handleFilterOption = (label: string) => {
     onClickFilter(label);
@@ -100,28 +91,7 @@ const FilterBar = ({
         )}
       </div>
 
-      <div className="ml-6 px-2 py-4 flex items-center">
-        {isEditMode ? (
-          <div>
-            <button onClick={onToggleEdit}>
-              <Text variant="body3" color="label-alternative">
-                취소
-              </Text>
-            </button>
-            <button onClick={onDelete} disabled={selectedNoteIds.length === 0}>
-              <Text variant="body3" color="label-alternative">
-                삭제
-              </Text>
-            </button>
-          </div>
-        ) : (
-          <button onClick={onToggleEdit}>
-            <Text variant="body3" color="label-alternative" as="p">
-              편집
-            </Text>
-          </button>
-        )}
-      </div>
+
     </header>
   );
 };

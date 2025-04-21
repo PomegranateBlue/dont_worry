@@ -58,21 +58,25 @@ const NoteCard = ({
       id={note_id}
       className="relative flex flex-col gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-lg"
     >
-      {isEdit && (
-        <button
-          className={`absolute top-3 left-3 z-10 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200
-      ${isChecked ? 'bg-primary-1' : 'bg-gray-200'}`}
-          onClick={() => onToggleCheck?.(note_id)}
-        >
-          <CircleCheck
-            size={20}
-            strokeWidth={2}
-            className={`${
-              isChecked ? 'text-primary-4 fill-primary-4' : 'text-gray-400'
-            }`}
-          />
-        </button>
-      )}
+      <div>
+        {isEdit && (
+          <button
+            className={`absolute  z-10 w-7 h-7 rounded-full flex items-center justify-center 
+      transition-colors duration-200 ${
+        isChecked ? 'bg-primary-4' : 'bg-gray-300'
+      }`}
+            onClick={() => onToggleCheck?.(note_id)}
+          >
+            <CircleCheck
+              width={24}
+              height={24}
+              className={`${
+                isChecked ? 'text-white fill-white' : 'text-white'
+              }`}
+            />
+          </button>
+        )}
+      </div>
 
       <div className="flex flex-wrap gap-2 items-center">
         {emotion_category?.map((emotionLabel) => {
@@ -130,7 +134,7 @@ const NoteCard = ({
               color="label-normal"
               className="flex text-right"
             >
-              {} 님께 드리는 돈워리리의 답장
+              {} 님께 드리는 돈워리의 답장
             </Text>
             <div className="flex p-1">
               <div className="w-[30px] h-[30px]">이미지</div>

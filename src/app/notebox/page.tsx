@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
 import Text from '@/components/common/Text';
 import { supabase } from '../utils/supabase/supabase';
+import EditBar from '@/components/noteBoxComponents/EditBar';
 
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
@@ -80,6 +81,10 @@ const NotePage = () => {
         : new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     });
 
+  const onToggleEdit = () => {
+    setIsEdit((prev) => !prev);
+    setSelectedNoteIds([]); // 체크된 항목 초기화
+  };
   const handleDeleteNote = async () => {
     if (selectedNoteIds.length === 0) return;
 
@@ -119,12 +124,11 @@ const NotePage = () => {
           selectedEmotions={selectedEmotions}
           selectedSort={selectedSort}
           onRemoveFilter={handleRemoveFilter}
-          isEditMode={isEdit}
+        />
+        <EditBar
+          isEdit={isEdit}
           selectedNoteIds={selectedNoteIds}
-          onToggleEdit={() => {
-            setIsEdit((prev) => !prev);
-            setSelectedNoteIds([]);
-          }}
+          onToggleEdit={onToggleEdit}
           onDelete={handleDeleteNote}
         />
       </div>

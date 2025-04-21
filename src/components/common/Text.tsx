@@ -11,6 +11,7 @@ const textVariants = cva('', {
       heading1: `text-[28px] leading-[135%] font-[600] ibmSans`, // pretendard 폰트 적용
       heading2: `text-[24px] leading-[135%] font-[600] ibmSans`,
       heading3: `text-[22px] leading-[135%] font-[600] ibmSans`,
+      heading4: `text-[26px] leading-[135%] font-[500] ibmSans`,
       title1: `text-[20px] leading-[135%] font-[600] pretendard`,
       title2: `text-[18px] leading-[135%] font-[600] pretendard`,
       body1: `text-[18px] leading-[150%] font-medium pretendard`,

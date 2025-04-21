@@ -127,47 +127,55 @@ const RankingPage = () => {
   }
 
   return (
-    <div>
-      <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[55px] self-stretch">
-        {chartMode === 'topic' ? (
-          <TopicChart topTopics={topTopics} />
-        ) : (
-          <EmotionChart topEmotions={topEmotions} />
-        )}
-        <Report most={most} />
+    <div className="xl:bg-backgroundSet-normal">
+      {/*레이아웃 상위*/}
+      <div className="xl:flex xl:flex-row xl:bg-backgroundSet-card xl:px-[40px] xl:py-[40px] xl:gap-[80px]">
+        <div className="flex flex-col items-center gap-[40px] py-[20px] xl:py-[40px] xl:px-[122px] xl:gap-[12px] self-stretch xl:bg-backgroundSet-normal rounded-[20px]">
+          {chartMode === 'topic' ? (
+            <TopicChart topTopics={topTopics} />
+          ) : (
+            <EmotionChart topEmotions={topEmotions} />
+          )}
+          <Report most={most} />
+        </div>
+
+        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch bg-backgroundSet-card xl:w-full xl:gap-[40px] xl:p-0">
+          <FilterMenu />
+
+          {chartMode === 'topic' ? (
+            <div className="flex flex-col w-full max-w-full gap-[12px]">
+              {topSixTopic.map((e) => (
+                <div key={e.name}>
+                  <TopThreeCard topThree={e} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col w-full max-w-full gap-[12px]">
+              {topSixEmotion.map((e) => (
+                <div key={e.name}>
+                  <TopThreeCard topThree={e} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">
-        <FilterMenu />
-
+      {/*레이아웃 상위*/}
+      {/*데스크탑 레이아웃 하위*/}
+      <div className="xl:flex xl:flex-row xl:px-10 xl:py-[60px] xl:justify-center xl:items-center xl:gap-[80px] xl:w-full xl:bg-backgroundSet-card">
+        <MWreportCard />
         {chartMode === 'topic' ? (
-          <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topSixTopic.map((e) => (
-              <div key={e.name}>
-                <TopThreeCard topThree={e} />
-              </div>
-            ))}
+          <div className="xl:flex xl:w-full">
+            <Solution topThree={topSixTopic} />
           </div>
         ) : (
-          <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topSixEmotion.map((e) => (
-              <div key={e.name}>
-                <TopThreeCard topThree={e} />
-              </div>
-            ))}
+          <div className="xl:flex xl:w-full">
+            <Solution topThree={topSixEmotion} />
           </div>
         )}
       </div>
-      <MWreportCard />
-      {chartMode === 'topic' ? (
-        <>
-          <Solution topThree={topSixTopic} />
-        </>
-      ) : (
-        <>
-          <Solution topThree={topSixEmotion} />
-        </>
-      )}
+      {/*데스크탑 레이아웃 하위*/}
     </div>
   );
 };

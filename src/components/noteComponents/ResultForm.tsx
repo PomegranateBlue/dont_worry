@@ -1,9 +1,9 @@
 'use client';
 
 import { useNoteStore } from '@/store/note/noteStore';
-import { ThumbsDown } from 'lucide-react';
+import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import ResultSaveButton from './ResultSaveButton';
+
 import Text from '../common/Text';
 const ResultForm = () => {
   const router = useRouter();
@@ -52,7 +52,7 @@ const ResultForm = () => {
           </Text>
           <div className="flex justify-center gap-6 mt-2">
             <div className="w-4 h-4 ">
-              <ResultSaveButton />
+              <ThumbsUp className="w-4 h-4 text-gray-500" />
             </div>
             <div>
               <ThumbsDown className="w-4 h-4 text-gray-500" />

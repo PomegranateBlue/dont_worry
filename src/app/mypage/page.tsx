@@ -9,7 +9,7 @@ import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 import { useUserStore } from '@/store/auth/store';
 import { useQueryClient } from '@tanstack/react-query';
-import { ChevronRight, PencilLine } from 'lucide-react';
+import { ChevronRight, Pencil } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
@@ -61,33 +61,33 @@ const MyPage = () => {
   }
 
   return (
-    <div className="px-4 pb-20 xl:px-[350px]">
+    <div className="px-4 pb-20 xl:px-[350px] xl:pt-12">
       {/* 프로필 섹션 */}
-      <Text variant="title1" className="text-center py-4">
+      <Text variant="title1" className="text-center py-4 xl:hidden">
         마이페이지
       </Text>
-      <div className="flex flex-col items-center py-3">
+      <div className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
         <ProfileImage
           imageUrl={userInfo?.profile_img || undefined}
           onUpload={handleUpload}
           onDelete={handleDelete}
         />
 
-        {/* 닉네임 */}
-        <div className="flex items-center gap-1 mt-4 mb-2">
-          <Text as="span" variant="title1" color="label-normal">
-            {userInfo?.nickname}
+        {/* 닉네임 & 이메일 영역 */}
+        <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
+          <div className="flex items-center justify-center gap-1 xl:justify-start">
+            <Text as="span" variant="title1" color="label-normal">
+              {userInfo?.nickname}
+            </Text>
+            <button onClick={openModal}>
+              <Pencil color="gray" size={16} />
+            </button>
+            <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
+          </div>
+          <Text variant="label1" color="label-alternative">
+            {userInfo?.email}
           </Text>
-          <button onClick={openModal}>
-            <PencilLine color="gray" size={16} />
-          </button>
-          <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
         </div>
-
-        {/* 이메일 */}
-        <Text variant="label1" color="label-alternative">
-          {userInfo?.email}
-        </Text>
       </div>
 
       {/* 작성글/편지 정보 */}
@@ -129,11 +129,11 @@ const MyPage = () => {
             className="flex justify-between items-center"
           >
             <Text variant="title2">{label}</Text>
-            <ChevronRight size={16} color="gray" />
+            <ChevronRight size={18} color="gray" />
           </Link>
         ))}
       </div>
-      <div className="flex flex-row justify-center gap-12 mt-5 text-gray-500">
+      <div className="flex flex-row justify-center gap-12 mt-5 ">
         <LogOutButton />
         <DeleteAccountButton />
       </div>

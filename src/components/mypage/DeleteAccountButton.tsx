@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { useState } from 'react';
 import browserClient from '@/app/utils/supabase/client';
+import Text from '../common/Text';
 
 export default function DeleteAccountButton() {
   const { user, setUser } = useUserStore();
@@ -12,7 +13,7 @@ export default function DeleteAccountButton() {
 
   const handleDeleteAccount = async () => {
     const confirmed = confirm(
-      '정말로 회원탈퇴 하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
+      '탈퇴 시, 모든 기록이 사라지며 복구할 수 없어요.'
     );
     if (!confirmed || !user) return;
 
@@ -38,9 +39,9 @@ export default function DeleteAccountButton() {
 
   return (
     <button onClick={handleDeleteAccount} disabled={loading}>
-      <span className="underline">
+      <Text variant={'body3'} className="text-label-alternative underline">
         {loading ? '탈퇴 처리 중...' : '회원탈퇴'}
-      </span>
+      </Text>
     </button>
   );
 }

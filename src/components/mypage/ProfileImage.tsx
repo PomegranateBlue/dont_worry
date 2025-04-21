@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PencilLine, X } from 'lucide-react';
+import { Camera, X } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProfileImageProps {
@@ -49,7 +49,7 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
           alt="프로필 이미지"
           priority
           unoptimized
-          className="object-cover rounded-full w-full h-full"
+          className="object-cover rounded-full w-full h-full p-3"
         />
       ) : (
         <Image
@@ -63,8 +63,8 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
         />
       )}
 
-      <label className="absolute bottom-0 right-0 bg-black w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">
-        <PencilLine color="white" size={16} />
+      <label className="absolute bottom-0 right-2 border-white border-2  bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">
+        <Camera color="black" size={16} />
         <input
           type="file"
           accept="image/*"
@@ -75,10 +75,10 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
 
       {preview && (
         <button
-          className="absolute top-0 right-0 bg-black w-4 h-4 rounded-full flex items-center justify-center"
+          className="absolute top-0 right-2 bg-gray-200 w-4 h-4 rounded-full flex items-center justify-center"
           onClick={handleDelete}
         >
-          <X color="white" size={12} />
+          <X color="black" size={12} />
         </button>
       )}
     </div>

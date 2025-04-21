@@ -1,5 +1,5 @@
 import { getImageUrl, uploadImage } from '@/app/utils/letter/imageAction';
-
+import Text from '../common/Text';
 import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React from 'react';
@@ -111,15 +111,22 @@ const LetterStep = ({
   return (
     <form
       onSubmit={handleLetterSubmit}
-      className="w-96 h-[954px] bg-white flex flex-col justify-between items-center mx-auto px-5 py-8"
+      className="w-96 h-[954px]l flex flex-col justify-between items-center  bg-backgroundSet-normal mx-auto px-5 py-8"
     >
       <div className="flex flex-col items-center w-full">
-        <p className="text-xl font-medium text-neutral-900 text-center leading-7 font-['IBM_Plex_Sans_KR'] mb-4">
-          미래의 나에게 하고 싶은 말을
-          <br />
-          작성해보세요
-        </p>
-
+        <nav className="flex px-5 py-2 justify-center items-center gap-2 self-stretch">
+          <div className="w-full">
+            <Text
+              variant="heading3"
+              color="label-normal"
+              className="font-ibm text-[22px] font-medium leading-[135%] text-left"
+            >
+              미래의 나에게 하고 싶은 말을
+              <br />
+              작성해보세요
+            </Text>
+          </div>
+        </nav>
         <div className="w-full">
           <div className="w-full h-72 px-4 py-3 bg-white rounded-lg outline outline-1 outline-offset-[-1px] outline-stone-300 flex flex-col justify-between">
             <textarea
@@ -131,7 +138,7 @@ const LetterStep = ({
               className="w-full h-full resize-none text-base text-stone-900 placeholder-stone-300 font-medium focus:outline-none font-['Pretendard']"
             />
             <div className="text-right text-xs text-stone-300">
-              {content.length}/100
+              {content.length}/150
             </div>
           </div>
         </div>

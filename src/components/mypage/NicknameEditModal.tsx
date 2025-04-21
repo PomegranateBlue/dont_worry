@@ -2,8 +2,9 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useUpdateUserInfo, useUserInfo } from '@/hooks/useMyPageQueries';
 import { useEffect } from 'react';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 
 // 닉네임만을 위한 유효성 검증 스키마
 const nicknameSchema = z.object({

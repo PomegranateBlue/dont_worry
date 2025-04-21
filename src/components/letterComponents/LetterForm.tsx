@@ -4,7 +4,6 @@ import browserClient from '@/app/utils/supabase/client';
 import { useState, useEffect } from 'react';
 import CalendarStep from './CalendarStep';
 import LetterStep from './LetterStep';
-import Text from '../common/Text';
 
 const LetterForm = () => {
   //useState를 이용해 사용자가 입력한 값 상태관리
@@ -36,44 +35,33 @@ const LetterForm = () => {
   }, []);
 
   return (
-    <section>
-      <div>
-        <nav className="flex h-[56px] px-[6px] justify-center items-center gap-[20px] self-stretch">
-          <Text
-            variant="title1"
-            color="label-normal"
-            className="text-center font-pretendard text-[20px] font-semibold leading-[135%]"
-          >
-            미래 편지 작성
-          </Text>
-        </nav>
-        {step === 'calendar' ? (
-          <CalendarStep
-            sendAt={sendAt}
-            setSendAt={setSendAt}
-            onNext={() => setStep('letter')}
-          />
-        ) : (
-          <LetterStep
-            sendAt={sendAt}
-            setSendAt={setSendAt}
-            content={content}
-            setContent={setContent}
-            imageFile={imageFile}
-            setImageFile={setImageFile}
-            imagePreview={imagePreview}
-            setImagePreview={setImagePreview}
-            onBack={() => setStep('calendar')}
-            setMessage={setMessage}
-            userId={userId}
-          />
-        )}
+    <div>
+      {step === 'calendar' ? (
+        <CalendarStep
+          sendAt={sendAt}
+          setSendAt={setSendAt}
+          onNext={() => setStep('letter')}
+        />
+      ) : (
+        <LetterStep
+          sendAt={sendAt}
+          setSendAt={setSendAt}
+          content={content}
+          setContent={setContent}
+          imageFile={imageFile}
+          setImageFile={setImageFile}
+          imagePreview={imagePreview}
+          setImagePreview={setImagePreview}
+          onBack={() => setStep('calendar')}
+          setMessage={setMessage}
+          userId={userId}
+        />
+      )}
 
-        {message && (
-          <p className="mt-4 text-center text-sm text-red-500">{message}</p>
-        )}
-      </div>
-    </section>
+      {message && (
+        <p className="mt-4 text-center text-sm text-red-500">{message}</p>
+      )}
+    </div>
   );
 };
 

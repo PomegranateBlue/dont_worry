@@ -21,11 +21,21 @@ const CalendarStep = ({ sendAt, setSendAt, onNext }: CalendarStepProps) => {
 
   // string → Date (캘린더에 보여줄 값으로)
   const selectedDate = sendAt ? new Date(sendAt) : undefined;
-
   return (
-    <section className="flex flex-col h-screen px-5 py-8">
-      <form className="w-96 flex flex-col items-center bg-backgroundSet-normal mx-auto px-5 py-8 mb-44">
-        <div className="flex flex-col items-center w-full py-5">
+    <section>
+      <nav className="flex h-[56px] px-[6px] justify-center items-center gap-[20px] self-stretch">
+        <div className="w-full">
+          <Text
+            variant="title1"
+            color="label-normal"
+            className="text-center font-pretendard text-[20px] font-semibold leading-[135%]"
+          >
+            미래 편지 작성
+          </Text>
+        </div>
+      </nav>
+      <form className="w-96 flex flex-col justify-between items-center bg-backgroundSet-normal mx-auto px-5 py-8">
+        <div className="flex flex-col items-center w-full">
           <nav className="flex px-5 py-2 justify-center items-center gap-2 self-stretch">
             <div className="w-full">
               <Text
@@ -39,7 +49,7 @@ const CalendarStep = ({ sendAt, setSendAt, onNext }: CalendarStepProps) => {
               </Text>
             </div>
           </nav>
-          <main className="flex flex-col items-start gap-2 py-5">
+          <main className="flex flex-col items-start gap-2 py-5 mb-44">
             <Calendar
               mode="single"
               selected={selectedDate}
@@ -58,18 +68,17 @@ const CalendarStep = ({ sendAt, setSendAt, onNext }: CalendarStepProps) => {
             />
           </main>
         </div>
+        <div className="w-full mt-10">
+          <button
+            type="button"
+            onClick={onNext}
+            className="w-full h-12 bg-primary-4 text-white text-lg font-semibold rounded-lg"
+            disabled={!sendAt}
+          >
+            다음으로
+          </button>
+        </div>
       </form>
-
-      <div className="flex w-[375px] px-5 py-2 justify-center items-center gap-2 self-stretch">
-        <button
-          type="button"
-          onClick={onNext}
-          className="w-full h-12 bg-primary-4 text-white rounded-lg"
-          disabled={!sendAt}
-        >
-          다음으로
-        </button>
-      </div>
     </section>
   );
 };

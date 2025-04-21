@@ -2,7 +2,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
 import { useEffect } from 'react';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';

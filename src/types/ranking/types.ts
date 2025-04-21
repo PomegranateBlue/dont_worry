@@ -103,3 +103,8 @@ export interface WorsenedThingProps {
   } | null;
   weekData: AnalysisWeekTrendsResult | null;
 }
+
+export interface RankingResponse {
+  topTopics: RankingItem[];
+  topEmotions: RankingItem[];
+}

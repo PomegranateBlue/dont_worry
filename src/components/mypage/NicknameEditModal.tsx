@@ -10,7 +10,10 @@ import Text from '../common/Text';
 
 // 닉네임만을 위한 유효성 검증 스키마
 const nicknameSchema = z.object({
-  nickname: z.string().min(2, '닉네임은 최소 2자 이상이어야 합니다')
+  nickname: z
+    .string()
+    .min(2, '닉네임은 최소 2자 이상이어야 합니다')
+    .max(10, '닉네임은 최대 10자까지 가능합니다')
 });
 
 type NicknameFormValues = z.infer<typeof nicknameSchema>;

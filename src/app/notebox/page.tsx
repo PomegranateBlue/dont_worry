@@ -11,6 +11,7 @@ import { Tables } from '../../../database.types';
 import Text from '@/components/common/Text';
 import { supabase } from '../utils/supabase/supabase';
 import EditBar from '@/components/noteBoxComponents/EditBar';
+import { CheckCircle2 } from 'lucide-react';
 
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
@@ -153,31 +154,51 @@ const NotePage = () => {
       )}
 
       <main className="flex-1 overflow-y-auto px-5 py-2 space-y-4">
-        {filteredNotes.map((note) => (
-          <NoteCard
-            key={note.note_id}
-            content={note.content}
-            created_at={note.created_at}
-            note_id={note.note_id}
-            topic_category={note.topic_category}
-            emotion_category={
-              note.emotion_category
-                ? note.emotion_category
-                    ?.split(',')
-                    .map((emotion) => emotion.trim())
-                : null
-            }
-            isEdit={isEdit}
-            isChecked={selectedNoteIds.includes(note.note_id)}
-            onToggleCheck={(id: string) => {
-              setSelectedNoteIds((item) =>
-                item.includes(id)
-                  ? item.filter((cardId) => cardId !== id)
-                  : [...item, id]
-              );
-            }}
-          />
-        ))}
+        {filteredNotes.map((note) => {
+          const isChecked = selectedNoteIds.includes(note.note_id);
+          return (
+            <div className="flex items-start gap-2" key={note.note_id}>
+              {isEdit && (
+                <button
+                  onClick={() => {
+                    setSelectedNoteIds((item) =>
+                      isChecked
+                        ? item.filter((id) => id !== note.note_id)
+                        : [...item, note.note_id]
+                    );
+                  }}
+                  className={`  flex items-center justify-center mt-1
+        ${isChecked ? 'bg-primary-4 text-white ' : 'text-gray-400'}`}
+                >
+                  <CheckCircle2 />
+                </button>
+              )}
+
+              <NoteCard
+                content={note.content}
+                created_at={note.created_at}
+                note_id={note.note_id}
+                topic_category={note.topic_category}
+                emotion_category={
+                  note.emotion_category
+                    ? note.emotion_category
+                        .split(',')
+                        .map((emotion) => emotion.trim())
+                    : null
+                }
+                isEdit={isEdit}
+                isChecked={isChecked}
+                onToggleCheck={(id: string) => {
+                  setSelectedNoteIds((item) =>
+                    item.includes(id)
+                      ? item.filter((i) => i !== id)
+                      : [...item, id]
+                  );
+                }}
+              />
+            </div>
+          );
+        })}
       </main>
     </div>
   );

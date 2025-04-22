@@ -32,7 +32,7 @@ export default function RootLayout({
         />
         <meta property="og:title" content="DONT WORRY" />
         <meta property="og:description" content="당신의 걱정을 들어드릴게요" />
-        <meta property="og:image" content="Thumbnail.svg" />
+        <meta property="og:image" content="/images/Thumbnail.svg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {/*썸네일 이미지 넣기*/}

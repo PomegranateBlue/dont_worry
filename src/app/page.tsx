@@ -1,4 +1,4 @@
-// export const dynamic = 'force-static';
+export const dynamic = 'force-static';
 
 import Image from 'next/image';
 import Text from '@/components/common/Text';
@@ -268,6 +268,7 @@ const HomePage = () => {
             width={335}
             height={300}
             alt="community"
+            quality={80}
           />
         </div>
       </section>

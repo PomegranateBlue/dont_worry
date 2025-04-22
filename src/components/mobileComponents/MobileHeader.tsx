@@ -7,11 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AlignJustify, X } from 'lucide-react';
 import Text from '../common/Text';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
-import { useUserStore } from '@/store/auth/store';
 
 interface MobileHeaderProps {
   isLogin: boolean;
@@ -19,12 +17,11 @@ interface MobileHeaderProps {
 
 export default function MobileHeader({ isLogin }: MobileHeaderProps) {
   const { data: userData } = useUserInfo();
-  const { user } = useUserStore();
+
   // console.log(userData);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const router = useRouter();
 
   // 스크롤 막기
   useEffect(() => {

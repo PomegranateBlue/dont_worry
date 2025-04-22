@@ -1,4 +1,4 @@
 declare module 'toastify-js' {
-  const Toastify: any;
+  // const Toastify: any;
   export default Toastify;
 }

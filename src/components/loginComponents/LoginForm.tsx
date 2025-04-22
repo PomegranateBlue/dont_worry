@@ -11,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
-import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 
 interface LoginFormProps {
   mode: string;
@@ -48,7 +47,6 @@ const initialState = { success: false, error: null };
 const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
-  const { data: userData } = useUserInfo();
 
   const schema = mode === 'signup' ? signupSchema : loginSchema;
   const actionFn = mode === 'signup' ? signup : login;
@@ -107,7 +105,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           placeholder="닉네임 입력"
           register={register}
           error={errors.fullName}
-          helperText="헬퍼텍스트"
           required
         />
       )}
@@ -118,7 +115,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         placeholder="ex)abc@email.com"
         register={register}
         error={errors.email}
-        helperText="헬퍼텍스트"
         required
       />
       <InputForm
@@ -128,7 +124,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         placeholder="비밀번호 입력"
         register={register}
         error={errors.password}
-        helperText="헬퍼텍스트"
         required
       />
 

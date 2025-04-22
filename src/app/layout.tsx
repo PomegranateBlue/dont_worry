@@ -42,6 +42,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/*todo:site map.xml 추가, robot.tsx알아보기 */}
+        <meta property="og:url" content="https://dontworry.io.kr/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="DONT WORRY" />
+        <meta property="og:description" content="당신의 걱정을 들어드릴게요" />
+        <meta property="og:image" content="/images/Thumbnail2.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        {/*썸네일 이미지 넣기*/}
+        <link rel="icon" href="/images/favicon.svg" />
+        {/*파비콘 url 설정하기*/}
+      </head>
       <body className={`${pretendard.className}`}>
         <Providers>
           <AuthProvider>

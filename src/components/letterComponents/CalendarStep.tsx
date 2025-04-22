@@ -19,7 +19,6 @@ const CalendarStep = ({ sendAt, setSendAt, onNext }: CalendarStepProps) => {
   //   return `${month}월 ${day}일`;
   // };
 
-  // string → Date (캘린더에 보여줄 값으로)
   const selectedDate = sendAt ? new Date(sendAt) : undefined;
   return (
     <section>

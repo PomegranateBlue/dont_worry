@@ -17,6 +17,7 @@ type LetterStepProps = {
   onBack: () => void;
   setMessage: (msg: string) => void;
   userId: string | null;
+  setStep: (step: 'calendar' | 'letter' | 'check') => void;
 };
 
 const LetterStep = ({
@@ -30,7 +31,8 @@ const LetterStep = ({
   setImagePreview,
   onBack,
   setMessage,
-  userId
+  userId,
+  setStep
 }: LetterStepProps) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -92,7 +94,7 @@ const LetterStep = ({
       const result = await res.json();
 
       if (res.ok) {
-        setMessage('편지를 저장하고 이메일을 보냈습니다!');
+        setStep('check');
       } else {
         console.error('crontest 호출 실패:', result);
         setMessage('편지는 저장했지만 이메일 전송에 실패했습니다.');
@@ -106,7 +108,6 @@ const LetterStep = ({
     setSendAt('');
     setImageFile(null);
     setImagePreview(null);
-    onBack();
   };
 
   return (

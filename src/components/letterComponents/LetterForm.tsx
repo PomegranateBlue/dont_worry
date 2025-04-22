@@ -4,6 +4,7 @@ import browserClient from '@/app/utils/supabase/client';
 import { useState, useEffect } from 'react';
 import CalendarStep from './CalendarStep';
 import LetterStep from './LetterStep';
+import CheckStep from './CheckStep';
 
 const LetterForm = () => {
   //useState를 이용해 사용자가 입력한 값 상태관리
@@ -13,7 +14,7 @@ const LetterForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [userId, setUserId] = useState<string | null>(null);
-  const [step, setStep] = useState<'calendar' | 'letter'>('calendar');
+  const [step, setStep] = useState<'calendar' | 'letter' | 'check'>('calendar');
 
   useEffect(() => {
     //로그인된 사용자 정보 가져오기
@@ -22,7 +23,7 @@ const LetterForm = () => {
         data: { user },
         error
       } = await browserClient.auth.getUser();
-      console.log('letterForm', user);
+
       if (user) {
         setUserId(user.id);
       } else {
@@ -36,13 +37,14 @@ const LetterForm = () => {
 
   return (
     <div>
-      {step === 'calendar' ? (
+      {step === 'calendar' && (
         <CalendarStep
           sendAt={sendAt}
           setSendAt={setSendAt}
           onNext={() => setStep('letter')}
         />
-      ) : (
+      )}
+      {step === 'letter' && (
         <LetterStep
           sendAt={sendAt}
           setSendAt={setSendAt}
@@ -55,9 +57,10 @@ const LetterForm = () => {
           onBack={() => setStep('calendar')}
           setMessage={setMessage}
           userId={userId}
+          setStep={setStep}
         />
       )}
-
+      {step === 'check' && <CheckStep />}
       {message && (
         <p className="mt-4 text-center text-sm text-red-500">{message}</p>
       )}

@@ -1,14 +1,19 @@
+'use client';
 import Link from 'next/link';
-import { getIsLogin } from '@/app/utils/supabase/server';
 import Image from 'next/image';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import LoginProfile from '../loginComponents/LoginProfile';
 import MobileHeader from '../mobileComponents/MobileHeader';
+import { useUserStore } from '@/store/auth/store';
 
-export default async function Header() {
-  const isLogin = await getIsLogin();
-  console.log('로그인여부', isLogin);
+export default function Header() {
+  const { user } = useUserStore();
+  const isLogin = !!user;
+  // const supabase = createClient();
+  // const { data } = await supabase.auth.getUser();
+  // const isLogin = await getIsLogin();
+  // console.log('로그인여부', data);
 
   return (
     <header className="w-full bg-white border-b border-b-[#EDEDED]">

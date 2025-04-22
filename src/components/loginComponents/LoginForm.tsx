@@ -1,5 +1,6 @@
 'use client';
-import { login } from '@/app/auth/action';
+
+import { login, signup } from '@/app/auth/action';
 import { fetchUser } from '@/app/utils/supabase/db';
 import { useUserStore } from '@/store/auth/store';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,20 +10,50 @@ import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '../common/Text';
+import { InputForm } from './InputForm';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+
+interface LoginFormProps {
+  mode: string;
+}
+
+interface FormData {
+  email: string;
+  password: string;
+  fullName?: string;
+}
+
+const loginSchema = z.object({
+  email: z
+    .string()
+    .nonempty('이메일을 입력하세요')
+    .email('이메일 형식이 아닙니다.'),
+  password: z.string().nonempty('비밀번호를 입력하세요')
+});
+
+const signupSchema = loginSchema.extend({
+  fullName: z
+    .string()
+    .nonempty('닉네임을 입력하세요')
+    .min(2, '닉네임은 2자 이상이어야 합니다.')
+    .max(10, '닉네임은 10자 이하여야 합니다.')
+    .regex(
+      /^[가-힣a-zA-Z0-9]+$/,
+      '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.'
+    )
+});
 
 const initialState = { success: false, error: null };
 
-const schema = z.object({
-  email: z
-    .string()
-    .email('이메일 형식이 아닙니다.')
-    .nonempty('이메일을 입력하세요'),
-  password: z.string().nonempty('비밀번호를 입력하세요')
-});
-const LoginForm = () => {
+const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
-  const [state, formAction] = useFormState(login, initialState);
+  const { data: userData } = useUserInfo();
+
+  const schema = mode === 'signup' ? signupSchema : loginSchema;
+  const actionFn = mode === 'signup' ? signup : login;
+  const [state, formAction] = useFormState(actionFn, initialState);
+
   useEffect(() => {
     const afterLogin = async () => {
       console.log(state);
@@ -31,6 +62,15 @@ const LoginForm = () => {
           const data = await fetchUser();
           setUser(data);
           console.log('$$$DATA:', data);
+          // Toastify({
+          //   text: `🎉 환영합니다!`,
+          //   duration: 1000,
+          //   gravity: 'top',
+          //   position: 'right',
+          //   stopOnFocus: true,
+          //   className: 'custom-toast'
+          // }).showToast();
+          alert('로그인성공');
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);
@@ -39,15 +79,17 @@ const LoginForm = () => {
     };
     afterLogin();
   }, [state.success]); // success 상태 변화에만 반응
+
   const {
     register,
     formState: { errors }
-  } = useForm({
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: 'onBlur',
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      fullName: ''
     }
   });
 
@@ -56,57 +98,39 @@ const LoginForm = () => {
       action={formAction}
       className="space-y-5 border-b border-b-line-normal pb-9"
     >
-      <div>
-        <label className="space-y-2">
-          <Text variant="body2" color="label-normal">
-            이메일
-          </Text>
-          <input
-            {...register('email')}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="ex)abc@email.com"
-            required
-            className={`w-full p-4 border-[1px] border-label-assistive rounded-md focus:outline-none placeholder-label-assistive ${
-              errors.email ? 'border-error' : ' border-label-assistive'
-            }`}
-          />
-          {errors.email ? (
-            <Text variant="label1" color="error">
-              {errors.email.message}
-            </Text>
-          ) : (
-            <Text variant="label1" color="label-assistive">
-              헬퍼 텍스트
-            </Text>
-          )}
-        </label>
-      </div>
-      <div>
-        <label className="space-y-2">
-          <span className="font-semibold">비밀번호</span>
-          <input
-            {...register('password')}
-            type="password"
-            name="password"
-            placeholder="비밀번호 입력"
-            required
-            className={`w-full p-4 border-[1px] border-label-assistive rounded-md focus:outline-none placeholder-label-assistive ${
-              errors.email ? 'border-error' : ' border-label-assistive'
-            }`}
-          />
-          {errors.password ? (
-            <Text variant="label1" color="error">
-              {errors.password.message}
-            </Text>
-          ) : (
-            <Text variant="label1" color="label-assistive">
-              헬퍼 텍스트
-            </Text>
-          )}
-        </label>
-      </div>
+      {/* 닉네임: 회원가입일 때만 보이게 */}
+      {mode === 'signup' && (
+        <InputForm
+          label="닉네임"
+          type="text"
+          name="fullName"
+          placeholder="닉네임 입력"
+          register={register}
+          error={errors.fullName}
+          helperText="헬퍼텍스트"
+          required
+        />
+      )}
+      <InputForm
+        label="이메일"
+        type="email"
+        name="email"
+        placeholder="ex)abc@email.com"
+        register={register}
+        error={errors.email}
+        helperText="헬퍼텍스트"
+        required
+      />
+      <InputForm
+        label="비밀번호"
+        type="password"
+        name="password"
+        placeholder="비밀번호 입력"
+        register={register}
+        error={errors.password}
+        helperText="헬퍼텍스트"
+        required
+      />
 
       {state.error && (
         <Text color="error" className="!mt-4">
@@ -119,7 +143,7 @@ const LoginForm = () => {
         className="w-full bg-primary-4 p-3 rounded-md !mt-7"
       >
         <Text as="span" variant="title2" color="white">
-          로그인
+          {mode === 'signup' ? '회원가입' : '로그인'}
         </Text>
       </button>
     </form>

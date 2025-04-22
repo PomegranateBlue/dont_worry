@@ -5,12 +5,16 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';
 import Image from 'next/image';
 import Text from '../common/Text';
+import { CircleCheck } from 'lucide-react';
 interface NoteCardProps {
   content: string;
   created_at: string;
   note_id: string;
   topic_category: string | null;
   emotion_category: string[] | null;
+  isEdit: boolean;
+  isChecked?: boolean;
+  onToggleCheck?: (id: string) => void;
 }
 
 // const emotionBgClassMap: Record<string, string> = {
@@ -32,7 +36,10 @@ const NoteCard = ({
   created_at,
   note_id,
   topic_category,
-  emotion_category
+  emotion_category,
+  isEdit,
+  isChecked,
+  onToggleCheck
 }: NoteCardProps) => {
   const formattedDate = new Date(created_at).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -49,8 +56,28 @@ const NoteCard = ({
   return (
     <div
       id={note_id}
-      className="flex flex-col gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-lg"
+      className="relative flex flex-col gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-lg"
     >
+      <div>
+        {isEdit && (
+          <button
+            className={`absolute  z-10 w-7 h-7 rounded-full flex items-center justify-center 
+      transition-colors duration-200 ${
+        isChecked ? 'bg-primary-4' : 'bg-gray-300'
+      }`}
+            onClick={() => onToggleCheck?.(note_id)}
+          >
+            <CircleCheck
+              width={24}
+              height={24}
+              className={`${
+                isChecked ? 'text-white fill-white' : 'text-white'
+              }`}
+            />
+          </button>
+        )}
+      </div>
+
       <div className="flex flex-wrap gap-2 items-center">
         {emotion_category?.map((emotionLabel) => {
           const emotionData = EMOTION_CATEGORIES.find(
@@ -107,7 +134,7 @@ const NoteCard = ({
               color="label-normal"
               className="flex text-right"
             >
-              {} 님께 드리는 돈워리리의 답장
+              {} 님께 드리는 돈워리의 답장
             </Text>
             <div className="flex p-1">
               <div className="w-[30px] h-[30px]">이미지</div>

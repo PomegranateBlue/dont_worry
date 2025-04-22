@@ -9,7 +9,6 @@ interface InputFormProps<T extends FieldValues> {
   required: boolean;
   register: UseFormRegister<T>;
   error?: { message?: string };
-  helperText: string;
 }
 export const InputForm = <T extends FieldValues>({
   label,
@@ -18,8 +17,7 @@ export const InputForm = <T extends FieldValues>({
   placeholder,
   required,
   register,
-  error,
-  helperText
+  error
 }: InputFormProps<T>) => {
   return (
     <div>

@@ -10,10 +10,6 @@ import { useUserStore } from '@/store/auth/store';
 export default function Header() {
   const { user } = useUserStore();
   const isLogin = !!user;
-  // const supabase = createClient();
-  // const { data } = await supabase.auth.getUser();
-  // const isLogin = await getIsLogin();
-  // console.log('로그인여부', data);
 
   return (
     <header className="w-full bg-white border-b border-b-[#EDEDED]">

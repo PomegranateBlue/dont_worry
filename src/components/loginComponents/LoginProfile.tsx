@@ -15,7 +15,7 @@ import Link from 'next/link';
 
 const LoginProfile = () => {
   const { data: userData } = useUserInfo();
-  console.log('userData', userData);
+  // console.log('userData', userData);
   return (
     <div className="flex items-center gap-3">
       <div className="w-[32px] h-[32px] rounded-full overflow-hidden">

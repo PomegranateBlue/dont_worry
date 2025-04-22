@@ -26,13 +26,10 @@ export default function RootLayout({
       <head>
         {/*todo:site map.xml 추가, robot.tsx알아보기 */}
         <meta property="og:url" content="https://dontworry.io.kr/" />
-        <meta
-          property="og:type"
-          content="https://dontworry.io.kr/images/website"
-        />
+        <meta property="og:type" content="website" />
         <meta property="og:title" content="DONT WORRY" />
         <meta property="og:description" content="당신의 걱정을 들어드릴게요" />
-        <meta property="og:image" content="/images/Thumbnail.svg" />
+        <meta property="og:image" content="/images/Thumbnail2.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {/*썸네일 이미지 넣기*/}

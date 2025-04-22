@@ -3,17 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/provider/providers';
 import Header from '@/components/common/Header';
-
-// const geistSans = localFont({
-//   src: './fonts/GeistVF.woff',
-//   variable: '--font-geist-sans',
-//   weight: '100 900'
-// });
-// const geistMono = localFont({
-//   src: './fonts/GeistMonoVF.woff',
-//   variable: '--font-geist-mono',
-//   weight: '100 900'
-// });
+import { AuthProvider } from '@/provider/authProvider';
 
 export const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
@@ -51,8 +41,10 @@ export default function RootLayout({
       </head>
       <body className={`${pretendard.className}`}>
         <Providers>
-          <Header />
-          {children}
+          <AuthProvider>
+            <Header />
+            {children}
+          </AuthProvider>
         </Providers>
       </body>
     </html>

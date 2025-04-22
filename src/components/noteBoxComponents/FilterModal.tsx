@@ -25,7 +25,7 @@ interface FilterModalProps {
 }
 
 const sortTabs = ['정렬순', '주제별', '감정별'];
-const sortOptions = ['최신순', '오래된순', '가나다순'];
+const sortOptions = ['최신순', '오래된순'];
 
 const FilterModal = ({
   selectedOption,
@@ -103,6 +103,13 @@ const FilterModal = ({
         className="bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
         onClick={(e) => e.stopPropagation()}
       >
+        <div
+          className="w-full flex justify-center mb-4 cursor-pointer"
+          onClick={onClose}
+        >
+          <div className="w-[36px] h-[5px] rounded-[2.5px] bg-label-assistive" />
+        </div>
+
         {/* 탭 버튼 */}
         <div className="flex items-center justify-between w-full py-6">
           {sortTabs.map((tab) => (

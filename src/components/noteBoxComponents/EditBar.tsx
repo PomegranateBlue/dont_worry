@@ -16,17 +16,21 @@ const EditBar = ({
   onDelete
 }: EditBarProps) => {
   return (
-    <div className="ml-6 px-2 py-4 flex items-center">
+    <div className="flex  px-2 py-4 ">
       {isEdit ? (
-        <div>
+        <div className="flex gap-2">
+          <button
+            className={selectedNoteIds.length === 0 ? 'opacity-50' : ''}
+            onClick={onDelete}
+            disabled={selectedNoteIds.length === 0}
+          >
+            <Text variant="body3" color="label-alternative">
+              삭제
+            </Text>
+          </button>
           <button onClick={onToggleEdit}>
             <Text variant="body3" color="label-alternative">
               취소
-            </Text>
-          </button>
-          <button onClick={onDelete} disabled={selectedNoteIds.length === 0}>
-            <Text variant="body3" color="label-alternative">
-              삭제
             </Text>
           </button>
         </div>

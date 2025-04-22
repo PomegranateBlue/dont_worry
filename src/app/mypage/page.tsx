@@ -61,9 +61,9 @@ const MyPage = () => {
   }
 
   return (
-    <div className="px-4 pb-20 xl:px-[350px] xl:pt-12">
+    <div className="px-4 pb-20 xl:px-[350px]">
       {/* 프로필 섹션 */}
-      <Text variant="title1" className="text-center py-4 xl:hidden">
+      <Text variant="title1" className="text-center py-4">
         마이페이지
       </Text>
       <div className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
@@ -75,12 +75,12 @@ const MyPage = () => {
 
         {/* 닉네임 & 이메일 영역 */}
         <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
-          <div className="flex items-center justify-center gap-1 xl:justify-start">
+          <div className="flex items-center justify-center gap-2 xl:justify-start">
             <Text as="span" variant="title1" color="label-normal">
               {userInfo?.nickname}
             </Text>
             <button onClick={openModal}>
-              <Pencil color="gray" size={16} />
+              <Pencil className="text-label-neutral" size={16} />
             </button>
             <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
           </div>
@@ -113,7 +113,7 @@ const MyPage = () => {
           </Link>
         </div>
       </div>
-      <div className="border-t-8 border-b pb-6 pt-10 text-sm text-gray-700 space-y-5 w-full">
+      <div className="border-t-8 border-b pb-6 pt-10 space-y-5 w-full">
         <Text variant="body2" className="text-label-alternative">
           고객지원
         </Text>

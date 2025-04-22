@@ -2,7 +2,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
 import { useEffect } from 'react';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
@@ -66,9 +65,9 @@ const NicknameEditModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
       <div
-        className="bg-white p-5 rounded-lg w-full max-w-md m-8"
+        className="bg-white p-5 rounded-lg w-80 max-w-md m-8 xl:w-[480px] "
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -76,7 +75,7 @@ const NicknameEditModal = ({
           if (e.key === 'Escape') onClose();
         }}
       >
-        <div id="modal-title" className="mb-6">
+        <div id="modal-title" className="mb-6 text-left">
           <Text variant="heading2">닉네임</Text>
         </div>
 
@@ -102,7 +101,7 @@ const NicknameEditModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-2 px-4 py-2 text-label-assistive bg-interaction-inactive border border-gray-300 hover:bg-opacity-70 rounded-lg"
+              className="flex-1 px-4 py-2 text-label-assistive bg-interaction-inactive border border-gray-300 hover:bg-opacity-70 rounded-lg"
             >
               취소
             </button>

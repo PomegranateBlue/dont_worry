@@ -18,13 +18,15 @@ const LoginProfile = () => {
   console.log('userData', userData);
   return (
     <div className="flex items-center gap-3">
-      <Image
-        src={userData?.profile_img || '/images/profile-default-image.svg'}
-        alt="프로필 이미지"
-        width={32}
-        height={32}
-        className="rounded-full"
-      />
+      <div className="w-[32px] h-[32px] rounded-full overflow-hidden">
+        <Image
+          src={userData?.profile_img || '/images/profile-default-image.svg'}
+          alt="프로필 이미지"
+          width={32}
+          height={32}
+          className="object-cover object-center w-full h-full"
+        />
+      </div>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center">

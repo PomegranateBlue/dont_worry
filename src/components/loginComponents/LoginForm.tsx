@@ -12,7 +12,6 @@ import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
-import Toastify from 'toastify-js';
 
 interface LoginFormProps {
   mode: string;
@@ -63,14 +62,15 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           const data = await fetchUser();
           setUser(data);
           console.log('$$$DATA:', data);
-          Toastify({
-            text: `🎉 환영합니다!`,
-            duration: 1000,
-            gravity: 'top',
-            position: 'right',
-            stopOnFocus: true,
-            className: 'custom-toast'
-          }).showToast();
+          // Toastify({
+          //   text: `🎉 환영합니다!`,
+          //   duration: 1000,
+          //   gravity: 'top',
+          //   position: 'right',
+          //   stopOnFocus: true,
+          //   className: 'custom-toast'
+          // }).showToast();
+          alert('로그인성공');
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);

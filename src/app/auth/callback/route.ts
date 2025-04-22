@@ -1,18 +1,33 @@
-// app/auth/callback/route.ts
-import { cookies } from 'next/headers';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/app/utils/supabase/server';
 import { NextResponse } from 'next/server';
+// The client you created from the Server-Side Auth instructions
 
 export async function GET(request: Request) {
-  const supabase = createRouteHandlerClient({ cookies });
-  const { searchParams } = new URL(request.url);
-
-  // Supabase가 토큰을 콜백 URL에 붙여서 전달함
+  const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
+  // if "next" is in param, use it as the redirect URL
+  const next = searchParams.get('next') ?? '/';
+  console.log('code', code);
 
   if (code) {
-    await supabase.auth.exchangeCodeForSession(code);
+    const supabase = createClient();
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    console.log('카카오에러', error);
+
+    if (!error) {
+      const forwardedHost = request.headers.get('x-forwarded-host'); // original origin before load balancer
+      const isLocalEnv = process.env.NODE_ENV === 'development';
+      if (isLocalEnv) {
+        // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
+        return NextResponse.redirect(`${origin}${next}`);
+      } else if (forwardedHost) {
+        return NextResponse.redirect(`https://${forwardedHost}${next}`);
+      } else {
+        return NextResponse.redirect(`${origin}${next}`);
+      }
+    }
   }
 
-  return NextResponse.redirect('/auth/auth-code-error');
+  // return the user to an error page with instructions
+  return NextResponse.redirect(`${origin}/auth/error`);
 }

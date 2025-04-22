@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import 'toastify-js/src/toastify.css';
 import './globals.css';
 import Providers from '@/provider/providers';
 import Header from '@/components/common/Header';
+import { AuthProvider } from '@/provider/authProvider';
 
 export const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
@@ -25,8 +25,10 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${pretendard.className}`}>
         <Providers>
-          <Header />
-          {children}
+          <AuthProvider>
+            <Header />
+            {children}
+          </AuthProvider>
         </Providers>
       </body>
     </html>

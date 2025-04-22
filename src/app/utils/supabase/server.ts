@@ -30,6 +30,6 @@ export const getIsLogin = async () => {
   const {
     data: { user }
   } = await serverClient.auth.getUser();
-  // console.log(user);
+  // console.log('유저', user);
   return !!user;
 };

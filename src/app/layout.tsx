@@ -36,7 +36,7 @@ export default function RootLayout({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {/*썸네일 이미지 넣기*/}
-        <link rel="icon" href="/images/favicon.ico?v=1" />
+        <link rel="icon" href="/images/favicon.svg" />
         {/*파비콘 url 설정하기*/}
       </head>
       <body className={`${pretendard.className}`}>

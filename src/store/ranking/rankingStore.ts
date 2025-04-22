@@ -60,7 +60,7 @@ const updateFormattedDate = (date: dayjs.Dayjs, mode: RankingMode) => {
 //통계페이지 스토어
 export const useRankingStore = create<RankingState>((set) => {
   const currentDate = dayjs();
-  const initialMode: RankingMode = 'week'; // 기본 모드 설정
+  const initialMode: RankingMode = 'month'; // 기본 모드 설정
   const initialChartMode: ChartMode = 'topic';
 
   return {

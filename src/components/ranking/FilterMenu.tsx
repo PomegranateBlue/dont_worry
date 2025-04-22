@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import React from 'react';
 import {
@@ -9,11 +7,20 @@ import {
   CHART_FILTER_TOPIC
 } from '@/constants/ranking/Line';
 import Text from '../common/Text';
+import { useRankingStore } from '@/store/ranking/rankingStore';
 
 const FilterMenu = () => {
-  const pathName = usePathname();
-  const isTopic = pathName === '/ranking';
-  const isEmotion = pathName === '/ranking/emotions-rank';
+  const { chartMode, setChartMode } = useRankingStore();
+  const isTopic = chartMode === 'topic';
+  const isEmotion = chartMode === 'emotion';
+
+  const handleTopicClick = () => {
+    setChartMode('topic');
+  };
+
+  const handleEmotionClick = () => {
+    setChartMode('emotion');
+  };
 
   return (
     <div className="w-[335px]">
@@ -30,28 +37,37 @@ const FilterMenu = () => {
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         />
         <div className="relative z-10 flex w-full text-sm font-semibold">
-          <Link href="/ranking" className="w-1/2">
+          <div className="w-1/2 cursor-pointer" onClick={handleTopicClick}>
             <div
               className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200 ${
                 isTopic ? 'text-backgroundSet-normal' : 'text-label-alternative'
               }`}
             >
-              <Text variant="body2" color="white">
+              <Text
+                variant="body2"
+                color={isTopic ? 'white' : 'label-alternative'}
+              >
                 {CHART_FILTER_TOPIC}
               </Text>
             </div>
-          </Link>
+          </div>
 
-          <Link href="/ranking/emotions-rank" className="w-1/2">
+          <div className="w-1/2 cursor-pointer" onClick={handleEmotionClick}>
             <div
-              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200`}
+              className={`flex justify-center items-center w-full h-full rounded-full transition-all duration-200 ${
+                isEmotion
+                  ? 'text-backgroundSet-normal'
+                  : 'text-label-alternative'
+              }`}
             >
-              <Text variant="body2" color="label-alternative">
+              <Text
+                variant="body2"
+                color={isEmotion ? 'white' : 'label-alternative'}
+              >
                 {CHART_FILTER_EMOTION}
               </Text>
-              {/*색추가해야함*/}
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

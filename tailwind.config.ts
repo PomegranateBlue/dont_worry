@@ -8,7 +8,19 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
-  safelist: ['custom-toast'],
+  safelist: [
+    'bg-mind-slpeum_bg',
+    'bg-mind-bulkuea_bg',
+    'bg-mind-apbak_bg',
+    'bg-mind-boolan_bg',
+    'bg-mind-honran_bg',
+    'bg-mind-bunno_bg',
+    'bg-mind-woowool_bg',
+    'bg-mind-zzazeung_bg',
+    'bg-mind-huhuea_bg',
+    'bg-mind-yoerowooum_bg',
+    'bg-mind-moogiryeok_bg'
+  ],
   theme: {
     extend: {
       keyframes: {

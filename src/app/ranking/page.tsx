@@ -57,6 +57,11 @@ const RankingPage = () => {
 
             setTopEmotions(result.topEmotions);
             setTopSixEmotion(result.topEmotions.slice(0, 6));
+          } else {
+            setTopTopics([]);
+            setTopSixTopic([]);
+            setTopEmotions([]);
+            setTopSixEmotion([]);
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
@@ -72,12 +77,15 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
 
-            // chartMode에 따라 다른 데이터 설정
-
             setTopTopics(result.topTopics);
             setTopSixTopic(result.topTopics.slice(0, 6));
             setTopEmotions(result.topEmotions);
             setTopSixEmotion(result.topEmotions.slice(0, 6));
+          } else {
+            setTopTopics([]);
+            setTopSixTopic([]);
+            setTopEmotions([]);
+            setTopSixEmotion([]);
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
@@ -121,7 +129,7 @@ const RankingPage = () => {
 
   const currentData = chartMode === 'topic' ? topTopics : topEmotions;
   if (currentData.length === 0) {
-    return <div>{NO_DATA_CHART}</div>;
+    return <div className="p-4">{NO_DATA_CHART}</div>;
   }
 
   return (

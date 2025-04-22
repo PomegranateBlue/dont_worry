@@ -1,3 +1,5 @@
+// export const dynamic = 'force-dynamic';
+
 import StepFlow from '@/components/noteComponents/StepFlow';
 
 const NotePage = () => {

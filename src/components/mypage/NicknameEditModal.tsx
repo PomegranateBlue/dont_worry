@@ -2,14 +2,17 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-// import {  useUserInfo } from '@/hooks/useMyPageQueries';
+import { useEffect } from 'react';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
-import { useEffect } from 'react';
+import Text from '../common/Text';
 
 // 닉네임만을 위한 유효성 검증 스키마
 const nicknameSchema = z.object({
-  nickname: z.string().min(2, '닉네임은 최소 2자 이상이어야 합니다')
+  nickname: z
+    .string()
+    .min(2, '닉네임은 최소 2자 이상이어야 합니다')
+    .max(10, '닉네임은 최대 10자까지 가능합니다')
 });
 
 type NicknameFormValues = z.infer<typeof nicknameSchema>;
@@ -62,9 +65,9 @@ const NicknameEditModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
       <div
-        className="bg-white p-6 rounded-lg w-full max-w-md m-8"
+        className="bg-white p-5 rounded-lg w-80 max-w-md m-8 xl:w-[480px] "
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -72,23 +75,21 @@ const NicknameEditModal = ({
           if (e.key === 'Escape') onClose();
         }}
       >
-        <h2 id="modal-title" className="text-xl font-bold mb-4">
-          닉네임 변경
-        </h2>
+        <div id="modal-title" className="mb-6 text-left">
+          <Text variant="heading2">닉네임</Text>
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label
-              htmlFor="nickname"
-              className="block text-sm font-medium mb-1"
-            >
-              닉네임
-            </label>
             <input
               id="nickname"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full p-4 border border-gray-300 rounded-lg mb-2 placeholder-label-assistive"
+              placeholder={userInfo?.nickname ?? ''}
               {...register('nickname')}
             />
+            <Text variant="body3" color="label-assistive">
+              닉네임은 (임의 한영숫자 최대 10자)까지 가능합니다
+            </Text>
             {errors.nickname && (
               <p className="text-red-500 mt-1 text-sm">
                 {errors.nickname.message}
@@ -96,20 +97,20 @@ const NicknameEditModal = ({
             )}
           </div>
 
-          <div className="flex justify-end gap-2 mt-6">
+          <div className="flex justify-end gap-2 mt-8">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 hover:bg-gray-100 rounded-lg"
+              className="flex-1 px-4 py-2 text-label-assistive bg-interaction-inactive border border-gray-300 hover:bg-opacity-70 rounded-lg"
             >
               취소
             </button>
             <button
               type="submit"
               disabled={updateMutation.isPending}
-              className="px-4 py-2 bg-primary-4 hover:bg-opacity-70 text-white rounded-lg transition duration-300"
+              className="flex-1 px-5 py-2 bg-primary-4 hover:bg-opacity-70 text-white rounded-lg transition duration-300"
             >
-              {updateMutation.isPending ? '저장 중...' : '저장하기'}
+              {updateMutation.isPending ? '수정 중...' : '수정하기'}
             </button>
           </div>
         </form>

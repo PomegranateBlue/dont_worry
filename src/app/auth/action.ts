@@ -22,11 +22,27 @@ export async function login(
     password: formData.get('password') as string
   };
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  const { error, data: authData } = await supabase.auth.signInWithPassword(
+    data
+  );
 
-  if (error) {
+  if (error || !authData?.user) {
     return { error: '이메일 또는 비밀번호가 틀렸습니다', success: false };
     // redirect('/error');
+  }
+
+  const { data: userData, error: userError } = await supabase
+    .from('users')
+    .select('is_deleted')
+    .eq('user_id', authData.user.id)
+    .single();
+
+  if (userError || userData?.is_deleted) {
+    await supabase.auth.signOut();
+    return {
+      error: '탈퇴한 회원입니다. 로그인할 수 없습니다.',
+      success: false
+    };
   }
 
   revalidatePath('/', 'layout');

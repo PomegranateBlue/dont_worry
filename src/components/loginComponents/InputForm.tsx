@@ -1,17 +1,17 @@
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import Text from '../common/Text';
 
-interface InputFormProps {
+interface InputFormProps<T extends FieldValues> {
   label: string;
   type: string;
-  name: string;
+  name: Path<T>;
   placeholder: string;
   required: boolean;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<T>;
   error?: { message?: string };
   helperText: string;
 }
-export const InputForm = ({
+export const InputForm = <T extends FieldValues>({
   label,
   type,
   name,
@@ -20,7 +20,7 @@ export const InputForm = ({
   register,
   error,
   helperText
-}: InputFormProps) => {
+}: InputFormProps<T>) => {
   return (
     <div>
       <label className="space-y-2">
@@ -30,8 +30,8 @@ export const InputForm = ({
         <input
           {...register(name, { required })}
           type={type}
-          name={name}
-          id={name}
+          name={String(name)}
+          id={String(name)}
           placeholder={placeholder}
           className={`w-full p-4 border-[1px] rounded-md focus:outline-none placeholder-label-assistive ${
             error ? 'border-error' : 'border-label-assistive'

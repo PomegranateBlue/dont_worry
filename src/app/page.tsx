@@ -237,7 +237,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px]">
+      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px]">
         <div className="flex flex-col gap-[24px] justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
@@ -245,15 +245,16 @@ const HomePage = () => {
                 커뮤니티
               </Text>
             </div>
+            <div>
+              <Text variant="heading2" color="primary4">
+                다른 사람들의 이야기
+              </Text>
+            </div>
           </div>
-          <div>
-            <Text variant="heading2" color="primary4">
-              다른 사람들의 이야기
-            </Text>
-          </div>
+
           <div className="flex">
             <div className="flex">
-              <Text variant="body2" color="label-neutral" className="px-4 pt-6">
+              <Text variant="body2" color="label-neutral">
                 익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
                 나눠보세요
               </Text>

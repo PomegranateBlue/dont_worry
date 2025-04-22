@@ -11,12 +11,13 @@ const textVariants = cva('', {
       heading1: `text-[28px] leading-[135%] font-[600] ibmSans`, // pretendard 폰트 적용
       heading2: `text-[24px] leading-[135%] font-[600] ibmSans`,
       heading3: `text-[22px] leading-[135%] font-[600] ibmSans`,
+      heading4: `text-[26px] leading-[135%] font-[500] ibmSans`,
       title1: `text-[20px] leading-[135%] font-[600] pretendard`,
       title2: `text-[18px] leading-[135%] font-[600] pretendard`,
       body1: `text-[18px] leading-[150%] font-medium pretendard`,
       body2: `text-[16px] leading-[150%] font-medium pretendard`,
       body3: `text-[14px] leading-[150%] font-medium pretendard`,
-      label1: `text-[12px] leading-[150%] font-[400] pretendard`
+      label1: `text-[12px] leading-[150%] font-regular pretendard`
     },
     color: {
       default: 'text-black',
@@ -29,7 +30,8 @@ const textVariants = cva('', {
       primary4: 'text-primary-4',
       'label-neutral': 'text-label-neutral',
       'label-alternative': 'text-label-alternative', //#858588
-      'label-normal': 'text-label-normal' //#171719
+      'label-normal': 'text-label-normal', //#171719
+      'label-assistive': 'text-label-assistive' //#C7C8C9
     }
   },
   defaultVariants: {

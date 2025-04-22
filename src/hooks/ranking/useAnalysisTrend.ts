@@ -1,7 +1,7 @@
 'use client';
 
 import { analyzeCategoryTrends } from '@/app/utils/ranking/DataFetch';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/auth/store';
 import { AnalysisTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
 

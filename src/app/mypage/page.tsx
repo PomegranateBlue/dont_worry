@@ -3,18 +3,17 @@
 import LogOutButton from '@/components/loginComponents/LogOutButton';
 import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
-import {
-  useUpdateUserInfo,
-  useUserInfo,
-  useUserLetters,
-  useUserWorries
-} from '@/hooks/useMyPageQueries';
-import { useUserStore } from '@/store/store';
+import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
+import { useUserStore } from '@/store/auth/store';
 import { useQueryClient } from '@tanstack/react-query';
-import { ChevronRight, PencilLine } from 'lucide-react';
+import { ChevronRight, Pencil } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
+import DeleteAccountButton from '@/components/mypage/DeleteAccountButton';
 import Text from '@/components/common/Text';
 
 const MyPage = () => {
@@ -55,48 +54,44 @@ const MyPage = () => {
   };
 
   const isLoading = userDataLoading || lettersLoading || userWorriesLoading;
-  console.log('page.tsx userInfo$$', userInfo);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="px-4 pb-20">
-      {/* 프로필 섹션 */}
+    <div className="px-4 pb-20 xl:px-[350px]">
       <Text variant="title1" className="text-center py-4">
         마이페이지
       </Text>
-      <div className="flex flex-col items-center py-3">
+      <div className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
         <ProfileImage
           imageUrl={userInfo?.profile_img || undefined}
           onUpload={handleUpload}
           onDelete={handleDelete}
         />
 
-        {/* 닉네임 */}
-        <div className="flex items-center gap-1 mt-4">
-          <Text as="span" variant="title1" color="label-normal">
-            {userInfo?.nickname}
+        <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
+          <div className="flex items-center justify-center gap-2 xl:justify-start">
+            <Text as="span" variant="title1" color="label-normal">
+              {userInfo?.nickname}
+            </Text>
+            <button onClick={openModal}>
+              <Pencil className="text-label-neutral" size={16} />
+            </button>
+            <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
+          </div>
+          <Text variant="label1" color="label-alternative">
+            {userInfo?.email}
           </Text>
-          <button onClick={openModal}>
-            <PencilLine color="gray" size={16} />
-          </button>
-          <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
         </div>
-
-        {/* 이메일 */}
-        <Text variant="label1" color="label-alternative">
-          {userInfo?.email}
-        </Text>
       </div>
 
-      {/* 작성글/편지 정보 */}
       <div className="flex justify-center items-center rounded-md bg-backgroundSet-card py-4 mb-6">
         <div className="flex-1 text-center">
           <Link href="/notebox">
             <Text variant="title2">
-              {/* 걱정 갯수 넣기 */}
+
               {userWorries?.length || 0}개
             </Text>
             <Text variant="body3" color="label-alternative">
@@ -114,7 +109,10 @@ const MyPage = () => {
           </Link>
         </div>
       </div>
-      <div className="border-t border-b pb-16 pt-4 text-sm text-gray-700 space-y-4">
+      <div className="border-t-8 border-b pb-6 pt-10 space-y-5 w-full">
+        <Text variant="body2" className="text-label-alternative">
+          고객지원
+        </Text>
         {[
           ['공지사항', '/mypage/notice'],
           ['이용약관', '/mypage/terms'],
@@ -126,14 +124,14 @@ const MyPage = () => {
             href={link}
             className="flex justify-between items-center"
           >
-            <span>{label}</span>
-            <ChevronRight size={16} color="gray" />
+            <Text variant="title2">{label}</Text>
+            <ChevronRight size={18} color="gray" />
           </Link>
         ))}
       </div>
-      <div className="flex flex-row justify-center gap-12 mt-4 text-gray-500">
+      <div className="flex flex-row justify-center gap-12 mt-5 ">
         <LogOutButton />
-        <p>회원탈퇴</p>
+        <DeleteAccountButton />
       </div>
     </div>
   );

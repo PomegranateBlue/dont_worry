@@ -2,19 +2,10 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/provider/providers';
-import Header from '@/components/header';
-// const geistSans = localFont({
-//   src: './fonts/GeistVF.woff',
-//   variable: '--font-geist-sans',
-//   weight: '100 900'
-// });
-// const geistMono = localFont({
-//   src: './fonts/GeistMonoVF.woff',
-//   variable: '--font-geist-mono',
-//   weight: '100 900'
-// });
+import Header from '@/components/common/Header';
+import { AuthProvider } from '@/provider/authProvider';
 
-const pretendard = localFont({
+export const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
   display: 'swap',
   weight: '400',
@@ -32,10 +23,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/*todo:site map.xml 추가, robot.tsx알아보기 */}
+        <meta property="og:url" content="https://dontworry.io.kr/" />
+        <meta
+          property="og:type"
+          content="https://dontworry.io.kr/images/website"
+        />
+        <meta property="og:title" content="DONT WORRY" />
+        <meta property="og:description" content="당신의 걱정을 들어드릴게요" />
+        <meta property="og:image" content="Thumbnail.svg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        {/*썸네일 이미지 넣기*/}
+        <link rel="icon" href="/images/favicon.ico?v=1" />
+        {/*파비콘 url 설정하기*/}
+      </head>
       <body className={`${pretendard.className}`}>
-        <Header />
-
-        <Providers>{children}</Providers>
+        <Providers>
+          <AuthProvider>
+            <Header />
+            {children}
+          </AuthProvider>
+        </Providers>
       </body>
     </html>
   );

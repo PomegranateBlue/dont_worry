@@ -12,7 +12,6 @@ const supabase = createClient(
 );
 //오늘 날짜 기준으로 발송할 편지 조회
 export async function GET() {
-  console.log('GET 메소드 실행됨');
   const today = new Date().toISOString().split('T')[0];
 
   const { data: letters, error } = await supabase
@@ -26,7 +25,6 @@ export async function GET() {
     console.error('Fetch error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-  console.log(`📨 ${letters.length}개의 편지를 찾았습니다`);
   // 📩 편지 하나씩 순회하며 메일 발송
   for (const letter of letters) {
     try {
@@ -46,10 +44,7 @@ export async function GET() {
         continue; // 이메일이 없으면 다음으로 넘어감
       }
 
-      console.log('사용자 이메일:', data?.email);
-
       // 💌 Resend로 이메일 발송
-      console.log('📤 이메일 보내는 중:', data.email);
       await resend.emails.send({
         from: 'team@dontworry.io.kr', // Resend에서 인증한 발신자 주소
         to: data.email,

@@ -1,4 +1,3 @@
-'use client';
 import Text from '../common/Text';
 import Image from 'next/image';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';
@@ -72,15 +71,13 @@ const Carousel = () => {
           ) : (
             <div
               key={`${item.title}-${idx}`}
-              className="flex  bg-white rounded-[40px]  gap-[10px] px-4 py-2  w-[162px] h-[62px] shrink-0  items-center justify-center"
+              className="flex  bg-white rounded-[40px]  gap-[10px] px-4 py-[9px]  w-[162px] h-[62px] shrink-0  items-center justify-center"
             >
               <div>
-                <Image src={item.src} width={32} height={32} alt="title" />
+                <Image src={item.src} width={36} height={36} alt="title" />
               </div>
               <div className="flex flex-col ">
-                <Text variant="body3" className=" mt-1">
-                  {item.title}
-                </Text>
+                <Text variant="body3">{item.title}</Text>
                 <div className="flex flex-row">
                   {item.tags?.map((tag, i) => (
                     <Text variant="label1" key={i}>

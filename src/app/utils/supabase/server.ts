@@ -25,12 +25,11 @@ export const createClient = () => {
     }
   );
 };
-
 export const getIsLogin = async () => {
   const serverClient = createClient();
   const {
     data: { user }
   } = await serverClient.auth.getUser();
-  // console.log(user);
+  // console.log('유저', user);
   return !!user;
 };

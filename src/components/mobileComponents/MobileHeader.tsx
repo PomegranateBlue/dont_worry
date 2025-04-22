@@ -62,6 +62,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
             alt="프로필 이미지"
             width={60}
             height={60}
+            unoptimized
           />
         </Link>
       )}

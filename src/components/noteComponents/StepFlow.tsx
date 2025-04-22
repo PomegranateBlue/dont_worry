@@ -22,7 +22,7 @@ enum StepProps {
 
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
-  const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
+  const { selectedTopic, selectedEmotions, toggleTopic, message, setResult,reset } =
     useNoteStore();
   const emotionRef = useRef<HTMLDivElement | null>(null);
   const { mutate: submitGPT, isPending } = useGPTSubmit();
@@ -73,6 +73,7 @@ const StepFlow = () => {
           }
 
           setStep(StepProps.RESULT);
+          reset()
         },
         onError: (err) => {
           console.error('GPT 요청 실패:', err.message);

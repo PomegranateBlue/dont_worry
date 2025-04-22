@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import LoginForm from '@/components/loginComponents/LoginForm';
-import NaverLogin from '@/components/loginComponents/NaverLogin';
+// import NaverLogin from '@/components/loginComponents/NaverLogin';
 import KakaoLogin from '@/components/loginComponents/KakaoLogin';
 import GoogleLogin from '@/components/loginComponents/GoogleLogin';
 import Text from '@/components/common/Text';
@@ -26,7 +26,7 @@ export default function LoginPage() {
         </Text>
         <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
           <KakaoLogin />
-          <NaverLogin />
+          {/* <NaverLogin /> */}
           <GoogleLogin />
         </div>
       </div>

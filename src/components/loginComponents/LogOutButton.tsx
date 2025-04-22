@@ -3,6 +3,7 @@ import browserClient from '@/app/utils/supabase/client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/auth/store';
+import Text from '../common/Text';
 const LogOutButton = () => {
   const { setUser } = useUserStore();
   const router = useRouter();
@@ -16,8 +17,9 @@ const LogOutButton = () => {
     router.refresh();
   };
   return (
-    <button onClick={signOut} className="underline md:no-underline">
-      로그아웃
+    //className="underline md:no-underline"
+    <button onClick={signOut} >
+      <Text variant={'body3'} className="text-label-alternative underline">로그아웃</Text>
     </button>
   );
 };

@@ -12,7 +12,7 @@ export interface GPTResponse {
   content: string;
 }
 
-export function useGPTSubmit() {
+export const useGPTSubmit = () => {
   return useMutation<GPTResponse, Error, GPTProps>({
     mutationFn: async ({ topic, emotions, message }) => {
       const res = await fetch('/utils/openai', {
@@ -29,4 +29,4 @@ export function useGPTSubmit() {
       return res.json();
     }
   });
-}
+};

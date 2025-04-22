@@ -60,9 +60,7 @@ const FilterBar = ({
         {getFilterLabel('주제별') ? (
           <FilterBadge
             label={getFilterLabel('주제별')!}
-            onRemove={() =>
-              onRemoveFilter('주제별', selectedTopic)
-            }
+            onRemove={() => onRemoveFilter('주제별', selectedTopic)}
             onClick={() => handleFilterOption('주제별')}
           />
         ) : (
@@ -93,11 +91,7 @@ const FilterBar = ({
         )}
       </div>
 
-      <button className="ml-6 px-2 py-4 flex items-center">
-        <Text variant="body3" color="label-alternative" as="p">
-          편집
-        </Text>
-      </button>
+
     </header>
   );
 };

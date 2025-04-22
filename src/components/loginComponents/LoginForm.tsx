@@ -54,12 +54,12 @@ const LoginForm = ({ mode }: LoginFormProps) => {
 
   useEffect(() => {
     const afterLogin = async () => {
-      console.log(state);
+      // console.log(state);
       if (state.success) {
         try {
           const data = await fetchUser();
           setUser(data);
-          console.log('$$$DATA:', data);
+          // console.log('$$$DATA:', data);
           // Toastify({
           //   text: `🎉 환영합니다!`,
           //   duration: 1000,

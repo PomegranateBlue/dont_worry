@@ -77,7 +77,7 @@ export async function signup(
   });
 
   if (error) {
-    console.log(error);
+    // console.log(error);
     redirect('/error');
   }
 

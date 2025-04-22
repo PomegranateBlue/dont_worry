@@ -19,7 +19,7 @@ const TermsPage = () => {
       </div>
 
       {/* 본문 내용 */}
-      <div className="py-6">
+      <div className="py-6 px-5">
         <p className="mb-4 text-sm text-gray-500">
           최종 업데이트: {mainTerms.lastUpdated}
         </p>

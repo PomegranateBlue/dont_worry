@@ -70,7 +70,6 @@ const Solution = ({ topThree }: SolutionProps) => {
           return;
         }
 
-        console.log('GPT 요청 실행 중...');
         const res = await fetch('/utils/rankingSolution', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -128,15 +127,18 @@ const Solution = ({ topThree }: SolutionProps) => {
   }, [topThree, user]);
 
   return (
-    <div className="flex flex-col gap-4 p-4 w-full">
-      <Text as="div" variant="title2" color="label-normal">
-        {userInfo?.nickname + SOLUTION_TITLE}
-      </Text>
+    <div className="flex flex-col gap-4 p-5 w-full xl:p-0 xl:gap-6">
+      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
+        <Text as="div" variant="title2" color="label-normal">
+          {userInfo?.nickname + SOLUTION_TITLE}
+        </Text>
+      </div>
+
       {solution ? (
         <Text
           variant="body3"
           color="label-normal"
-          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words xl:p-6 xl:w-[508px] xl:h-[240px]"
         >
           {solution}
         </Text>

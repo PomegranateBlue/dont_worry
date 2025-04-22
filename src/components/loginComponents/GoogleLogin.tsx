@@ -5,13 +5,13 @@ import Image from 'next/image';
 
 const GoogleLogin = () => {
   async function signinWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `http://localhost:3000/auth/callback`
       }
     });
-    console.log('구글로그인데이터', data);
+    // console.log('구글로그인데이터', data);
     if (error) {
       console.log(error);
     }

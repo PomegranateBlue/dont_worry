@@ -14,12 +14,12 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
   try {
     const { data, error } = await supabase
       .from('users')
-      .select('email, nickname, profile_img, user_id')
+      .select('email, nickname, profile_img, user_id, is_deleted')
       .eq('user_id', userId)
       .single();
 
     if (error) throw error;
-    return data as Pick<User, 'email' | 'nickname' | 'profile_img' | 'user_id'>;
+    return data as Pick<User, 'email' | 'nickname' | 'profile_img' | 'user_id' | 'is_deleted'>;
   } catch (error) {
     console.error('사용자 정보 조회 실패:', error);
 

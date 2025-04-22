@@ -21,7 +21,7 @@ import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
 
 const RankingPage = () => {
-  const { year, month, week, mode, chartMode } = useRankingStore(); // chartMode 추가
+  const { year, month, week, mode, chartMode } = useRankingStore();
   const { year: Myear, month: Mmonth } = useMRankingStore();
   const { user, hydrated } = useUserStore();
 
@@ -40,7 +40,7 @@ const RankingPage = () => {
   const [topSixEmotion, setTopSixEmotion] = useState<
     { name: string; count: number }[]
   >([]);
-  // 데이터 가져오기 로직
+
   useEffect(() => {
     if (!hydrated) return;
 
@@ -57,6 +57,11 @@ const RankingPage = () => {
 
             setTopEmotions(result.topEmotions);
             setTopSixEmotion(result.topEmotions.slice(0, 6));
+          } else {
+            setTopTopics([]);
+            setTopSixTopic([]);
+            setTopEmotions([]);
+            setTopSixEmotion([]);
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
@@ -72,12 +77,15 @@ const RankingPage = () => {
           if (userNotes.length > 0) {
             const result = makeTopTen(userNotes);
 
-            // chartMode에 따라 다른 데이터 설정
-
             setTopTopics(result.topTopics);
             setTopSixTopic(result.topTopics.slice(0, 6));
             setTopEmotions(result.topEmotions);
             setTopSixEmotion(result.topEmotions.slice(0, 6));
+          } else {
+            setTopTopics([]);
+            setTopSixTopic([]);
+            setTopEmotions([]);
+            setTopSixEmotion([]);
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
@@ -92,9 +100,7 @@ const RankingPage = () => {
     };
   }, [year, month, week, mode, Mmonth, Myear, hydrated, chartMode]);
 
-  // 백분율 계산 로직 - chartMode에 따라 다른 데이터로 계산
   useEffect(() => {
-    // 현재 차트 모드에 맞는 데이터 선택
     const currentData = chartMode === 'topic' ? topTopics : topEmotions;
 
     if (currentData.length === 0) return;
@@ -123,51 +129,59 @@ const RankingPage = () => {
 
   const currentData = chartMode === 'topic' ? topTopics : topEmotions;
   if (currentData.length === 0) {
-    return <div>{NO_DATA_CHART}</div>;
+    return <div className="p-4">{NO_DATA_CHART}</div>;
   }
 
   return (
-    <div>
-      <div className="flex flex-col items-center py-[20px] pb-[60px] gap-[55px] self-stretch">
-        {chartMode === 'topic' ? (
-          <TopicChart topTopics={topTopics} />
-        ) : (
-          <EmotionChart topEmotions={topEmotions} />
-        )}
-        <Report most={most} />
+    <div className="xl:bg-backgroundSet-normal">
+      {/*레이아웃 상위*/}
+      <div className="xl:flex xl:flex-row xl:bg-backgroundSet-card xl:px-[40px] xl:py-[40px] xl:gap-[80px]">
+        <div className="flex flex-col items-center gap-[40px] py-[20px] xl:py-[40px] xl:px-[122px] xl:gap-[12px] self-stretch xl:bg-backgroundSet-normal rounded-[20px]">
+          {chartMode === 'topic' ? (
+            <TopicChart topTopics={topTopics} />
+          ) : (
+            <EmotionChart topEmotions={topEmotions} />
+          )}
+          <Report most={most} />
+        </div>
+
+        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch bg-backgroundSet-card xl:w-full xl:gap-[40px] xl:p-0">
+          <FilterMenu />
+
+          {chartMode === 'topic' ? (
+            <div className="flex flex-col w-full max-w-full gap-[12px]">
+              {topSixTopic.map((e) => (
+                <div key={e.name}>
+                  <TopThreeCard topThree={e} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col w-full max-w-full gap-[12px]">
+              {topSixEmotion.map((e) => (
+                <div key={e.name}>
+                  <TopThreeCard topThree={e} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className="flex flex-col items-center px-[20px] py-[40px] gap-[20px] self-stretch bg-backgroundSet-card">
-        <FilterMenu />
-
+      {/*레이아웃 상위*/}
+      {/*데스크탑 레이아웃 하위*/}
+      <div className="xl:flex xl:flex-row xl:px-10 xl:py-[60px] xl:justify-center xl:items-center xl:gap-[80px] xl:w-full xl:bg-backgroundSet-card">
+        <MWreportCard />
         {chartMode === 'topic' ? (
-          <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topSixTopic.map((e) => (
-              <div key={e.name}>
-                <TopThreeCard topThree={e} />
-              </div>
-            ))}
+          <div className="xl:flex xl:w-full">
+            <Solution topThree={topSixTopic} />
           </div>
         ) : (
-          <div className="flex flex-col w-full max-w-full gap-[12px]">
-            {topSixEmotion.map((e) => (
-              <div key={e.name}>
-                <TopThreeCard topThree={e} />
-              </div>
-            ))}
+          <div className="xl:flex xl:w-full">
+            <Solution topThree={topSixEmotion} />
           </div>
         )}
       </div>
-      <MWreportCard />
-      {chartMode === 'topic' ? (
-        <>
-          <Solution topThree={topSixTopic} />
-        </>
-      ) : (
-        <>
-          <Solution topThree={topSixEmotion} />
-        </>
-      )}
+      {/*데스크탑 레이아웃 하위*/}
     </div>
   );
 };

@@ -70,7 +70,6 @@ const Solution = ({ topThree }: SolutionProps) => {
           return;
         }
 
-        console.log('GPT 요청 실행 중...');
         const res = await fetch('/utils/rankingSolution', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

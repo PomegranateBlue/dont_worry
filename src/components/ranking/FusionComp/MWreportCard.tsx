@@ -23,15 +23,17 @@ const MWreportCard = () => {
   if (!weekData) return;
 
   return (
-    <section className="flex flex-col items-center gap-4 p-4 sm:p-5 w-full mx-auto mt-6 sm:mt-10 mb-4 sm:mb-6">
+    <section className="flex flex-col items-center gap-4 p-5 w-full mx-auto xl:p-0 xl:gap-6">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
-        <Text as="div" variant="heading3" color="label-normal">
+        <Text as="div" variant="title2" color="label-normal">
           {mode === WEEK_MODE ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
         </Text>
       </div>
-
-      <BetterThing monthData={monthData} weekData={weekData} />
-      <WorsenedThing monthData={monthData} weekData={weekData} />
+      <div className="xl:flex xl:flex-row xl:gap-3 xl:items-start gap-4 flex flex-col w-full">
+        {/*여기 레이아웃을 잘 정해야함 그래야 gap이 적용됨*/}
+        <BetterThing monthData={monthData} weekData={weekData} />
+        <WorsenedThing monthData={monthData} weekData={weekData} />
+      </div>
     </section>
   );
 };

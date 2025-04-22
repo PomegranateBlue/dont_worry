@@ -18,13 +18,13 @@ interface MobileHeaderProps {
 }
 
 export default function MobileHeader({ isLogin }: MobileHeaderProps) {
-  const { data: userData, isLoading: userDataLoading } = useUserInfo();
+  const { data: userData } = useUserInfo();
   const { user } = useUserStore();
   // console.log(userData);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const router = useRouter();
 
   // 스크롤 막기
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
           className="w-[30px] h-[30px] bg-slate-400 rounded-full overflow-hidden"
         >
           <Image
-            src={userData?.profile_img || '/images/default-profile.svg'}
+            src={userData?.profile_img || '/images/profile-default-image.svg'}
             alt="프로필 이미지"
             width={60}
             height={60}

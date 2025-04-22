@@ -38,7 +38,7 @@ export const MONTH = '월';
 
 export const WEEK = '주';
 
-export const SOLUTION_TITLE = '님께 돈 드리는 돈워리의 한 마디';
+export const SOLUTION_TITLE = '님께 드리는 돈워리의 한 마디';
 
 export const NO_ID = '사용자 ID가 없습니다.';
 

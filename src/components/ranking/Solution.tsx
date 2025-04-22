@@ -129,7 +129,12 @@ const Solution = ({ topThree }: SolutionProps) => {
   return (
     <div className="flex flex-col gap-4 p-5 w-full xl:p-0 xl:gap-6">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
-        <Text as="div" variant="title2" color="label-normal">
+        <Text
+          as="div"
+          variant="title2"
+          variant2="display1"
+          color="label-normal"
+        >
           {userInfo?.nickname + SOLUTION_TITLE}
         </Text>
       </div>

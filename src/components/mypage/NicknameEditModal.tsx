@@ -5,12 +5,8 @@ import { z } from 'zod';
 import { useEffect } from 'react';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
-
-
 import Text from '../common/Text';
 
-
-// 닉네임만을 위한 유효성 검증 스키마
 const nicknameSchema = z.object({
   nickname: z
     .string()
@@ -50,7 +46,6 @@ const NicknameEditModal = ({
   }, [userInfo, setValue]);
 
   const onSubmit = (data: NicknameFormValues) => {
-    // 닉네임만 업데이트
     updateMutation.mutate(
       { nickname: data.nickname },
       {

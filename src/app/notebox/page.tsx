@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
@@ -11,7 +12,7 @@ import { Tables } from '../../../database.types';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
 
-  const [filterType, setFilterType] = useState<string | null>(null);
+  const [filterType, setFilterType] = useState<string | null>('주제별');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
@@ -36,6 +37,20 @@ const NotePage = () => {
       setNotes(userNotesQuery.data);
     }
   }, [userNotesQuery.data, setNotes]);
+
+  // 선택된 필터 제거
+  const handleRemoveFilter = (
+    type: '정렬순' | '주제별' | '감정별',
+    value: string
+  ) => {
+    if (type === '주제별') {
+      setSelectedTopics([]);
+    } else if (type === '감정별') {
+      setSelectedEmotions((prev) => prev.filter((v) => v !== value));
+    } else if (type === '정렬순') {
+      setSelectedSort('최신순');
+    }
+  };
 
   const filteredNotes = notes
     .filter((note) => {
@@ -71,6 +86,11 @@ const NotePage = () => {
           setFilterType(label);
           setIsModalOpen(true);
         }}
+        selectedOption={filterType}
+        selectedTopic={selectedTopics[0] || ''}
+        selectedEmotions={selectedEmotions}
+        selectedSort={selectedSort}
+        onRemoveFilter={handleRemoveFilter}
       />
 
       {isModalOpen && (

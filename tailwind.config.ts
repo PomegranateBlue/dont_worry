@@ -8,6 +8,19 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
+  safelist: [
+    'bg-mind-slpeum_bg',
+    'bg-mind-bulkuea_bg',
+    'bg-mind-apbak_bg',
+    'bg-mind-boolan_bg',
+    'bg-mind-honran_bg',
+    'bg-mind-bunno_bg',
+    'bg-mind-woowool_bg',
+    'bg-mind-zzazeung_bg',
+    'bg-mind-huhuea_bg',
+    'bg-mind-yoerowooum_bg',
+    'bg-mind-moogiryeok_bg'
+  ],
   theme: {
     extend: {
       keyframes: {
@@ -22,7 +35,6 @@ const config: Config = {
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다
-
 
         error: '#fe5558',
         success: '#00bd78',
@@ -100,7 +112,6 @@ const config: Config = {
           offwhite: '#EEEEF0'
         },
         mind: {
-
           honran: '#CAADC6', //혼란
           honran_bg: '#FCF2FB',
           moogiryeok: '#E7DDF2', //무기력

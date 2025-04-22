@@ -78,14 +78,15 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
         <Text
           as="h2"
           variant="heading3"
-          className="text-primary-4 text-center leading-[135%]"
+          color='primary4'
+          className="text-center leading-[135%]"
         >
           {TOPIC_FILTER_DESCRIPTION}
         </Text>
         <Text
           variant="body3"
           color="label-alternative"
-          className="text-center leading-[150%] w-[258px] h-[21px]"
+          className="text-center leading-[150%] w-[260px] h-[21px]"
         >
           {TOPIC_FILTER_DESCRIPTION2}
         </Text>

@@ -44,7 +44,7 @@ const ResultSaveButton = () => {
   return (
     <button onClick={handleSaveMessage} disabled={isSaved}>
       <ThumbsUp
-        className={`w-5 h-5 ${
+        className={`w-4 h-4 ${
           isSaved ? 'text-purple-500' : 'text-gray-500 hover:text-purple-500'
         }`}
       />

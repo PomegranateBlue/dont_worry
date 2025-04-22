@@ -23,7 +23,7 @@ const MWreportCard = () => {
   if (!weekData) return;
 
   return (
-    <section className="flex flex-col items-center gap-4 p-4 sm:p-5 w-full mx-auto mt-6 sm:mt-10 mb-4 sm:mb-6">
+    <section className="flex flex-col items-center gap-4 p-5 w-full mx-auto">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
         <Text as="div" variant="heading3" color="label-normal">
           {mode === WEEK_MODE ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}

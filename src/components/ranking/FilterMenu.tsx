@@ -25,7 +25,6 @@ const FilterMenu = () => {
   return (
     <div className="w-full">
       <div className="relative flex h-10 rounded-full bg-label-disable overflow-hidden">
-        {/* 애니메이션 바 */}
         <motion.div
           layout
           layoutId="tabHighlight"

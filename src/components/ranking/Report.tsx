@@ -7,7 +7,6 @@ interface ReportProps {
 }
 
 const Report = ({ most }: ReportProps) => {
-  //주차별 차트 하단에 간단 요약
   return (
     <>
       {most && (

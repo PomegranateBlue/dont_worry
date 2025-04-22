@@ -11,6 +11,7 @@ import { BetterThingProps } from '@/types/ranking/types';
 import React from 'react';
 import Text from '../common/Text';
 import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+import { NO_DATA } from '@/constants/ranking/ErrorConstants';
 
 const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
   const { mode } = useRankingStore();
@@ -37,7 +38,7 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">
-              데이터가 없습니다
+              {NO_DATA}
             </span>
           )}
         </div>
@@ -59,7 +60,7 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
             </div>
           ) : (
             <span className="text-label-normal text-sm sm:text-base font-medium">
-              데이터가 없습니다
+              {NO_DATA}
             </span>
           )}
         </div>

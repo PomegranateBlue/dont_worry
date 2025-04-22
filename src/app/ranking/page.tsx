@@ -21,7 +21,7 @@ import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
 
 const RankingPage = () => {
-  const { year, month, week, mode, chartMode } = useRankingStore(); // chartMode 추가
+  const { year, month, week, mode, chartMode } = useRankingStore();
   const { year: Myear, month: Mmonth } = useMRankingStore();
   const { user, hydrated } = useUserStore();
 
@@ -40,7 +40,7 @@ const RankingPage = () => {
   const [topSixEmotion, setTopSixEmotion] = useState<
     { name: string; count: number }[]
   >([]);
-  // 데이터 가져오기 로직
+
   useEffect(() => {
     if (!hydrated) return;
 
@@ -92,9 +92,7 @@ const RankingPage = () => {
     };
   }, [year, month, week, mode, Mmonth, Myear, hydrated, chartMode]);
 
-  // 백분율 계산 로직 - chartMode에 따라 다른 데이터로 계산
   useEffect(() => {
-    // 현재 차트 모드에 맞는 데이터 선택
     const currentData = chartMode === 'topic' ? topTopics : topEmotions;
 
     if (currentData.length === 0) return;

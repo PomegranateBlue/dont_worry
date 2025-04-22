@@ -74,7 +74,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
 
   return (
     <>
-      <div className="flex w-[258px] flex-col items-cente">
+      <div className="flex w-[258px] flex-col items-center">
         <Text
           as="h2"
           variant="heading3"

@@ -10,7 +10,7 @@ import {
   ChartOptions,
   ChartData
 } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels'; // ✅ 추가
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import {
   EMOTION_FILTER_DESCRIPTION,
@@ -23,7 +23,7 @@ import {
 } from '@/constants/ranking/ChartOptions';
 import Text from '../common/Text';
 
-ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels); // ✅ 플러그인 등록
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 interface EmotionChartProps {
   topEmotions: { name: string; count: number }[];
@@ -32,7 +32,7 @@ interface EmotionChartProps {
 const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
   const emotionLabels = topEmotions.map((emotion) => emotion.name);
   const emotionData = topEmotions.map((emotion) => emotion.count);
-  const total = emotionData.reduce((acc, cur) => acc + cur, 0); // ✅ 총합
+  const total = emotionData.reduce((acc, cur) => acc + cur, 0);
 
   const emotionChartData: ChartData<'doughnut'> = {
     labels: emotionLabels,
@@ -74,7 +74,7 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
 
   return (
     <>
-      <div className="flex w-[258px] flex-col items-center gap-[12px]">
+      <div className="flex w-[258px] flex-col items-center">
         <Text
           as="h2"
           variant="heading3"
@@ -91,7 +91,7 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
           {EMOTION_FILTER_DESCRIPTION2}
         </Text>
       </div>
-      <div className="w-[217.8px] h-[198px] sm:w-[320px] sm:h-[320px]">
+      <div className="w-[217.8px] h-[198px] xl:w-[280px] xl:h-[255px] flex justify-center items-center xl:gap-3">
         <Doughnut options={options} data={emotionChartData} />
       </div>
     </>

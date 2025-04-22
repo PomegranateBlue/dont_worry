@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
@@ -7,11 +8,15 @@ import NoteCard from '@/components/noteBoxComponents/NoteCard';
 import { useNoteListStore } from '@/store/notebox/noteboxStore';
 import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
+import Text from '@/components/common/Text';
+import { supabase } from '../utils/supabase/supabase';
+import EditBar from '@/components/noteBoxComponents/EditBar';
 
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
-
-  const [filterType, setFilterType] = useState<string | null>(null);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
+  const [filterType, setFilterType] = useState<string | null>('주제별');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
@@ -36,6 +41,20 @@ const NotePage = () => {
       setNotes(userNotesQuery.data);
     }
   }, [userNotesQuery.data, setNotes]);
+
+  // 선택된 필터 제거
+  const handleRemoveFilter = (
+    type: '정렬순' | '주제별' | '감정별',
+    value: string
+  ) => {
+    if (type === '주제별') {
+      setSelectedTopics([]);
+    } else if (type === '감정별') {
+      setSelectedEmotions((prev) => prev.filter((v) => v !== value));
+    } else if (type === '정렬순') {
+      setSelectedSort('최신순');
+    }
+  };
 
   const filteredNotes = notes
     .filter((note) => {
@@ -62,16 +81,57 @@ const NotePage = () => {
         : new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     });
 
+  const onToggleEdit = () => {
+    setIsEdit((prev) => !prev);
+    setSelectedNoteIds([]); // 체크된 항목 초기화
+  };
+  const handleDeleteNote = async () => {
+    if (selectedNoteIds.length === 0) return;
+
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+    if (!confirmDelete) return;
+
+    const { error } = await supabase
+      .from('users_note')
+      .delete()
+      .in('note_id', selectedNoteIds);
+
+    if (error) {
+      console.error('삭제 실패:', error.message);
+      return;
+    }
+
+    setNotes(notes.filter((note) => !selectedNoteIds.includes(note.note_id)));
+    setSelectedNoteIds([]);
+    setIsEdit(false);
+  };
   return (
     <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
-      <h1 className="text-xl font-bold text-center p-5">걱정 보관함</h1>
+      <div className="flex justify-center items-center px-[6px] py-[15px]">
+        <Text variant="title2" color="label-normal" className=" text-center">
+          걱정 보관함
+        </Text>
+      </div>
 
-      <FilterBar
-        onClickFilter={(label) => {
-          setFilterType(label);
-          setIsModalOpen(true);
-        }}
-      />
+      <div className="sticky top-0 z-10 bg-backgroundSet-normal">
+        <FilterBar
+          onClickFilter={(label) => {
+            setFilterType(label);
+            setIsModalOpen(true);
+          }}
+          selectedOption={filterType}
+          selectedTopic={selectedTopics[0] || ''}
+          selectedEmotions={selectedEmotions}
+          selectedSort={selectedSort}
+          onRemoveFilter={handleRemoveFilter}
+        />
+        <EditBar
+          isEdit={isEdit}
+          selectedNoteIds={selectedNoteIds}
+          onToggleEdit={onToggleEdit}
+          onDelete={handleDeleteNote}
+        />
+      </div>
 
       {isModalOpen && (
         <FilterModal
@@ -102,6 +162,15 @@ const NotePage = () => {
                     .map((emotion) => emotion.trim())
                 : null
             }
+            isEdit={isEdit}
+            isChecked={selectedNoteIds.includes(note.note_id)}
+            onToggleCheck={(id: string) => {
+              setSelectedNoteIds((item) =>
+                item.includes(id)
+                  ? item.filter((cardId) => cardId !== id)
+                  : [...item, id]
+              );
+            }}
           />
         ))}
       </main>

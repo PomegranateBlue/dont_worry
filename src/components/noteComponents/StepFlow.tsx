@@ -1,3 +1,158 @@
+// 'use client';
+
+// import { useState, useRef } from 'react';
+// import { ChevronLeft } from 'lucide-react';
+// import EmotionCategoryForm from './EmotionCategoryForm';
+// import TopicCategoryForm from './TopicCategoryForm';
+// import MessageForm from './MessageForm';
+// import ResultForm from './ResultForm';
+// import Text from '../common/Text';
+// import { useNoteStore } from '@/store/note/noteStore';
+// import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
+// import { useUserStore } from '@/store/auth/store';
+// import { supabase } from '@/app/utils/supabase/supabase';
+// import { TablesInsert } from '../../../database.types';
+// import MessageLoading from './MessageLoading';
+// enum StepProps {
+//   CATEGORY = 'category',
+//   MESSAGE = 'message',
+//   RESULT = 'result'
+// }
+
+// const StepFlow = () => {
+//   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
+//   const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
+//     useNoteStore();
+//   const emotionRef = useRef<HTMLDivElement | null>(null);
+//   const { mutate: submitGPT, isLoading } = useGPTSubmit();
+//   const { user } = useUserStore();
+
+//   const handleCategorySelect = (topic: string) => {
+//     toggleTopic(topic);
+//     setTimeout(() => {
+//       emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
+//     }, 100);
+//   };
+
+//   const handleSubmit = () => {
+//     submitGPT(
+//       {
+//         topic: selectedTopic,
+//         emotions: selectedEmotions,
+//         message
+//       },
+//       {
+//         onSuccess: async (res) => {
+//           setResult(res.content);
+
+//           if (!user) {
+//             console.error('로그인된 사용자가 없습니다.');
+//             setStep(StepProps.RESULT);
+//             return;
+//           }
+
+//           const note: TablesInsert<'users_note'> = {
+//             content: JSON.stringify({
+//               Question: message,
+//               Answer: res.content
+//             }),
+//             topic_category: selectedTopic,
+//             emotion_category: selectedEmotions.join(','),
+//             created_at: new Date().toISOString(),
+//             note_img: null,
+//             user_id: user
+//           };
+
+//           const { error } = await supabase.from('users_note').insert([note]);
+
+//           if (error) {
+//             console.error('저장 실패:', error);
+//           } else {
+//             console.log('저장 완료');
+//           }
+
+//           setStep(StepProps.RESULT);
+//         },
+//         onError: (err) => {
+//           console.error('GPT 요청 실패:', err.message);
+//         }
+//       }
+//     );
+//   };
+
+//   return (
+//     <div>
+//       {step === StepProps.CATEGORY && (
+//         <div>
+//           <Text
+//             variant="title1"
+//             color="label-normal"
+//             className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px]"
+//           >
+//             걱정 작성
+//           </Text>
+//           <TopicCategoryForm onSelectCategory={handleCategorySelect} />
+//           <div ref={emotionRef}>
+//             <EmotionCategoryForm />
+//           </div>
+//           <div className="px-5 py-2 w-full">
+//             <button
+//               className="flex items-center justify-center mx-auto w-full h-[48px]  text-[#FFFFFF] bg-[#8573C9]   rounded-[8px] px-5 py-4"
+//               onClick={() => setStep(StepProps.MESSAGE)}
+//             >
+//               <Text variant="title2" className="text-backgroundSet-normal">
+//                 다음으로
+//               </Text>
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {step === StepProps.MESSAGE && (
+//         <div className="flex flex-col min-h-screen  overflow-hidden">
+//           <div className="relative h-[56px] w-full px-[6px]">
+//             <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+//               <ChevronLeft
+//                 onClick={() => {
+//                   console.log('뒤로가기');
+//                   setStep(StepProps.CATEGORY);
+//                 }}
+//               />
+//             </button>
+//             <div className="absolute inset-0 flex justify-center items-center">
+//               <p className="text-[20px] font-semibold">감정 작성</p>
+//             </div>
+//           </div>
+
+//           <div className=" flex flex-col justify-center items-center">
+//             <MessageForm />
+//           </div>
+
+//           <div className="h-[128px] " />
+
+//           <div className="flex px-5 py-2 w-full">
+//             <button
+//               onClick={handleSubmit}
+//               className="flex items-center justify-center px-5 py-4 w-full h-[48px]  bg-primary-4   rounded-[8px] mt-auto"
+//             >
+//               <Text variant="title2" className="text-backgroundSet-normal">
+//                 제출하기
+//               </Text>
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {step === StepProps.RESULT && (
+//         <div>
+//           <ResultForm />
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default StepFlow;
 'use client';
 
 import { useState, useRef } from 'react';
@@ -8,6 +163,11 @@ import MessageForm from './MessageForm';
 import ResultForm from './ResultForm';
 import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
+import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
+import { useUserStore } from '@/store/auth/store';
+import { supabase } from '@/app/utils/supabase/supabase';
+import { TablesInsert } from '../../../database.types';
+import MessageLoading from './MessageLoading';
 
 enum StepProps {
   CATEGORY = 'category',
@@ -15,17 +175,13 @@ enum StepProps {
   RESULT = 'result'
 }
 
-interface GPTRouteProps {
-  topic: string | null;
-  emotions: string[];
-  message: string;
-}
-
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const { selectedTopic, selectedEmotions, toggleTopic, message, setResult } =
     useNoteStore();
   const emotionRef = useRef<HTMLDivElement | null>(null);
+  const { mutate: submitGPT, isPending } = useGPTSubmit();
+  const { user } = useUserStore();
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);
@@ -34,50 +190,56 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const handleSubmit = async () => {
-    try {
-      const userInput = await fetchGPT({
+  const handleSubmit = () => {
+    submitGPT(
+      {
         topic: selectedTopic,
         emotions: selectedEmotions,
         message
-      });
-      setResult(userInput);
-      setStep(StepProps.RESULT);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      },
+      {
+        onSuccess: async (res) => {
+          setResult(res.content);
 
-  const fetchGPT = async ({ topic, emotions, message }: GPTRouteProps) => {
-    try {
-      const content = JSON.stringify({
-        content: `주제: ${topic}, 감정: ${emotions.join(
-          ', '
-        )}, 메시지: ${message}`
-      });
+          if (!user) {
+            console.error('로그인된 사용자가 없습니다.');
+            setStep(StepProps.RESULT);
+            return;
+          }
 
-      const res = await fetch('/api/utils/openai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+          const note: TablesInsert<'users_note'> = {
+            content: JSON.stringify({
+              Question: message,
+              Answer: res.content
+            }),
+            topic_category: selectedTopic,
+            emotion_category: selectedEmotions.join(','),
+            created_at: new Date().toISOString(),
+            note_img: null,
+            user_id: user
+          };
+
+          const { error } = await supabase.from('users_note').insert([note]);
+
+          if (error) {
+            console.error('저장 실패:', error);
+          } else {
+            console.log('저장 완료');
+          }
+
+          setStep(StepProps.RESULT);
         },
-        body: content
-      });
-
-      if (!res.ok) {
-        throw new Error(`GPT 요청 실패: ${res.status}`);
+        onError: (err) => {
+          console.error('GPT 요청 실패:', err.message);
+        }
       }
-
-      const data: { content: string } = await res.json();
-      return data.content;
-    } catch (error) {
-      console.error('fetchGPT 에러:', error);
-      return 'GPT 응답에 실패했습니다.';
-    }
+    );
   };
 
   return (
-    <div>
+    <div className="relative">
+      {' '}
+      {/* ✅ 오버레이 기준 */}
       {step === StepProps.CATEGORY && (
         <div>
           <Text
@@ -93,22 +255,22 @@ const StepFlow = () => {
           </div>
           <div className="px-5 py-2 w-full">
             <button
-              className="flex items-center justify-center mx-auto w-full h-[48px]  text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
+              className="flex items-center justify-center mx-auto w-full h-[48px] text-[#FFFFFF] bg-[#8573C9] rounded-[8px] px-5 py-4"
               onClick={() => setStep(StepProps.MESSAGE)}
             >
-              다음으로
+              <Text variant="title2" className="text-backgroundSet-normal">
+                다음으로
+              </Text>
             </button>
           </div>
         </div>
       )}
-
       {step === StepProps.MESSAGE && (
-        <div className="flex flex-col min-h-screen  overflow-hidden">
+        <div className="flex flex-col min-h-screen overflow-hidden">
           <div className="relative h-[56px] w-full px-[6px]">
             <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
               <ChevronLeft
                 onClick={() => {
-                  console.log('뒤로가기');
                   setStep(StepProps.CATEGORY);
                 }}
               />
@@ -118,29 +280,31 @@ const StepFlow = () => {
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col">
-            <p className="font-semibold text-[22px] px-5 py-2  ">
-              오늘 나의 걱정을 작성해보세요
-            </p>
+          <div className="flex flex-col justify-center items-center">
             <MessageForm />
           </div>
 
-          <div className="px-5 py-2 w-full">
+          <div className="h-[128px]" />
+
+          <div className="flex px-5 py-2 w-full">
             <button
               onClick={handleSubmit}
-              className="w-full h-[48px] text-[#FFFFFF] bg-[#8573C9]  text-[18px] font-semibold rounded-md px-5"
+              className="flex items-center justify-center px-5 py-4 w-full h-[48px] bg-primary-4 rounded-[8px] mt-auto"
             >
-              제출하기
+              <Text variant="title2" className="text-backgroundSet-normal">
+                제출하기
+              </Text>
             </button>
           </div>
         </div>
       )}
-
       {step === StepProps.RESULT && (
         <div>
           <ResultForm />
         </div>
       )}
+      {/* ✅ 로딩 화면 오버레이 */}
+      {isPending && <MessageLoading />}
     </div>
   );
 };

@@ -1,12 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import Link from 'next/link';
-import { useFormState } from 'react-dom';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { signup } from '../action';
 import Text from '@/components/common/Text';
 import LoginForm from '@/components/loginComponents/LoginForm';
-import Image from 'next/image';
+
 
 // const initialState = { success: false, error: null };
 

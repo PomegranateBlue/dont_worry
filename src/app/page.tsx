@@ -1,4 +1,4 @@
-export const dynamic = 'force-static';
+// export const dynamic = 'force-static';
 
 import Image from 'next/image';
 import Text from '@/components/common/Text';
@@ -34,7 +34,7 @@ const HomePage = () => {
         </div>
 
         {/* 캐러셀: 섹션 바닥 기준으로 62px 위 */}
-        <div className="absolute bottom-[88px] left-1/2 -translate-x-1/2 z-10">
+        <div className="absolute bottom-[88px] left-1/2 -translate-x-1/2 z-10 ">
           <Carousel />
         </div>
 
@@ -109,7 +109,7 @@ const HomePage = () => {
             </div>
             <div>
               <Image
-                src={'images/step1.svg'}
+                src={'images/step1-final.svg'}
                 width={335}
                 height={300}
                 alt="step1"
@@ -132,7 +132,7 @@ const HomePage = () => {
             </div>
             <div>
               <Image
-                src={'images/step2.svg'}
+                src={'images/step2-final.svg'}
                 width={335}
                 height={300}
                 alt="step2"
@@ -155,7 +155,7 @@ const HomePage = () => {
             </div>
             <div>
               <Image
-                src={'images/step3.svg'}
+                src={'images/step3-final.svg'}
                 width={335}
                 height={300}
                 alt="step3"
@@ -192,7 +192,13 @@ const HomePage = () => {
         </div>
 
         <div>
-          <div>image</div>
+          <Image
+            src={'images/graph.svg'}
+            width={335}
+            height={335}
+            alt="graph
+          "
+          />
         </div>
       </section>
 
@@ -227,7 +233,7 @@ const HomePage = () => {
         <div>
           <div>
             <Image
-              src={'/images/future-letter2.svg'}
+              src={'/images/future-letter-final.svg'}
               width={335}
               height={335}
               alt="future"
@@ -236,19 +242,34 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col h-[630px] justify-center items-center">
-        <div className="flex  items-center justify-center w-auto h-[30px] px-3 rounded-[16px] bg-primary-4">
-          <Text variant="body3" color="white">
-            커뮤니티
-          </Text>
+      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px]">
+        <div className="">
+          <div>
+            <Text variant="body3" color="white">
+              커뮤니티
+            </Text>
+          </div>
+          <div>
+            <Text variant="heading2" color="primary4">
+              다른 사람들의 이야기
+            </Text>
+          </div>
+          <div>
+            <Text variant="body2" color="label-neutral" className="px-4 pt-6">
+              익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
+              나눠보세요
+            </Text>
+          </div>
         </div>
-        <Text variant="heading2" color="primary4">
-          다른 사람들의 이야기
-        </Text>
-        <Text variant="body2" color="label-neutral" className="px-4 pt-6">
-          익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
-          나눠보세요
-        </Text>
+
+        <div>
+          <Image
+            src={'images/community-final.svg'}
+            width={335}
+            height={300}
+            alt="community"
+          />
+        </div>
       </section>
 
       <section className="flex flex-col justify-center items-center h-[630px] bg-[#F3F0FF]">

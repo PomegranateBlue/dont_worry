@@ -11,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
-import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 
 interface LoginFormProps {
   mode: string;
@@ -48,7 +47,6 @@ const initialState = { success: false, error: null };
 const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
-  const { data: userData } = useUserInfo();
 
   const schema = mode === 'signup' ? signupSchema : loginSchema;
   const actionFn = mode === 'signup' ? signup : login;

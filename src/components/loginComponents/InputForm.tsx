@@ -18,8 +18,7 @@ export const InputForm = <T extends FieldValues>({
   placeholder,
   required,
   register,
-  error,
-  helperText
+  error
 }: InputFormProps<T>) => {
   return (
     <div>

@@ -30,12 +30,11 @@ const ProfileImageEditModal = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white rounded-xl p-5 w-80 shadow-lg relative xl:w-[480px]">
-        {/* 닫기 버튼 */}
+
         <button onClick={onClose} className="absolute top-5 right-5 ">
           <X size={20} />
         </button>
 
-        {/* 현재 이미지 */}
         <div className="flex justify-start mb-8 h-20">
           <Image
             src={imageUrl || '/images/profile-default-image.svg'}
@@ -46,12 +45,10 @@ const ProfileImageEditModal = ({
           />
         </div>
 
-        {/* 제목 */}
         <h2 className="text-left mb-8">
           <Text variant="heading2">프로필 사진 설정</Text>
         </h2>
 
-        {/* 라이브러리에서 선택 */}
         <label className="flex items-center gap-2 cursor-pointer hover:opacity-80 mb-6 mt-6">
           <ImagePlus size={24} />
           <Text variant="title1" color="label-neutral">
@@ -65,7 +62,6 @@ const ProfileImageEditModal = ({
           />
         </label>
 
-        {/* 삭제 */}
         <button
           onClick={() => {
             onDelete();

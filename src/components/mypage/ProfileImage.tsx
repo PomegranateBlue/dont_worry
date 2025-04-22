@@ -23,7 +23,6 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
         unoptimized
       />
 
-      {/* 아이콘 클릭 시 모달 열기 */}
       <button
         onClick={() => setIsModalOpen(true)}
         className="absolute bottom-0 right-1 bg-white w-8 h-8 rounded-full flex items-center justify-center"

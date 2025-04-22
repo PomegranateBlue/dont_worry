@@ -54,7 +54,6 @@ const MyPage = () => {
   };
 
   const isLoading = userDataLoading || lettersLoading || userWorriesLoading;
-  console.log('page.tsx userInfo$$', userInfo);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -62,7 +61,6 @@ const MyPage = () => {
 
   return (
     <div className="px-4 pb-20 xl:px-[350px]">
-      {/* 프로필 섹션 */}
       <Text variant="title1" className="text-center py-4">
         마이페이지
       </Text>
@@ -73,7 +71,6 @@ const MyPage = () => {
           onDelete={handleDelete}
         />
 
-        {/* 닉네임 & 이메일 영역 */}
         <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
           <div className="flex items-center justify-center gap-2 xl:justify-start">
             <Text as="span" variant="title1" color="label-normal">
@@ -90,12 +87,11 @@ const MyPage = () => {
         </div>
       </div>
 
-      {/* 작성글/편지 정보 */}
       <div className="flex justify-center items-center rounded-md bg-backgroundSet-card py-4 mb-6">
         <div className="flex-1 text-center">
           <Link href="/notebox">
             <Text variant="title2">
-              {/* 걱정 갯수 넣기 */}
+
               {userWorries?.length || 0}개
             </Text>
             <Text variant="body3" color="label-alternative">

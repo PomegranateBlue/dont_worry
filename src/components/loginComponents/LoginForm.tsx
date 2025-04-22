@@ -54,12 +54,12 @@ const LoginForm = ({ mode }: LoginFormProps) => {
 
   useEffect(() => {
     const afterLogin = async () => {
-      console.log(state);
+      // console.log(state);
       if (state.success) {
         try {
           const data = await fetchUser();
           setUser(data);
-          console.log('$$$DATA:', data);
+          // console.log('$$$DATA:', data);
           // Toastify({
           //   text: `🎉 환영합니다!`,
           //   duration: 1000,
@@ -105,7 +105,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           placeholder="닉네임 입력"
           register={register}
           error={errors.fullName}
-          helperText="헬퍼텍스트"
           required
         />
       )}
@@ -116,7 +115,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         placeholder="ex)abc@email.com"
         register={register}
         error={errors.email}
-        helperText="헬퍼텍스트"
         required
       />
       <InputForm
@@ -126,7 +124,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         placeholder="비밀번호 입력"
         register={register}
         error={errors.password}
-        helperText="헬퍼텍스트"
         required
       />
 

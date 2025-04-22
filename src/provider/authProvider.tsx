@@ -8,19 +8,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { setUser } = useUserStore();
 
   useEffect(() => {
-    // const getUser1 = async () => {
-    //   const { data: a } = await supabase.auth.getUser();
-    //   console.log('provider', a);
-    // };
-    // getUser1();
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
+      // console.log(event, session);
 
       if (event === 'INITIAL_SESSION') {
         // handle initial session
-        console.log(session);
+        // console.log(session);
         if (session) {
-          console.log(session?.user?.id);
+          //   console.log(session?.user?.id);
           setUser(session?.user?.id);
         }
       } else if (event === 'SIGNED_IN') {
@@ -39,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // call unsubscribe to remove the callback
       data.subscription.unsubscribe();
     };
-  }, []);
+  }, [setUser, supabase.auth]);
 
   return <>{children}</>;
 };

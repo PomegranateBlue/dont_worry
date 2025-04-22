@@ -11,7 +11,6 @@ import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
 
-
 interface MobileHeaderProps {
   isLogin: boolean;
 }
@@ -23,7 +22,6 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
 
   // 스크롤 막기
   useEffect(() => {

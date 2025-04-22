@@ -12,21 +12,23 @@ const RankingLayout = ({
   children
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <div>
-      <div className="pr-[6px] pl-[6px] h-14 flex items-center justify-center">
-        <Text
-          as="h1"
-          variant="title1"
-          color="label-normal"
-          className="text-center border-gray-200 w-full"
-        >
-          {CHART_PAGE_TITLE}
-        </Text>
+    <div className="w-full flex justify-center">
+      <div className="xl:bg-backgroundSet-normal w-full max-w-[1280px] mx-auto">{/*마지막 3개의 속성을 루트에서 적용시켜야함*/}
+        <div className="pr-[6px] pl-[6px] h-14 flex items-center justify-center">
+          <Text
+            as="h1"
+            variant="title1"
+            color="label-normal"
+            className="text-center border-gray-200 w-full"
+          >
+            {CHART_PAGE_TITLE}
+          </Text>
+        </div>
+        <div className="py-5 xl:py-6 xl:flex xl:gap-4 xl:h-16 xl:justify-center xl:items-center xl:bg-backgroundSet-card">
+          <TimeFilterGroup />
+        </div>
+        {children}
       </div>
-      <div className="pt-5 pb-5">
-        <TimeFilterGroup />
-      </div>
-      {children}
     </div>
   );
 };

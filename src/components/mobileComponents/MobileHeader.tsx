@@ -7,23 +7,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AlignJustify, X } from 'lucide-react';
 import Text from '../common/Text';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
-import { useUserStore } from '@/store/auth/store';
 
 interface MobileHeaderProps {
   isLogin: boolean;
 }
 
 export default function MobileHeader({ isLogin }: MobileHeaderProps) {
-  const { data: userData, isLoading: userDataLoading } = useUserInfo();
-  const { user } = useUserStore();
+  const { data: userData } = useUserInfo();
+
   // console.log(userData);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   // 스크롤 막기
@@ -61,7 +58,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
           className="w-[30px] h-[30px] bg-slate-400 rounded-full overflow-hidden"
         >
           <Image
-            src={userData?.profile_img || '/images/default-profile.svg'}
+            src={userData?.profile_img || '/images/profile-default-image.svg'}
             alt="프로필 이미지"
             width={60}
             height={60}

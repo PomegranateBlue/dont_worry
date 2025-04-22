@@ -84,7 +84,7 @@ const TimeFilterGroup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center space-x-4 bg-backgroundSet-normal">
+    <div className="flex justify-center items-center space-x-4 bg-backgroundSet-normal xl:bg-backgroundSet-card xl:w-full">
       <TimeFilter
         type="year"
         options={yearOptions}

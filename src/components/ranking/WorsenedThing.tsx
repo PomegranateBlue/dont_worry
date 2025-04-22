@@ -25,7 +25,7 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
   return (
     <>
       {mode === WEEK_MODE ? (
-        <div className="flex w-full whitespace-normal break-words items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+        <div className="flex w-full whitespace-normal break-words items-center gap-2 self-stretch p-4 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm xl:w-[300px] xl:h-[240px]">
           {weekBest ? (
             <div className="w-full">
               <div>
@@ -47,7 +47,7 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
           )}
         </div>
       ) : (
-        <div className="flex items-center gap-2 self-stretch p-4 sm:p-6 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm">
+        <div className="flex items-center gap-2 self-stretch p-4 rounded-2xl bg-mind-boolan_bg text-label-normal text-base sm:text-lg md:text-xl font-medium shadow-sm xl:h-[240px] xl:w-[300px]">
           {monthBest ? (
             <div className="w-full">
               <div>

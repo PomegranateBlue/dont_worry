@@ -13,8 +13,9 @@ const Report = ({ most }: ReportProps) => {
         <Text
           as="h2"
           variant="heading3"
+          variant2="heading4"
           color="label-normal"
-          className="text-center text-[22px] font-medium leading-[135%] w-[228px] h-[60px] xl:w-[249px] xl:h-[76px]"
+          className="text-center text-[22px] font-medium leading-[135%] w-[228px] h-[60px] xl:w-[255px] xl:h-[76px]"
         >
           {`${most.name}에 관한 걱정이 
           ${most.percentage}%로 가장 많았어요`}

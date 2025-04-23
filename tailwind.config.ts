@@ -19,10 +19,14 @@ const config: Config = {
     'bg-mind-zzazeung_bg',
     'bg-mind-huhuea_bg',
     'bg-mind-yoerowooum_bg',
-    'bg-mind-moogiryeok_bg'
+    'bg-mind-moogiryeok_bg',
+    'custom-toast'
   ],
   theme: {
     extend: {
+      screens: {
+        headerMd: '810px'
+      },
       keyframes: {
         slide: {
           '0%': { transform: 'translateX(0%)' },

@@ -25,14 +25,29 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
           {weekLowest ? (
             <div className="w-full">
               <div>
-                <Text as="span" variant="title2" color="label-normal">
+                <Text
+                  as="span"
+                  variant="title2"
+                  variant2="title1"
+                  color="label-normal"
+                >
                   {weekLowest.category}
                 </Text>
-                <Text as="span" variant="body3" color="label-normal">
+                <Text
+                  as="span"
+                  variant="body3"
+                  variant2="body2"
+                  color="label-normal"
+                >
                   {ABOUT}
                 </Text>
               </div>
-              <Text as="span" variant="body3" color="label-normal">
+              <Text
+                as="span"
+                variant="body3"
+                variant2="body2"
+                color="label-normal"
+              >
                 {MOST_DECREASE_COMMENT_WEEK}
               </Text>
             </div>
@@ -47,14 +62,29 @@ const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
           {monthLowest ? (
             <div className="w-full">
               <div>
-                <Text as="span" variant="title2" color="label-normal">
+                <Text
+                  as="span"
+                  variant="title2"
+                  variant2="title1"
+                  color="label-normal"
+                >
                   {monthLowest.category}
                 </Text>
-                <Text as="span" variant="body3" color="label-normal">
+                <Text
+                  as="span"
+                  variant="body3"
+                  variant2="body2"
+                  color="label-normal"
+                >
                   {ABOUT}
                 </Text>
               </div>
-              <Text as="span" variant="body3" color="label-normal">
+              <Text
+                as="span"
+                variant="body3"
+                variant2="body2"
+                color="label-normal"
+              >
                 {MOST_DECREASE_COMMENT_MONTH}
               </Text>
             </div>

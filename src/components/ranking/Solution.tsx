@@ -7,6 +7,7 @@ import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
+import Image from 'next/image';
 
 type TopThreeItem = {
   name: string;
@@ -128,11 +129,17 @@ const Solution = ({ topThree }: SolutionProps) => {
 
   return (
     <div className="flex flex-col gap-4 p-5 w-full xl:p-0 xl:gap-6">
-      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
+      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full xl:gap-3">
+        <Image
+          src="/images/ver-default.svg"
+          width={30}
+          height={30}
+          alt="이미지 없음"
+        />
         <Text
           as="div"
           variant="title2"
-          variant2="display1"
+          variant2="heading4"
           color="label-normal"
         >
           {userInfo?.nickname + SOLUTION_TITLE}

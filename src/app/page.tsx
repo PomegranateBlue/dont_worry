@@ -202,7 +202,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-center px-5 py-[60px] bg-primary-1">
+      <section className="flex flex-col items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px]">
         <div className="flex flex-col justify-center items-center gap-[24px]">
           <div className="flex flex-col justify-center items-center gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
@@ -218,51 +218,51 @@ const HomePage = () => {
           </div>
           <div className="flex">
             <div className="flex">
-              <Text
-                variant="body2"
-                color="label-neutral"
-                className="whitespace-nowrap"
-              >
-                지금의 내가 느끼는 감정, 바라는 변화, 그리고 <br /> 전하고 싶은
-                말들을 미래의 나에게 편지로 남겨보세요
+              <Text variant="body2" color="label-neutral">
+                지금의 내가 느끼는 감정, 바라는 변화
+                <br />
+                그리고 전하고 싶은 말들을 미래의 나에게 편지로 남겨보세요
               </Text>
             </div>
           </div>
         </div>
 
-        <div>
-          <div>
-            <Image
-              src={'/images/future-letter-final.svg'}
-              width={335}
-              height={335}
-              alt="future"
-            />
-          </div>
+        <div className="flex w-full">
+          <Image
+            src={'/images/future-letter-final.svg'}
+            width={335}
+            height={335}
+            alt="future"
+          />
         </div>
       </section>
 
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px]">
-        <div className="">
-          <div>
-            <Text variant="body3" color="white">
-              커뮤니티
-            </Text>
+      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px]">
+        <div className="flex flex-col gap-[24px] justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-[12px]">
+            <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
+              <Text variant="body3" color="white">
+                커뮤니티
+              </Text>
+            </div>
+            <div>
+              <Text variant="heading2" color="primary4">
+                다른 사람들의 이야기
+              </Text>
+            </div>
           </div>
-          <div>
-            <Text variant="heading2" color="primary4">
-              다른 사람들의 이야기
-            </Text>
-          </div>
-          <div>
-            <Text variant="body2" color="label-neutral" className="px-4 pt-6">
-              익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
-              나눠보세요
-            </Text>
+
+          <div className="flex">
+            <div className="flex">
+              <Text variant="body2" color="label-neutral">
+                익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
+                나눠보세요
+              </Text>
+            </div>
           </div>
         </div>
 
-        <div>
+        <div className="flex drop-shadow-xl">
           <Image
             src={'images/community-final.svg'}
             width={335}

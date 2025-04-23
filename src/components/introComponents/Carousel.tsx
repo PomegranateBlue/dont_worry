@@ -1,7 +1,8 @@
+'use client';
 import Text from '../common/Text';
 import Image from 'next/image';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';
-
+import { motion } from 'framer-motion';
 const Carousel = () => {
   const serviceIcons = [
     {
@@ -56,10 +57,20 @@ const Carousel = () => {
   }
 
   const doubledItems = [...items.slice(0, 2), ...items];
-
+  console.log(doubledItems);
   return (
-    <div className="w-full max-w-[360px] overflow-hidden mx-auto">
-      <div className="flex gap-x-6 animate-slide w-max">
+    <div className="w-full max-w-[360px] overflow-hidden mx-auto ">
+      <motion.div
+        className="flex gap-x-6  w-max "
+        initial={{ x: 0 }}
+        animate={{ x: '-50%' }}
+        transition={{
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+          duration: 20
+        }}
+      >
         {doubledItems.map((item, idx) =>
           item.type === 'emotion' ? (
             <div
@@ -89,7 +100,7 @@ const Carousel = () => {
             </div>
           )
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,12 +1,23 @@
+'use client';
+
 import React from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 // interface CheckStepProps {
 //   sendAt: string;
 // }
 
 const CheckStep = () => {
+  const router = useRouter();
+
+  const handleGoToLetterBox = () => {
+    // setTimeout을 넣어 렌더링 타이밍 이슈 피하기
+    setTimeout(() => {
+      router.push('/letterbox');
+    }, 0);
+  };
   //   //날짜 데이터를 -월 -일 형식의 텍스트로 변환
   //   const formatDateText = (dateStr: string) => {
   //     const date = new Date(dateStr);
@@ -52,6 +63,7 @@ const CheckStep = () => {
         <div className="w-full mt-10">
           <button
             type="button"
+            onClick={handleGoToLetterBox}
             className="w-full h-12 bg-primary-4 text-white text-lg font-semibold rounded-lg"
           >
             편지함 바로가기

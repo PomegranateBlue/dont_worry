@@ -21,7 +21,7 @@ enum StepProps {
 }
 
 const StepFlow = () => {
-  const [step, setStep] = useState<StepProps>(StepProps.MESSAGE);
+  const [step, setStep] = useState<StepProps>(StepProps.RESULT);
   const {
     selectedTopic,
     selectedEmotions,
@@ -131,7 +131,7 @@ const StepFlow = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center px-[12px] py-[16px] xl:py-[40px]">
               <MessageForm />
             </div>
 

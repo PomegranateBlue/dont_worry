@@ -7,7 +7,7 @@ const MessageForm = () => {
   const maxLength = 150;
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto">
+    <div className="w-full max-w-[1200px] mx-auto ">
       <div className="w-full max-w-[648px] mx-auto ">
         <div className="flex px-5 py-2">
           <Text variant="heading3" color="label-normal">
@@ -17,7 +17,7 @@ const MessageForm = () => {
 
         <div className="relative flex flex-col px-4 py-3">
           <textarea
-            className="max-w-[648px] border-[1px] border-label-assistive text-label-neutral resize-none w-full h-[300px] rounded-[8px] px-5 py-4"
+            className="max-w-[648px] border-[1px] border-label-assistive text-label-neutral resize-none w-full h-[300px] rounded-[8px] px-5 py-3"
             value={message}
             maxLength={149}
             onChange={(e) => setMessage(e.target.value)}

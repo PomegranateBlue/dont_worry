@@ -26,14 +26,14 @@ export default function LoginPage() {
         />
       </div>
       <LoginForm mode="login" />
-      <div className="mt-10">
-        <Text variant="body3" color="label-normal" className="text-center">
-          {LOGIN_TEXT.socialLoginTitle}
-        </Text>
-        <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
-          <KakaoLogin />
-          <GoogleLogin />
-        </div>
+      <div className="w-full h-[1px] bg-line-normal my-9"></div>
+
+      <Text variant="body3" color="label-normal" className="text-center">
+        {LOGIN_TEXT.socialLoginTitle}
+      </Text>
+      <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
+        <KakaoLogin />
+        <GoogleLogin />
       </div>
       <Link href={PATHS.SIGNUP} className="text-center mx-auto w-fit block">
         <Text variant="body3" color="label-alternative" className="underline">

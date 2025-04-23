@@ -28,7 +28,7 @@ const LoginProfile = () => {
           className="object-cover object-center w-full h-full"
         />
       </div>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <div className="flex items-center">
             <Text variant="title2" color="label-neutral">

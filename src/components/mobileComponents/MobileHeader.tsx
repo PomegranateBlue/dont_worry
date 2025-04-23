@@ -44,9 +44,9 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
   };
 
   return (
-    <div className="md:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
+    <div className="headerMd:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
       <button
-        className="md:hidden focus:outline-none z-50"
+        className="headerMd:hidden focus:outline-none z-50"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >

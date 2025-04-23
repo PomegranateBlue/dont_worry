@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-b-[#EDEDED]">
-      <nav className="hidden md:flex flex-row flex-wrap items-center justify-between w-full p-4">
+      <nav className="hidden headerMd:flex flex-row flex-wrap items-center justify-between w-full p-4">
         <Link href="/" className="relative">
           <Image
             src="/images/header-logo.svg"

@@ -24,6 +24,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        headerMd: '810px'
+      },
       keyframes: {
         slide: {
           '0%': { transform: 'translateX(0%)' },

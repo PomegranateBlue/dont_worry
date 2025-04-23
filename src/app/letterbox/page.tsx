@@ -20,11 +20,12 @@ const LetterBoxPage = () => {
           </Text>
         </div>
       </nav>
-      <div>
+      <div className="flex w-[375px] flex-col items-center">
         <FilterLetter
           selectedFilter={selectedFilter}
           onToggleFilter={(label) => setSelectedFilter(label || null)}
         />
+
         <LetterCard selectedFilter={selectedFilter} />
       </div>
     </section>

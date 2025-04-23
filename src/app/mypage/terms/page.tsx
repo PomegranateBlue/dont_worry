@@ -1,4 +1,5 @@
 import { termsOfServiceData } from '@/components/mypage/termsOfServiceData';
+import { PATHS } from '@/constants/common/paths';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -11,7 +12,7 @@ const TermsPage = () => {
       {/* 상단 바 */}
       <div className="relative flex items-center justify-center h-16 border-b">
         {/* 왼쪽 아이콘 */}
-        <Link href="/mypage" className="absolute left-4 p-2">
+        <Link href={PATHS.MYPAGE} className="absolute left-4 p-2">
           <ChevronLeft />
         </Link>
         {/* 가운데 제목 */}

@@ -5,6 +5,7 @@ import KakaoLogin from '@/components/loginComponents/KakaoLogin';
 import GoogleLogin from '@/components/loginComponents/GoogleLogin';
 import Text from '@/components/common/Text';
 import Image from 'next/image';
+import { PATHS } from '@/constants/common/paths';
 
 export default function LoginPage() {
   return (
@@ -33,8 +34,8 @@ export default function LoginPage() {
           <GoogleLogin />
         </div>
       </div>
-      <Link href="/auth/signup" className="text-center mx-auto w-fit block">
-        <Text variant="body3" color="label-alternative" className=" underline">
+      <Link href={PATHS.SIGNUP} className="text-center mx-auto w-fit block">
+        <Text variant="body3" color="label-alternative" className="underline">
           회원가입
         </Text>
       </Link>

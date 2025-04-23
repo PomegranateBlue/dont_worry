@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Text from '@/components/common/Text';
 import LoginForm from '@/components/loginComponents/LoginForm';
+import { PATHS } from '@/constants/common/paths';
 
 const SignupPage = () => {
   return (
@@ -12,7 +13,7 @@ const SignupPage = () => {
       </div>
 
       <LoginForm mode="signup" />
-      <Link href="/auth/login" className="mx-auto mt-4 block w-fit">
+      <Link href={PATHS.LOGIN} className="mx-auto mt-4 block w-fit">
         이미 계정이 있어요
       </Link>
     </div>

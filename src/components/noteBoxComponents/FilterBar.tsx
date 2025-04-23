@@ -43,7 +43,7 @@ const FilterBar = ({
       <div className="flex-1 whitespace-nowrap scrollbar-hide overflow-x-auto flex pr-4 gap-2">
         {/* 정렬순 탭 */}
         <button
-          className={`flex items-center px-3 h-[32px] rounded-full border text-sm ${
+          className={`flex items-center px-3 py-[6px] h-[32px] rounded-[16px] border  xl:rounded-[20px] xl:px-[16px]${
             selectedOption === '정렬순'
               ? 'border-primary-4 bg-primary-1'
               : 'border-line-normal'
@@ -90,8 +90,6 @@ const FilterBar = ({
           />
         )}
       </div>
-
-
     </header>
   );
 };

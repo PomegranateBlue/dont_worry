@@ -61,7 +61,9 @@ export default function RootLayout({
         <link rel="icon" href="/images/favicon.svg" />
         {/*파비콘 url 설정하기*/}
       </head>
-      <body className={`${pretendard.className} w-full max-w-[1280px] mx-auto`}>
+      <body
+        className={`${pretendard.className} w-full max-w-[1280px] !p-0 m-0 mx-auto`}
+      >
         <Providers>
           <AuthProvider>
             <Header />

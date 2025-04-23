@@ -12,6 +12,7 @@ import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { showToast } from '../common/Toast';
+import { LOGIN_TEXT } from '@/constants/login/text';
 
 interface LoginFormProps {
   mode: string;
@@ -55,7 +56,6 @@ const LoginForm = ({ mode }: LoginFormProps) => {
 
   useEffect(() => {
     const afterLogin = async () => {
-      // console.log(state);
       if (state.success) {
         try {
           const data = await fetchUser();
@@ -85,10 +85,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
   });
 
   return (
-    <form
-      action={formAction}
-      className="space-y-5 border-b border-b-line-normal pb-9"
-    >
+    <form action={formAction} className="space-y-5">
       {/* 닉네임: 회원가입일 때만 보이게 */}
       {mode === 'signup' && (
         <InputForm
@@ -131,7 +128,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         className="w-full bg-primary-4 p-3 rounded-md !mt-7"
       >
         <Text as="span" variant="title2" color="white">
-          {mode === 'signup' ? '회원가입' : '로그인'}
+          {mode === 'signup' ? LOGIN_TEXT.signupTitle : LOGIN_TEXT.loginTitle}
         </Text>
       </button>
     </form>

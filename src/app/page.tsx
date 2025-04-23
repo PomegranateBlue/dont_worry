@@ -62,12 +62,13 @@ const HomePage = () => {
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <Text
             variant="title2"
+            variant2="heading1"
             color="primary2"
             className="flex justify-center text-center"
           >
             돈워리는 부정적인 감정을
-            <br /> 기록하고, 정리하고, 돌아볼 수 있게 돕는
-            <br />
+            <br className="xl:hidden" /> 기록하고, 정리하고, 돌아볼 수 있게 돕는
+            <br className="xl:hidden" />
           </Text>
           <Text variant="heading3" color="primary4" variant2="display2">
             정서 기반 감정 기록 플랫폼입니다
@@ -76,7 +77,7 @@ const HomePage = () => {
       </section>
       {/* 첫번째 섹션 끝 */}
 
-      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px] ">
+      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
             <Text
@@ -166,7 +167,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px]">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col justify-center items-center gap-[24px] xl:items-start xl:text-left ">
           <div className="flex flex-col justify-center items-center gap-[12px] xl:items-start">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
@@ -207,7 +208,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col xl:flex-row-reverse items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px] xl:gap-[80px]">
+      <section className="flex flex-col xl:flex-row-reverse items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px] xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col items-center xl:items-start gap-[24px] text-center xl:text-left">
           <div className="flex flex-col items-center xl:items-start gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
@@ -245,7 +246,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px]">
+      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col gap-[24px] justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
@@ -271,41 +272,51 @@ const HomePage = () => {
         </div>
 
         <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
-          <div className="flex gap-[12px]">
-            <div className="flex-1 p-[16px] xl:p-[24px]">
+          <div className="flex flex-col gap-[12px] xl:flex-row w-full">
+            <div className="flex p-[16px] xl:p-[24px]">
               <Image
                 src={'images/community1.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="community1"
                 quality={80}
+                className="w-full min-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
               />
             </div>
-            <div className="flex-1 p-[16px] xl:p-[24px]">
+            <div className="flex p-[16px] xl:p-[24px]">
               <Image
                 src={'images/community2.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="community2"
                 quality={80}
+                className="w-full min-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center h-[630px] bg-[#F3F0FF]">
-        <Text variant="heading2" color="primary4" className="flex text-center">
+      <section className="flex flex-col justify-center items-center h-[630px] bg-primary-1 gap-[40px] xl:gap-[60px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <Text
+          variant="heading2"
+          variant2="display2"
+          color="primary4"
+          className="flex text-center"
+        >
           여러분의 고민은 무엇인가요?
           <br /> 돈워리를 통해 이야기를 들려주세요
         </Text>
-        <Image
-          src={'/images/intro-emoticon.svg'}
-          width={253}
-          height={160}
-          alt="main"
-          className=" pt-20 pb-20"
-        />
+        <div>
+          <Image
+            src={'/images/intro-emoticon.svg'}
+            width={0}
+            height={0}
+            alt="main"
+            className="min-w-[253px] min-h-[160px]  xl:max-w-[317px] xl:min-h-[200px]"
+          />
+        </div>
+
         <StartButtonBottom />
       </section>
     </main>

@@ -146,7 +146,7 @@ const RankingPage = () => {
             <Report most={most} />
           </div>
         </div>
-        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch xl:w-full xl:gap-[40px] xl:p-0 xl:max-w-[580px] justify-center md:px-0">
+        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch xl:w-full xl:gap-[40px] xl:p-0 xl:max-w-[580px] md:px-0">
           <FilterMenu />
 
           {chartMode === 'topic' ? (

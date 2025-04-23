@@ -53,13 +53,6 @@ const FilterModal = ({
     }
   }, [selectedOption, selectedSort, selectedTopics, selectedEmotions]);
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
   const handleToggle = (value: string) => {
     if (selectedOption === '정렬순') {
       setSelectedValues([value]);

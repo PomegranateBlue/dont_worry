@@ -19,7 +19,10 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
       .single();
 
     if (error) throw error;
-    return data as Pick<User, 'email' | 'nickname' | 'profile_img' | 'user_id' | 'is_deleted'>;
+    return data as Pick<
+      User,
+      'email' | 'nickname' | 'profile_img' | 'user_id' | 'is_deleted'
+    >;
   } catch (error) {
     console.error('사용자 정보 조회 실패:', error);
 
@@ -28,16 +31,21 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
 };
 
 // 사용자의 미래 편지 목록 가져오기
-export const fetchUserLetters = async (userId: string | null | undefined) => {
-  if (userId === null || userId === undefined) {
+export const fetchUserLetters = async (
+  userId: string | null | undefined,
+  selectedFilter: string | null
+) => {
+  if (!userId) {
     return [];
   }
+
+  const sortColumn = selectedFilter === '도착일순' ? 'send_at' : 'created_at';
 
   const { data, error } = await supabase
     .from('letter')
     .select('*')
     .eq('user_id', userId)
-    .order('created_at', { ascending: false });
+    .order(sortColumn, { ascending: false });
 
   if (error) throw new Error(error.message);
   return data || [];

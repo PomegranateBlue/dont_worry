@@ -23,8 +23,8 @@ const FilterMenu = () => {
   };
 
   return (
-    <div className="w-full h-[24px] xl:h-[44px]">
-      <div className="relative flex h-10 rounded-full bg-label-disable overflow-hidden">
+    <div className="w-full">
+      <div className="relative flex rounded-full bg-label-disable overflow-hidden h-[36px] xl:h-[44px]">
         <motion.div
           layout
           layoutId="tabHighlight"

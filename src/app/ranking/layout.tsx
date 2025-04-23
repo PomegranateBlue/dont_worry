@@ -31,7 +31,7 @@ const RankingLayout = ({
     <div className="w-full flex justify-center">
       <div className="xl:bg-backgroundSet-normal w-full max-w-[1280px] mx-auto">
         {/*마지막 3개의 속성을 루트에서 적용시켜야함*/}
-        <div className="pr-[6px] pl-[6px] h-14 flex items-center justify-center">
+        <div className="pr-[6px] pl-[6px] h-14 flex items-center justify-center sticky top-0 z-10 bg-backgroundSet-normal">
           <Text
             as="h1"
             variant="title1"

@@ -28,7 +28,7 @@ const FilterLetter = ({
         className="flex items-center px-3 py-1 border rounded"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {selectedFilter || '선택 없음'}
+        정렬 : {selectedFilter || '선택 없음'}
         <ChevronDown className="ml-1 w-4 h-4" />
       </button>
 

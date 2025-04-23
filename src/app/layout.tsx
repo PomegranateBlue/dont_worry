@@ -4,6 +4,7 @@ import './globals.css';
 import Providers from '@/provider/providers';
 import Header from '@/components/common/Header';
 import { AuthProvider } from '@/provider/authProvider';
+import { Toast } from '@/components/common/Toast';
 
 export const pretendard = localFont({
   src: './fonts/PretendardVariable.ttf',
@@ -47,6 +48,7 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             {children}
+            <Toast />
           </AuthProvider>
         </Providers>
       </body>

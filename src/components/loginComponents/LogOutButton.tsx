@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/auth/store';
 import Text from '../common/Text';
+import Toastify from 'toastify-js';
 const LogOutButton = () => {
   const { setUser } = useUserStore();
   const router = useRouter();
@@ -15,7 +16,14 @@ const LogOutButton = () => {
     setUser(null);
     localStorage.removeItem('auth-storage');
     router.push('/');
-    alert('로그아웃');
+    Toastify({
+      text: `🙏 안녕히가세요 🙏`,
+      duration: 100,
+      gravity: 'top',
+      position: 'right',
+      stopOnFocus: true,
+      className: 'bg-white'
+    }).showToast();
     router.refresh();
   };
   return (

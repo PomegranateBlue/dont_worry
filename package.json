@@ -37,6 +37,8 @@
     "react-day-picker": "8.10.1",
     "react-dom": "^18",
     "react-hook-form": "^7.55.0",
+    "react-lottie": "^1.2.10",
+    "react-text-loop": "^2.3.0",
     "react-toastify": "^11.0.5",
     "resend": "^4.2.0",
     "sweetalert2": "^11.19.1",

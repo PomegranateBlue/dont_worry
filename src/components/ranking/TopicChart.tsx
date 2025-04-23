@@ -74,7 +74,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
 
   return (
     <>
-      <div className="flex w-[258px] flex-col items-center">
+      <div className="flex w-[258px] flex-col items-center gap-2">
         <Text
           as="h2"
           variant="heading3"
@@ -93,7 +93,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
         </Text>
       </div>
 
-      <div className="w-[217.8px] h-[220px] xl:w-[280px] xl:h-[255px] flex justify-center items-center xl:gap-3">
+      <div className="w-[217.8px] h-[220px] xl:w-[255px] xl:h-[255px] flex justify-center items-center xl:gap-3 md:w-[217.8px]">
         <Doughnut options={options} data={topicChartData} />
       </div>
     </>

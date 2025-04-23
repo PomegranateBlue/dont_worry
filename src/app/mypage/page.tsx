@@ -22,7 +22,7 @@ const MyPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUserStore();
   const { mutateAsync: updateUserInfo } = useUpdateUserInfo();
-  const { data: letters, isLoading: lettersLoading } = useUserLetters();
+  const { data: letters, isLoading: lettersLoading } = useUserLetters(null);
   const { data: userInfo, isLoading: userDataLoading } = useUserInfo();
   const { data: userWorries, isLoading: userWorriesLoading } = useUserWorries();
   const openModal = () => setIsModalOpen(true);

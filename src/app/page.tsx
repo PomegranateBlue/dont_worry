@@ -166,9 +166,9 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal px-5 py-[60px] xl:flex-row xl:gap-[80px]">
-        <div className="flex flex-col justify-center items-center gap-[24px] ">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px]">
+        <div className="flex flex-col justify-center items-center gap-[24px] xl:items-start xl:text-left ">
+          <div className="flex flex-col justify-center items-center gap-[12px] xl:items-start">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
               <Text
                 variant="body3"
@@ -207,37 +207,40 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px]">
-        <div className="flex flex-col justify-center items-center gap-[24px]">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
+      <section className="flex flex-col xl:flex-row-reverse items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px] xl:gap-[80px]">
+        <div className="flex flex-col items-center xl:items-start gap-[24px] text-center xl:text-left">
+          <div className="flex flex-col items-center xl:items-start gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" className="text-backgroundSet-normal">
+              <Text
+                variant="body3"
+                variant2="body1"
+                className="text-backgroundSet-normal"
+              >
                 미래편지
               </Text>
             </div>
-            <div className="flex text-center ">
-              <Text variant="heading2" color="primary4">
+            <div className="flex">
+              <Text variant="heading2" variant2="display2" color="primary4">
                 미래의 나에게 보내는 편지
               </Text>
             </div>
           </div>
           <div className="flex">
-            <div className="flex">
-              <Text variant="body2" color="label-neutral">
-                지금의 내가 느끼는 감정, 바라는 변화
-                <br />
-                그리고 전하고 싶은 말들을 미래의 나에게 편지로 남겨보세요
-              </Text>
-            </div>
+            <Text variant="body2" variant2="body1" color="label-neutral">
+              지금의 내가 느끼는 감정, 바라는 변화
+              <br />
+              그리고 전하고 싶은 말들을 미래의 나에게 편지로 남겨보세요
+            </Text>
           </div>
         </div>
 
-        <div className="flex w-full">
+        <div className="flex w-full xl:w-[335px] justify-center xl:justify-start">
           <Image
-            src={'/images/future-letter-final.svg'}
+            src="/images/future-letter-final.svg"
             width={335}
             height={335}
             alt="future"
+            className="w-[260px] h-auto xl:w-[335px]"
           />
         </div>
       </section>
@@ -246,12 +249,12 @@ const HomePage = () => {
         <div className="flex flex-col gap-[24px] justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" color="white">
+              <Text variant="body3" variant2="body1" color="white">
                 커뮤니티
               </Text>
             </div>
             <div>
-              <Text variant="heading2" color="primary4">
+              <Text variant="heading2" variant2="display2" color="primary4">
                 다른 사람들의 이야기
               </Text>
             </div>
@@ -259,7 +262,7 @@ const HomePage = () => {
 
           <div className="flex">
             <div className="flex">
-              <Text variant="body2" color="label-neutral">
+              <Text variant="body2" variant2="body1" color="label-neutral">
                 익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
                 나눠보세요
               </Text>
@@ -267,14 +270,27 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex drop-shadow-xl">
-          <Image
-            src={'images/community-final.svg'}
-            width={335}
-            height={300}
-            alt="community"
-            quality={80}
-          />
+        <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
+          <div className="flex gap-[12px]">
+            <div className="flex-1 p-[16px] xl:p-[24px]">
+              <Image
+                src={'images/community1.svg'}
+                width={335}
+                height={300}
+                alt="community1"
+                quality={80}
+              />
+            </div>
+            <div className="flex-1 p-[16px] xl:p-[24px]">
+              <Image
+                src={'images/community2.svg'}
+                width={335}
+                height={300}
+                alt="community2"
+                quality={80}
+              />
+            </div>
+          </div>
         </div>
       </section>
 

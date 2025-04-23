@@ -19,7 +19,8 @@ const config: Config = {
     'bg-mind-zzazeung_bg',
     'bg-mind-huhuea_bg',
     'bg-mind-yoerowooum_bg',
-    'bg-mind-moogiryeok_bg'
+    'bg-mind-moogiryeok_bg',
+    'custom-toast'
   ],
   theme: {
     extend: {

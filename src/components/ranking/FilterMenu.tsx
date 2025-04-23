@@ -24,7 +24,7 @@ const FilterMenu = () => {
 
   return (
     <div className="w-full">
-      <div className="relative flex h-10 rounded-full bg-label-disable overflow-hidden">
+      <div className="relative flex rounded-full bg-label-disable overflow-hidden h-[36px] xl:h-[44px]">
         <motion.div
           layout
           layoutId="tabHighlight"
@@ -44,6 +44,7 @@ const FilterMenu = () => {
             >
               <Text
                 variant="body2"
+                variant2="body1"
                 color={isTopic ? 'white' : 'label-alternative'}
               >
                 {CHART_FILTER_TOPIC}
@@ -61,6 +62,7 @@ const FilterMenu = () => {
             >
               <Text
                 variant="body2"
+                variant2="body1"
                 color={isEmotion ? 'white' : 'label-alternative'}
               >
                 {CHART_FILTER_EMOTION}

@@ -78,6 +78,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
         <Text
           as="h2"
           variant="heading3"
+          variant2="heading1"
           color="primary4"
           className="text-center leading-[135%]"
         >

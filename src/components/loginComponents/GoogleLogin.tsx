@@ -1,21 +1,18 @@
 'use client';
 
-import { supabase } from '@/app/utils/supabase/supabase';
+import { createClient } from '@/app/utils/supabase/client';
 import Image from 'next/image';
 
 const GoogleLogin = () => {
-  async function signinWithGoogle() {
-    const { error } = await supabase.auth.signInWithOAuth({
+  const signinWithGoogle = async () => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `http://localhost:3000/auth/callback`
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
       }
     });
-    // console.log('구글로그인데이터', data);
-    if (error) {
-      console.log(error);
-    }
-  }
+  };
   return (
     <button onClick={signinWithGoogle}>
       <Image

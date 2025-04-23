@@ -89,9 +89,6 @@ const NotePage = () => {
   const handleDeleteNote = async () => {
     if (selectedNoteIds.length === 0) return;
 
-    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
-    if (!confirmDelete) return;
-
     const { error } = await supabase
       .from('users_note')
       .delete()

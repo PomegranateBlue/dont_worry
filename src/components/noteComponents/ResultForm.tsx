@@ -26,7 +26,7 @@ const ResultForm = () => {
       </div>
 
       {/* 메시지 영역 */}
-      <div className="flex flex-col gap-5 p-5 flex-1">
+      <div className="flex flex-col gap-5 p-5 flex-1 xl:px-[40px] xl:py-[24px]">
         {/* 사용자 메시지 */}
         <div className="flex justify-end">
           <div className="bg-white px-4 py-2 w-fit max-w-[80%]  rounded-[16px_16px_0px_16px] drop-shadow-md">

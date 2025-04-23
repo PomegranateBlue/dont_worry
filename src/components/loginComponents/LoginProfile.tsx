@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
 import Link from 'next/link';
+import { PATHS } from '@/constants/common/paths';
 
 const LoginProfile = () => {
   const { data: userData } = useUserInfo();
@@ -43,19 +44,19 @@ const LoginProfile = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>
-            <Link href="/mypage">
+            <Link href={PATHS.MYPAGE}>
               <Text variant="body3" color="label-neutral">
                 마이페이지
               </Text>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="">
+          <DropdownMenuItem>
             <Text variant="body3" color="label-neutral">
-              <LogOutButton />
+              <LogOutButton textColor="label-neutral" />
             </Text>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/letter">
+            <Link href={PATHS.LETTER}>
               <Text variant="body3" color="label-neutral">
                 편지함
               </Text>

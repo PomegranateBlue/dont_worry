@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';
 import Image from 'next/image';
 import Text from '../common/Text';
-
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 interface NoteCardProps {
   content: string;
   created_at: string;
@@ -36,12 +36,13 @@ const NoteCard = ({
   const message = userNote.Question;
   const answer = userNote.Answer;
 
+  const { data } = useUserInfo();
   return (
     <div
       id={note_id}
-      className="relative flex flex-col gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-xl"
+      className="relative flex flex-col w-full max-w-[648px] gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-xl"
     >
-      <div className="flex flex-wrap gap-2 items-center">
+      <div className="flex flex-wrap  gap-2 items-center">
         {emotion_category?.map((emotionLabel) => {
           const emotionData = EMOTION_CATEGORIES.find(
             (emotion) => emotion.label === emotionLabel
@@ -82,7 +83,7 @@ const NoteCard = ({
           {formattedDate}
         </Text>
       </div>
-      <div className="flex my-2 w-[295px] h-[1px] bg-[#E0E0E2]"></div>
+      <div className="flex my-2 w-full h-[1px] bg-[#E0E0E2]"></div>
       <div className="flex   leading-relaxed  whitespace-pre-wrap line-clamp-5">
         <Text variant="body3" color="label-neutral" as="p">
           {message}
@@ -90,17 +91,25 @@ const NoteCard = ({
       </div>
 
       {showAnswer && (
-        <div className="flex flex-col   bg-[#FFFFFF]   rounded   whitespace-pre-wrap">
-          <div className="flex px-2 gap-2">
+        <div className="flex flex-col bg-backgroundSet-normal whitespace-pre-wrap">
+          <div className="flex justify-end w-full items-center px-2 gap-2">
             <Text
               variant="body3"
               color="label-normal"
               className="flex text-right"
             >
-              {} 님께 드리는 돈워리의 답장
+              {data?.nickname} 님께 드리는 돈워리의 답장
             </Text>
             <div className="flex p-1">
-              <div className="w-[30px] h-[30px]">이미지</div>
+              <div className="w-[40px] h-[40px]  xl:w-[80px] xl:h-[80px]">
+                <Image
+                  src={'/images/ver2-default.svg'}
+                  width={80}
+                  height={64}
+                  alt="answer"
+                  className="w-[30px] h-[30px] xl:w-[80px] xl:h-[64px]"
+                />
+              </div>
             </div>
           </div>
 

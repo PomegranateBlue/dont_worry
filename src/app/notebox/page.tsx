@@ -115,7 +115,7 @@ const NotePage = () => {
           </Text>
         </div>
 
-        <div className="flex justify-between items-center sticky top-0 z-10 px-4 to-backgroundSet-normal">
+        <div className="flex flex-1 justify-between items-center sticky top-0 z-10 bg-backgroundSet-normal ">
           <div className="flex  items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
             <FilterBar
               onClickFilter={(label) => {

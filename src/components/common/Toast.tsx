@@ -33,3 +33,8 @@ export const showToast = (
       break;
   }
 };
+
+/**
+ * 적용예시
+ * showToast('문구입력', 'info(type입력)');
+ */

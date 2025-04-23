@@ -2,11 +2,14 @@
 
 import Text from '../common/Text';
 import Lottie from 'react-lottie';
+import type { AnimationConfigWithData } from 'lottie-web';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const MessageLoading = () => {
-  const [animation, setAnimation] = useState<any>(null);
+  const [animation, setAnimation] = useState<
+    AnimationConfigWithData['animationData'] | null
+  >(null);
   const [dotIndex, setDotIndex] = useState(0);
   const dotArray = ['', '.', '..', '...'];
 

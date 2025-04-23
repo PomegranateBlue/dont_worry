@@ -57,7 +57,7 @@ const Carousel = () => {
   }
 
   const doubledItems = [...items.slice(0, 2), ...items];
-  console.log(doubledItems);
+
   return (
     <div className="w-full  overflow-hidden mx-auto ">
       <motion.div

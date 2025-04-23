@@ -61,7 +61,7 @@ const Carousel = () => {
   return (
     <div className="w-full  overflow-hidden mx-auto ">
       <motion.div
-        className="flex gap-x-6  w-max "
+        className="flex gap-x-6  w-max xl:gap-x-[20px] "
         initial={{ x: 0 }}
         animate={{ x: '-50%' }}
         transition={{

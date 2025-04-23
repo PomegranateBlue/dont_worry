@@ -6,7 +6,17 @@ import { useUserStore } from '@/store/auth/store';
 import Text from '../common/Text';
 import { showToast } from '../common/Toast';
 
-const LogOutButton = () => {
+interface LogOutButtonProps {
+  textVariant?: 'body3';
+  textColor?: 'label-alternative' | 'label-neutral' | 'default';
+  className?: string;
+}
+
+const LogOutButton = ({
+  textVariant = 'body3',
+  textColor = 'default',
+  className
+}: LogOutButtonProps) => {
   const { setUser } = useUserStore();
   const router = useRouter();
   const signOut = async () => {
@@ -23,7 +33,7 @@ const LogOutButton = () => {
   return (
     //className="underline md:no-underline"
     <button onClick={signOut}>
-      <Text variant={'body3'} className="text-label-alternative underline">
+      <Text variant={textVariant} color={textColor} className={className}>
         로그아웃
       </Text>
     </button>

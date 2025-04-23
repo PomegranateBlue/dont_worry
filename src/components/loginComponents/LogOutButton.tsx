@@ -4,6 +4,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/auth/store';
 import Text from '../common/Text';
+import { showToast } from '../common/Toast';
+
 const LogOutButton = () => {
   const { setUser } = useUserStore();
   const router = useRouter();
@@ -15,7 +17,7 @@ const LogOutButton = () => {
     setUser(null);
     localStorage.removeItem('auth-storage');
     router.push('/');
-    alert('로그아웃');
+    showToast('🙏 안녕히가세요 🙏', 'info');
     router.refresh();
   };
   return (

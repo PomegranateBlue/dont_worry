@@ -107,9 +107,9 @@ const NotePage = () => {
     setIsEdit(false);
   };
   return (
-    <div className="w-full max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
+    <div className="w-full max-w-[375px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
       <div className="flex justify-center items-center px-[6px] py-[15px]">
-        <Text variant="title2" color="label-normal" className=" text-center">
+        <Text variant="title2" color="label-normal" className="text-center">
           걱정 보관함
         </Text>
       </div>
@@ -153,7 +153,7 @@ const NotePage = () => {
         />
       )}
 
-      <main className="flex-1 overflow-y-auto  px-5 py-2 space-y-4">
+      <main className="flex-1   px-5 py-2 space-y-4 ">
         {filteredNotes.map((note) => {
           const isChecked = selectedNoteIds.includes(note.note_id);
           return (

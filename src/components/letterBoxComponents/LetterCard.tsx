@@ -4,8 +4,12 @@ import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
 import Image from 'next/image';
 import React from 'react';
 
-const LetterCard = () => {
-  const { data: letters, isLoading, isError } = useUserLetters();
+interface LetterCardProps {
+  selectedFilter: string | null;
+}
+
+const LetterCard = ({ selectedFilter }: LetterCardProps) => {
+  const { data: letters, isLoading, isError } = useUserLetters(selectedFilter);
 
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>편지 데이터 로딩 실패</div>;

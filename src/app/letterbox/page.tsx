@@ -1,12 +1,20 @@
-import LetterCard from '@/components/letterBoxComponents/LetterCard';
-import React from 'react';
+'use client';
 
-const page = () => {
+import FilterLetter from '@/components/letterBoxComponents/FilterLetter';
+import LetterCard from '@/components/letterBoxComponents/LetterCard';
+import React, { useState } from 'react';
+
+const LetterBoxPage = () => {
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   return (
     <div>
-      <LetterCard />
+      <FilterLetter
+        selectedFilter={selectedFilter}
+        onToggleFilter={(label) => setSelectedFilter(label || null)}
+      />
+      <LetterCard selectedFilter={selectedFilter} />
     </div>
   );
 };
 
-export default page;
+export default LetterBoxPage;

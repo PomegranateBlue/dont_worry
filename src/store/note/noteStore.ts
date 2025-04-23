@@ -47,7 +47,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
     }),
 
   message: '',
-  setMessage: (message) => set({ message }),
+  setMessage: (message) => set({  message }),
 
   result: '',
   setResult: (result) => set({ result }),

@@ -89,71 +89,73 @@ const StepFlow = () => {
   };
 
   return (
-    <div className="w-full relative max-w-[1200px]">
-      {step === StepProps.CATEGORY && (
-        <div>
-          <Text
-            variant="title1"
-            color="label-normal"
-            className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
-          >
-            걱정 작성
-          </Text>
-          <TopicCategoryForm onSelectCategory={handleCategorySelect} />
-          <div ref={emotionRef}>
-            <EmotionCategoryForm />
-          </div>
-          <div className="px-5 py-2 w-full">
-            <button
-              className="flex items-center justify-center mx-auto w-full h-[48px] text-[#FFFFFF] bg-[#8573C9] rounded-[8px] px-5 py-4"
-              onClick={() => setStep(StepProps.MESSAGE)}
+    <div className="flex w-full justify-center mx-auto max-w-[1200px]">
+      <div className="w-full  max-w-[648px]">
+        {step === StepProps.CATEGORY && (
+          <div>
+            <Text
+              variant="title1"
+              color="label-normal"
+              className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
             >
-              <Text variant="title2" className="text-backgroundSet-normal">
-                다음으로
-              </Text>
-            </button>
-          </div>
-        </div>
-      )}
-      {step === StepProps.MESSAGE && (
-        <div className="flex flex-col min-h-screen overflow-hidden">
-          <div className="relative h-[56px] w-full px-[6px]">
-            <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-              <ChevronLeft
-                onClick={() => {
-                  setStep(StepProps.CATEGORY);
-                }}
-              />
-            </button>
-            <div className="absolute inset-0 flex justify-center items-center">
-              <p className="text-[20px] font-semibold">감정 작성</p>
+              걱정 작성
+            </Text>
+            <TopicCategoryForm onSelectCategory={handleCategorySelect} />
+            <div ref={emotionRef}>
+              <EmotionCategoryForm />
+            </div>
+            <div className="flex justify-center w-full px-5 py-2  ">
+              <button
+                className="max-w-[648px] flex items-center justify-center  w-full h-[48px]  bg-primary-4 rounded-[8px] px-5 py-4"
+                onClick={() => setStep(StepProps.MESSAGE)}
+              >
+                <Text variant="title2" className="text-backgroundSet-normal">
+                  다음으로
+                </Text>
+              </button>
             </div>
           </div>
+        )}
+        {step === StepProps.MESSAGE && (
+          <div className="flex flex-col min-h-screen overflow-hidden">
+            <div className="relative h-[56px] w-full px-[6px]">
+              <button className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+                <ChevronLeft
+                  onClick={() => {
+                    setStep(StepProps.CATEGORY);
+                  }}
+                />
+              </button>
+              <div className="absolute inset-0 flex justify-center items-center">
+                <p className="text-[20px] font-semibold">감정 작성</p>
+              </div>
+            </div>
 
-          <div className="flex flex-col justify-center items-center">
-            <MessageForm />
+            <div className="flex flex-col justify-center items-center">
+              <MessageForm />
+            </div>
+
+            <div className="h-[128px]" />
+
+            <div className="flex px-5 py-2 w-full">
+              <button
+                onClick={handleSubmit}
+                className="flex items-center justify-center px-5 py-4 w-full h-[48px] bg-primary-4 rounded-[8px] mt-auto"
+              >
+                <Text variant="title2" className="text-backgroundSet-normal">
+                  제출하기
+                </Text>
+              </button>
+            </div>
           </div>
-
-          <div className="h-[128px]" />
-
-          <div className="flex px-5 py-2 w-full">
-            <button
-              onClick={handleSubmit}
-              className="flex items-center justify-center px-5 py-4 w-full h-[48px] bg-primary-4 rounded-[8px] mt-auto"
-            >
-              <Text variant="title2" className="text-backgroundSet-normal">
-                제출하기
-              </Text>
-            </button>
+        )}
+        {step === StepProps.RESULT && (
+          <div>
+            <ResultForm />
           </div>
-        </div>
-      )}
-      {step === StepProps.RESULT && (
-        <div>
-          <ResultForm />
-        </div>
-      )}
-      {isPending && <MessageLoading />}
+        )}
+        {isPending && <MessageLoading />}
+      </div>
     </div>
   );
 };

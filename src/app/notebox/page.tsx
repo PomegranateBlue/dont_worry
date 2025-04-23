@@ -107,100 +107,102 @@ const NotePage = () => {
     setIsEdit(false);
   };
   return (
-    <div className="w-full max-w-[375px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
-      <div className="flex justify-center items-center px-[6px] py-[15px]">
-        <Text variant="title2" color="label-normal" className="text-center">
-          걱정 보관함
-        </Text>
-      </div>
+    <div className="flex max-h-[1200px]">
+      <div className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
+        <div className="flex justify-center items-center px-[6px] py-[15px]">
+          <Text variant="title2" color="label-normal" className="text-center">
+            걱정 보관함
+          </Text>
+        </div>
 
-      <div className="flex justify-center whitespace-nowrap scrollbar-hide overflow-x-auto items-center sticky top-0 z-10 bg-backgroundSet-normal">
-        <div>
-          <FilterBar
-            onClickFilter={(label) => {
-              setFilterType(label);
-              setIsModalOpen(true);
-            }}
+        <div className="flex justify-between items-center sticky top-0 z-10 px-4 to-backgroundSet-normal">
+          <div className="flex  items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
+            <FilterBar
+              onClickFilter={(label) => {
+                setFilterType(label);
+                setIsModalOpen(true);
+              }}
+              selectedOption={filterType}
+              selectedTopic={selectedTopics[0] || ''}
+              selectedEmotions={selectedEmotions}
+              selectedSort={selectedSort}
+              onRemoveFilter={handleRemoveFilter}
+            />
+          </div>
+
+          <div className="whitespace-nowrap">
+            <EditBar
+              isEdit={isEdit}
+              selectedNoteIds={selectedNoteIds}
+              onToggleEdit={onToggleEdit}
+              onDelete={handleDeleteNote}
+            />
+          </div>
+        </div>
+
+        {isModalOpen && (
+          <FilterModal
             selectedOption={filterType}
-            selectedTopic={selectedTopics[0] || ''}
-            selectedEmotions={selectedEmotions}
+            setSelectedOption={setFilterType}
             selectedSort={selectedSort}
-            onRemoveFilter={handleRemoveFilter}
+            setSelectedSort={setSelectedSort}
+            selectedTopics={selectedTopics}
+            setSelectedTopics={setSelectedTopics}
+            selectedEmotions={selectedEmotions}
+            setSelectedEmotions={setSelectedEmotions}
+            onClose={() => setIsModalOpen(false)}
           />
-        </div>
+        )}
 
-        <div>
-          <EditBar
-            isEdit={isEdit}
-            selectedNoteIds={selectedNoteIds}
-            onToggleEdit={onToggleEdit}
-            onDelete={handleDeleteNote}
-          />
-        </div>
-      </div>
-
-      {isModalOpen && (
-        <FilterModal
-          selectedOption={filterType}
-          setSelectedOption={setFilterType}
-          selectedSort={selectedSort}
-          setSelectedSort={setSelectedSort}
-          selectedTopics={selectedTopics}
-          setSelectedTopics={setSelectedTopics}
-          selectedEmotions={selectedEmotions}
-          setSelectedEmotions={setSelectedEmotions}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
-
-      <main className="flex-1   px-5 py-2 space-y-4 ">
-        {filteredNotes.map((note) => {
-          const isChecked = selectedNoteIds.includes(note.note_id);
-          return (
-            <div className="flex w-full items-start gap-2" key={note.note_id}>
-              {isEdit && (
-                <button
-                  onClick={() => {
-                    setSelectedNoteIds((item) =>
-                      isChecked
-                        ? item.filter((id) => id !== note.note_id)
-                        : [...item, note.note_id]
-                    );
-                  }}
-                  className={`  flex items-center justify-center mt-1
-        ${isChecked ? 'bg-primary-4 text-white ' : 'text-gray-400'}`}
-                >
-                  <CheckCircle2 />
-                </button>
-              )}
-              <div className="flex-1 min-w-0">
-                <NoteCard
-                  content={note.content}
-                  created_at={note.created_at}
-                  note_id={note.note_id}
-                  topic_category={note.topic_category}
-                  emotion_category={
-                    note.emotion_category
-                      ? note.emotion_category
-                          .split(',')
-                          .map((emotion) => emotion.trim())
-                      : null
-                  }
-                  isEdit={isEdit}
-                  isChecked={isChecked}
-                  onToggleCheck={(id: string) => {
-                    setSelectedNoteIds((item) =>
-                      item.includes(id)
-                        ? item.filter((i) => i !== id)
-                        : [...item, id]
-                    );
-                  }}
-                />
+        <main className="flex-1   px-5 py-2 space-y-4 ">
+          {filteredNotes.map((note) => {
+            const isChecked = selectedNoteIds.includes(note.note_id);
+            return (
+              <div className="flex w-full items-start gap-2" key={note.note_id}>
+                {isEdit && (
+                  <button
+                    onClick={() => {
+                      setSelectedNoteIds((item) =>
+                        isChecked
+                          ? item.filter((id) => id !== note.note_id)
+                          : [...item, note.note_id]
+                      );
+                    }}
+                    className={`  flex items-center justify-center mt-1
+      ${isChecked ? 'bg-primary-4 text-white ' : 'text-gray-400'}`}
+                  >
+                    <CheckCircle2 />
+                  </button>
+                )}
+                <div className="flex-1 min-w-0">
+                  <NoteCard
+                    content={note.content}
+                    created_at={note.created_at}
+                    note_id={note.note_id}
+                    topic_category={note.topic_category}
+                    emotion_category={
+                      note.emotion_category
+                        ? note.emotion_category
+                            .split(',')
+                            .map((emotion) => emotion.trim())
+                        : null
+                    }
+                    isEdit={isEdit}
+                    isChecked={isChecked}
+                    onToggleCheck={(id: string) => {
+                      setSelectedNoteIds((item) =>
+                        item.includes(id)
+                          ? item.filter((i) => i !== id)
+                          : [...item, id]
+                      );
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </main>
+            );
+          })}
+        </main>
+      </div>
     </div>
   );
 };

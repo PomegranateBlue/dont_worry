@@ -59,7 +59,7 @@ const Carousel = () => {
   const doubledItems = [...items.slice(0, 2), ...items];
   console.log(doubledItems);
   return (
-    <div className="w-full max-w-[360px] overflow-hidden mx-auto ">
+    <div className="w-full  overflow-hidden mx-auto ">
       <motion.div
         className="flex gap-x-6  w-max "
         initial={{ x: 0 }}

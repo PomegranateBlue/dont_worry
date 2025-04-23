@@ -11,7 +11,7 @@ const HomePage = () => {
     <main className="min-h-screen">
       {/*히어로 섹션 시작  */}
       <section
-        className="flex flex-col w-full h-[621px] pt-[60px] relative overflow-hidden"
+        className="flex flex-col w-full h-[621px] pt-[60px] relative xl:overflow-hidden"
         style={{
           background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 87.13%)'
         }}
@@ -26,26 +26,22 @@ const HomePage = () => {
             <br />
             어딘가 털어놓고 싶다면?
           </Text>
-
-          {/* 버튼과 배경 이미지 사이 30px */}
           <div className="mt-[40px] mb-[40px]">
             <StartButton />
           </div>
         </div>
 
-        {/* 캐러셀: 섹션 바닥 기준으로 62px 위 */}
-        <div className="absolute bottom-[88px] left-1/2 -translate-x-1/2 z-10 ">
+        <div className="absolute bottom-[88px] w-full left-1/2 -translate-x-1/2 z-10 ">
           <Carousel />
         </div>
 
         {/* 배경 일러스트 이미지: 섹션 바닥에 붙음 */}
         <div>
           <Image
-            src={'/images/hero-section.svg'}
+            src={'/images/hero-section-bg.svg'}
             alt="hero"
-            width={430}
-            height={356}
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 z-0 object-cover"
+            fill
+            className="absolute  object-cover"
           />
         </div>
       </section>

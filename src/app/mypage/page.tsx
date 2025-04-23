@@ -128,7 +128,11 @@ const MyPage = () => {
         ))}
       </div>
       <div className="flex flex-row justify-center gap-12 mt-5 ">
-        <LogOutButton />
+        <LogOutButton
+          textVariant="body3"
+          textColor="label-alternative"
+          className="underline"
+        />
         <DeleteAccountButton />
       </div>
     </div>

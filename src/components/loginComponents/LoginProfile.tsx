@@ -52,7 +52,7 @@ const LoginProfile = () => {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Text variant="body3" color="label-neutral">
-              <LogOutButton />
+              <LogOutButton textColor="label-neutral" />
             </Text>
           </DropdownMenuItem>
           <DropdownMenuItem>

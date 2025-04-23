@@ -20,6 +20,7 @@ const HomePage = () => {
           {/* 텍스트 */}
           <Text
             variant="display3"
+            variant2="display1"
             className="text-center text-backgroundSet-normal"
           >
             말 못할 걱정들..
@@ -68,37 +69,41 @@ const HomePage = () => {
             <br /> 기록하고, 정리하고, 돌아볼 수 있게 돕는
             <br />
           </Text>
-          <Text variant="heading3" color="primary4">
+          <Text variant="heading3" color="primary4" variant2="display2">
             정서 기반 감정 기록 플랫폼입니다
           </Text>
         </div>
       </section>
       {/* 첫번째 섹션 끝 */}
 
-      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px]">
+      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px] ">
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-            <Text variant="body3" className="text-backgroundSet-normal">
+            <Text
+              variant="body3"
+              variant2="body1"
+              className="text-backgroundSet-normal"
+            >
               걱정 작성하기
             </Text>
           </div>
           <div>
-            <Text variant="heading3" color="primary4">
+            <Text variant="heading3" variant2="display2" color="primary4">
               가벼운 한마디로 시작해보세요
             </Text>
           </div>
         </div>
         {/* 단계별 내용 시작*/}
-        <div className="flex flex-col justify-center items-center gap-[40px]">
+        <div className="flex flex-col justify-center items-center gap-[40px] xl:flex-row xl:gap-[24px] xl:mx-auto  ">
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[8px]  ">
               <div>
-                <Text variant="body2" color="primary4">
+                <Text variant="body2" variant2="title2" color="primary4">
                   Step1
                 </Text>
               </div>
               <div>
-                <Text variant="body2" color="label-normal">
+                <Text variant="body2" variant2="body1" color="label-normal">
                   걱정의 주제와 느끼는 감정을 선택해요
                 </Text>
               </div>
@@ -116,19 +121,19 @@ const HomePage = () => {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[8px]  ">
               <div>
-                <Text variant="body2" color="primary4">
+                <Text variant="body2" variant2="title2" color="primary4">
                   Step2
                 </Text>
               </div>
               <div>
-                <Text variant="body2" color="label-normal">
+                <Text variant="body2" variant2="body1" color="label-normal">
                   내 걱정과 속마음을 작성해요
                 </Text>
               </div>
             </div>
             <div>
               <Image
-                src={'images/step2-final.svg'}
+                src={'/images/step2-final.svg'}
                 width={335}
                 height={300}
                 alt="step2"
@@ -139,12 +144,12 @@ const HomePage = () => {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[8px]  ">
               <div>
-                <Text variant="body2" color="primary4">
+                <Text variant="body2" variant2="title2" color="primary4">
                   Step3
                 </Text>
               </div>
               <div>
-                <Text variant="body2" color="label-normal">
+                <Text variant="body2" variant2="body1" color="label-normal">
                   돈워리가 건네는 위로와 조언을 통해 스스로 성장해요
                 </Text>
               </div>
@@ -161,28 +166,32 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal px-5 py-[60px]">
-        <div className="flex flex-col justify-center items-center gap-[24px]">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal px-5 py-[60px] xl:flex-row xl:gap-[80px]">
+        <div className="flex flex-col justify-center items-center gap-[24px] ">
           <div className="flex flex-col justify-center items-center gap-[12px]">
-            <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" className="text-backgroundSet-normal">
+            <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
+              <Text
+                variant="body3"
+                variant2="body1"
+                className="text-backgroundSet-normal"
+              >
                 통계
               </Text>
             </div>
-            <div className="flex text-center ">
-              <Text variant="heading2" color="primary4">
+            <div className="flex text-center xl:text-left ">
+              <Text variant="heading2" variant2="display2" color="primary4">
                 통계 데이터를 통해
-                <br /> 파악하는 기록
+                <br className="xl:hidden" /> 파악하는 기록
               </Text>
             </div>
-          </div>
-          <div className="flex">
             <div className="flex">
-              <Text variant="body2" color="label-neutral">
-                지금까지 작성한 걱정 기록을 기반으로
-                <br />
-                나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
-              </Text>
+              <div className="flex xl:text-left">
+                <Text variant="body2" variant2="body1" color="label-neutral">
+                  지금까지 작성한 걱정 기록을 기반으로
+                  <br className="xl:hidden" />
+                  나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
+                </Text>
+              </div>
             </div>
           </div>
         </div>

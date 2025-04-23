@@ -28,6 +28,7 @@ const MessageLoading = () => {
     }, 500);
     return () => clearInterval(interval);
   }, []);
+  
   const defaultOptions = {
     loop: true,
     autoplay: true,

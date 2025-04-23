@@ -30,7 +30,6 @@ export default function LoginPage() {
         </Text>
         <div className="flex flex-wrap mx-auto w-fit space-x-9 m-8">
           <KakaoLogin />
-          {/* <NaverLogin /> */}
           <GoogleLogin />
         </div>
       </div>

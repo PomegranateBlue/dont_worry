@@ -7,5 +7,6 @@ export const PATHS = {
   NOTE: '/note',
   NOTEBOX: '/notebox',
   RANKING: '/ranking',
-  COMMUNITY: '/community'
+  COMMUNITY: '/community',
+  LETTERBOX: '/letterbox'
 };

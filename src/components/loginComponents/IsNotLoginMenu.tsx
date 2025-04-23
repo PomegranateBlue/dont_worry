@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Text from '../common/Text';
 import { showToast } from '../common/Toast';
+import { MENU } from '@/constants/common/menu';
 
 export const IsNotLoginMenu = () => {
   const router = useRouter();
@@ -22,22 +23,27 @@ export const IsNotLoginMenu = () => {
     >
       <button className="py-4 headerMd:py-0">
         <Text variant="title2" color="label-neutral">
-          걱정작성
+          {MENU.NOTE}
         </Text>
       </button>
       <button className="py-4 headerMd:py-0">
         <Text variant="title2" color="label-neutral">
-          걱정보관함
+          {MENU.NOTEBOX}
         </Text>
       </button>
       <button className="py-4 headerMd:py-0">
         <Text variant="title2" color="label-neutral">
-          통계
+          {MENU.RANKING}
         </Text>
       </button>
       <button className="py-4 headerMd:py-0">
         <Text variant="title2" color="label-neutral">
-          미래편지
+          {MENU.LETTER}
+        </Text>
+      </button>
+      <button className="py-4 headerMd:py-0">
+        <Text variant="title2" color="label-neutral">
+          {MENU.LETTERBOX}
         </Text>
       </button>
     </div>

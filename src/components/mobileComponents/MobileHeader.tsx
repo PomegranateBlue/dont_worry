@@ -120,8 +120,12 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                 {isLogin ? <IsLoginMenu /> : <IsNotLoginMenu />}
 
                 {isLogin && (
-                  <div className="mt-10 text-sm text-gray-500 p-2">
-                    <LogOutButton />
+                  <div className="p-2">
+                    <LogOutButton
+                      textVariant="body3"
+                      textColor="label-alternative"
+                      className="underline"
+                    />
                   </div>
                 )}
               </div>

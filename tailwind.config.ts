@@ -25,7 +25,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        headerMd: '810px'
+        headerMd: '900px'
       },
       keyframes: {
         slide: {

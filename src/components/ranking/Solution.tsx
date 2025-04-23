@@ -150,7 +150,7 @@ const Solution = ({ topThree }: SolutionProps) => {
         <Text
           variant="body3"
           color="label-normal"
-          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words xl:p-6 xl:w-max-[500px] xl:h-[240px]"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words xl:p-6 xl:max-w-[500px] xl:h-[240px]"
         >
           {solution}
         </Text>

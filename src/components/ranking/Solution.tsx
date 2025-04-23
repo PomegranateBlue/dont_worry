@@ -128,12 +128,12 @@ const Solution = ({ topThree }: SolutionProps) => {
   }, [topThree, user]);
 
   return (
-    <div className="flex flex-col gap-4 p-5 w-full xl:p-0 xl:gap-6">
+    <div className="flex flex-col gap-4 p-5 w-full xl:gap-6 xl:p-10 rounded-[20px] shadow-customCard bg-backgroundSet-normal xl:h-[407px] xl:max-w-[580px]">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full xl:gap-3">
         <Image
           src="/images/ver-default.svg"
-          width={30}
-          height={30}
+          width={24}
+          height={24}
           alt="이미지 없음"
         />
         <Text
@@ -150,7 +150,7 @@ const Solution = ({ topThree }: SolutionProps) => {
         <Text
           variant="body3"
           color="label-normal"
-          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words xl:p-6 xl:w-[508px] xl:h-[240px]"
+          className="items-center flex w-full p-4 flex-col justify-center gap-2 rounded-lg bg-primary-1 whitespace-normal break-words xl:p-6 xl:w-max-[500px] xl:h-[240px]"
         >
           {solution}
         </Text>

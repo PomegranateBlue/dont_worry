@@ -24,12 +24,12 @@ const MWreportCard = () => {
   if (!weekData) return;
 
   return (
-    <section className="flex flex-col items-center gap-4 p-5 w-full mx-auto xl:p-0 xl:gap-6">
+    <section className="flex flex-col items-center gap-4 p-5 w-full mx-auto xl:p-10 xl:gap-6 xl:max-w-[580px] rounded-[20px] bg-backgroundSet-normal shadow-customCard">
       <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full xl:gap-3">
         <Image
           src="/images/rankingLogo.svg"
-          width={40}
-          height={40}
+          width={24}
+          height={24}
           alt="이미지 없음"
         />
         <Text
@@ -41,7 +41,7 @@ const MWreportCard = () => {
           {mode === WEEK_MODE ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
         </Text>
       </div>
-      <div className="xl:flex xl:flex-row xl:gap-3 xl:items-start gap-4 flex flex-col w-full">
+      <div className="xl:gap-3 xl:items-start gap-4 flex flex-col w-full">
         {/*여기 레이아웃을 잘 정해야함 그래야 gap이 적용됨*/}
         <BetterThing monthData={monthData} weekData={weekData} />
         <WorsenedThing monthData={monthData} weekData={weekData} />

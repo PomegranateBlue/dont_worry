@@ -158,7 +158,7 @@ const RankingPage = () => {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col w-full max-w-full gap-[12px] xl:gap-[16px]">
+            <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixEmotion.map((e) => (
                 <div key={e.name}>
                   <TopThreeCard topThree={e} />
@@ -179,7 +179,7 @@ const RankingPage = () => {
             <Solution topThree={topSixTopic} />
           </div>
         ) : (
-          <div className="xl:flex xl:w-full p-4 xl:p-0 md:px-0">
+          <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
             <Solution topThree={topSixEmotion} />
           </div>
         )}

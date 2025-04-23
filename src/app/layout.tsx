@@ -53,6 +53,10 @@ export default function RootLayout({
         <meta property="og:image" content="/images/Thumbnail2.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" /> */}
+        <meta
+          name="google-site-verification"
+          content="LASgkNVwHhdv5OZXVRb5TllpP_CZ3UlzaciSyRGApKQ"
+        />
         {/*썸네일 이미지 넣기*/}
         <link rel="icon" href="/images/favicon.svg" />
         {/*파비콘 url 설정하기*/}

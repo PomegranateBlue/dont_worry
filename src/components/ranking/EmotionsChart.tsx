@@ -74,7 +74,7 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
 
   return (
     <>
-      <div className="flex w-[258px] flex-col items-center">
+      <div className="flex w-[258px] flex-col items-center gap-2">
         <Text
           as="h2"
           variant="heading3"
@@ -92,7 +92,7 @@ const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
           {EMOTION_FILTER_DESCRIPTION2}
         </Text>
       </div>
-      <div className="w-[217.8px] h-[198px] xl:w-[280px] xl:h-[255px] flex justify-center items-center xl:gap-3">
+      <div className="w-[217.8px] h-[220px] xl:w-[255px] xl:h-[255px] flex justify-center items-center xl:gap-3">
         <Doughnut options={options} data={emotionChartData} />
       </div>
     </>

@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
 import DeleteAccountButton from '@/components/mypage/DeleteAccountButton';
 import Text from '@/components/common/Text';
+import { PATHS } from '@/constants/common/paths';
 
 const MyPage = () => {
   const queryClient = useQueryClient();
@@ -89,11 +90,8 @@ const MyPage = () => {
 
       <div className="flex justify-center items-center rounded-md bg-backgroundSet-card py-4 mb-6">
         <div className="flex-1 text-center">
-          <Link href="/notebox">
-            <Text variant="title2">
-
-              {userWorries?.length || 0}개
-            </Text>
+          <Link href={PATHS.NOTEBOX}>
+            <Text variant="title2">{userWorries?.length || 0}개</Text>
             <Text variant="body3" color="label-alternative">
               작성한 걱정
             </Text>
@@ -101,7 +99,7 @@ const MyPage = () => {
         </div>
         <div className="w-px h-10 bg-line-normal" />
         <div className="flex-1 text-center">
-          <Link href="/letter">
+          <Link href={PATHS.LETTER}>
             <Text variant="title2">{letters?.length || 0}개</Text>
             <Text variant="body3" className="text-label-alternative">
               미래 편지

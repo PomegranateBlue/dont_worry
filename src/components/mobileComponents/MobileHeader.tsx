@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { IsNotLoginMenu } from '../loginComponents/IsNotLoginMenu';
 import { IsLoginMenu } from '../loginComponents/IsLoginMenu';
+import { PATHS } from '@/constants/common/paths';
 
 interface MobileHeaderProps {
   isLogin: boolean;
@@ -44,9 +45,9 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
   };
 
   return (
-    <div className="md:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
+    <div className="headerMd:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
       <button
-        className="md:hidden focus:outline-none z-50"
+        className="headerMd:hidden focus:outline-none z-50"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
@@ -111,7 +112,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                 </Link>
               </div>
               <div className="p-6 flex flex-col gap-1">
-                <Link href="/" className="py-4">
+                <Link href={PATHS.HOME} className="py-4">
                   <Text variant="title2" color="label-neutral">
                     서비스 소개
                   </Text>
@@ -124,7 +125,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                   </div>
                 )}
               </div>
-              <Link href="/">
+              <Link href={PATHS.HOME}>
                 <Image
                   src="/images/mobile-logo.svg"
                   alt="logo"

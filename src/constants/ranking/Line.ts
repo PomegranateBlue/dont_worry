@@ -18,7 +18,7 @@ export const EMOTION_FILTER_DESCRIPTION2 =
 
 export const IS_LOADING = '데이터를 불러오는 중입니다...'; //임시 다른 폴백 ui추가시 제거
 
-export const NO_DATA_CHART = `아직 걱정이 없으시군요! 걱정이 없으시다니 정말 다행이에요!`; //멘트 변경 필요
+export const NO_DATA_CHART = `아직 걱정이 없으시군요! 걱정이 없으시다니 정말 다행이에요!`;
 
 export const MOST_DECREASE_COMMENT_MONTH = '전월 대비 가장 많이 감소했어요!';
 
@@ -38,7 +38,7 @@ export const MONTH = '월';
 
 export const WEEK = '주';
 
-export const SOLUTION_TITLE = '님께 드리는 돈워리의 한 마디';
+export const SOLUTION_TITLE = '님께 드리는 걱정이의 한마디';
 
 export const NO_ID = '사용자 ID가 없습니다.';
 

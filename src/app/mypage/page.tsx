@@ -62,7 +62,12 @@ const MyPage = () => {
 
   return (
     <div className="px-4 pb-20 xl:px-[350px]">
-      <Text variant="title1" className="text-center py-4">
+      <Text
+        variant="title1"
+        variant2="heading2"
+        color="label-normal"
+        className="text-center py-4"
+      >
         마이페이지
       </Text>
       <div className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
@@ -74,7 +79,12 @@ const MyPage = () => {
 
         <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
           <div className="flex items-center justify-center gap-2 xl:justify-start">
-            <Text as="span" variant="title1" color="label-normal">
+            <Text
+              as="span"
+              variant="title1"
+              variant2="heading3"
+              color="label-normal"
+            >
               {userInfo?.nickname}
             </Text>
             <button onClick={openModal}>
@@ -82,17 +92,19 @@ const MyPage = () => {
             </button>
             <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
           </div>
-          <Text variant="label1" color="label-alternative">
+          <Text variant="label1" variant2="body3" color="label-alternative">
             {userInfo?.email}
           </Text>
         </div>
       </div>
 
-      <div className="flex justify-center items-center rounded-md bg-backgroundSet-card py-4 mb-6">
+      <div className="flex justify-center items-center rounded-lg bg-backgroundSet-card py-4 mb-6">
         <div className="flex-1 text-center">
           <Link href={PATHS.NOTEBOX}>
-            <Text variant="title2">{userWorries?.length || 0}개</Text>
-            <Text variant="body3" color="label-alternative">
+            <Text variant="title2" variant2="heading3" color="label-normal">
+              {userWorries?.length || 0}개
+            </Text>
+            <Text variant="body3" variant2="body2" color="label-alternative">
               작성한 걱정
             </Text>
           </Link>
@@ -100,15 +112,25 @@ const MyPage = () => {
         <div className="w-px h-10 bg-line-normal" />
         <div className="flex-1 text-center">
           <Link href={PATHS.LETTER}>
-            <Text variant="title2">{letters?.length || 0}개</Text>
-            <Text variant="body3" className="text-label-alternative">
+            <Text variant="title2" variant2="heading3" color="label-normal">
+              {letters?.length || 0}개
+            </Text>
+            <Text
+              variant="body3"
+              variant2="body2"
+              className="text-label-alternative"
+            >
               미래 편지
             </Text>
           </Link>
         </div>
       </div>
       <div className="border-t-8 border-b pb-6 pt-10 space-y-5 w-full">
-        <Text variant="body2" className="text-label-alternative">
+        <Text
+          variant="body2"
+          variant2="title2"
+          className="text-label-alternative"
+        >
           고객지원
         </Text>
         {[
@@ -122,7 +144,9 @@ const MyPage = () => {
             href={link}
             className="flex justify-between items-center"
           >
-            <Text variant="title2">{label}</Text>
+            <Text variant="title2" variant2="body1" color="label-neutral">
+              {label}
+            </Text>
             <ChevronRight size={18} color="gray" />
           </Link>
         ))}

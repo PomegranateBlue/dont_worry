@@ -19,9 +19,9 @@ const TopThreeCard = ({ topThree }: TopThreeProps) => {
         pathname: '/notebox',
         query: { category: topThree.name }
       }}
-      className="flex bg-backgroundSet-normal h-[56px] p-[16px] items-center gap-[10px] self-stretch rounded-lg"
+      className="flex bg-backgroundSet-normal h-[56px] p-[16px] items-center gap-[10px] self-stretch rounded-lg shadow-customCard"
     >
-      <Text as="span" variant="body3" color="label-normal">
+      <Text as="span" variant="body3" variant2="body1" color="label-normal">
         {topThree.name}
       </Text>
       <Text as="span" variant="label1" color="label-alternative">

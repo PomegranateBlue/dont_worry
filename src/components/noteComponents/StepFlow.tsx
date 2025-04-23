@@ -12,7 +12,11 @@ import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
 import { useUserStore } from '@/store/auth/store';
 import { supabase } from '@/app/utils/supabase/supabase';
 import { TablesInsert } from '../../../database.types';
-import MessageLoading from './MessageLoading';
+import dynamic from 'next/dynamic';
+
+const MessageLoading = dynamic(() => import('./MessageLoading'), {
+  ssr: false
+});
 
 enum StepProps {
   CATEGORY = 'category',

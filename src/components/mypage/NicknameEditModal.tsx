@@ -65,7 +65,7 @@ const NicknameEditModal = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ">
       <div
-        className="bg-white p-5 rounded-lg w-80 max-w-md m-8 xl:w-[480px] "
+        className="bg-white p-5 rounded-[20px] w-80 max-w-md m-8 xl:w-[480px] "
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -74,7 +74,7 @@ const NicknameEditModal = ({
         }}
       >
         <div id="modal-title" className="mb-6 text-left">
-          <Text variant="heading2">닉네임</Text>
+          <Text variant="heading2" color="label-normal">닉네임</Text>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>

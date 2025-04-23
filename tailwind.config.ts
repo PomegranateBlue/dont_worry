@@ -36,6 +36,10 @@ const config: Config = {
       animation: {
         slide: 'slide 20s linear infinite'
       },
+      boxShadow: {
+        customCard:
+          '0px 0px 2px 0px var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)), 0px 4px 8px 0px var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08))'
+      },
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다

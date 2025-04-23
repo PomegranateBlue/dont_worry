@@ -41,7 +41,7 @@ const RankingLayout = ({
             {CHART_PAGE_TITLE}
           </Text>
         </div>
-        <div className="py-5 xl:py-6 xl:flex xl:gap-4 xl:h-16 xl:justify-center xl:items-center xl:bg-backgroundSet-card">
+        <div className="py-5 xl:py-6 xl:flex xl:gap-4 xl:h-16 xl:justify-center xl:items-center bg-backgroundSet-card">
           <TimeFilterGroup />
         </div>
         {children}

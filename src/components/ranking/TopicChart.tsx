@@ -58,7 +58,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
         color: '#171719',
         font: {
           weight: 'bold',
-          size: 12
+          size: 10
         },
         formatter: (value, context) => {
           const label = context.chart.data.labels?.[context.dataIndex];
@@ -93,7 +93,7 @@ const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
         </Text>
       </div>
 
-      <div className="w-[217.8px] h-[198px] xl:w-[280px] xl:h-[255px] flex justify-center items-center xl:gap-3">
+      <div className="w-[217.8px] h-[220px] xl:w-[280px] xl:h-[255px] flex justify-center items-center xl:gap-3">
         <Doughnut options={options} data={topicChartData} />
       </div>
     </>

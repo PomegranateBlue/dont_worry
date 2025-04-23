@@ -12,6 +12,7 @@ import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import useAnaylsisTrendWeek from '@/hooks/ranking/useAnaylsisTrendWeek';
 import Text from '@/components/common/Text';
 import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+import Image from 'next/image';
 
 const MWreportCard = () => {
   const { year, month, mode, week } = useRankingStore();
@@ -24,8 +25,19 @@ const MWreportCard = () => {
 
   return (
     <section className="flex flex-col items-center gap-4 p-5 w-full mx-auto xl:p-0 xl:gap-6">
-      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full">
-        <Text as="div" variant="title2" color="label-normal">
+      <div className="flex py-2 justify-start items-center gap-2 self-stretch w-full xl:gap-3">
+        <Image
+          src="/images/rankingLogo.svg"
+          width={40}
+          height={40}
+          alt="이미지 없음"
+        />
+        <Text
+          as="div"
+          variant="title2"
+          variant2="heading4"
+          color="label-normal"
+        >
           {mode === WEEK_MODE ? REPORT_TITLE_WEEK : REPORT_TITLE_MONTH}
         </Text>
       </div>

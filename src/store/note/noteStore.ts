@@ -56,8 +56,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
     set({
       selectedTopic: null,
       selectedEmotions: [],
-      message: '',
-      result: ''
+      message: ''
     });
   }
 }));

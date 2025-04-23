@@ -22,8 +22,14 @@ enum StepProps {
 
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
-  const { selectedTopic, selectedEmotions, toggleTopic, message, setResult,reset } =
-    useNoteStore();
+  const {
+    selectedTopic,
+    selectedEmotions,
+    toggleTopic,
+    message,
+    setResult,
+    reset
+  } = useNoteStore();
   const emotionRef = useRef<HTMLDivElement | null>(null);
   const { mutate: submitGPT, isPending } = useGPTSubmit();
   const { user } = useUserStore();
@@ -73,7 +79,7 @@ const StepFlow = () => {
           }
 
           setStep(StepProps.RESULT);
-          reset()
+          reset();
         },
         onError: (err) => {
           console.error('GPT 요청 실패:', err.message);
@@ -83,13 +89,13 @@ const StepFlow = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="w-full relative max-w-[1200px]">
       {step === StepProps.CATEGORY && (
         <div>
           <Text
             variant="title1"
             color="label-normal"
-            className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px]"
+            className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
           >
             걱정 작성
           </Text>

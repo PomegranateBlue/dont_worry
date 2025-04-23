@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Text from '../common/Text';
+import { showToast } from '../common/Toast';
 
 export const IsNotLoginMenu = () => {
   const router = useRouter();
@@ -9,8 +10,9 @@ export const IsNotLoginMenu = () => {
     const target = e.target as HTMLElement;
     if (target.closest('button')) {
       e.preventDefault();
-      alert('로그인 후 이용 가능합니다!');
+      // alert('로그인 후 이용 가능합니다!');
       router.push('/auth/login');
+      showToast('로그인 후 이용 가능합니다!', 'info');
     }
   };
   return (

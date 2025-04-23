@@ -47,7 +47,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
     }),
 
   message: '',
-  setMessage: (message) => set({  message }),
+  setMessage: (message) => set({ message }),
 
   result: '',
   setResult: (result) => set({ result }),
@@ -55,8 +55,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
   reset: () => {
     set({
       selectedTopic: null,
-      selectedEmotions: [],
-      message: ''
+      selectedEmotions: []
     });
   }
 }));

@@ -21,7 +21,7 @@ enum StepProps {
 }
 
 const StepFlow = () => {
-  const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
+  const [step, setStep] = useState<StepProps>(StepProps.MESSAGE);
   const {
     selectedTopic,
     selectedEmotions,

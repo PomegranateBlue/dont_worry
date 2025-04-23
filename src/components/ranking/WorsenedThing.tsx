@@ -29,14 +29,29 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
           {weekBest ? (
             <div className="w-full">
               <div>
-                <Text as="span" variant="title2" color="label-normal">
+                <Text
+                  as="span"
+                  variant="title2"
+                  variant2="title1"
+                  color="label-normal"
+                >
                   {weekBest.category}
                 </Text>
-                <Text as="span" variant="body3" color="label-normal">
+                <Text
+                  as="span"
+                  variant="body3"
+                  variant2="body2"
+                  color="label-normal"
+                >
                   {ABOUT}
                 </Text>
               </div>
-              <Text as="span" variant="body3" color="label-normal">
+              <Text
+                as="span"
+                variant="body3"
+                variant2="body2"
+                color="label-normal"
+              >
                 {MOST_INCREASE_COMMENT_WEEK}
               </Text>
             </div>
@@ -51,14 +66,29 @@ const WorsenedThing: React.FC<WorsenedThingProps> = ({
           {monthBest ? (
             <div className="w-full">
               <div>
-                <Text as="span" variant="title2" color="label-normal">
+                <Text
+                  as="span"
+                  variant="title2"
+                  variant2="title1"
+                  color="label-normal"
+                >
                   {monthBest.category}
                 </Text>
-                <Text as="span" variant="body3" color="label-normal">
+                <Text
+                  as="span"
+                  variant="body3"
+                  variant2="body2"
+                  color="label-normal"
+                >
                   {ABOUT}
                 </Text>
               </div>
-              <Text as="span" variant="body3" color="label-normal">
+              <Text
+                as="span"
+                variant="body3"
+                variant2="body2"
+                color="label-normal"
+              >
                 {MOST_INCREASE_COMMENT_MONTH}
               </Text>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { login, signup } from '@/app/auth/action';
-import { fetchUser } from '@/app/utils/supabase/db';
+import { fetchUser, fetchUserInfo } from '@/app/utils/supabase/db';
 import { useUserStore } from '@/store/auth/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
+import { showToast } from '../common/Toast';
 
 interface LoginFormProps {
   mode: string;
@@ -59,16 +60,8 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         try {
           const data = await fetchUser();
           setUser(data);
-          // console.log('$$$DATA:', data);
-          // Toastify({
-          //   text: `🎉 환영합니다!`,
-          //   duration: 1000,
-          //   gravity: 'top',
-          //   position: 'right',
-          //   stopOnFocus: true,
-          //   className: 'custom-toast'
-          // }).showToast();
-          alert('로그인성공');
+          const userInfo = await fetchUserInfo(data);
+          showToast(`${userInfo?.nickname}님 환영합니다!`, 'success');
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);

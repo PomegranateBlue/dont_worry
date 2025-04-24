@@ -20,7 +20,7 @@ import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
 import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 import { DATA_FETHCING_ERROR } from '@/constants/error/rankingError';
-
+import { SUPABASE_ERROR_MESSAGE } from '@/constants/error/supabaseErrorKeys';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();
@@ -67,6 +67,7 @@ const RankingPage = () => {
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
+          throw new Error(SUPABASE_ERROR_MESSAGE.SUPABASE_FETCH_FAILED.message);
         }
       };
 
@@ -91,6 +92,7 @@ const RankingPage = () => {
           }
         } catch (err) {
           console.error(DATA_FETHCING_ERROR, err);
+          throw new Error(SUPABASE_ERROR_MESSAGE.SUPABASE_FETCH_FAILED.message);
         }
       };
 

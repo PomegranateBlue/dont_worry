@@ -1,6 +1,6 @@
 //하드 코딩 텍스트 상수화 파일
 
-export const CHART_PAGE_TITLE = '통합 레포트';
+export const CHART_PAGE_TITLE = '통계';
 
 export const CHART_FILTER_TOPIC = '주제별';
 

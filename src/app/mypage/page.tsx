@@ -111,7 +111,7 @@ const MyPage = () => {
         </div>
         <div className="w-px h-10 bg-line-normal" />
         <div className="flex-1 text-center">
-          <Link href={PATHS.LETTER}>
+          <Link href={PATHS.LETTERBOX}>
             <Text variant="title2" variant2="heading3" color="label-normal">
               {letters?.length || 0}개
             </Text>

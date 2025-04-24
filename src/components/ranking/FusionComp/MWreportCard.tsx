@@ -7,12 +7,13 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import {
   REPORT_TITLE_MONTH,
   REPORT_TITLE_WEEK
-} from '@/constants/ranking/Line';
+} from '@/constants/ranking/line';
 import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import useAnaylsisTrendWeek from '@/hooks/ranking/useAnaylsisTrendWeek';
 import Text from '@/components/common/Text';
-import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+
 import Image from 'next/image';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 
 const MWreportCard = () => {
   const { year, month, mode, week } = useRankingStore();
@@ -31,6 +32,14 @@ const MWreportCard = () => {
           width={24}
           height={24}
           alt="이미지 없음"
+          className="lg:hidden"
+        />
+        <Image
+          src="/images/rankingLogo.svg"
+          width={40}
+          height={40}
+          alt="이미지 없음"
+          className="hidden lg:block"
         />
         <Text
           as="div"

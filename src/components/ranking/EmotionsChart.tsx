@@ -15,13 +15,10 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   EMOTION_FILTER_DESCRIPTION,
   EMOTION_FILTER_DESCRIPTION2
-} from '@/constants/ranking/Line';
-import {
-  CHART_LABEL,
-  emotionBackgroundColor,
-  emotionBorderColor
-} from '@/constants/ranking/ChartOptions';
+} from '@/constants/ranking/line';
+
 import Text from '../common/Text';
+import { CHART_LABEL, emotionBackgroundColor, emotionBorderColor } from '@/constants/ranking/chartOptions';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -29,7 +26,7 @@ interface EmotionChartProps {
   topEmotions: { name: string; count: number }[];
 }
 
-const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
+const EmotionChart = ({ topEmotions }: EmotionChartProps) => {
   const emotionLabels = topEmotions.map((emotion) => emotion.name);
   const emotionData = topEmotions.map((emotion) => emotion.count);
   const total = emotionData.reduce((acc, cur) => acc + cur, 0);

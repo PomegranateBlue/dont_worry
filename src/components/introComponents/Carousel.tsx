@@ -56,7 +56,7 @@ const Carousel = () => {
     }
   }
 
-  const doubledItems = [...items.slice(0, 2), ...items];
+  const doubledItems = [...items.slice(0, 2), ...items, ...items.slice(0, 2)];
 
   return (
     <div className="w-full  overflow-hidden mx-auto ">
@@ -68,7 +68,7 @@ const Carousel = () => {
           repeat: Infinity,
           repeatType: 'loop',
           ease: 'linear',
-          duration: 20
+          duration: 10
         }}
       >
         {doubledItems.map((item, idx) =>

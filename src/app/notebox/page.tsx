@@ -104,7 +104,7 @@ const NotePage = () => {
     setIsEdit(false);
   };
   return (
-    <div className="flex max-h-[1200px]">
+    <div className="flex max-w-[1200px]">
       <div className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
         <div className="flex justify-center items-center px-[6px] py-[15px]">
           <Text variant="title2" color="label-normal" className="text-center">

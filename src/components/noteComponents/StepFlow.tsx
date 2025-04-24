@@ -9,11 +9,13 @@ import ResultForm from './ResultForm';
 import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
 import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
+import { useNoteSave } from '@/hooks/noteHooks/useNoteSave';
 import { useUserStore } from '@/store/auth/store';
-import { supabase } from '@/app/utils/supabase/supabase';
-import { TablesInsert } from '../../../database.types';
-import dynamic from 'next/dynamic';
 
+import dynamic from 'next/dynamic';
+{
+  /*lottie 라이브러리를 위한 ssr 렌더링 방지 */
+}
 const MessageLoading = dynamic(() => import('./MessageLoading'), {
   ssr: false
 });
@@ -34,8 +36,10 @@ const StepFlow = () => {
     setResult,
     reset
   } = useNoteStore();
+
   const emotionRef = useRef<HTMLDivElement | null>(null);
-  const { mutate: submitGPT, isPending } = useGPTSubmit();
+  const { mutateAsync: submitGPT, isPending } = useGPTSubmit();
+  const { mutateAsync: saveNote } = useNoteSave();
   const { user } = useUserStore();
 
   const handleCategorySelect = (topic: string) => {
@@ -45,51 +49,38 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const handleSubmit = () => {
-    submitGPT(
-      {
+  const handleSubmit = async () => {
+    if (!user) {
+      setStep(StepProps.RESULT);
+      return;
+    }
+
+    try {
+      const gptInput = {
         topic: selectedTopic,
         emotions: selectedEmotions,
         message
-      },
-      {
-        onSuccess: async (res) => {
-          setResult(res.content);
+      };
 
-          if (!user) {
-            console.error('로그인된 사용자가 없습니다.');
-            setStep(StepProps.RESULT);
-            return;
-          }
+      const res = await submitGPT(gptInput);
+      setResult(res.content);
 
-          const note: TablesInsert<'users_note'> = {
-            content: JSON.stringify({
-              Question: message,
-              Answer: res.content
-            }),
-            topic_category: selectedTopic,
-            emotion_category: selectedEmotions.join(','),
-            created_at: new Date().toISOString(),
-            note_img: null,
-            user_id: user
-          };
+      const saveInput = {
+        message,
+        result: res.content,
+        topic: selectedTopic ?? '',
+        emotions: selectedEmotions,
+        userId: user
+      };
 
-          const { error } = await supabase.from('users_note').insert([note]);
-
-          if (error) {
-            console.error('저장 실패:', error);
-          } else {
-            console.log('저장 완료');
-          }
-
-          setStep(StepProps.RESULT);
-          reset();
-        },
-        onError: (err) => {
-          console.error('GPT 요청 실패:', err.message);
-        }
-      }
-    );
+      await saveNote(saveInput);
+      setStep(StepProps.RESULT);
+      reset();
+    } catch (err) {
+      console.error('에러 발생:', err);
+      alert((err as Error).message);
+      setStep(StepProps.RESULT);
+    }
   };
 
   return (

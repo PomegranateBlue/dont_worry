@@ -44,9 +44,15 @@ const StepFlow = () => {
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);
+
+    // 다음 렌더링에서 상태가 반영된 후 확인해야 하므로 약간 지연
     setTimeout(() => {
-      emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      const { selectedTopics } = useNoteStore.getState(); // 최신 상태 직접 가져옴
+
+      if (selectedTopics.length === 3) {
+        emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50); // 50ms 정도면 충분 (너무 길면 UX 저하됨)
   };
 
   const handleSubmit = async () => {

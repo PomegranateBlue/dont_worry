@@ -12,7 +12,7 @@ import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
-import TopThreeCard from '@/components/ranking/TopThreeCard';
+import TopSixCard from '@/components/ranking/TopSixCard';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import { DATA_FETHCING_ERROR } from '@/constants/ranking/ErrorConstants';
@@ -146,14 +146,14 @@ const RankingPage = () => {
             <Report most={most} />
           </div>
         </div>
-        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch xl:w-full xl:gap-[40px] xl:p-0 xl:max-w-[580px] justify-center md:px-0">
+        <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch xl:w-full xl:gap-[40px] xl:p-0 xl:max-w-[580px] md:px-0">
           <FilterMenu />
 
           {chartMode === 'topic' ? (
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixTopic.map((e) => (
                 <div key={e.name}>
-                  <TopThreeCard topThree={e} />
+                  <TopSixCard topThree={e} />
                 </div>
               ))}
             </div>
@@ -161,7 +161,7 @@ const RankingPage = () => {
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixEmotion.map((e) => (
                 <div key={e.name}>
-                  <TopThreeCard topThree={e} />
+                  <TopSixCard topThree={e} />
                 </div>
               ))}
             </div>
@@ -184,7 +184,7 @@ const RankingPage = () => {
           </div>
         )}
       </div>
-      {/*데스크탑 레이아웃 하위*/}
+      {/*데스크탑 레이아웃 하위.*/}
     </div>
   );
 };

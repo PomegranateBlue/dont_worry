@@ -22,8 +22,6 @@ interface RankingState {
   chartMode: ChartMode;
 
   initialize: (year: number, month: number, week: number) => void;
-  goToPreviousWeek: () => void;
-  goToNextWeek: () => void;
   setMode: (mode: RankingMode) => void; // mode 변경 함수 추가
   setChartMode: (chartMode: ChartMode) => void;
 }
@@ -99,30 +97,6 @@ export const useRankingStore = create<RankingState>((set) => {
     setChartMode: (chartMode: ChartMode) =>
       set(() => ({
         chartMode
-      })),
-
-    goToPreviousWeek: () =>
-      set((state) => {
-        const newDate = state.currentDate.subtract(7, 'day');
-        return {
-          currentDate: newDate,
-          formattedDate: updateFormattedDate(newDate, state.mode),
-          year: newDate.year(),
-          month: newDate.month() + 1,
-          week: getWeekOfMonth(newDate)
-        };
-      }),
-
-    goToNextWeek: () =>
-      set((state) => {
-        const newDate = state.currentDate.add(7, 'day');
-        return {
-          currentDate: newDate,
-          formattedDate: updateFormattedDate(newDate, state.mode),
-          year: newDate.year(),
-          month: newDate.month() + 1,
-          week: getWeekOfMonth(newDate)
-        };
-      })
+      }))
   };
 });

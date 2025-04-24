@@ -13,10 +13,7 @@ import { WorsenedThingProps } from '@/types/ranking/types';
 import React from 'react';
 import Text from '../common/Text';
 
-const WorsenedThing: React.FC<WorsenedThingProps> = ({
-  monthData,
-  weekData
-}) => {
+const WorsenedThing = ({ monthData, weekData }: WorsenedThingProps) => {
   const { mode } = useRankingStore();
 
   const monthBest = monthData?.mostIncreased;

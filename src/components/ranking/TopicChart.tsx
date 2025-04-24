@@ -29,7 +29,7 @@ interface ChartProps {
   topTopics: { name: string; count: number }[];
 }
 
-const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
+const TopicChart = ({ topTopics }: ChartProps) => {
   const topicLabels = topTopics.map((topic) => topic.name);
   const topicData = topTopics.map((topic) => topic.count);
   const total = topicData.reduce((acc, cur) => acc + cur, 0); // 총합

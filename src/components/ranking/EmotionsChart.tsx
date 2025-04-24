@@ -29,7 +29,7 @@ interface EmotionChartProps {
   topEmotions: { name: string; count: number }[];
 }
 
-const EmotionChart: React.FC<EmotionChartProps> = ({ topEmotions }) => {
+const EmotionChart = ({ topEmotions }: EmotionChartProps) => {
   const emotionLabels = topEmotions.map((emotion) => emotion.name);
   const emotionData = topEmotions.map((emotion) => emotion.count);
   const total = emotionData.reduce((acc, cur) => acc + cur, 0);

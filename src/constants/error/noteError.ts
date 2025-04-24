@@ -51,3 +51,12 @@ export const NOTE_ERROR_MESSAGE = {
     action: '잠시 후 다시 시도해주세요.'
   }
 } as const;
+
+export type NoteErrorMessageType = keyof typeof NOTE_ERROR_MESSAGE;
+
+export function isNoteErrorResponse(key: NoteErrorMessageType) {
+  return {
+    error: NOTE_ERROR_MESSAGE[key].message,
+    action: NOTE_ERROR_MESSAGE[key].action
+  };
+}

@@ -51,3 +51,12 @@ export const LETTER_ERROR_MESSAGE = {
     action: '입력값을 확인해주세요.'
   }
 };
+
+export type LetterErrorMessageType = keyof typeof LETTER_ERROR_MESSAGE;
+
+export function isLetterErrorResponse(key: LetterErrorMessageType) {
+  return {
+    error: LETTER_ERROR_MESSAGE[key].message,
+    action: LETTER_ERROR_MESSAGE[key].action
+  };
+}

@@ -51,3 +51,12 @@ export const LOGIN_ERROR_MESSAGE = {
     action: '잠시 후 다시 시도해주세요.'
   }
 };
+
+export type LoginErrorMessageType = keyof typeof LOGIN_ERROR_MESSAGE;
+
+export function isLoginErrorResponse(key: LoginErrorMessageType) {
+  return {
+    error: LOGIN_ERROR_MESSAGE[key].message,
+    action: LOGIN_ERROR_MESSAGE[key].action
+  };
+}

@@ -46,3 +46,12 @@ export const AI_ERROR_MESSAGE = {
     action: '잠시 후 다시 시도해주세요.'
   }
 };
+
+export type AIErrorMessageType = keyof typeof AI_ERROR_MESSAGE;
+
+export function isAIErrorResponse(key: AIErrorMessageType) {
+  return {
+    error: AI_ERROR_MESSAGE[key].message,
+    action: AI_ERROR_MESSAGE[key].action
+  };
+}

@@ -51,3 +51,12 @@ export const MYPAGE_ERROR_MESSAGE = {
     action: '잠시 후 다시 시도해주세요.'
   }
 } as const;
+
+export type MypageErrorMessageType = keyof typeof MYPAGE_ERROR_MESSAGE;
+
+export function isMypageErrorResponse(key: MypageErrorMessageType) {
+  return {
+    error: MYPAGE_ERROR_MESSAGE[key].message,
+    action: MYPAGE_ERROR_MESSAGE[key].action
+  };
+}

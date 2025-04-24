@@ -33,3 +33,12 @@ export const SUPABASE_ERROR_MESSAGE = {
     action: '다시 로그인해주세요.'
   }
 };
+
+export type SupabaseErrorMessageType = keyof typeof SUPABASE_ERROR_MESSAGE;
+
+export function isSupabaseErrorResponse(key: SupabaseErrorMessageType) {
+  return {
+    error: SUPABASE_ERROR_MESSAGE[key].message,
+    action: SUPABASE_ERROR_MESSAGE[key].action
+  };
+}

@@ -13,7 +13,7 @@ import Text from '../common/Text';
 import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 import { NO_DATA } from '@/constants/ranking/ErrorConstants';
 
-const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
+const BetterThing = ({ monthData, weekData }: BetterThingProps) => {
   const { mode } = useRankingStore();
   const monthLowest = monthData?.mostDecreased;
   const weekLowest = weekData?.mostDecreased;

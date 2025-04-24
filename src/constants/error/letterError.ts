@@ -60,3 +60,18 @@ export function isLetterErrorResponse(key: LetterErrorMessageType) {
     action: LETTER_ERROR_MESSAGE[key].action
   };
 }
+
+export class LetterError extends Error {
+  key: LetterErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: LetterErrorMessageType) {
+    const errorInfo = LETTER_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'LetterError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

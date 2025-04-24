@@ -2,7 +2,7 @@
 
 import browserClient from '@/app/utils/supabase/client';
 import { supabase } from '@/app/utils/supabase/supabase';
-import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/Line';
+import { NO_ID, SOLUTION_TITLE } from '@/constants/ranking/line';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';

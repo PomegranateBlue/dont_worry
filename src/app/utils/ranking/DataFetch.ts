@@ -1,10 +1,10 @@
-import { NO_ID } from '@/constants/ranking/Line';
+import { NO_ID } from '@/constants/ranking/line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
 import {
   ANALYZE_ERROR,
   DATA_FETHCING_ERROR
-} from '@/constants/ranking/ErrorConstants';
+} from '@/constants/ranking/errorConstants';
 
 //주 단위 데이터를 패칭
 export const fetchUserNotes = async (

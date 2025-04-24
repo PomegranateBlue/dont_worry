@@ -12,7 +12,7 @@ import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
-import TopThreeCard from '@/components/ranking/TopThreeCard';
+import TopSixCard from '@/components/ranking/TopSixCard';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
 import { DATA_FETHCING_ERROR } from '@/constants/ranking/ErrorConstants';
@@ -153,7 +153,7 @@ const RankingPage = () => {
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixTopic.map((e) => (
                 <div key={e.name}>
-                  <TopThreeCard topThree={e} />
+                  <TopSixCard topThree={e} />
                 </div>
               ))}
             </div>
@@ -161,7 +161,7 @@ const RankingPage = () => {
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixEmotion.map((e) => (
                 <div key={e.name}>
-                  <TopThreeCard topThree={e} />
+                  <TopSixCard topThree={e} />
                 </div>
               ))}
             </div>

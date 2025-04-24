@@ -12,7 +12,7 @@ export interface TopThreeProps {
   topThree: TopThree;
 }
 
-const TopThreeCard = ({ topThree }: TopThreeProps) => {
+const TopSixCard = ({ topThree }: TopThreeProps) => {
   return (
     <Link
       href={{
@@ -36,4 +36,4 @@ const TopThreeCard = ({ topThree }: TopThreeProps) => {
   );
 };
 
-export default TopThreeCard;
+export default TopSixCard;

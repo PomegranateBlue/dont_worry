@@ -91,9 +91,9 @@ const FilterModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end">
+    <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end ">
       <div
-        className="bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
+        className="xl:max-w-[648px] bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
         onClick={(e) => e.stopPropagation()}
       >
         <div

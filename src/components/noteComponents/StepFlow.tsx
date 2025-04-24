@@ -96,6 +96,7 @@ const StepFlow = () => {
           <div>
             <Text
               variant="title1"
+              variant2="heading1"
               color="label-normal"
               className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
             >
@@ -128,7 +129,7 @@ const StepFlow = () => {
                 />
               </button>
               <div className="absolute inset-0 flex justify-center items-center">
-                <p className="text-[20px] font-semibold">감정 작성</p>
+                <Text variant="title1" variant2="heading1">감정 작성</Text>
               </div>
             </div>
 

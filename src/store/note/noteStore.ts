@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 
 interface NoteProps {
-  selectedTopic: string | null; // 주제는 1개만
+  selectedTopics: string[]; // 주제도 3개
   selectedEmotions: string[]; // 감정은 최대 3개
 
   toggleTopic: (topic: string) => void;
@@ -19,14 +19,26 @@ interface NoteProps {
 }
 
 export const useNoteStore = create<NoteProps>((set) => ({
-  selectedTopic: null,
+  selectedTopics: [],
   selectedEmotions: [],
 
   toggleTopic: (topic) =>
-    set((state) => ({
-      selectedTopic: state.selectedTopic === topic ? null : topic
-    })),
+    set((state) => {
+      const isSelected = state.selectedTopics.includes(topic);
 
+      if (isSelected) {
+        return {
+          selectedTopics: state.selectedTopics.filter((t) => t !== topic)
+        };
+      }
+
+      if (state.selectedTopics.length >= 3) {
+        return state;
+      }
+      return {
+        selectedTopics: [...state.selectedTopics, topic]
+      };
+    }),
   toggleEmotion: (emotion) =>
     set((state) => {
       const isEmotion = state.selectedEmotions.includes(emotion);
@@ -54,7 +66,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
 
   reset: () => {
     set({
-      selectedTopic: null,
+      selectedTopics: [],
       selectedEmotions: []
     });
   }

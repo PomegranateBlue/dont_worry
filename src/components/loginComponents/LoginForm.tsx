@@ -13,6 +13,7 @@ import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { showToast } from '../common/Toast';
 import { LOGIN_TEXT } from '@/constants/login/text';
+import { Info } from 'lucide-react';
 
 interface LoginFormProps {
   mode: string;
@@ -106,6 +107,19 @@ const LoginForm = ({ mode }: LoginFormProps) => {
         register={register}
         error={errors.email}
         required
+        infoText={
+          mode === 'signup' ? (
+            <Text
+              as="div"
+              variant="label1"
+              color="primary4"
+              className="flex items-center gap-1 !leading-normal !mt-[6px]"
+            >
+              <Info className="w-4 h-4 translate-y-[-2px]" />
+              <span>미래 편지를 입력하신 이메일로 받아볼 수 있어요!</span>
+            </Text>
+          ) : undefined
+        }
       />
       <InputForm
         label="비밀번호"

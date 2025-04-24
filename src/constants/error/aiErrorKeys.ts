@@ -44,6 +44,11 @@ export const AI_ERROR_MESSAGE = {
     status: 500,
     message: 'AI 분석결과를 해석하는 데 실패했습니다.',
     action: '잠시 후 다시 시도해주세요.'
+  },
+  SUPABASE_INSERT_FAILED: {
+    status: 500,
+    message: '데이터 저장에 실패했습니다.',
+    action: '잠시 후 다시 시도해주세요.'
   }
 };
 

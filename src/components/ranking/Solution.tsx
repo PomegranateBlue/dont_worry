@@ -8,6 +8,12 @@ import { useUserStore } from '@/store/auth/store';
 import React, { useEffect, useRef, useState } from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
+import {
+  isSupabaseErrorResponse,
+  SUPABASE_ERROR_KEYS,
+  SUPABASE_ERROR_MESSAGE
+} from '@/constants/error/supabaseErrorKeys';
+import { NextResponse } from 'next/server';
 
 type TopThreeItem = {
   name: string;
@@ -107,7 +113,15 @@ const Solution = ({ topThree }: SolutionProps) => {
               ]);
 
             if (insertError) {
-              console.log('삽입 에러:', insertError);
+              console.error('삽입 에러:', insertError);
+              return NextResponse.json(
+                isSupabaseErrorResponse(
+                  SUPABASE_ERROR_KEYS.SUPABASE_INSERT_FAILED
+                ),
+                {
+                  status: SUPABASE_ERROR_MESSAGE.SUPABASE_INSERT_FAILED.status
+                }
+              );
             }
           }
         } else {

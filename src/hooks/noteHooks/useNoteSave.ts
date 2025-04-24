@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 interface NoteSaveProps {
   message: string;
   result: string;
-  topic: string;
+  topics: string[];
   emotions: string[];
   userId: string;
 }
@@ -17,14 +17,14 @@ interface SaveResultProps {
 
 export const useNoteSave = () => {
   return useMutation<SaveResultProps, Error, NoteSaveProps>({
-    mutationFn: async ({ message, result, topic, emotions, userId }) => {
+    mutationFn: async ({ message, result, topics, emotions, userId }) => {
       const res = await fetch('/utils/note', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message,
           result: { content: result }, // 서버 구조에 맞게 감쌈
-          topic,
+          topics,
           emotions,
           userId
         })

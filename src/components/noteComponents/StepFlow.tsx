@@ -29,7 +29,7 @@ enum StepProps {
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const {
-    selectedTopic,
+    selectedTopics,
     selectedEmotions,
     toggleTopic,
     message,
@@ -57,7 +57,7 @@ const StepFlow = () => {
 
     try {
       const gptInput = {
-        topic: selectedTopic,
+        topics: selectedTopics,
         emotions: selectedEmotions,
         message
       };
@@ -68,7 +68,7 @@ const StepFlow = () => {
       const saveInput = {
         message,
         result: res.content,
-        topic: selectedTopic ?? '',
+        topics: selectedTopics,
         emotions: selectedEmotions,
         userId: user
       };

@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 const useAnalysisTrend = (year: number, month: number) => {
   const [data, setData] = useState<AnalysisTrendsResult | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string | null>('');
   const { user } = useUserStore();
 
   useEffect(() => {
@@ -21,9 +21,8 @@ const useAnalysisTrend = (year: number, month: number) => {
         setData(result);
         setError('');
       } catch (err) {
-        setError('데이터를 불러오는중 오류 발생');
+        setError(RANKING_ERROR_MESSAGE.CANT_ANALYZE_WORRIES.message);
         console.log(err);
-        throw new Error(RANKING_ERROR_MESSAGE.CANT_ANALYZE_WORRIES.message);
       } finally {
         setLoading(false);
       }

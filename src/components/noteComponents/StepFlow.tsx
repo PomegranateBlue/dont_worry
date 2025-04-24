@@ -38,8 +38,8 @@ const StepFlow = () => {
   } = useNoteStore();
 
   const emotionRef = useRef<HTMLDivElement | null>(null);
-  const { mutate: submitGPT, isPending } = useGPTSubmit();
-  const { mutate: saveNote } = useNoteSave();
+  const { mutateAsync: submitGPT, isPending } = useGPTSubmit();
+  const { mutateAsync: saveNote } = useNoteSave();
   const { user } = useUserStore();
 
   const handleCategorySelect = (topic: string) => {
@@ -49,48 +49,38 @@ const StepFlow = () => {
     }, 100);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!user) {
-      alert('로그인이 필요합니다.');
       setStep(StepProps.RESULT);
       return;
     }
 
-    const gptInput = {
-      topic: selectedTopic,
-      emotions: selectedEmotions,
-      message
-    };
+    try {
+      const gptInput = {
+        topic: selectedTopic,
+        emotions: selectedEmotions,
+        message
+      };
 
-    submitGPT(gptInput, {
-      onSuccess: (res) => {
-        setResult(res.content);
+      const res = await submitGPT(gptInput);
+      setResult(res.content);
 
-        const saveInput = {
-          message,
-          result: res.content,
-          topic: selectedTopic ?? '',
-          emotions: selectedEmotions,
-          userId: user
-        };
+      const saveInput = {
+        message,
+        result: res.content,
+        topic: selectedTopic ?? '',
+        emotions: selectedEmotions,
+        userId: user
+      };
 
-        saveNote(saveInput, {
-          onSuccess: () => {
-            setStep(StepProps.RESULT);
-            reset();
-          },
-          onError: (err) => {
-            console.error('노트 저장 실패:', err.message);
-            alert(err.message);
-            setStep(StepProps.RESULT);
-          }
-        });
-      },
-      onError: (err) => {
-        console.error('GPT 요청 실패:', err.message);
-        alert('GPT 요청에 실패했습니다.');
-      }
-    });
+      await saveNote(saveInput);
+      setStep(StepProps.RESULT);
+      reset();
+    } catch (err) {
+      console.error('에러 발생:', err);
+      alert((err as Error).message);
+      setStep(StepProps.RESULT);
+    }
   };
 
   return (

@@ -15,13 +15,10 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   TOPIC_FILTER_DESCRIPTION,
   TOPIC_FILTER_DESCRIPTION2
-} from '@/constants/ranking/Line';
-import {
-  CHART_LABEL,
-  topicBackgroundColor,
-  topicBorderColor
-} from '@/constants/ranking/ChartOptions';
+} from '@/constants/ranking/line';
+
 import Text from '../common/Text';
+import { CHART_LABEL, topicBackgroundColor, topicBorderColor } from '@/constants/ranking/chartOptions';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 

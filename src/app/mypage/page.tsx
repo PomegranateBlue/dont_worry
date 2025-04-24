@@ -137,8 +137,8 @@ const MyPage = () => {
           ['공지사항', '/mypage/notice'],
           ['이용약관', '/mypage/terms'],
           ['챗봇 문의', '/mypage/chat'],
-          ['버전', '/mypage/version'],
-          [`TEAM DON'T WORRY`, '/mypage/team']
+          ['버전', '/mypage/version']
+          // [`TEAM DON'T WORRY`, '/mypage/team']
         ].map(([label, link], idx) => (
           <Link
             key={idx}

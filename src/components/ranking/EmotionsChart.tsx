@@ -18,7 +18,7 @@ import {
 } from '@/constants/ranking/line';
 
 import Text from '../common/Text';
-import { CHART_LABEL, emotionBackgroundColor, emotionBorderColor } from '@/constants/ranking/ChartOptions';
+import { CHART_LABEL, emotionBackgroundColor, emotionBorderColor } from '@/constants/ranking/chartOptions';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 

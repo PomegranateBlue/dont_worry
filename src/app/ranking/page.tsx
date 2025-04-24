@@ -18,8 +18,9 @@ import FilterMenu from '@/components/ranking/FilterMenu';
 
 import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
-import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
-import { DATA_FETHCING_ERROR } from '@/constants/ranking/rankingError';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import { DATA_FETHCING_ERROR } from '@/constants/error/rankingError';
+
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();

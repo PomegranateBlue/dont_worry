@@ -93,3 +93,18 @@
     @apply bg-background text-foreground;
   }
 }
+/* 성공 토스트로딩바 */
+.Toastify__toast--success {
+  /* color: #7f1d1d !important; */
+}
+.Toastify__progress-bar--success {
+  background-color: #c1b8e5 !important;
+}
+.Toastify__toast--success .Toastify__progress-bar {
+  background-color: #8573c9 !important;
+}
+
+/* 성공 토스트 아이콘 제거 (필요 시) */
+/* .Toastify__toast--success .Toastify__toast-icon {
+  display: none;
+} */

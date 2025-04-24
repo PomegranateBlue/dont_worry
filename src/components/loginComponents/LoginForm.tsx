@@ -62,7 +62,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
           const data = await fetchUser();
           setUser(data);
           const userInfo = await fetchUserInfo(data);
-          showToast(`${userInfo?.nickname}님 환영합니다!`, 'success');
+          showToast(`🎉 ${userInfo?.nickname}님 환영합니다!`, 'success');
           router.push('/');
         } catch (error) {
           console.error('유저 정보 불러오기 실패:', error);

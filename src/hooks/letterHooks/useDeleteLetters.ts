@@ -7,6 +7,7 @@ import { deleteLetters } from '@/app/utils/supabase/db';
 export const useDeleteLetters = () => {
   const queryClient = useQueryClient();
   const { user } = useUserStore();
+
   return useMutation({
     mutationFn: (letterIds: string[]) => {
       if (!user) {

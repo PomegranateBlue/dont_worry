@@ -3,31 +3,9 @@
 import React from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-
-// interface CheckStepProps {
-//   sendAt: string;
-// }
+import Link from 'next/link';
 
 const CheckStep = () => {
-  const router = useRouter();
-
-  const handleGoToLetterBox = () => {
-    // setTimeout을 넣어 렌더링 타이밍 이슈 피하기
-    setTimeout(() => {
-      router.push('/letterbox');
-    }, 0);
-  };
-  //   //날짜 데이터를 -월 -일 형식의 텍스트로 변환
-  //   const formatDateText = (dateStr: string) => {
-  //     const date = new Date(dateStr);
-  //     if (isNaN(date.getTime())) return null; //날짜 유효성 검사
-  //     const month = date.getMonth() + 1;
-  //     const day = date.getDate();
-  //     return `${month}월 ${day}일`;
-  //   };
-  //   const formattedDate = sendAt ? formatDateText(sendAt) : null;
-
   return (
     <section>
       <nav className="flex h-[56px] px-[6px] justify-center items-center gap-[20px] mb-40 self-stretch">
@@ -53,21 +31,25 @@ const CheckStep = () => {
           />
           <nav className="flex flex-col items-start py-5 self-stretch">
             <div className="flex justify-center items-center gap-2 px-5 py-2 self-stretch">
-              <Text>미래의 나에게 편지를 보냈어요</Text>
+              <Text
+                variant="heading3"
+                color="label-normal"
+                className="text-center font-[500] text-[22px] leading-[135%] font-['IBM Plex Sans KR']"
+              >
+                미래의 나에게 편지를 보냈어요
+              </Text>
             </div>
           </nav>
         </div>
-
-        {/* <Text>{formattedDate}에 이메일로 편지가 도착해요</Text> */}
-
         <div className="w-full mt-10">
-          <button
-            type="button"
-            onClick={handleGoToLetterBox}
-            className="w-full h-12 bg-primary-4 text-white text-lg font-semibold rounded-lg"
-          >
-            편지함 바로가기
-          </button>
+          <Link href="/letterbox">
+            <button
+              type="button"
+              className="w-full h-12 bg-primary-4 text-white text-lg font-semibold rounded-lg"
+            >
+              편지함 바로가기
+            </button>
+          </Link>
         </div>
       </form>
     </section>

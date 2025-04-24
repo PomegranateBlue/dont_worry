@@ -24,9 +24,9 @@ const FilterLetter = ({
   };
 
   return (
-    <section className="relative">
+    <section>
       <button
-        className={`flex items-start px-3 py-[6px] h-[32px] rounded-[16px] border xl:rounded-[20px] xl:px-[16px] ${
+        className={`flex items-start px-3 py-[6px] h-[32px] rounded-[16px] border xl:rounded-[20px] xl:px-[16px] bg-backgroundSet-normal ${
           selectedFilter
             ? 'border-primary-4 bg-primary-1'
             : 'border-line-normal'

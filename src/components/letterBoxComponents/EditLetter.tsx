@@ -1,19 +1,24 @@
 'use client';
 
 import { useDeleteLetters } from '@/hooks/letterHooks/useDeleteLetters';
+import Text from '../common/Text';
 
 interface EditLetterProps {
   isEdit: boolean;
   setIsEdit: (state: boolean) => void;
   selectedLetterIds: string[];
   setSelectedLetterIds: (ids: string[]) => void;
+  isAllSelected: boolean;
+  onSelectAll: () => void;
 }
 
 const EditLetter = ({
   isEdit,
   setIsEdit,
   selectedLetterIds,
-  setSelectedLetterIds
+  setSelectedLetterIds,
+  isAllSelected,
+  onSelectAll
 }: EditLetterProps) => {
   const { mutate } = useDeleteLetters();
 
@@ -44,14 +49,40 @@ const EditLetter = ({
   };
 
   return (
-    <div className="flex justify-between items-center px-4 py-2">
-      <button onClick={handleToggleEdit}>
-        {isEdit ? '편집 모드 해제' : '편집 모드'}
-      </button>
-
-      {isEdit && (
-        <div className="flex gap-2">
-          <button onClick={handleDeleteLetter}>삭제</button>
+    <div>
+      {!isEdit ? (
+        <button
+          onClick={handleToggleEdit}
+          className="flex h-[36px] px-2 py-4 justify-center items-center gap-2"
+        >
+          <Text variant="body3" color="label-alternative">
+            편집
+          </Text>
+        </button>
+      ) : (
+        <div className="flex justify-between w-full">
+          <div className="flex gap-2">
+            <button onClick={onSelectAll}>
+              <Text variant="body3" color="label-alternative">
+                {isAllSelected ? '전체 해제' : '전체 선택'}
+              </Text>
+            </button>
+            <button onClick={handleDeleteLetter}>
+              <Text variant="body3" color="label-alternative">
+                삭제
+              </Text>
+            </button>
+            <button
+              onClick={() => {
+                setIsEdit(false);
+                setSelectedLetterIds([]);
+              }}
+            >
+              <Text variant="body3" color="label-alternative">
+                취소
+              </Text>
+            </button>
+          </div>
         </div>
       )}
     </div>

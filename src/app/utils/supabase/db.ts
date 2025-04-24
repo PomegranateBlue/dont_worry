@@ -69,7 +69,7 @@ export const updateUserInfo = async (
     .from('users')
     .update(updates)
     .eq('user_id', userId)
-    .select('email, nickname, profile_img')
+    .select('email, nickname, profile_img, is_deleted')
     .single();
 
   if (error) throw new Error(error.message);

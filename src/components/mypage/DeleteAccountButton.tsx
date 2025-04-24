@@ -3,9 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/auth/store';
 import { useState } from 'react';
-import { updateUserInfo } from '@/app/utils/supabase/db';
-import browserClient from '@/app/utils/supabase/client';
 import Text from '../common/Text';
+import { deleteUserAccount } from '@/app/utils/auth/logoutUser';
 
 export default function DeleteAccountButton() {
   const { user, setUser } = useUserStore();
@@ -21,13 +20,12 @@ export default function DeleteAccountButton() {
     setLoading(true);
 
     try {
-      // 사용자 소프트 삭제
-      const updatedUser = await updateUserInfo(user, { is_deleted: true });
-      if (!updatedUser) {
-        throw new Error('사용자 정보 업데이트 실패');
+      const { success, error } = await deleteUserAccount(user);
+
+      if (!success) {
+        throw error || new Error('회원탈퇴 처리 실패');
       }
 
-      await browserClient.auth.signOut();
       setUser(null);
       router.push('/');
     } catch (error) {

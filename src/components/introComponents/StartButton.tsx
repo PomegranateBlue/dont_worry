@@ -10,7 +10,7 @@ const StartButton = () => {
       onClick={() => handleStartNote()}
     >
       <div className=" px-5 py-4 whitespace-nowrap">
-        <Text variant="title2" color="primary4">
+        <Text variant="title2" variant2="title1" color="primary4">
           걱정 작성하러 가기
         </Text>
       </div>

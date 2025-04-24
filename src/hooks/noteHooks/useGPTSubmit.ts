@@ -30,3 +30,4 @@ export const useGPTSubmit = () => {
     }
   });
 };
+// 에러문구 : GPT로의 제출 실패, status:

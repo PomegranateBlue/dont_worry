@@ -15,10 +15,11 @@ const Report = ({ most }: ReportProps) => {
           variant="heading3"
           variant2="heading4"
           color="label-normal"
-          className="text-center text-[22px] font-medium leading-[135%] w-[228px] h-[60px] xl:w-[255px] xl:h-[76px]"
+          className="text-center break-words"
         >
-          {`${most.name}에 관한 걱정이 
-          ${most.percentage}%로 가장 많았어요`}
+          {`${most.name}에 관한 걱정이`}
+          <br />
+          {`${most.percentage}%로 가장 많았어요`}
         </Text>
       )}
     </>

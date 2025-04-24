@@ -1,22 +1,22 @@
 'use client';
 
-import { NO_DATA } from '@/constants/ranking/ErrorConstants';
+
 import {
   ABOUT,
   MOST_INCREASE_COMMENT_MONTH,
   MOST_INCREASE_COMMENT_WEEK
-} from '@/constants/ranking/Line';
-import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+} from '@/constants/ranking/line';
+
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { WorsenedThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 import Text from '../common/Text';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import { NO_DATA } from '@/constants/error/rankingError';
 
-const WorsenedThing: React.FC<WorsenedThingProps> = ({
-  monthData,
-  weekData
-}) => {
+
+const WorsenedThing = ({ monthData, weekData }: WorsenedThingProps) => {
   const { mode } = useRankingStore();
 
   const monthBest = monthData?.mostIncreased;

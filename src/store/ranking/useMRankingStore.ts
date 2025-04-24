@@ -8,8 +8,6 @@ interface MonthlyRankingState {
   month: number;
 
   initialize: (year: number, month: number) => void;
-  goToPreviousMonth: () => void;
-  goToNextMonth: () => void;
 }
 
 const updateFormattedDate = (date: dayjs.Dayjs) => {
@@ -41,34 +39,6 @@ export const useMRankingStore = create<MonthlyRankingState>((set) => {
         currentDate: targetDate,
         formattedDate: updateFormattedDate(targetDate)
       });
-    },
-
-    // 이전 월로 이동하는 함수
-    goToPreviousMonth: () =>
-      set((state) => {
-        // 현재 월의 첫날로 설정 후 한 달 이전으로 이동
-        const newDate = state.currentDate.startOf('month').subtract(1, 'month');
-
-        return {
-          currentDate: newDate,
-          formattedDate: updateFormattedDate(newDate),
-          year: newDate.year(),
-          month: newDate.month() + 1
-        };
-      }),
-
-    // 다음 월로 이동하는 함수
-    goToNextMonth: () =>
-      set((state) => {
-        // 현재 월의 첫날로 설정 후 한 달 다음으로 이동
-        const newDate = state.currentDate.startOf('month').add(1, 'month');
-
-        return {
-          currentDate: newDate,
-          formattedDate: updateFormattedDate(newDate),
-          year: newDate.year(),
-          month: newDate.month() + 1
-        };
-      })
+    }
   };
 });

@@ -15,13 +15,10 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   TOPIC_FILTER_DESCRIPTION,
   TOPIC_FILTER_DESCRIPTION2
-} from '@/constants/ranking/Line';
-import {
-  CHART_LABEL,
-  topicBackgroundColor,
-  topicBorderColor
-} from '@/constants/ranking/ChartOptions';
+} from '@/constants/ranking/line';
+
 import Text from '../common/Text';
+import { CHART_LABEL, topicBackgroundColor, topicBorderColor } from '@/constants/ranking/chartOptions';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -29,7 +26,7 @@ interface ChartProps {
   topTopics: { name: string; count: number }[];
 }
 
-const TopicChart: React.FC<ChartProps> = ({ topTopics }) => {
+const TopicChart = ({ topTopics }: ChartProps) => {
   const topicLabels = topTopics.map((topic) => topic.name);
   const topicData = topTopics.map((topic) => topic.count);
   const total = topicData.reduce((acc, cur) => acc + cur, 0); // 총합

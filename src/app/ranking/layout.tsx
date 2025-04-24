@@ -1,6 +1,6 @@
 import Text from '@/components/common/Text';
 import TimeFilterGroup from '@/components/ranking/FusionComp/TimeFilterGroup';
-import { CHART_PAGE_TITLE } from '@/constants/ranking/Line';
+import { CHART_PAGE_TITLE } from '@/constants/ranking/line';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

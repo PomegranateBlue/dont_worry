@@ -10,7 +10,7 @@ interface Props {
 const TopicCategoryForm = ({ onSelectCategory }: Props) => {
   const { selectedTopic } = useNoteStore();
   return (
-    <div className="flex flex-col justify-center items-center max-w-[648px]">
+    <div className="flex flex-col justify-center items-center max-w-[648px] xl:pb-[80px]">
       <div className="flex  w-full h-auto px-5 py-2 ">
         <Text variant="heading3" color="label-normal">
           걱정은 어디에서 왔나요? 어떤 주제인가요?

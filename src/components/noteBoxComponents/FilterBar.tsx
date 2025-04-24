@@ -107,7 +107,7 @@ const FilterTab = ({
   onClick: () => void;
 }) => (
   <button
-    className={`flex items-center px-3 h-[32px] rounded-full border text-sm ${
+    className={`flex items-center px-3 h-[32px] rounded-full border  ${
       selected ? 'border-primary-4 bg-primary-1' : 'border-line-normal'
     }`}
     onClick={onClick}

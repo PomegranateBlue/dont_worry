@@ -11,23 +11,23 @@ const HomePage = () => {
     <main className="min-h-screen">
       {/*히어로 섹션 시작  */}
       <section
-        className="flex flex-col w-full h-[621px] pt-[60px] relative xl:overflow-hidden"
+        className="flex flex-col w-full h-[621px] pt-[60px] relative xl:overflow-hidden xl:flex-row "
         style={{
           background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 87.13%)'
         }}
       >
-        <div className="relative z-10 flex flex-col items-center justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center  xl:items-start xl:left-[600px] xl:gap-[40px] xl:bottom-[100px] ">
           {/* 텍스트 */}
           <Text
             variant="display3"
             variant2="display1"
-            className="text-center text-backgroundSet-normal"
+            className="text-center text-backgroundSet-normal xl:text-left"
           >
             말 못할 걱정들..
             <br />
             어딘가 털어놓고 싶다면?
           </Text>
-          <div className="mt-[40px] mb-[40px]">
+          <div>
             <StartButton />
           </div>
         </div>
@@ -36,13 +36,21 @@ const HomePage = () => {
           <Carousel />
         </div>
 
-        {/* 배경 일러스트 이미지: 섹션 바닥에 붙음 */}
-        <div>
+        {/* 배경 일러스트 이미지 */}
+        <div className="xl:hidden">
           <Image
             src={'/images/hero-section-bg.svg'}
             alt="hero"
             fill
             className="absolute  object-cover"
+          />
+        </div>
+        <div className="hidden xl:block">
+          <Image
+            src={'/images/hero-section-desktop.svg'}
+            alt="hero-desktop"
+            fill
+            className="absolute object-cover"
           />
         </div>
       </section>
@@ -53,9 +61,10 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/mobile-logo.svg'}
-            width={180}
-            height={24}
+            width={0}
+            height={0}
             alt="logo"
+            className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
           />
         </div>
 
@@ -112,9 +121,10 @@ const HomePage = () => {
             <div>
               <Image
                 src={'images/step1-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step1"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
@@ -135,9 +145,10 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step2-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step2"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
@@ -150,17 +161,23 @@ const HomePage = () => {
                 </Text>
               </div>
               <div>
-                <Text variant="body2" variant2="body1" color="label-normal">
+                <Text
+                  variant="body2"
+                  variant2="body1"
+                  color="label-normal"
+                  className="xl:whitespace-nowrap"
+                >
                   돈워리가 건네는 위로와 조언을 통해 스스로 성장해요
                 </Text>
               </div>
             </div>
-            <div>
+            <div className="bg-[#ADA2D7] min-w-[335px] rounded-[8px] xl:min-w-[370px]">
               <Image
                 src={'images/step3-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step3"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
@@ -197,13 +214,13 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div>
+        <div className="flex">
           <Image
             src={'images/graph.svg'}
-            width={335}
-            height={335}
-            alt="graph
-          "
+            width={0}
+            height={0}
+            alt="graph"
+            className="min-w-[236px] min-h-[236px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
       </section>

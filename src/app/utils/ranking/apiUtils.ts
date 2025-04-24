@@ -1,4 +1,4 @@
-import { AI_ERROR_MESSAGE } from '@/constants/error/aiErrorKeys';
+import { AIError } from '@/constants/error/aiErrorKeys';
 
 export const fetchGptSolution = async (keywords: string): Promise<string> => {
   try {
@@ -9,7 +9,7 @@ export const fetchGptSolution = async (keywords: string): Promise<string> => {
     });
 
     if (!res.ok) {
-      throw new Error(AI_ERROR_MESSAGE.UNKNOWN.message);
+      throw new AIError('GPT_GENERATION_FAIL');
     }
 
     const gptData = await res.json();
@@ -17,10 +17,10 @@ export const fetchGptSolution = async (keywords: string): Promise<string> => {
     if (typeof gptData === 'string') {
       return gptData;
     } else {
-      throw new Error(AI_ERROR_MESSAGE.UNKNOWN.message);
+      throw new AIError('UNKNOWN');
     }
   } catch (error) {
     console.error('GPT 솔루션 생성 중 오류:', error);
-    throw new Error(AI_ERROR_MESSAGE.GPT_GENERATION_FAIL.message);
+    throw new AIError('UNKNOWN');
   }
 };

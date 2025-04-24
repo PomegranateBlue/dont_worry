@@ -15,7 +15,7 @@ export const fetchUserNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error(NO_ID);
+    throw new RankingError('NO_USER_INFO');
   }
 
   try {
@@ -33,13 +33,13 @@ export const fetchUserNotes = async (
       .eq('user_id', id);
 
     if (error) {
-      throw error;
+      throw new RankingError('CANT_SELECT_USER_WORRIES');
     }
 
     return data as UserNote[];
   } catch (err) {
     console.error(DATA_FETHCING_ERROR, err);
-    throw new Error(DATA_FETHCING_ERROR);
+    throw new RankingError('CANT_SELECT_USER_WORRIES');
   }
 };
 
@@ -50,7 +50,7 @@ export const fetchMonthlyNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error(NO_ID);
+    throw new RankingError('NO_USER_INFO');
   }
 
   try {
@@ -68,7 +68,7 @@ export const fetchMonthlyNotes = async (
       .eq('user_id', id);
 
     if (error) {
-      throw error;
+      throw new RankingError('CANT_SELECT_USER_WORRIES');
     }
 
     return data as UserNote[];

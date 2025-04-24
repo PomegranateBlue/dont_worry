@@ -1,12 +1,16 @@
 'use client';
 
 import Text from '@/components/common/Text';
+import EditLetter from '@/components/letterBoxComponents/EditLetter';
 import FilterLetter from '@/components/letterBoxComponents/FilterLetter';
 import LetterCard from '@/components/letterBoxComponents/LetterCard';
 import React, { useState } from 'react';
 
 const LetterBoxPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+  const [isEdit, setIsEdit] = useState(false);
+  const [selectedLetterIds, setSelectedLetterIds] = useState<string[]>([]);
+
   return (
     <section>
       <nav className="flex h-[56px] px-[6px] justify-center items-center gap-[20px] self-stretch">
@@ -21,12 +25,25 @@ const LetterBoxPage = () => {
         </div>
       </nav>
       <div className="flex w-[375px] flex-col items-center">
-        <FilterLetter
-          selectedFilter={selectedFilter}
-          onToggleFilter={(label) => setSelectedFilter(label || null)}
-        />
+        <nav>
+          <FilterLetter
+            selectedFilter={selectedFilter}
+            onToggleFilter={(label) => setSelectedFilter(label || null)}
+          />
+          <EditLetter
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            selectedLetterIds={selectedLetterIds}
+            setSelectedLetterIds={setSelectedLetterIds}
+          />
+        </nav>
 
-        <LetterCard selectedFilter={selectedFilter} />
+        <LetterCard
+          selectedFilter={selectedFilter}
+          selectedLetterIds={selectedLetterIds}
+          setSelectedLetterIds={setSelectedLetterIds}
+          isEdit={isEdit}
+        />
       </div>
     </section>
   );

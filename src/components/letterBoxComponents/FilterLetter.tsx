@@ -24,9 +24,9 @@ const FilterLetter = ({
   };
 
   return (
-    <div className="relative">
+    <section className="relative">
       <button
-        className={`flex items-center px-3 py-[6px] h-[32px] rounded-[16px] border xl:rounded-[20px] xl:px-[16px] ${
+        className={`flex items-start px-3 py-[6px] h-[32px] rounded-[16px] border xl:rounded-[20px] xl:px-[16px] ${
           selectedFilter
             ? 'border-primary-4 bg-primary-1'
             : 'border-line-normal'
@@ -41,9 +41,9 @@ const FilterLetter = ({
       </button>
 
       {isOpen && (
-        <figure className="mt-1 w-full border rounded-[8px] bg-background-normal shadow">
+        <figure className="absolute mt-1 w-full border rounded-[8px] bg-backgroundSet-normal shadow">
           <button
-            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch"
+            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch z-10 bg-backgroundSet-normal"
             onClick={() => handleFilterOption('작성일순')}
           >
             <Text variant="body3" as="p" color="label-neutral">
@@ -51,7 +51,7 @@ const FilterLetter = ({
             </Text>
           </button>
           <button
-            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch"
+            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch z-10 bg-backgroundSet-normal"
             onClick={() => handleFilterOption('도착일순')}
           >
             <Text variant="body3" as="p" color="label-neutral">
@@ -60,7 +60,7 @@ const FilterLetter = ({
           </button>
         </figure>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -7,9 +7,8 @@ import { AuthProvider } from '@/provider/authProvider';
 import { Toast } from '@/components/common/Toast';
 
 export const pretendard = localFont({
-  src: './fonts/PretendardVariable.ttf',
+  src: '../fonts/PretendardVariable.ttf',
   display: 'swap',
-  weight: '400',
   variable: '--font-pretendard'
 });
 
@@ -67,7 +66,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>
             <Header />
-            {children}
+            <main className="pt-14 lg:pt-20">{children}</main>
             <Toast />
           </AuthProvider>
         </Providers>

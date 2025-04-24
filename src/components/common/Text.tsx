@@ -5,13 +5,14 @@ import { ElementType, ReactNode } from 'react';
 const textVariants = cva('', {
   variants: {
     variant: {
-      display1: `text-[40px] leading-[135%] font-[600] ibmSans`,
-      display2: `text-[36px] leading-[135%] font-[600] ibmSans`,
-      display3: `text-[32px] leading-[135%] font-[600] ibmSans`,
-      heading1: `text-[28px] leading-[135%] font-[600] ibmSans`,
-      heading2: `text-[24px] leading-[135%] font-[600] ibmSans`,
-      heading3: `text-[22px] leading-[135%] font-[600] ibmSans`,
-      heading4: `text-[26px] leading-[135%] font-[500] ibmSans`,
+      display1: `text-[40px] leading-[135%] ibmSans-600`,
+      display2: `text-[36px] leading-[135%] ibmSans-600`,
+      display3: `text-[32px] leading-[135%] ibmSans-600`,
+      heading1: `text-[28px] leading-[135%] ibmSans-600`,
+      heading2: `text-[24px] leading-[135%] ibmSans-600`,
+      heading3: `text-[22px] leading-[135%] ibmSans-600`,
+      heading4: `text-[26px] leading-[135%] ibmSans-500`,
+      heading5: `text-[16px] leading-[135%] ibmSans-500`,
       title1: `text-[20px] leading-[135%] font-[600] pretendard`,
       title2: `text-[18px] leading-[135%] font-[600] pretendard`,
       body1: `text-[18px] leading-[150%] font-medium pretendard`,
@@ -79,6 +80,12 @@ const responsiveVariantMap = {
   },
   heading4: {
     fontSize: 'xl:text-[26px]',
+    lineHeight: 'xl:leading-[135%]',
+    fontWeight: 'xl:font-[500]',
+    fontFamily: 'xl:ibmSans'
+  },
+  heading5: {
+    fontSize: 'xl:text-[16px]',
     lineHeight: 'xl:leading-[135%]',
     fontWeight: 'xl:font-[500]',
     fontFamily: 'xl:ibmSans'

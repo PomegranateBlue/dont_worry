@@ -41,6 +41,7 @@ const ProfileImageEditModal = ({
             width={80}
             height={80}
             className="rounded-full object-cover p-2"
+            unoptimized
           />
         </div>
 

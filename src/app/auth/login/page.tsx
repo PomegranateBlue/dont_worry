@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LoginForm from '@/components/loginComponents/LoginForm';
-// import NaverLogin from '@/components/loginComponents/NaverLogin';
 import KakaoLogin from '@/components/loginComponents/KakaoLogin';
 import GoogleLogin from '@/components/loginComponents/GoogleLogin';
 import Text from '@/components/common/Text';
@@ -27,7 +26,6 @@ export default function LoginPage() {
       </div>
       <LoginForm mode="login" />
       <div className="w-full h-[1px] bg-line-normal my-9"></div>
-
       <Text variant="body3" color="label-normal" className="text-center">
         {LOGIN_TEXT.socialLoginTitle}
       </Text>

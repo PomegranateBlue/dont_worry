@@ -26,13 +26,14 @@ const LoginProfile = () => {
           width={32}
           height={32}
           className="object-cover object-center w-full h-full"
+          unoptimized
         />
       </div>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <div className="flex items-center">
             <Text variant="title2" color="label-neutral">
-              {userData?.nickname} 님
+              {userData?.nickname}님
             </Text>
             <Image
               src="/images/keyboard-arrow-down.svg"

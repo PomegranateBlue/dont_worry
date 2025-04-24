@@ -60,3 +60,18 @@ export function isMypageErrorResponse(key: MypageErrorMessageType) {
     action: MYPAGE_ERROR_MESSAGE[key].action
   };
 }
+
+export class MypageError extends Error {
+  key: MypageErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: MypageErrorMessageType) {
+    const errorInfo = MYPAGE_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'MypageError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

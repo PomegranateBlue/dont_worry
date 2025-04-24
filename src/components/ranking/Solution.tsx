@@ -36,6 +36,14 @@ const Solution = ({ topThree }: SolutionProps) => {
           width={24}
           height={24}
           alt="이미지 없음"
+          className="lg:hidden"
+        />
+        <Image
+          src="/images/ver-default.svg"
+          width={40}
+          height={40}
+          alt="이미지 없음"
+          className="hidden lg:block"
         />
         <Text
           as="div"

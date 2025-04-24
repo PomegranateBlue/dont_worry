@@ -42,3 +42,18 @@ export function isSupabaseErrorResponse(key: SupabaseErrorMessageType) {
     action: SUPABASE_ERROR_MESSAGE[key].action
   };
 }
+
+export class SupabaseError extends Error {
+  key: SupabaseErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: SupabaseErrorMessageType) {
+    const errorInfo = SUPABASE_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'SupabaseError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

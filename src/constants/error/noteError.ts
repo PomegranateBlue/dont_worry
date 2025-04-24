@@ -60,3 +60,18 @@ export function isNoteErrorResponse(key: NoteErrorMessageType) {
     action: NOTE_ERROR_MESSAGE[key].action
   };
 }
+
+export class NoteError extends Error {
+  key: NoteErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: NoteErrorMessageType) {
+    const errorInfo = NOTE_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'NoteError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

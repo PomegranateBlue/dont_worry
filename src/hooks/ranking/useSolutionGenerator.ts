@@ -6,6 +6,7 @@ import {
   saveSolutionToDatabase
 } from '@/app/utils/ranking/solutionFetch';
 import { fetchGptSolution } from '@/app/utils/ranking/apiUtils';
+import { AIError } from '@/constants/error/aiErrorKeys';
 
 export const useSolutionGenerator = () => {
   const [solution, setSolution] = useState<string | null>(null);
@@ -36,8 +37,9 @@ export const useSolutionGenerator = () => {
 
         await saveSolutionToDatabase(userId, gptSolution, keywords);
       } catch (error) {
+        setSolution('걱정거리를 불러오는 중 오류가 발생했습니다.');
         console.error('솔루션 생성 중 오류 발생:', error);
-        setSolution('문제를 불러오는 중 오류가 발생했습니다.');
+        throw new AIError('GPT_GENERATION_FAIL');
       } finally {
         setIsLoading(false);
       }

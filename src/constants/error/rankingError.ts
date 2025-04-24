@@ -9,7 +9,8 @@ export const NO_DATA = '데이터가 없습니다';
 export const RANKING_ERROR_KEYS = {
   UNKNOWN: 'UNKNOWN',
   NO_USER_INFO: 'NO_USER_INFO',
-  CANT_SELECT_USER_WORRIES: 'CANT_SELECT_USER_WORRIES'
+  CANT_SELECT_USER_WORRIES: 'CANT_SELECT_USER_WORRIES',
+  CANT_ANALYZE_WORRIES: 'CANT_ANALYZE_WORRIES'
 } as const;
 
 export const RANKING_ERROR_MESSAGE = {
@@ -27,6 +28,11 @@ export const RANKING_ERROR_MESSAGE = {
     status: 500,
     message: '걱정 데이터를 불러오는 데 실패했어요.',
     action: '잠시 후 다시 시도해주세요.'
+  },
+  CANT_ANALYZE_WORRIES: {
+    status: 500,
+    message: '걱정을 분석하는 중 오류가 발생했어요.',
+    action: '잠시 후 다시 시도해주세요.'
   }
 } as const;
 
@@ -37,4 +43,19 @@ export function isRankingErrorResponse(key: RankingErrorMessageType) {
     error: RANKING_ERROR_MESSAGE[key].message,
     action: RANKING_ERROR_MESSAGE[key].action
   };
+}
+
+export class RankingError extends Error {
+  key: RankingErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: RankingErrorMessageType) {
+    const errorInfo = RANKING_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'RankingError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
 }

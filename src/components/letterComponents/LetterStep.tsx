@@ -55,8 +55,8 @@ const LetterStep = ({
     let imageUrl = '';
 
     if (imageFile) {
-      const rawFileName = `${Date.now()}_${imageFile.name}`;
-      const encodedPath = `letters/${encodeURIComponent(rawFileName)}`;
+      const rawFileName = `${userId}_${Date.now()}.png`;
+      const encodedPath = `letters/${rawFileName}`;
       const formData = new FormData();
       formData.append('file', imageFile);
       formData.append('path', encodedPath);

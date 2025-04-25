@@ -1,39 +1,80 @@
 'use client';
 
-import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+import { Separator } from '@radix-ui/react-separator';
 import Image from 'next/image';
 import React from 'react';
+import Text from '../common/Text';
 
-interface LetterCardProps {
-  selectedFilter: string | null;
+// 타입 정의
+interface Letter {
+  letter_id: string;
+  content: string;
+  img_url?: string | null;
+  send_at?: string | null;
 }
 
-const LetterCard = ({ selectedFilter }: LetterCardProps) => {
-  const { data: letters, isLoading, isError } = useUserLetters(selectedFilter);
+interface LetterCardProps {
+  letter: Letter;
+  isEdit: boolean;
+  isSelected: boolean;
+  onCheckboxChange: () => void;
+  formatDate: (date?: string | null) => string;
+}
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>편지 데이터 로딩 실패</div>;
-
+const LetterCard = ({
+  letter,
+  isEdit,
+  isSelected,
+  onCheckboxChange,
+  formatDate
+}: LetterCardProps) => {
   return (
-    <div className="space-y-4">
-      {letters?.map((letter) => (
-        <div
-          key={letter.letter_id}
-          className="border p-4 rounded shadow bg-white"
-        >
-          <p>{letter.content}</p>
-          {letter.img_url && (
-            <Image
-              width={80}
-              height={80}
-              src={letter.img_url}
-              alt="편지 이미지"
-              className="mt-2 w-full h-auto rounded"
-            />
-          )}
-        </div>
-      ))}
-    </div>
+    <main className="flex gap-2 self-stretch">
+      {isEdit && (
+        <label className="flex cursor-pointer">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={onCheckboxChange}
+            className="sr-only peer" // 기본 체크박스 숨기기
+          />
+          <div className="w-5 h-5 aspect-square rounded-full border-2 border-[#E0E0E2] peer-checked:bg-[#8573C9] peer-checked:border-[#8573C9] transition-all"></div>
+        </label>
+      )}
+      <div
+        className={`flex flex-col items-center gap-4 p-5 self-stretch border rounded bg-backgroundSet-normal shadow ${isEdit ? 'max-w-[303px]' : 'w-full'}`}
+      >
+        <nav className="flex items-center gap-2 self-stretch">
+          <Text variant="label1" color="label-neutral">
+            도착 예정일 {formatDate(letter.send_at)}
+          </Text>
+        </nav>
+        <Separator className="w-[295px] h-[1px] bg-line-normal" />
+        <article className="flex items-center gap-3 self-stretch">
+          <div className="min-w-[72px] h-[72px] rounded-[4px] bg-gray-100 flex items-center justify-center">
+            {letter.img_url && (
+              <Image
+                width={80}
+                height={80}
+                src={letter.img_url}
+                alt="편지 이미지"
+                className="w-[72px] h-[72px] rounded-[4px] object-cover"
+              />
+            )}
+          </div>
+          <figure className="flex flex-col justify-between items-start flex-[1_0_0] self-stretch">
+            <Text variant="label1" color="label-alternative">
+              {formatDate(letter.send_at)} 작성
+            </Text>
+            <div className="h-[38px] self-stretch">
+              <Text variant="label1" color="label-neutral">
+                {letter.content}
+              </Text>
+            </div>
+          </figure>
+        </article>
+      </div>
+    </main>
   );
 };
 

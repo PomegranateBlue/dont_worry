@@ -53,6 +53,16 @@ export const fetchUserLetters = async (
   return data || [];
 };
 
+// 사용자가 작성한 미래 편지 삭제하기
+export const deleteLetters = async (userId: string, letterIds: string[]) => {
+  const { error } = await browserClient
+    .from('letter')
+    .delete()
+    .in('letter_id', letterIds);
+
+  if (error) throw new Error(error.message);
+};
+
 // 사용자 정보 업데이트하기
 export const updateUserInfo = async (
   userId: string | null | undefined,

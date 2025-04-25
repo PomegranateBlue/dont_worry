@@ -7,8 +7,9 @@ import Text from '@/components/common/Text';
 
 type Member = {
   name: string;
+  role: string;
   image: string;
-  github: string;
+  github?: string;
   intro1: string;
   intro2: string;
 };
@@ -46,21 +47,34 @@ const MemberSlide = ({ members }: { members: Member[] }) => {
                       height={200}
                     />
                   </div>
-                  <div className="text-center flex flex-col gap-4">
-                    <Text variant={'heading2'}>{member.name}</Text>
-                    <a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                  <div className="text-center flex flex-col gap-4 items-center">
+                    <div className="flex items-center gap-2">
+                      <Text variant={'heading2'} color={'label-normal'}>
+                        {member.name}
+                      </Text>
                       <Text
                         variant={'heading5'}
-                        color={'primary4'}
-                        className="underline"
+                        color={'label-alternative'}
+                        className="mt-1"
                       >
-                        GitHub 바로가기
+                        {member.role}
                       </Text>
-                    </a>
+                    </div>
+                    {member.github && (
+                      <a
+                        href={member.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Text
+                          variant={'heading5'}
+                          color={'primary4'}
+                          className="underline"
+                        >
+                          GitHub 바로가기
+                        </Text>
+                      </a>
+                    )}
                     <Text variant={'body2'} color={'label-neutral'}>
                       {member.intro1}
                       <br />

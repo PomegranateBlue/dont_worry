@@ -8,48 +8,13 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { showToast } from '../common/Toast';
 import { LOGIN_TEXT } from '@/constants/login/text';
 import { Info } from 'lucide-react';
-
-interface LoginFormProps {
-  mode: string;
-}
-
-interface FormData {
-  email: string;
-  password: string;
-  fullName?: string;
-}
-
-const loginSchema = z.object({
-  email: z
-    .string()
-    .nonempty('이메일을 입력하세요')
-    .regex(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      '이메일 형식이 올바르지 않습니다.'
-    ),
-  password: z
-    .string()
-    .nonempty('비밀번호를 입력하세요')
-    .min(6, '비밀번호는 6자 이상이어야 합니다.')
-});
-
-const signupSchema = loginSchema.extend({
-  fullName: z
-    .string()
-    .nonempty('닉네임을 입력하세요')
-    .min(2, '닉네임은 2자 이상이어야 합니다.')
-    .max(10, '닉네임은 10자 이하여야 합니다.')
-    .regex(
-      /^[가-힣a-zA-Z0-9]+$/,
-      '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.'
-    )
-});
+import { AuthFormValues, LoginFormProps } from '@/types/auth/auth';
+import { loginSchema, signupSchema } from '@/types/auth/schemas';
 
 const initialState = { success: false, error: null };
 
@@ -65,7 +30,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
     register,
     formState: { errors },
     handleSubmit
-  } = useForm<FormData>({
+  } = useForm<AuthFormValues>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
@@ -92,7 +57,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
     afterLogin();
   }, [state.success]); // success 상태 변화에만 반응
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: AuthFormValues) => {
     const formData = new FormData();
     formData.append('email', data.email);
     formData.append('password', data.password);

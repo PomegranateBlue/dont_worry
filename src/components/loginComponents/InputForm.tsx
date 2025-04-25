@@ -1,17 +1,7 @@
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
 import Text from '../common/Text';
-import { ReactNode } from 'react';
+import { InputFormProps } from '@/types/auth/auth';
 
-interface InputFormProps<T extends FieldValues> {
-  label: string;
-  type: string;
-  name: Path<T>;
-  placeholder: string;
-  required: boolean;
-  register: UseFormRegister<T>;
-  error?: { message?: string };
-  infoText?: ReactNode;
-}
 export const InputForm = <T extends FieldValues>({
   label,
   type,

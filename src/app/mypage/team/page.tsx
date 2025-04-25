@@ -9,20 +9,23 @@ import MemberSlide from './MemberSlide';
 const memberCards = [
   {
     name: '송제우',
-    image: '/images/wontaek-face.png',
+    role: '개발자',
+    image: '/images/zeu-face.png',
     github: 'https://github.com/PomegranateBlue',
     intro1: '함께하면 두려울 게 없는 든든한 리더!',
     intro2: '항상 팀을 배려하며 최고의 결과를 이끄는 조타수입니다.'
   },
   {
     name: '오원택',
+    role: '개발자',
     image: '/images/wontaek-face.png',
     github: 'https://github.com/dhdnjs0702',
-    intro1: '우리 팀의 부리더이자 분위기 메이커!',
+    intro1: '우리 팀의 부리더이자 아이스 브레이킹 중독자!',
     intro2: '상황 판단이 빠르고 센스 넘치는 전략가예요.'
   },
   {
     name: '문정빈',
+    role: '개발자',
     image: '/images/Jeongbin-face.png',
     github: 'https://github.com/answq',
     intro1: '사용자 관점에서 생각하는 개발자!',
@@ -30,6 +33,7 @@ const memberCards = [
   },
   {
     name: '유익환',
+    role: '개발자',
     image: '/images/Ikhwan-face.png',
     github: 'https://github.com/ick-web/',
     intro1: '코드로 감동을 주는 개발자!',
@@ -37,6 +41,7 @@ const memberCards = [
   },
   {
     name: '강혜린',
+    role: '개발자',
     image: '/images/hyerin-face.png',
     github: 'https://github.com/hyerin-kang',
     intro1: 'UI/UX 디자인에 진심인 개발자',
@@ -44,15 +49,15 @@ const memberCards = [
   },
   {
     name: '소수현',
+    role: '디자이너',
     image: '/images/suhyeon-face.png',
-    github: 'https://github.com/designer1',
     intro1: '디자인 감각이 뛰어난 우리의 아트 디렉터',
     intro2: '멋진 디자인으로 프로젝트에 생명을 불어넣어요.'
   },
   {
     name: '김효임',
-    image: '/images/wontaek-face.png',
-    github: 'https://github.com/designer2',
+    role: '디자이너',
+    image: '/images/hyoim-face.png',
     intro1: '브랜드 아이덴티티의 마법사',
     intro2: '세련된 디자인으로 사용자 경험을 극대화시켜요.'
   }
@@ -120,9 +125,9 @@ const TeamPage = () => {
         </div>
 
         <div className="max-w-4xl mt-10 text-neutral-600 text-sm">
-          <h4 className="font-semibold text-lg text-color-purple2 mb-2">
-            🤝 우리 팀은 이렇게 협업했어요
-          </h4>
+          <Text variant={'body2'} color={'label-neutral'} className="mb-2">
+            🤝 우리 팀은 이렇게 협업했어요 🤝
+          </Text>
           <ul className="list-disc list-inside space-y-1 text-left">
             <li>매일 짧은 스크럼으로 진행 상황을 공유했어요</li>
             <li>문제가 생기면 바로 모여서 해결 방안을 찾았어요</li>

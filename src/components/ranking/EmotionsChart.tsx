@@ -15,10 +15,14 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   EMOTION_FILTER_DESCRIPTION,
   EMOTION_FILTER_DESCRIPTION2
-} from '@/constants/ranking/line';
+} from '@/constants/ranking/Line';
 
 import Text from '../common/Text';
-import { CHART_LABEL, emotionBackgroundColor, emotionBorderColor } from '@/constants/ranking/chartOptions';
+import {
+  CHART_LABEL,
+  emotionBackgroundColor,
+  emotionBorderColor
+} from '@/constants/ranking/ChartOptions';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 

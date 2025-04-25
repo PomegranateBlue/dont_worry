@@ -1,4 +1,4 @@
-import { ALL } from '@/constants/ranking/line';
+import { ALL } from '@/constants/ranking/Line';
 import {
   FIFTH_WEEK,
   FIRST_WEEK,

@@ -114,7 +114,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
               </div>
               <div className="p-6 flex flex-col gap-1">
                 <Link href={PATHS.HOME} className="py-4">
-                  <Text variant="title2" color="label-neutral">
+                  <Text variant="heading5" color="label-neutral">
                     서비스 소개
                   </Text>
                 </Link>

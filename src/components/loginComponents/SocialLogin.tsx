@@ -28,6 +28,7 @@ export const SocialLogin = ({ provider }: SocialLoginProps) => {
       }
     });
   };
+
   return (
     <button onClick={socialLoginBtn}>
       <Image

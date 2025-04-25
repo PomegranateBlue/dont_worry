@@ -7,7 +7,7 @@ import { AuthProvider } from '@/provider/authProvider';
 import { Toast } from '@/components/common/Toast';
 
 export const pretendard = localFont({
-  src: '../fonts/PretendardVariable.ttf',
+  src: './fonts/PretendardVariable.ttf',
   display: 'swap',
   variable: '--font-pretendard'
 });

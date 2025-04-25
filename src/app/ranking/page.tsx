@@ -15,7 +15,7 @@ import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopSixCard from '@/components/ranking/TopSixCard';
 import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+
 import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
 
@@ -23,6 +23,7 @@ import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();

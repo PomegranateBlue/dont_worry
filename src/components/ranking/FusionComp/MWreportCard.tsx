@@ -13,7 +13,7 @@ import useAnaylsisTrendWeek from '@/hooks/ranking/useAnaylsisTrendWeek';
 import Text from '@/components/common/Text';
 
 import Image from 'next/image';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 
 const MWreportCard = () => {
   const { year, month, mode, week } = useRankingStore();

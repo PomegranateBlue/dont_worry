@@ -4,6 +4,7 @@ import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
+// import dayjs from 'dayjs';
 
 type LetterStepProps = {
   sendAt: string;
@@ -69,6 +70,8 @@ const LetterStep = ({
         return;
       }
     }
+
+    // const scheduledTime = dayjs().add(5, 'minute').toISOString();
 
     const { error } = await browserClient
       .from('letter')

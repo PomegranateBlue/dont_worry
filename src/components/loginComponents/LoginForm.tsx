@@ -55,6 +55,20 @@ const LoginForm = ({ mode }: LoginFormProps) => {
   const actionFn = mode === 'signup' ? signup : login;
   const [state, formAction] = useFormState(actionFn, initialState);
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+      fullName: ''
+    }
+  });
+
   useEffect(() => {
     const afterLogin = async () => {
       if (state.success) {
@@ -72,21 +86,18 @@ const LoginForm = ({ mode }: LoginFormProps) => {
     afterLogin();
   }, [state.success]); // success 상태 변화에만 반응
 
-  const {
-    register,
-    formState: { errors }
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    mode: 'onBlur',
-    defaultValues: {
-      email: '',
-      password: '',
-      fullName: ''
+  const onSubmit = (data: FormData) => {
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    if (mode === 'signup' && data.fullName) {
+      formData.append('fullName', data.fullName);
     }
-  });
+    formAction(formData);
+  };
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 닉네임: 회원가입일 때만 보이게 */}
       {mode === 'signup' && (
         <InputForm

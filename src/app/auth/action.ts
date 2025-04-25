@@ -27,7 +27,8 @@ export async function login(
   );
 
   if (error || !authData?.user) {
-    return { error: '이메일 또는 비밀번호가 틀렸습니다', success: false };
+    const errorMessage = error?.message || '이메일 또는 비밀번호가 틀렸습니다';
+    return { error: errorMessage, success: false };
     // redirect('/error');
   }
 
@@ -77,8 +78,9 @@ export async function signup(
   });
 
   if (error) {
-    // console.log(error);
-    redirect('/error');
+    const errorMessage = error.message || '회원가입 중 오류가 발생했습니다.';
+    return { error: errorMessage, success: false };
+    // redirect('/error');
   }
 
   //로그인페이지로

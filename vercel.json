@@ -1,5 +1,5 @@
 {
-  "cron": [
+  "crons": [
     {
       "path": "/api/crontest",
       "schedule": "*/10 * * * *"

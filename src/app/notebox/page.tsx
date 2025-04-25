@@ -105,7 +105,7 @@ const NotePage = () => {
   };
   return (
     <section className="flex max-w-[1200px] mx-auto">
-      <main className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
+      <article className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
         <div className="flex justify-center items-center px-[6px] py-[15px]">
           <Text
             variant="title2"
@@ -204,7 +204,7 @@ const NotePage = () => {
             );
           })}
         </section>
-      </main>
+      </article>
     </section>
   );
 };

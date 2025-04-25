@@ -16,7 +16,7 @@ import { CheckCircle2 } from 'lucide-react';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);

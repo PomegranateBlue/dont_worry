@@ -28,16 +28,14 @@ const FilterBar = ({
   const FilterBadge = ({
     label,
     onRemove,
-    onClick,
-    selected
+    onClick
   }: {
     label: string;
     onRemove: () => void;
     onClick: () => void;
-    selected: boolean;
   }) => (
     <div
-      className="flex items-center bg-primary-4 text-white font-medium px-3 h-8 rounded-full whitespace-nowrap text-sm cursor-pointer"
+      className="flex items-center bg-primary-4 text-white font-medium px-3 h-8 rounded-full whitespace-nowrap  cursor-pointer"
       onClick={onClick}
     >
       <Text color="white" variant="body3" variant2="body1">

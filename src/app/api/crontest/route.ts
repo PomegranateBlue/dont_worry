@@ -87,3 +87,11 @@ export async function GET() {
 //     return NextResponse.json({ error: String(error) }, { status: 500 });
 //   }
 // }
+
+// import { NextRequest,NextResponse } from 'next/server';
+
+// export const GET = async (req: NextRequest) => {
+//   console.log('Cron jobs ran at:', new Date());
+
+//   return new NextResponse('cron ran ', { status: 200 });
+// };

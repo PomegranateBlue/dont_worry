@@ -9,10 +9,9 @@ import { useNoteListStore } from '@/store/notebox/noteboxStore';
 import { useQuery } from '@tanstack/react-query';
 import { Tables } from '../../../database.types';
 import Text from '@/components/common/Text';
-import { supabase } from '../utils/supabase/supabase';
 import EditBar from '@/components/noteBoxComponents/EditBar';
 import { CheckCircle2 } from 'lucide-react';
-
+import { useNoteDelete } from '@/hooks/noteboxHooks/useNoteDelete';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -24,6 +23,7 @@ const NotePage = () => {
   const [selectedSort, setSelectedSort] = useState<'최신순' | '과거순'>(
     '최신순'
   );
+  const { mutate: deleteNote } = useNoteDelete();
 
   const userQuery = useQuery<string | null, Error>({
     queryKey: ['user'],
@@ -87,20 +87,12 @@ const NotePage = () => {
     setSelectedNoteIds([]); // 체크된 항목 초기화
   };
 
-  
   const handleDeleteNote = async () => {
     if (selectedNoteIds.length === 0) return;
 
-    const { error } = await supabase
-      .from('users_note')
-      .delete()
-      .in('note_id', selectedNoteIds);
-
-    if (error) {
-      console.error('삭제 실패:', error.message);
-      return;
-    }
-
+    selectedNoteIds.forEach((id) => {
+      deleteNote({ noteId: id });
+    });
     setNotes(notes.filter((note) => !selectedNoteIds.includes(note.note_id)));
     setSelectedNoteIds([]);
     setIsEdit(false);

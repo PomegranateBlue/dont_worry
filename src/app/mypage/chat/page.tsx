@@ -8,14 +8,13 @@ const ChatPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 왼쪽 상단 뒤로가기 아이콘 */}
-      <div className="relative flex items-center justify-center h-16 border-b">
+      <header className="relative flex items-center justify-center h-16 border-b">
         <Link href={PATHS.MYPAGE} className="absolute left-4 p-2">
           <ChevronLeft size={24} />
         </Link>
         <h1 className="text-xl font-semibold">서비스 준비 중입니다.</h1>
-      </div>
+      </header>
 
-      {/* 가운데 콘텐츠 */}
       <div className="flex flex-col items-center flex-1 mt-4">
         <Image
           width={150}

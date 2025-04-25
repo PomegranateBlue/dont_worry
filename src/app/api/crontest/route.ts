@@ -74,24 +74,3 @@ export async function GET() {
   // 🟢 모든 작업 완료 응답
   return NextResponse.json({ message: 'Emails sent if conditions met' });
 }
-// app/api/run-command/route.ts
-// import { NextResponse } from 'next/server';
-// import { exec } from 'child_process';
-// import util from 'util';
-// const execPromise = util.promisify(exec);
-// export async function GET() {
-//   try {
-//     const { stdout, stderr } = await execPromise('crontab -l');
-//     return NextResponse.json({ stdout, stderr });
-//   } catch (error) {
-//     return NextResponse.json({ error: String(error) }, { status: 500 });
-//   }
-// }
-
-// import { NextRequest,NextResponse } from 'next/server';
-
-// export const GET = async (req: NextRequest) => {
-//   console.log('Cron jobs ran at:', new Date());
-
-//   return new NextResponse('cron ran ', { status: 200 });
-// };

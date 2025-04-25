@@ -45,19 +45,14 @@ const NicknameEditModal = ({
     }
   }, [userInfo, setValue]);
 
-  const onSubmit = (data: NicknameFormValues) => {
-    updateMutation.mutate(
-      { nickname: data.nickname },
-      {
-        onSuccess: () => {
-          onClose();
-          reset();
-        },
-        onError: (error) => {
-          console.log('Failed to update nickname:', error);
-        }
-      }
-    );
+  const onSubmit = async (data: NicknameFormValues) => {
+    try {
+      await updateMutation.mutateAsync({ nickname: data.nickname });
+      onClose();
+      reset();
+    } catch (error) {
+      console.log('닉네임 수정 실패:', error);
+    }
   };
 
   if (!isOpen) return null;
@@ -74,7 +69,9 @@ const NicknameEditModal = ({
         }}
       >
         <div id="modal-title" className="mb-6 text-left">
-          <Text variant="heading2" color="label-normal">닉네임</Text>
+          <Text variant="heading2" color="label-normal">
+            닉네임
+          </Text>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>

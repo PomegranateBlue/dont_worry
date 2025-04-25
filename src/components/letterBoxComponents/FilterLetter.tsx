@@ -2,6 +2,7 @@
 
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
+import Text from '../common/Text';
 
 interface FilterLetterProps {
   selectedFilter: string | null;
@@ -23,32 +24,43 @@ const FilterLetter = ({
   };
 
   return (
-    <div className="relative">
+    <section>
       <button
-        className="flex items-center px-3 py-1 border rounded"
+        className={`flex items-start px-3 py-[6px] h-[32px] rounded-[16px] border xl:rounded-[20px] xl:px-[16px] bg-backgroundSet-normal ${
+          selectedFilter
+            ? 'border-primary-4 bg-primary-1'
+            : 'border-line-normal'
+        }`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        정렬 : {selectedFilter || '선택 없음'}
+        <Text variant="body3" as="p" color="label-neutral">
+          {selectedFilter || '정렬기준'}
+        </Text>
+
         <ChevronDown className="ml-1 w-4 h-4" />
       </button>
 
       {isOpen && (
-        <div className="absolute mt-1 w-full border rounded bg-white shadow">
+        <figure className="absolute mt-1 w-full border rounded-[8px] bg-backgroundSet-normal shadow">
           <button
-            className="w-full px-3 py-1 text-left hover:bg-gray-100"
+            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch z-10 bg-backgroundSet-normal"
             onClick={() => handleFilterOption('작성일순')}
           >
-            작성일순
+            <Text variant="body3" as="p" color="label-neutral">
+              작성일순
+            </Text>
           </button>
           <button
-            className="w-full px-3 py-1 text-left hover:bg-gray-100"
+            className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch z-10 bg-backgroundSet-normal"
             onClick={() => handleFilterOption('도착일순')}
           >
-            도착일순
+            <Text variant="body3" as="p" color="label-neutral">
+              도착일순
+            </Text>
           </button>
-        </div>
+        </figure>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -45,9 +45,9 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
   };
 
   return (
-    <div className="headerMd:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
+    <div className="lg:hidden h-[50px] relative px-4 flex items-center justify-between bg-white z-50">
       <button
-        className="headerMd:hidden focus:outline-none z-50"
+        className="lg:hidden focus:outline-none z-50"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
@@ -94,6 +94,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
                         alt="프로필 이미지"
                         width={60}
                         height={60}
+                        unoptimized
                       />
                     )}
                   </div>
@@ -113,7 +114,7 @@ export default function MobileHeader({ isLogin }: MobileHeaderProps) {
               </div>
               <div className="p-6 flex flex-col gap-1">
                 <Link href={PATHS.HOME} className="py-4">
-                  <Text variant="title2" color="label-neutral">
+                  <Text variant="heading5" color="label-neutral">
                     서비스 소개
                   </Text>
                 </Link>

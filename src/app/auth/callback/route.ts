@@ -7,12 +7,10 @@ export async function GET(request: Request) {
   const code = searchParams.get('code');
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get('next') ?? '/';
-  // console.log('code', code);
 
   if (code) {
     const supabase = createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-    // console.log('카카오에러', error);
 
     if (!error) {
       const forwardedHost = request.headers.get('x-forwarded-host'); // original origin before load balancer

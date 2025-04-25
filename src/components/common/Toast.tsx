@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Toast = () => {
@@ -21,9 +21,12 @@ export const showToast = (
   message: string,
   type: 'success' | 'error' | 'info' = 'info'
 ) => {
+  const toastOptions: ToastOptions = {
+    icon: type === 'success' ? false : undefined
+  };
   switch (type) {
     case 'success':
-      toast.success(message);
+      toast.success(message, toastOptions);
       break;
     case 'error':
       toast.error(message);

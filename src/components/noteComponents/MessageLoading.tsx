@@ -28,7 +28,7 @@ const MessageLoading = () => {
     }, 500);
     return () => clearInterval(interval);
   }, []);
-  
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -38,7 +38,7 @@ const MessageLoading = () => {
     }
   };
   return (
-    <div className="absolute inset-0 z-50 bg-backgroundSet-offwhite flex flex-col justify-center items-center text-center gap-[16px]">
+    <div className="h-lvh absolute inset-0 z-50 bg-backgroundSet-offwhite flex flex-col justify-center items-center text-center gap-[16px]">
       <div>
         <Text variant="body1" color="label-normal">
           걱정이가 답장을 쓰고 있어요

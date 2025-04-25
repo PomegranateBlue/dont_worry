@@ -1,21 +1,24 @@
 'use client';
 
+import Text from '@/components/common/Text';
 import LogOutButton from '@/components/loginComponents/LogOutButton';
+import DeleteAccountButton from '@/components/mypage/DeleteAccountButton';
 import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
-import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
-import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
+import { PATHS } from '@/constants/common/paths';
+import {
+  MypageError
+} from '@/constants/error/mypageError';
 import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
+import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
+import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUserStore } from '@/store/auth/store';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRight, Pencil } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { uploadProfileImage } from '../utils/supabase/db';
-import DeleteAccountButton from '@/components/mypage/DeleteAccountButton';
-import Text from '@/components/common/Text';
-import { PATHS } from '@/constants/common/paths';
 
 const MyPage = () => {
   const queryClient = useQueryClient();
@@ -38,7 +41,7 @@ const MyPage = () => {
     } catch (err) {
       console.error('이미지 업로드 실패:', err);
       alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
-      throw err;
+      throw new MypageError('CANT_UPLOAD_PROFILEIMG');
     }
   };
 
@@ -50,7 +53,7 @@ const MyPage = () => {
     } catch (err) {
       console.error('이미지 삭제 실패:', err);
       alert('이미지 삭제에 실패했습니다. 다시 시도해주세요.');
-      throw err;
+      throw new MypageError('CANT_DELETE_PROFILEIMG');
     }
   };
 
@@ -138,6 +141,7 @@ const MyPage = () => {
           ['이용약관', '/mypage/terms'],
           ['챗봇 문의', '/mypage/chat'],
           ['버전', '/mypage/version']
+          // [`TEAM DON'T WORRY`, '/mypage/team']
         ].map(([label, link], idx) => (
           <Link
             key={idx}

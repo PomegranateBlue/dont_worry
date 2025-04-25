@@ -19,30 +19,30 @@ export const IsNotLoginMenu = () => {
   return (
     <div
       onClick={goLoginPage}
-      className="flex flex-col gap-1 items-start headerMd:flex-row headerMd:gap-11"
+      className="flex flex-col gap-1 items-start lg:flex-row lg:gap-11"
     >
-      <button className="py-4 headerMd:py-0">
-        <Text variant="title2" color="label-neutral">
+      <button className="py-4 lg:py-0">
+        <Text variant="heading5" color="label-neutral">
           {MENU.NOTE}
         </Text>
       </button>
-      <button className="py-4 headerMd:py-0">
-        <Text variant="title2" color="label-neutral">
+      <button className="py-4 lg:py-0">
+        <Text variant="heading5" color="label-neutral">
           {MENU.NOTEBOX}
         </Text>
       </button>
-      <button className="py-4 headerMd:py-0">
-        <Text variant="title2" color="label-neutral">
+      <button className="py-4 lg:py-0">
+        <Text variant="heading5" color="label-neutral">
           {MENU.RANKING}
         </Text>
       </button>
-      <button className="py-4 headerMd:py-0">
-        <Text variant="title2" color="label-neutral">
+      <button className="py-4 lg:py-0">
+        <Text variant="heading5" color="label-neutral">
           {MENU.LETTER}
         </Text>
       </button>
-      <button className="py-4 headerMd:py-0">
-        <Text variant="title2" color="label-neutral">
+      <button className="py-4 lg:py-0">
+        <Text variant="heading5" color="label-neutral">
           {MENU.LETTERBOX}
         </Text>
       </button>

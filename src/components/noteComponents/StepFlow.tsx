@@ -29,7 +29,7 @@ enum StepProps {
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const {
-    selectedTopic,
+    selectedTopics,
     selectedEmotions,
     toggleTopic,
     message,
@@ -44,9 +44,15 @@ const StepFlow = () => {
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);
+
+    // 다음 렌더링에서 상태가 반영된 후 확인해야 하므로 약간 지연
     setTimeout(() => {
-      emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      const { selectedTopics } = useNoteStore.getState(); // 최신 상태 직접 가져옴
+
+      if (selectedTopics.length === 3) {
+        emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50); // 50ms 정도면 충분 (너무 길면 UX 저하됨)
   };
 
   const handleSubmit = async () => {
@@ -57,7 +63,7 @@ const StepFlow = () => {
 
     try {
       const gptInput = {
-        topic: selectedTopic,
+        topics: selectedTopics,
         emotions: selectedEmotions,
         message
       };
@@ -68,7 +74,7 @@ const StepFlow = () => {
       const saveInput = {
         message,
         result: res.content,
-        topic: selectedTopic ?? '',
+        topics: selectedTopics,
         emotions: selectedEmotions,
         userId: user
       };
@@ -90,6 +96,7 @@ const StepFlow = () => {
           <div>
             <Text
               variant="title1"
+              variant2="heading1"
               color="label-normal"
               className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
             >
@@ -122,7 +129,7 @@ const StepFlow = () => {
                 />
               </button>
               <div className="absolute inset-0 flex justify-center items-center">
-                <p className="text-[20px] font-semibold">감정 작성</p>
+                <Text variant="title1" variant2="heading1">감정 작성</Text>
               </div>
             </div>
 

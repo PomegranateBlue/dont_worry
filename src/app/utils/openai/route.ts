@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { COMMENT_PROMPT } from '@/constants/openai/commentConfig';
-const openai = new OpenAI();
+import { AIError } from '@/constants/error/aiErrorKeys';
 
+const openai = new OpenAI();
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
@@ -25,11 +26,8 @@ export const POST = async (req: Request) => {
       content: completion.choices[0].message.content
     });
   } catch (error) {
-    console.error('OpenAI API 호출 에러', error);
-    return NextResponse.json(
-      { error: '서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.' },
-      { status: 500 }
-    );
+    console.log(error);
+    throw new AIError('GPT_GENERATION_FAIL');
   }
 };
 

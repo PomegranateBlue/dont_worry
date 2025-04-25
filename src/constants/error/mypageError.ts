@@ -35,6 +35,11 @@ export const MYPAGE_ERROR_MESSAGE = {
     message: '프로필 이미지 업로드에 실패했어요.',
     action: '인터넷 연결 상태를 확인한 후 다시 시도해주세요.'
   },
+  CANT_DELETE_PROFILEIMG: {
+    status: 500,
+    message: '프로필 이미지 삭제 실패했어요.',
+    action: '인터넷 연결 상태를 확인한 후 다시 시도해주세요.'
+  },
   CANT_COUNT_USER_WORRIES: {
     status: 500,
     message: '걱정 기록을 집계하는 데 실패했어요.',

@@ -4,6 +4,7 @@ import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
+// import dayjs from 'dayjs';
 
 type LetterStepProps = {
   sendAt: string;
@@ -54,8 +55,8 @@ const LetterStep = ({
     let imageUrl = '';
 
     if (imageFile) {
-      const rawFileName = `${Date.now()}_${imageFile.name}`;
-      const encodedPath = `letters/${encodeURIComponent(rawFileName)}`;
+      const rawFileName = `${userId}_${Date.now()}.png`;
+      const encodedPath = `letters/${rawFileName}`;
       const formData = new FormData();
       formData.append('file', imageFile);
       formData.append('path', encodedPath);
@@ -69,6 +70,8 @@ const LetterStep = ({
         return;
       }
     }
+
+    // const scheduledTime = dayjs().add(5, 'minute').toISOString();
 
     const { error } = await browserClient
       .from('letter')

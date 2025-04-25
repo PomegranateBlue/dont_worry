@@ -16,7 +16,7 @@ const HomePage = () => {
           background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 87.13%)'
         }}
       >
-        <div className="relative z-10 flex flex-col items-center justify-center  xl:items-start xl:left-[600px] xl:gap-[40px] xl:bottom-[100px] ">
+        <div className="relative z-10 flex flex-col items-center justify-center  xl:items-start xl:left-[600px] gap-[40px] xl:bottom-[100px] ">
           {/* 텍스트 */}
           <Text
             variant="display3"
@@ -290,24 +290,24 @@ const HomePage = () => {
 
         <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
           <div className="flex flex-col gap-[12px] xl:flex-row w-full">
-            <div className="flex p-[16px] xl:p-[24px]">
+            <div className="flex w-full p-[16px] xl:p-[24px]">
               <Image
                 src={'images/community1.svg'}
                 width={0}
                 height={0}
                 alt="community1"
-                quality={80}
-                className="w-full min-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
+                quality={70}
+                className=" w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
               />
             </div>
-            <div className="flex p-[16px] xl:p-[24px]">
+            <div className="flex p-[16px] w-full xl:p-[24px]">
               <Image
                 src={'images/community2.svg'}
                 width={0}
                 height={0}
                 alt="community2"
-                quality={80}
-                className="w-full min-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
+                quality={70}
+                className="w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
               />
             </div>
           </div>
@@ -335,6 +335,81 @@ const HomePage = () => {
         </div>
 
         <StartButtonBottom />
+      </section>
+
+      <section className="hidden xl:flex xl:w-full xl:h-[320px] xl:px-[60px] xl:py-[40px] xl:justify-between xl:items-start bg-backgroundSet-card text-label-neutral text-[14px]">
+        {/* 왼쪽 영역 */}
+        <div className="flex flex-col gap-[12px]">
+          {/* 로고 */}
+          <div className="flex items-center gap-[8px]">
+            <Image
+              src="/images/ver-default.svg"
+              alt="footer-emoticon"
+              width={28}
+              height={28}
+            />
+            <Image
+              src="/images/mobile-logo.svg"
+              alt="footer-logo"
+              width={180}
+              height={27}
+            />
+          </div>
+
+          {/* 버전 정보 */}
+          <div className="text-primary-4 font-bold">v1.0.0</div>
+
+          {/* 연락처 */}
+          <div className="flex gap-[4px]">
+            <span className="font-medium">Contact</span>
+            <span>abcd_1234@gmail.com</span>
+          </div>
+
+          {/* 이용약관 / 개인정보처리방침 */}
+          <div className="flex gap-[12px]">
+            <button className="underline">이용약관</button>
+            <button className="underline">개인정보처리방침</button>
+          </div>
+
+          {/* 저작권 */}
+          <div className="text-[13px] text-label-disable">
+            Copyright © Don’t Worry All rights reserved
+          </div>
+        </div>
+
+        {/* 오른쪽 링크 목록 */}
+        <div className="grid grid-cols-2 gap-x-[40px] gap-y-[8px] text-label-normal">
+          <Text variant="label1" color="label-assistive">
+            돈워리
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스 소개
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스 이용약관
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            걱정 작성
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            개인정보처리방침
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            걱정 보관함
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            고객 센터
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            통계
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            미래 편지 작성
+          </Text>
+        </div>
       </section>
     </main>
   );

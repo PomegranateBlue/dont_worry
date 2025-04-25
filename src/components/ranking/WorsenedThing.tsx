@@ -4,7 +4,7 @@ import {
   ABOUT,
   MOST_INCREASE_COMMENT_MONTH,
   MOST_INCREASE_COMMENT_WEEK
-} from '@/constants/ranking/line';
+} from '@/constants/ranking/Line';
 
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { WorsenedThingProps } from '@/types/ranking/types';

@@ -7,7 +7,7 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import {
   REPORT_TITLE_MONTH,
   REPORT_TITLE_WEEK
-} from '@/constants/ranking/line';
+} from '@/constants/ranking/Line';
 import useAnalysisTrend from '@/hooks/ranking/useAnalysisTrend';
 import useAnaylsisTrendWeek from '@/hooks/ranking/useAnaylsisTrendWeek';
 import Text from '@/components/common/Text';

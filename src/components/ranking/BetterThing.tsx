@@ -4,7 +4,7 @@ import {
   ABOUT,
   MOST_DECREASE_COMMENT_MONTH,
   MOST_DECREASE_COMMENT_WEEK
-} from '@/constants/ranking/line';
+} from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { BetterThingProps } from '@/types/ranking/types';
 

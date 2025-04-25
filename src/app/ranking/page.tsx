@@ -8,7 +8,7 @@ import EmotionChart from '@/components/ranking/EmotionsChart';
 import { fetchMonthlyNotes, fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
 
-import { NO_DATA_CHART } from '@/constants/ranking/line';
+import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';

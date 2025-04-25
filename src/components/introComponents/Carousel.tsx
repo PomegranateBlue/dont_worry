@@ -77,7 +77,13 @@ const Carousel = () => {
               key={`${item.label}-${idx}`}
               className="bg-backgroundSet-normal flex items-center justify-center rounded-full w-[62px] h-[62px] shrink-0"
             >
-              <Image src={item.src} width={36} height={36} alt="item" />
+              <Image
+                src={item.src}
+                width={36}
+                height={36}
+                alt="item"
+                loading="lazy"
+              />
             </div>
           ) : (
             <div
@@ -85,9 +91,15 @@ const Carousel = () => {
               className="flex  bg-white rounded-[40px]  gap-[10px] px-4 py-[9px]  w-[162px] h-[62px] shrink-0  items-center justify-center"
             >
               <div>
-                <Image src={item.src} width={36} height={36} alt="title" />
+                <Image
+                  src={item.src}
+                  width={36}
+                  height={36}
+                  alt="title"
+                  loading="lazy"
+                />
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col whitespace-nowrap ">
                 <Text variant="body3">{item.title}</Text>
                 <div className="flex flex-row">
                   {item.tags?.map((tag, i) => (

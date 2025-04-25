@@ -104,8 +104,8 @@ const NotePage = () => {
     setIsEdit(false);
   };
   return (
-    <div className="flex max-w-[1200px] mx-auto">
-      <div className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
+    <section className="flex max-w-[1200px] mx-auto">
+      <main className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
         <div className="flex justify-center items-center px-[6px] py-[15px]">
           <Text
             variant="title2"
@@ -156,7 +156,7 @@ const NotePage = () => {
           />
         )}
 
-        <main className="flex-1   px-5 py-2 space-y-4 ">
+        <section className="flex-1   px-5 py-2 space-y-4 ">
           {filteredNotes.map((note) => {
             const isChecked = selectedNoteIds.includes(note.note_id);
             return (
@@ -203,9 +203,9 @@ const NotePage = () => {
               </div>
             );
           })}
-        </main>
-      </div>
-    </div>
+        </section>
+      </main>
+    </section>
   );
 };
 

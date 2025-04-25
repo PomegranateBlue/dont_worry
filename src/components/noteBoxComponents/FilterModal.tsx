@@ -92,7 +92,7 @@ const FilterModal = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end ">
-      <div
+      <section
         className="xl:max-w-[648px] bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
         onClick={(e) => e.stopPropagation()}
       >
@@ -104,7 +104,7 @@ const FilterModal = ({
         </div>
 
         {/* 탭 버튼 */}
-        <div className="flex items-center justify-between w-full py-6">
+        <nav className="flex items-center justify-between w-full py-6">
           {sortTabs.map((tab) => (
             <button
               key={tab}
@@ -126,10 +126,10 @@ const FilterModal = ({
               </Text>
             </button>
           ))}
-        </div>
+        </nav>
 
         {/* 필터 선택 버튼들 */}
-        <div className="flex flex-wrap pb-6 h-[150px] overflow-y-auto gap-2">
+        <fieldset className="flex flex-wrap pb-6 h-[150px] overflow-y-auto gap-2">
           {getOptions().map((option) => {
             const isSelected = selectedValues.includes(option);
             return (
@@ -154,10 +154,10 @@ const FilterModal = ({
               </button>
             );
           })}
-        </div>
+        </fieldset>
 
         {/* 하단 버튼 */}
-        <div className="flex gap-x-2 w-full justify-between">
+        <section className="flex gap-x-2 w-full justify-between">
           <button
             onClick={() => setSelectedValues([])}
             className="flex items-center px-5 py-3 bg-[#F4F4F5] bg-opacity-50 rounded-[8px]"
@@ -178,8 +178,8 @@ const FilterModal = ({
               {selectedValues.length}개 결과보기
             </Text>
           </button>
-        </div>
-      </div>
+        </section>
+      </section>
     </div>
   );
 };

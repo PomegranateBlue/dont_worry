@@ -7,8 +7,8 @@ const MessageForm = () => {
   const maxLength = 150;
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto ">
-      <div className="w-full max-w-[648px] mx-auto ">
+    <section className="w-full max-w-[1200px] mx-auto ">
+      <main className="w-full max-w-[648px] mx-auto ">
         <div className="flex px-5 py-2">
           <Text variant="heading3" color="label-normal">
             오늘 나의 걱정을 작성해보세요
@@ -29,8 +29,8 @@ const MessageForm = () => {
             </Text>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 };
 

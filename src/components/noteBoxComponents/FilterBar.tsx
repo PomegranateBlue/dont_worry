@@ -92,7 +92,7 @@ const FilterBar = ({
 
   return (
     <header className="w-full flex items-center justify-between p-5 xl:max-w-[648px]">
-      <div className="flex-1 whitespace-nowrap scrollbar-hide overflow-x-auto flex pr-4 gap-2">
+      <nav className="flex-1 whitespace-nowrap scrollbar-hide overflow-x-auto flex pr-4 gap-2">
         {/* 정렬순 탭 */}
         <button
           className={`flex items-center px-3 py-[6px]  xl:py-[12px] h-[32px] rounded-[16px] border  xl:rounded-[20px] xl:px-[16px] ${
@@ -141,7 +141,7 @@ const FilterBar = ({
             onClick={() => handleFilterOption('감정별')}
           />
         )}
-      </div>
+      </nav>
     </header>
   );
 };

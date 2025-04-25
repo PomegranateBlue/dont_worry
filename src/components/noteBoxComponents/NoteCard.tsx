@@ -38,11 +38,11 @@ const NoteCard = ({
 
   const { data } = useUserInfo();
   return (
-    <div
+    <article
       id={note_id}
       className="relative flex flex-col w-full max-w-[648px] gap-2 bg-backgroundSet-normal px-[24px] py-[24px] rounded-[8px] drop-shadow-xl"
     >
-      <div className="flex flex-wrap  gap-2 items-center">
+      <header className="flex flex-wrap  gap-2 items-center">
         {emotion_category?.map((emotionLabel) => {
           const emotionData = EMOTION_CATEGORIES.find(
             (emotion) => emotion.label === emotionLabel
@@ -61,7 +61,6 @@ const NoteCard = ({
                   width={24}
                   height={24}
                   alt={emotionData.label}
-                  unoptimized
                   className="aspect-square"
                 />
                 <Text variant="body3" color="label-neutral" as="p">
@@ -76,23 +75,23 @@ const NoteCard = ({
             {topic_category}
           </Text>
         </div>
-      </div>
+      </header>
 
-      <div className="flex ">
+      <time className="flex ">
         <Text color="label-alternative" variant="label1" as="p">
           {formattedDate}
         </Text>
-      </div>
+      </time>
       <div className="flex my-2 w-full h-[1px] bg-[#E0E0E2]"></div>
-      <div className="flex   leading-relaxed  whitespace-pre-wrap line-clamp-5">
+      <section className="flex   leading-relaxed  whitespace-pre-wrap break-all">
         <Text variant="body3" color="label-neutral" as="p">
           {message}
         </Text>
-      </div>
+      </section>
 
       {showAnswer && (
-        <div className="flex flex-col bg-backgroundSet-normal whitespace-pre-wrap">
-          <div className="flex justify-end w-full items-center px-2 gap-2">
+        <section className="flex flex-col bg-backgroundSet-normal whitespace-pre-wrap">
+          <header className="flex justify-end w-full items-center px-2 gap-2">
             <Text
               variant="body3"
               color="label-normal"
@@ -111,17 +110,17 @@ const NoteCard = ({
                 />
               </div>
             </div>
-          </div>
+          </header>
 
-          <div>
-            <Text variant="body3" color="label-neutral" as="p">
+          <div className="flex break-all">
+            <Text variant="body3" variant2="body2" color="label-neutral" as="p">
               {answer}
             </Text>
           </div>
-        </div>
+        </section>
       )}
 
-      <div className="px-2 py-4">
+      <section className="px-2 py-4">
         <button
           onClick={() => setShowAnswer(!showAnswer)}
           className="mt-2   flex ml-auto "
@@ -142,8 +141,8 @@ const NoteCard = ({
             </div>
           )}
         </button>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 export default NoteCard;

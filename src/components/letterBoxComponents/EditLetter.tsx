@@ -20,7 +20,7 @@ const EditLetter = ({
   isAllSelected,
   onSelectAll
 }: EditLetterProps) => {
-  const { mutate } = useDeleteLetters();
+  const { mutateAsync } = useDeleteLetters();
 
   // 편집 모드 토글
   const handleToggleEdit = () => {
@@ -31,21 +31,19 @@ const EditLetter = ({
   };
 
   // 선택된 편지 삭제
-  const handleDeleteLetter = () => {
+  const handleDeleteLetter = async () => {
     if (selectedLetterIds.length === 0)
       return alert('삭제할 편지를 선택해주세요.');
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
-    mutate(selectedLetterIds, {
-      onSuccess: () => {
-        alert('삭제가 완료되었습니다.');
-        setSelectedLetterIds([]);
-      },
-      onError: (error) => {
-        alert('삭제 중 오류가 발생했습니다.');
-        console.error(error);
-      }
-    });
+    try {
+      await mutateAsync(selectedLetterIds);
+      alert('삭제가 완료되었습니다.');
+      setSelectedLetterIds([]);
+    } catch (error) {
+      alert('삭제 중 오류가 발생했습니다.');
+      console.error(error);
+    }
   };
 
   return (

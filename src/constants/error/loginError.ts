@@ -60,3 +60,18 @@ export function isLoginErrorResponse(key: LoginErrorMessageType) {
     action: LOGIN_ERROR_MESSAGE[key].action
   };
 }
+
+export class LoginError extends Error {
+  key: LoginErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: LoginErrorMessageType) {
+    const errorInfo = LOGIN_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'LoginError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

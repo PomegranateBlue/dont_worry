@@ -1,3 +1,5 @@
+import { AIError } from '@/constants/error/aiErrorKeys';
+
 export const fetchGptSolution = async (keywords: string): Promise<string> => {
   try {
     const res = await fetch('/utils/rankingSolution', {
@@ -7,7 +9,7 @@ export const fetchGptSolution = async (keywords: string): Promise<string> => {
     });
 
     if (!res.ok) {
-      throw new Error(`서버 오류: ${res.status}`);
+      throw new AIError('GPT_GENERATION_FAIL');
     }
 
     const gptData = await res.json();
@@ -15,10 +17,10 @@ export const fetchGptSolution = async (keywords: string): Promise<string> => {
     if (typeof gptData === 'string') {
       return gptData;
     } else {
-      return '예상하지 못한 GPT 응답 형식입니다.';
+      throw new AIError('UNKNOWN');
     }
   } catch (error) {
     console.error('GPT 솔루션 생성 중 오류:', error);
-    throw new Error('솔루션을 생성하는 중 오류가 발생했습니다.');
+    throw new AIError('UNKNOWN');
   }
 };

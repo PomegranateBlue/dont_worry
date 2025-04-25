@@ -60,3 +60,18 @@ export function isAIErrorResponse(key: AIErrorMessageType) {
     action: AI_ERROR_MESSAGE[key].action
   };
 }
+
+export class AIError extends Error {
+  key: AIErrorMessageType;
+  status: number;
+  action: string;
+
+  constructor(key: AIErrorMessageType) {
+    const errorInfo = AI_ERROR_MESSAGE[key];
+    super(errorInfo.message);
+    this.name = 'AIError';
+    this.key = key;
+    this.status = errorInfo.status;
+    this.action = errorInfo.action;
+  }
+}

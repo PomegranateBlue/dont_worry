@@ -32,7 +32,7 @@ export const fetchExistingSolution = async (
     return matchingEntry ? matchingEntry.comment : null;
   } catch (error) {
     console.error('기존 솔루션 조회 중 오류:', error);
-    return null;
+    throw new Error(SUPABASE_ERROR_MESSAGE.SUPABASE_FETCH_FAILED.message);
   }
 };
 
@@ -75,6 +75,14 @@ export const saveSolutionToDatabase = async (
     return { success: true };
   } catch (error) {
     console.error('솔루션 저장 중 오류:', error);
-    return { success: false, error };
+    return NextResponse.json(
+      {
+        success: false,
+        ...isSupabaseErrorResponse(SUPABASE_ERROR_KEYS.SUPABASE_INSERT_FAILED)
+      },
+      {
+        status: SUPABASE_ERROR_MESSAGE.SUPABASE_INSERT_FAILED.status
+      }
+    );
   }
 };

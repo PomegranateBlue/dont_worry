@@ -1,7 +1,11 @@
 import { NO_ID } from '@/constants/ranking/line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
-import { ANALYZE_ERROR, DATA_FETHCING_ERROR } from '@/constants/error/rankingError';
+import {
+  ANALYZE_ERROR,
+  DATA_FETHCING_ERROR,
+  RankingError
+} from '@/constants/error/rankingError';
 
 //주 단위 데이터를 패칭
 export const fetchUserNotes = async (
@@ -11,7 +15,7 @@ export const fetchUserNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error(NO_ID);
+    throw new RankingError('NO_USER_INFO');
   }
 
   try {
@@ -29,13 +33,13 @@ export const fetchUserNotes = async (
       .eq('user_id', id);
 
     if (error) {
-      throw error;
+      throw new RankingError('CANT_SELECT_USER_WORRIES');
     }
 
     return data as UserNote[];
   } catch (err) {
     console.error(DATA_FETHCING_ERROR, err);
-    throw new Error(DATA_FETHCING_ERROR);
+    throw new RankingError('CANT_SELECT_USER_WORRIES');
   }
 };
 
@@ -46,7 +50,7 @@ export const fetchMonthlyNotes = async (
   id: string | null
 ) => {
   if (!id) {
-    throw new Error(NO_ID);
+    throw new RankingError('NO_USER_INFO');
   }
 
   try {
@@ -64,13 +68,13 @@ export const fetchMonthlyNotes = async (
       .eq('user_id', id);
 
     if (error) {
-      throw error;
+      throw new RankingError('CANT_SELECT_USER_WORRIES');
     }
 
     return data as UserNote[];
   } catch (err) {
     console.error(DATA_FETHCING_ERROR, err);
-    throw new Error(DATA_FETHCING_ERROR);
+    throw new RankingError('CANT_SELECT_USER_WORRIES');
   }
 };
 
@@ -179,7 +183,7 @@ export const analyzeCategoryTrends = async (
     };
   } catch (err) {
     console.error(ANALYZE_ERROR, err);
-    throw new Error(ANALYZE_ERROR);
+    throw new RankingError('CANT_ANALYZE_WORRIES');
   }
 };
 //주단위
@@ -317,12 +321,12 @@ export const analyzeWeeklyCategoryTrends = async (
         category: mostDecreased[0],
         data: mostDecreased[1]
       },
-      allChanges: changes, // 필요시 전체 변화 데이터도 반환
+      allChanges: changes,
       prevWeekName: `${prevYear}년 ${prevMonth}월 ${prevWeek}주차`,
       currentWeekName: `${currentYear}년 ${currentMonth}월 ${currentWeek}주차`
     };
   } catch (err) {
-    console.error('주간 분석 오류:', err);
-    throw new Error('주간 카테고리 변화를 분석하는 중 오류가 발생했습니다.');
+    console.error('분석 오류:', err);
+    throw new RankingError('CANT_ANALYZE_WORRIES');
   }
 };

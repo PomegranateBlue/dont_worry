@@ -86,6 +86,8 @@ const NotePage = () => {
     setIsEdit((prev) => !prev);
     setSelectedNoteIds([]); // 체크된 항목 초기화
   };
+
+  
   const handleDeleteNote = async () => {
     if (selectedNoteIds.length === 0) return;
 

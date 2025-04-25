@@ -29,8 +29,14 @@ const loginSchema = z.object({
   email: z
     .string()
     .nonempty('이메일을 입력하세요')
-    .email('이메일 형식이 아닙니다.'),
-  password: z.string().nonempty('비밀번호를 입력하세요')
+    .regex(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      '이메일 형식이 올바르지 않습니다.'
+    ),
+  password: z
+    .string()
+    .nonempty('비밀번호를 입력하세요')
+    .min(6, '비밀번호는 6자 이상이어야 합니다.')
 });
 
 const signupSchema = loginSchema.extend({
@@ -143,7 +149,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
       />
 
       {state.error && (
-        <Text color="error" className="!mt-4">
+        <Text color="error" variant={'body2'} className="!mt-4">
           {state.error}
         </Text>
       )}

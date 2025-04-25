@@ -16,7 +16,7 @@ export const EMOTION_FILTER_DESCRIPTION = '감정별 분포';
 export const EMOTION_FILTER_DESCRIPTION2 =
   '걱정과 함께 기록한 감정을 한 눈에 볼 수 있어요';
 
-export const IS_LOADING = '데이터를 불러오는 중입니다...'; //임시 다른 폴백 ui추가시 제거
+export const IS_LOADING = '데이터를 불러오는 중입니다...';
 
 export const NO_DATA_CHART = `아직 걱정이 없으시군요! 걱정이 없으시다니 정말 다행이에요!`;
 

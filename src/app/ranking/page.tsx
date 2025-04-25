@@ -23,7 +23,8 @@ import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import {WEEKM}
+
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();

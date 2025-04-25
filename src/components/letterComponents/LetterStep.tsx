@@ -32,8 +32,7 @@ const LetterStep = ({
   setImagePreview,
   onBack,
   setMessage,
-  userId,
-  setStep
+  userId
 }: LetterStepProps) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -90,21 +89,6 @@ const LetterStep = ({
       console.error('편지 저장 실패', error);
       setMessage('저장에 실패했습니다.');
       return;
-    }
-
-    try {
-      const res = await fetch('/api/crontest');
-      const result = await res.json();
-
-      if (res.ok) {
-        setStep('check');
-      } else {
-        console.error('crontest 호출 실패:', result);
-        setMessage('편지는 저장했지만 이메일 전송에 실패했습니다.');
-      }
-    } catch (err) {
-      console.error('API 호출 중 오류:', err);
-      setMessage('편지는 저장했지만 이메일 전송 중 오류가 발생했습니다.');
     }
 
     setContent('');

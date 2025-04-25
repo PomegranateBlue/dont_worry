@@ -92,7 +92,7 @@ const TeamPage = () => {
           Don’t Worry – 걱정이 많아도 괜찮아!
         </Text>
         <Text variant={'body1'} color={'label-neutral'}>
-          <span>"밤마다 걱정이 머리를 떠나지 않나요?"</span>
+          <span>밤마다 걱정이 머리를 떠나지 않나요?</span>
           <br />
           Don’t Worry는 그런 당신을 위한, 귀엽고 직관적인{' '}
           <strong>‘마음 정리 도우미’</strong>
@@ -142,7 +142,7 @@ const TeamPage = () => {
             <li>매일 짧은 스크럼으로 진행 상황을 공유했어요</li>
             <li>문제가 생기면 바로 모여서 해결 방안을 찾았어요</li>
             <li>디자인-개발 간 피드백을 적극적으로 주고받았어요</li>
-            <li>끝까지 포기하지 않고, 함께 완성해냈어요 :)</li>
+            <li>끝까지 포기하지 않고, 함께 완성해냈어요</li>
           </ul>
         </div>
       </section>

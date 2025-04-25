@@ -1,5 +1,6 @@
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import Text from '../common/Text';
+import { ReactNode } from 'react';
 
 interface InputFormProps<T extends FieldValues> {
   label: string;
@@ -9,6 +10,7 @@ interface InputFormProps<T extends FieldValues> {
   required: boolean;
   register: UseFormRegister<T>;
   error?: { message?: string };
+  infoText?: ReactNode;
 }
 export const InputForm = <T extends FieldValues>({
   label,
@@ -17,7 +19,8 @@ export const InputForm = <T extends FieldValues>({
   placeholder,
   required,
   register,
-  error
+  error,
+  infoText
 }: InputFormProps<T>) => {
   return (
     <div>
@@ -25,6 +28,7 @@ export const InputForm = <T extends FieldValues>({
         <Text variant="body2" color="label-normal">
           {label}
         </Text>
+        {infoText && infoText}
         <input
           {...register(name, { required })}
           type={type}

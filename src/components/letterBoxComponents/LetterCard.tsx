@@ -29,20 +29,20 @@ const LetterCard = ({
   formatDate
 }: LetterCardProps) => {
   return (
-    <main className="flex items-center gap-2 self-stretch">
+    <main className="flex gap-2 self-stretch">
       {isEdit && (
-        <label className="flex items-center justify-center cursor-pointer">
+        <label className="flex cursor-pointer">
           <input
             type="checkbox"
             checked={isSelected}
             onChange={onCheckboxChange}
             className="sr-only peer" // 기본 체크박스 숨기기
           />
-          <div className="w-4 h-4 aspect-square rounded-full border-2 border-[#E0E0E2] peer-checked:bg-[#8573C9] peer-checked:border-[#8573C9] transition-all"></div>
+          <div className="w-5 h-5 aspect-square rounded-full border-2 border-[#E0E0E2] peer-checked:bg-[#8573C9] peer-checked:border-[#8573C9] transition-all"></div>
         </label>
       )}
       <div
-        className={`flex flex-col items-center gap-5 p-5 self-stretch border rounded bg-backgroundSet-normal shadow ${isEdit ? 'w-full' : ''}`}
+        className={`flex flex-col items-center gap-4 p-5 self-stretch border rounded bg-backgroundSet-normal shadow ${isEdit ? 'max-w-[303px]' : 'w-full'}`}
       >
         <nav className="flex items-center gap-2 self-stretch">
           <Text variant="label1" color="label-neutral">

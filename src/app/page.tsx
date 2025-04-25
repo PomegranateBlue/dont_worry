@@ -216,11 +216,11 @@ const HomePage = () => {
 
         <div className="flex">
           <Image
-            src={'images/graph.svg'}
+            src={'/images/graph.svg'}
             width={0}
             height={0}
             alt="graph"
-            className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px]  xl:min-w-[353px] xl:min-h-[353px]"
+            className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
       </section>

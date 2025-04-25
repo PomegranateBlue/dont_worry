@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { EMOTION_CATEGORIES } from '@/constants/openai/category';
 import Image from 'next/image';
@@ -145,4 +145,4 @@ const NoteCard = ({
     </article>
   );
 };
-export default NoteCard;
+export default React.memo(NoteCard);

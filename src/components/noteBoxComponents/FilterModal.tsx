@@ -1,5 +1,3 @@
-'use client';
-
 import {
   TOPIC_CATEGORIES,
   EMOTION_CATEGORIES
@@ -7,13 +5,14 @@ import {
 import { useState, useEffect } from 'react';
 import { RotateCw } from 'lucide-react';
 import Text from '../common/Text';
+import { FilterProps, SortProps } from '@/app/notebox/page';
 
 interface FilterModalProps {
-  selectedOption: string | null;
-  setSelectedOption: (option: string | null) => void;
+  selectedOption: FilterProps | null;
+  setSelectedOption: (option: FilterProps) => void;
 
-  selectedSort: '최신순' | '과거순';
-  setSelectedSort: React.Dispatch<React.SetStateAction<'최신순' | '과거순'>>;
+  selectedSort: SortProps;
+  setSelectedSort: React.Dispatch<React.SetStateAction<SortProps>>;
 
   selectedTopics: string[];
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>;
@@ -24,8 +23,13 @@ interface FilterModalProps {
   onClose: () => void;
 }
 
-const sortTabs = ['정렬순', '주제별', '감정별'];
-const sortOptions = ['최신순', '오래된순'];
+const sortTabs: FilterProps[] = [
+  FilterProps.SORT,
+  FilterProps.TOPIC,
+  FilterProps.EMOTION
+];
+
+const sortOptions: SortProps[] = [SortProps.LATEST, SortProps.OLDEST];
 
 const FilterModal = ({
   selectedOption,
@@ -40,13 +44,12 @@ const FilterModal = ({
 }: FilterModalProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
-  //  최신순이 디폴트값으로
   useEffect(() => {
-    if (selectedOption === '정렬순') {
+    if (selectedOption === FilterProps.SORT) {
       setSelectedValues([selectedSort]);
-    } else if (selectedOption === '주제별') {
+    } else if (selectedOption === FilterProps.TOPIC) {
       setSelectedValues(selectedTopics);
-    } else if (selectedOption === '감정별') {
+    } else if (selectedOption === FilterProps.EMOTION) {
       setSelectedValues(selectedEmotions);
     } else {
       setSelectedValues([]);
@@ -54,7 +57,7 @@ const FilterModal = ({
   }, [selectedOption, selectedSort, selectedTopics, selectedEmotions]);
 
   const handleToggle = (value: string) => {
-    if (selectedOption === '정렬순') {
+    if (selectedOption === FilterProps.SORT) {
       setSelectedValues([value]);
     } else {
       setSelectedValues((prev) =>
@@ -67,11 +70,11 @@ const FilterModal = ({
 
   const getOptions = () => {
     switch (selectedOption) {
-      case '정렬순':
+      case FilterProps.SORT:
         return sortOptions;
-      case '주제별':
+      case FilterProps.TOPIC:
         return TOPIC_CATEGORIES;
-      case '감정별':
+      case FilterProps.EMOTION:
         return EMOTION_CATEGORIES.map(({ label }) => label);
       default:
         return [];
@@ -79,19 +82,21 @@ const FilterModal = ({
   };
 
   const handleApply = () => {
-    if (selectedOption === '정렬순') {
-      if (selectedValues[0] === '최신순') setSelectedSort('최신순');
-      else if (selectedValues[0] === '오래된순') setSelectedSort('과거순');
-    } else if (selectedOption === '주제별') {
+    if (selectedOption === FilterProps.SORT) {
+      if (selectedValues[0] === SortProps.LATEST)
+        setSelectedSort(SortProps.LATEST);
+      else if (selectedValues[0] === SortProps.OLDEST)
+        setSelectedSort(SortProps.OLDEST);
+    } else if (selectedOption === FilterProps.TOPIC) {
       setSelectedTopics(selectedValues);
-    } else if (selectedOption === '감정별') {
+    } else if (selectedOption === FilterProps.EMOTION) {
       setSelectedEmotions(selectedValues);
     }
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end ">
+    <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end">
       <section
         className="xl:max-w-[648px] bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
         onClick={(e) => e.stopPropagation()}
@@ -103,7 +108,6 @@ const FilterModal = ({
           <div className="w-[36px] h-[5px] rounded-[2.5px] bg-label-assistive" />
         </div>
 
-        {/* 탭 버튼 */}
         <nav className="flex items-center justify-between w-full py-6">
           {sortTabs.map((tab) => (
             <button
@@ -128,7 +132,6 @@ const FilterModal = ({
           ))}
         </nav>
 
-        {/* 필터 선택 버튼들 */}
         <fieldset className="flex flex-wrap pb-6 h-[150px] overflow-y-auto gap-2">
           {getOptions().map((option) => {
             const isSelected = selectedValues.includes(option);
@@ -156,7 +159,6 @@ const FilterModal = ({
           })}
         </fieldset>
 
-        {/* 하단 버튼 */}
         <section className="flex gap-x-2 w-full justify-between">
           <button
             onClick={() => setSelectedValues([])}

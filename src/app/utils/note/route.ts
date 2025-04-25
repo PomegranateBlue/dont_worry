@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { TablesInsert } from '../../../../database.types';
+import { NOTE_ERROR_KEYS,NOTE_ERROR_MESSAGE } from '@/constants/error/noteError';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -8,7 +8,7 @@ import EmotionChart from '@/components/ranking/EmotionsChart';
 import { fetchMonthlyNotes, fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
 
-import { NO_DATA_CHART } from '@/constants/ranking/line';
+import { NO_DATA_CHART } from '@/constants/ranking/Line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
@@ -18,11 +18,12 @@ import FilterMenu from '@/components/ranking/FilterMenu';
 
 import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+
 import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
+import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();

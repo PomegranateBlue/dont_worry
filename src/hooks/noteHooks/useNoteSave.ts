@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-
+import { NoteError } from '@/constants/error/noteError';
 interface NoteSaveProps {
   message: string;
   result: string;
@@ -30,10 +30,11 @@ export const useNoteSave = () => {
         })
       });
 
-      const data = await res.json().catch(() => ({}));
+      // const data = await res.json().catch(() => ({}));
+      //에러 처리 변경 로직이 변경될 수 있음
 
       if (!res.ok) {
-        throw new Error(data.error || `노트 저장 실패 (status: ${res.status})`);
+        throw new NoteError('CANT_UPLOAD_USER_WORRIES');
       }
 
       return { success: true };

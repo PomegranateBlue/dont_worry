@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { TablesInsert } from '../../../../database.types';
-import { NOTE_ERROR_KEYS,NOTE_ERROR_MESSAGE } from '@/constants/error/noteError';
+import { NoteError } from '@/constants/error/noteError';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,6 +15,10 @@ export const POST = async (req: Request) => {
 
     if (!userId) {
       return NextResponse.json({ error: '로그인 정보 없음' }, { status: 401 });
+    }
+
+    if (!message) {
+      throw new NoteError('NOT_ENOUGH_TEXT');
     }
 
     const note: TablesInsert<'users_note'> = {
@@ -32,14 +36,11 @@ export const POST = async (req: Request) => {
     const { error } = await supabase.from('users_note').insert([note]);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      throw new NoteError('CANT_UPLOAD_USER_WORRIES');
     }
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("서버 저장 실패",error)
-    return NextResponse.json(
-      { error: '수파베이스 저장 실패' },
-      { status: 500 }
-    );
+    console.error(error);
+    throw new NoteError('CANT_UPLOAD_USER_WORRIES');
   }
 };

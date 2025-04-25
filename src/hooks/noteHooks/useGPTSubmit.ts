@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-
+import { AIError } from '@/constants/error/aiErrorKeys';
 export interface GPTProps {
   topics: string[];
   emotions: string[];
@@ -25,7 +25,7 @@ export const useGPTSubmit = () => {
         })
       });
 
-      if (!res.ok) throw new Error('GPT 요청 실패');
+      if (!res.ok) throw new AIError('GPT_GENERATION_FAIL');
       return res.json();
     }
   });

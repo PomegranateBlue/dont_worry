@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'IBMPlexSansKR-Medium';
+  src: url('./fonts/IBMPlexSansKR-Medium.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexSansKR-SemiBold';
+  src: url('./fonts/IBMPlexSansKR-SemiBold.ttf');
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -11,10 +20,18 @@
 @layer components {
   .pretendard {
     font-family: 'Pretendard', sans-serif;
-    font-weight: normal;
   }
-  .ibmSans {
+  .ibmSans-500 {
+    font-family: 'IBMPlexSansKR-Medium', sans-serif;
+  }
+  .ibmSans-600 {
     font-family: 'IBMPlexSansKR-SemiBold', sans-serif;
+  }
+}
+
+@layer base {
+  html {
+    word-break: keep-all;
   }
 }
 
@@ -81,4 +98,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+/* 성공 토스트로딩바 */
+
+.Toastify__progress-bar--success {
+  background-color: #c1b8e5 !important;
+}
+.Toastify__toast--success .Toastify__progress-bar {
+  background-color: #8573c9 !important;
 }

@@ -40,7 +40,7 @@ const NoteCard = ({
   return (
     <div
       id={note_id}
-      className="relative flex flex-col w-full max-w-[648px] gap-2 bg-backgroundSet-normal p-5 rounded-[8px] drop-shadow-xl"
+      className="relative flex flex-col w-full max-w-[648px] gap-2 bg-backgroundSet-normal px-[24px] py-[24px] rounded-[8px] drop-shadow-xl"
     >
       <div className="flex flex-wrap  gap-2 items-center">
         {emotion_category?.map((emotionLabel) => {

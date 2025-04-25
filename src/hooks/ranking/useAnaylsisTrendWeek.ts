@@ -1,4 +1,5 @@
 import { analyzeWeeklyCategoryTrends } from '@/app/utils/ranking/DataFetch';
+import { RANKING_ERROR_MESSAGE } from '@/constants/error/rankingError';
 import { useUserStore } from '@/store/auth/store';
 import { AnalysisWeekTrendsResult } from '@/types/ranking/types';
 import { useEffect, useState } from 'react';
@@ -25,6 +26,7 @@ const useAnaylsisTrendWeek = (year: number, month: number, week: number) => {
       } catch (err) {
         setError('데이터를 불러오는중 오류 발생');
         console.log(err);
+        throw new Error(RANKING_ERROR_MESSAGE.CANT_ANALYZE_WORRIES.message);
       } finally {
         setLoading(false);
       }

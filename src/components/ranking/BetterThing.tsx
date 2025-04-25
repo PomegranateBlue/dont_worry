@@ -4,16 +4,16 @@ import {
   ABOUT,
   MOST_DECREASE_COMMENT_MONTH,
   MOST_DECREASE_COMMENT_WEEK
-} from '@/constants/ranking/Line';
+} from '@/constants/ranking/line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { BetterThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 import Text from '../common/Text';
-import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
-import { NO_DATA } from '@/constants/ranking/ErrorConstants';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import { NO_DATA } from '@/constants/error/rankingError';
 
-const BetterThing: React.FC<BetterThingProps> = ({ monthData, weekData }) => {
+const BetterThing = ({ monthData, weekData }: BetterThingProps) => {
   const { mode } = useRankingStore();
   const monthLowest = monthData?.mostDecreased;
   const weekLowest = weekData?.mostDecreased;

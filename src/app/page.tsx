@@ -11,23 +11,23 @@ const HomePage = () => {
     <main className="min-h-screen">
       {/*히어로 섹션 시작  */}
       <section
-        className="flex flex-col w-full h-[621px] pt-[60px] relative xl:overflow-hidden"
+        className="flex flex-col w-full h-[621px] pt-[60px] relative xl:overflow-hidden xl:flex-row "
         style={{
           background: 'linear-gradient(0deg, #E8E2FF 0%, #8775CA 87.13%)'
         }}
       >
-        <div className="relative z-10 flex flex-col items-center justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center  xl:items-start xl:left-[600px] gap-[40px] xl:bottom-[100px] ">
           {/* 텍스트 */}
           <Text
             variant="display3"
             variant2="display1"
-            className="text-center text-backgroundSet-normal"
+            className="text-center text-backgroundSet-normal xl:text-left"
           >
             말 못할 걱정들..
             <br />
             어딘가 털어놓고 싶다면?
           </Text>
-          <div className="mt-[40px] mb-[40px]">
+          <div>
             <StartButton />
           </div>
         </div>
@@ -36,13 +36,21 @@ const HomePage = () => {
           <Carousel />
         </div>
 
-        {/* 배경 일러스트 이미지: 섹션 바닥에 붙음 */}
-        <div>
+        {/* 배경 일러스트 이미지 */}
+        <div className="xl:hidden">
           <Image
             src={'/images/hero-section-bg.svg'}
             alt="hero"
             fill
             className="absolute  object-cover"
+          />
+        </div>
+        <div className="hidden xl:block">
+          <Image
+            src={'/images/hero-section-desktop.svg'}
+            alt="hero-desktop"
+            fill
+            className="absolute object-cover"
           />
         </div>
       </section>
@@ -53,21 +61,23 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/mobile-logo.svg'}
-            width={180}
-            height={24}
+            width={0}
+            height={0}
             alt="logo"
+            className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
           />
         </div>
 
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <Text
             variant="title2"
+            variant2="heading1"
             color="primary2"
             className="flex justify-center text-center"
           >
             돈워리는 부정적인 감정을
-            <br /> 기록하고, 정리하고, 돌아볼 수 있게 돕는
-            <br />
+            <br className="xl:hidden" /> 기록하고, 정리하고, 돌아볼 수 있게 돕는
+            <br className="xl:hidden" />
           </Text>
           <Text variant="heading3" color="primary4" variant2="display2">
             정서 기반 감정 기록 플랫폼입니다
@@ -76,7 +86,7 @@ const HomePage = () => {
       </section>
       {/* 첫번째 섹션 끝 */}
 
-      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px] ">
+      <section className="w-full h-auto flex flex-col bg-primary-1 items-center justify-center px-[20px] py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col justify-center items-center gap-[12px]">
           <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
             <Text
@@ -111,9 +121,10 @@ const HomePage = () => {
             <div>
               <Image
                 src={'images/step1-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step1"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
@@ -134,9 +145,10 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step2-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step2"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
@@ -149,26 +161,32 @@ const HomePage = () => {
                 </Text>
               </div>
               <div>
-                <Text variant="body2" variant2="body1" color="label-normal">
+                <Text
+                  variant="body2"
+                  variant2="body1"
+                  color="label-normal"
+                  className="xl:whitespace-nowrap"
+                >
                   돈워리가 건네는 위로와 조언을 통해 스스로 성장해요
                 </Text>
               </div>
             </div>
-            <div>
+            <div className="bg-[#ADA2D7] min-w-[335px] rounded-[8px] xl:min-w-[370px]">
               <Image
                 src={'images/step3-final.svg'}
-                width={335}
-                height={300}
+                width={0}
+                height={0}
                 alt="step3"
+                className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal px-5 py-[60px] xl:flex-row xl:gap-[80px]">
-        <div className="flex flex-col justify-center items-center gap-[24px] ">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <div className="flex flex-col justify-center items-center gap-[24px] xl:items-start xl:text-left ">
+          <div className="flex flex-col justify-center items-center gap-[12px] xl:items-start">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
               <Text
                 variant="body3"
@@ -196,62 +214,65 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div>
+        <div className="flex">
           <Image
             src={'images/graph.svg'}
-            width={335}
-            height={335}
-            alt="graph
-          "
+            width={0}
+            height={0}
+            alt="graph"
+            className="min-w-[236px] min-h-[236px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px]">
-        <div className="flex flex-col justify-center items-center gap-[24px]">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
+      <section className="flex flex-col xl:flex-row-reverse items-center justify-center px-5 py-[60px] bg-primary-1 gap-[40px] xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <div className="flex flex-col items-center xl:items-start gap-[24px] text-center xl:text-left">
+          <div className="flex flex-col items-center xl:items-start gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" className="text-backgroundSet-normal">
+              <Text
+                variant="body3"
+                variant2="body1"
+                className="text-backgroundSet-normal"
+              >
                 미래편지
               </Text>
             </div>
-            <div className="flex text-center ">
-              <Text variant="heading2" color="primary4">
+            <div className="flex">
+              <Text variant="heading2" variant2="display2" color="primary4">
                 미래의 나에게 보내는 편지
               </Text>
             </div>
           </div>
           <div className="flex">
-            <div className="flex">
-              <Text variant="body2" color="label-neutral">
-                지금의 내가 느끼는 감정, 바라는 변화
-                <br />
-                그리고 전하고 싶은 말들을 미래의 나에게 편지로 남겨보세요
-              </Text>
-            </div>
+            <Text variant="body2" variant2="body1" color="label-neutral">
+              지금의 내가 느끼는 감정, 바라는 변화
+              <br />
+              그리고 전하고 싶은 말들을 미래의 나에게 편지로 남겨보세요
+            </Text>
           </div>
         </div>
 
-        <div className="flex w-full">
+        <div className="flex w-full xl:w-[335px] justify-center xl:justify-start">
           <Image
-            src={'/images/future-letter-final.svg'}
+            src="/images/future-letter-final.svg"
             width={335}
             height={335}
             alt="future"
+            className="w-[260px] h-auto xl:w-[335px]"
           />
         </div>
       </section>
 
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px]">
+      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <div className="flex flex-col gap-[24px] justify-center items-center">
           <div className="flex flex-col justify-center items-center gap-[12px]">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" color="white">
+              <Text variant="body3" variant2="body1" color="white">
                 커뮤니티
               </Text>
             </div>
             <div>
-              <Text variant="heading2" color="primary4">
+              <Text variant="heading2" variant2="display2" color="primary4">
                 다른 사람들의 이야기
               </Text>
             </div>
@@ -259,7 +280,7 @@ const HomePage = () => {
 
           <div className="flex">
             <div className="flex">
-              <Text variant="body2" color="label-neutral">
+              <Text variant="body2" variant2="body1" color="label-neutral">
                 익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
                 나눠보세요
               </Text>
@@ -267,30 +288,128 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex drop-shadow-xl">
-          <Image
-            src={'images/community-final.svg'}
-            width={335}
-            height={300}
-            alt="community"
-            quality={80}
-          />
+        <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
+          <div className="flex flex-col gap-[12px] xl:flex-row w-full">
+            <div className="flex w-full p-[16px] xl:p-[24px]">
+              <Image
+                src={'images/community1.svg'}
+                width={0}
+                height={0}
+                alt="community1"
+                quality={70}
+                className=" w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
+              />
+            </div>
+            <div className="flex p-[16px] w-full xl:p-[24px]">
+              <Image
+                src={'images/community2.svg'}
+                width={0}
+                height={0}
+                alt="community2"
+                quality={70}
+                className="w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center h-[630px] bg-[#F3F0FF]">
-        <Text variant="heading2" color="primary4" className="flex text-center">
+      <section className="flex flex-col justify-center items-center h-[630px] bg-primary-1 gap-[40px] xl:gap-[60px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <Text
+          variant="heading2"
+          variant2="display2"
+          color="primary4"
+          className="flex text-center"
+        >
           여러분의 고민은 무엇인가요?
           <br /> 돈워리를 통해 이야기를 들려주세요
         </Text>
-        <Image
-          src={'/images/intro-emoticon.svg'}
-          width={253}
-          height={160}
-          alt="main"
-          className=" pt-20 pb-20"
-        />
+        <div>
+          <Image
+            src={'/images/intro-emoticon.svg'}
+            width={0}
+            height={0}
+            alt="main"
+            className="min-w-[253px] min-h-[160px]  xl:max-w-[317px] xl:min-h-[200px]"
+          />
+        </div>
+
         <StartButtonBottom />
+      </section>
+
+      <section className="hidden xl:flex xl:w-full xl:h-[320px] xl:px-[60px] xl:py-[40px] xl:justify-between xl:items-start bg-backgroundSet-card text-label-neutral text-[14px]">
+        {/* 왼쪽 영역 */}
+        <div className="flex flex-col gap-[12px]">
+          {/* 로고 */}
+          <div className="flex items-center gap-[8px]">
+            <Image
+              src="/images/ver-default.svg"
+              alt="footer-emoticon"
+              width={28}
+              height={28}
+            />
+            <Image
+              src="/images/mobile-logo.svg"
+              alt="footer-logo"
+              width={180}
+              height={27}
+            />
+          </div>
+
+          {/* 버전 정보 */}
+          <div className="text-primary-4 font-bold">v1.0.0</div>
+
+          {/* 연락처 */}
+          <div className="flex gap-[4px]">
+            <span className="font-medium">Contact</span>
+            <span>abcd_1234@gmail.com</span>
+          </div>
+
+          {/* 이용약관 / 개인정보처리방침 */}
+          <div className="flex gap-[12px]">
+            <button className="underline">이용약관</button>
+            <button className="underline">개인정보처리방침</button>
+          </div>
+
+          {/* 저작권 */}
+          <div className="text-[13px] text-label-disable">
+            Copyright © Don’t Worry All rights reserved
+          </div>
+        </div>
+
+        {/* 오른쪽 링크 목록 */}
+        <div className="grid grid-cols-2 gap-x-[40px] gap-y-[8px] text-label-normal">
+          <Text variant="label1" color="label-assistive">
+            돈워리
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스 소개
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            서비스 이용약관
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            걱정 작성
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            개인정보처리방침
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            걱정 보관함
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            고객 센터
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            통계
+          </Text>
+          <Text variant="label1" color="label-assistive">
+            미래 편지 작성
+          </Text>
+        </div>
       </section>
     </main>
   );

@@ -3,6 +3,12 @@ import Text from '@/components/common/Text';
 import LoginForm from '@/components/loginComponents/LoginForm';
 import { PATHS } from '@/constants/common/paths';
 import { LOGIN_TEXT } from '@/constants/login/text';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'DONT WORRY | 회원가입',
+  description: '회원가입 페이지'
+};
 
 const SignupPage = () => {
   return (

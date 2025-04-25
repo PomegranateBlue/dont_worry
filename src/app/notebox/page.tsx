@@ -16,11 +16,11 @@ import { CheckCircle2 } from 'lucide-react';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
-  const [filterType, setFilterType] = useState<string | null>('주제별');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
+  const [filterType, setFilterType] = useState<string | null>('주제별');
   const [selectedSort, setSelectedSort] = useState<'최신순' | '과거순'>(
     '최신순'
   );
@@ -104,15 +104,20 @@ const NotePage = () => {
     setIsEdit(false);
   };
   return (
-    <div className="flex max-h-[1200px]">
+    <div className="flex max-w-[1200px] mx-auto">
       <div className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
         <div className="flex justify-center items-center px-[6px] py-[15px]">
-          <Text variant="title2" color="label-normal" className="text-center">
+          <Text
+            variant="title2"
+            variant2="heading1"
+            color="label-normal"
+            className="text-center"
+          >
             걱정 보관함
           </Text>
         </div>
 
-        <div className="flex flex-1 justify-between items-center sticky top-0 z-10 bg-backgroundSet-normal ">
+        <div className="flex flex-1 justify-between items-center sticky top-0 z-10 bg-backgroundSet-normal  ">
           <div className="flex  items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
             <FilterBar
               onClickFilter={(label) => {
@@ -120,14 +125,14 @@ const NotePage = () => {
                 setIsModalOpen(true);
               }}
               selectedOption={filterType}
-              selectedTopic={selectedTopics[0] || ''}
+              selectedTopics={selectedTopics}
               selectedEmotions={selectedEmotions}
               selectedSort={selectedSort}
               onRemoveFilter={handleRemoveFilter}
             />
           </div>
 
-          <div className="whitespace-nowrap">
+          <div className="pr-[10px] whitespace-nowrap">
             <EditBar
               isEdit={isEdit}
               selectedNoteIds={selectedNoteIds}

@@ -3,9 +3,11 @@ import browserClient from './client';
 import { Database } from '../../../../database.types';
 
 // 데이터베이스 타입 정의
-type Tables = Database['public']['Tables']; // Tables<'letters'>
-type User = Tables['users']['Row'];
-export type UserUpdate = Pick<User, 'email' | 'nickname' | 'profile_img'>;
+type User = Database['public']['Tables']['users']['Row'];
+export type UserUpdate = Pick<
+  User,
+  'email' | 'nickname' | 'profile_img' | 'is_deleted'
+>;
 
 // 사용자 정보 가져오기
 export const fetchUserInfo = async (userId: string | null | undefined) => {
@@ -51,11 +53,24 @@ export const fetchUserLetters = async (
   return data || [];
 };
 
+// 사용자가 작성한 미래 편지 삭제하기
+export const deleteLetters = async (userId: string, letterIds: string[]) => {
+  const { error } = await browserClient
+    .from('letter')
+    .delete()
+    .in('letter_id', letterIds);
+
+  if (error) throw new Error(error.message);
+};
+
 // 사용자 정보 업데이트하기
 export const updateUserInfo = async (
   userId: string | null | undefined,
   updates: Partial<UserUpdate>
-): Promise<Pick<User, 'email' | 'nickname' | 'profile_img'> | null> => {
+): Promise<Pick<
+  User,
+  'email' | 'nickname' | 'profile_img' | 'is_deleted'
+> | null> => {
   if (userId === null || userId === undefined) {
     return null;
   }
@@ -64,11 +79,14 @@ export const updateUserInfo = async (
     .from('users')
     .update(updates)
     .eq('user_id', userId)
-    .select('email, nickname, profile_img')
+    .select('email, nickname, profile_img, is_deleted')
     .single();
 
   if (error) throw new Error(error.message);
-  return data as Pick<User, 'email' | 'nickname' | 'profile_img'>;
+  return data as Pick<
+    User,
+    'email' | 'nickname' | 'profile_img' | 'is_deleted'
+  >;
 };
 
 //로그인 유저 ID

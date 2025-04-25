@@ -4,6 +4,7 @@ import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
+// import dayjs from 'dayjs';
 
 type LetterStepProps = {
   sendAt: string;
@@ -31,8 +32,7 @@ const LetterStep = ({
   setImagePreview,
   onBack,
   setMessage,
-  userId,
-  setStep
+  userId
 }: LetterStepProps) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,8 +54,8 @@ const LetterStep = ({
     let imageUrl = '';
 
     if (imageFile) {
-      const rawFileName = `${Date.now()}_${imageFile.name}`;
-      const encodedPath = `letters/${encodeURIComponent(rawFileName)}`;
+      const rawFileName = `${userId}_${Date.now()}.png`;
+      const encodedPath = `letters/${rawFileName}`;
       const formData = new FormData();
       formData.append('file', imageFile);
       formData.append('path', encodedPath);
@@ -69,6 +69,8 @@ const LetterStep = ({
         return;
       }
     }
+
+    // const scheduledTime = dayjs().add(5, 'minute').toISOString();
 
     const { error } = await browserClient
       .from('letter')
@@ -87,21 +89,6 @@ const LetterStep = ({
       console.error('편지 저장 실패', error);
       setMessage('저장에 실패했습니다.');
       return;
-    }
-
-    try {
-      const res = await fetch('/api/crontest');
-      const result = await res.json();
-
-      if (res.ok) {
-        setStep('check');
-      } else {
-        console.error('crontest 호출 실패:', result);
-        setMessage('편지는 저장했지만 이메일 전송에 실패했습니다.');
-      }
-    } catch (err) {
-      console.error('API 호출 중 오류:', err);
-      setMessage('편지는 저장했지만 이메일 전송 중 오류가 발생했습니다.');
     }
 
     setContent('');

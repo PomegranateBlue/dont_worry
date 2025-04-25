@@ -1,4 +1,5 @@
-import { RANKING_PROPMT } from '@/constants/ranking/Line';
+import { AIError } from '@/constants/error/aiErrorKeys';
+import { RANKING_PROPMT } from '@/constants/ranking/line';
 
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
@@ -38,9 +39,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     return NextResponse.json(res.choices[0].message.content);
   } catch (error) {
     console.log('open ai에러 발생=>', error);
-    return NextResponse.json(
-      { error: 'OpenAI API 호출 중 오류가 발생했습니다.' },
-      { status: 500 }
-    );
+    throw new AIError('GPT_GENERATION_FAIL');
   }
 };

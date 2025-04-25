@@ -7,14 +7,15 @@ import LoginProfile from '../loginComponents/LoginProfile';
 import MobileHeader from '../mobileComponents/MobileHeader';
 import { useUserStore } from '@/store/auth/store';
 import { PATHS } from '@/constants/common/paths';
+import Text from './Text';
 
 export default function Header() {
   const { user } = useUserStore();
   const isLogin = !!user;
 
   return (
-    <header className="w-full bg-white border-b border-b-[#EDEDED]">
-      <nav className="hidden headerMd:flex flex-row flex-wrap items-center justify-between w-full p-4">
+    <header className=" bg-white border-b border-b-[#EDEDED] fixed top-0 left-0 right-0 z-50 h-14 lg:h-20">
+      <nav className="max-w-screen-xl mx-auto px-10 hidden lg:flex flex-row flex-wrap items-center justify-between w-full h-full">
         <Link href={PATHS.HOME} className="relative">
           <Image
             src="/images/header-logo.svg"
@@ -24,7 +25,15 @@ export default function Header() {
           />
         </Link>
         {isLogin ? <IsLoginMenu /> : <IsNotLoginMenu />}
-        {isLogin ? <LoginProfile /> : <Link href={PATHS.LOGIN}>로그인</Link>}
+        {isLogin ? (
+          <LoginProfile />
+        ) : (
+          <Link href={PATHS.LOGIN}>
+            <Text variant="heading5" color="label-neutral">
+              로그인
+            </Text>
+          </Link>
+        )}
       </nav>
       <MobileHeader isLogin={isLogin} />
     </header>

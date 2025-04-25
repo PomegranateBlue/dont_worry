@@ -9,11 +9,13 @@ import ResultForm from './ResultForm';
 import Text from '../common/Text';
 import { useNoteStore } from '@/store/note/noteStore';
 import { useGPTSubmit } from '@/hooks/noteHooks/useGPTSubmit';
+import { useNoteSave } from '@/hooks/noteHooks/useNoteSave';
 import { useUserStore } from '@/store/auth/store';
-import { supabase } from '@/app/utils/supabase/supabase';
-import { TablesInsert } from '../../../database.types';
-import dynamic from 'next/dynamic';
 
+import dynamic from 'next/dynamic';
+{
+  /*lottie 라이브러리를 위한 ssr 렌더링 방지 */
+}
 const MessageLoading = dynamic(() => import('./MessageLoading'), {
   ssr: false
 });
@@ -27,69 +29,64 @@ enum StepProps {
 const StepFlow = () => {
   const [step, setStep] = useState<StepProps>(StepProps.CATEGORY);
   const {
-    selectedTopic,
+    selectedTopics,
     selectedEmotions,
     toggleTopic,
     message,
     setResult,
     reset
   } = useNoteStore();
+
   const emotionRef = useRef<HTMLDivElement | null>(null);
-  const { mutate: submitGPT, isPending } = useGPTSubmit();
+  const { mutateAsync: submitGPT, isPending } = useGPTSubmit();
+  const { mutateAsync: saveNote } = useNoteSave();
   const { user } = useUserStore();
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);
+
+    // 다음 렌더링에서 상태가 반영된 후 확인해야 하므로 약간 지연
     setTimeout(() => {
-      emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      const { selectedTopics } = useNoteStore.getState(); // 최신 상태 직접 가져옴
+
+      if (selectedTopics.length === 3) {
+        emotionRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50); // 50ms 정도면 충분 (너무 길면 UX 저하됨)
   };
 
-  const handleSubmit = () => {
-    submitGPT(
-      {
-        topic: selectedTopic,
+  const handleSubmit = async () => {
+    if (!user) {
+      setStep(StepProps.RESULT);
+      return;
+    }
+
+    try {
+      const gptInput = {
+        topics: selectedTopics,
         emotions: selectedEmotions,
         message
-      },
-      {
-        onSuccess: async (res) => {
-          setResult(res.content);
+      };
 
-          if (!user) {
-            console.error('로그인된 사용자가 없습니다.');
-            setStep(StepProps.RESULT);
-            return;
-          }
+      const res = await submitGPT(gptInput);
+      setResult(res.content);
 
-          const note: TablesInsert<'users_note'> = {
-            content: JSON.stringify({
-              Question: message,
-              Answer: res.content
-            }),
-            topic_category: selectedTopic,
-            emotion_category: selectedEmotions.join(','),
-            created_at: new Date().toISOString(),
-            note_img: null,
-            user_id: user
-          };
+      const saveInput = {
+        message,
+        result: res.content,
+        topics: selectedTopics,
+        emotions: selectedEmotions,
+        userId: user
+      };
 
-          const { error } = await supabase.from('users_note').insert([note]);
-
-          if (error) {
-            console.error('저장 실패:', error);
-          } else {
-            console.log('저장 완료');
-          }
-
-          setStep(StepProps.RESULT);
-          reset();
-        },
-        onError: (err) => {
-          console.error('GPT 요청 실패:', err.message);
-        }
-      }
-    );
+      await saveNote(saveInput);
+      setStep(StepProps.RESULT);
+      reset();
+    } catch (err) {
+      console.error('에러 발생:', err);
+      alert((err as Error).message);
+      setStep(StepProps.RESULT);
+    }
   };
 
   return (
@@ -99,6 +96,7 @@ const StepFlow = () => {
           <div>
             <Text
               variant="title1"
+              variant2="heading1"
               color="label-normal"
               className="flex h-[56px] items-center justify-center w-full bg-backgroundSet-normal px-[6px] xl:px-[40px]"
             >
@@ -131,7 +129,7 @@ const StepFlow = () => {
                 />
               </button>
               <div className="absolute inset-0 flex justify-center items-center">
-                <p className="text-[20px] font-semibold">감정 작성</p>
+                <Text variant="title1" variant2="heading1">감정 작성</Text>
               </div>
             </div>
 

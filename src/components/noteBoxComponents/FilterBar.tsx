@@ -2,9 +2,7 @@
 
 import { ChevronDown, X } from 'lucide-react';
 import Text from '../common/Text';
-import { FilterProps } from '@/app/notebox/page';
-
-
+import { FilterProps } from '@/constants/filter/filterProps';
 
 interface FilterBarProps {
   onClickFilter: (label: FilterProps) => void;
@@ -23,6 +21,8 @@ const FilterBar = ({
   selectedSort,
   onRemoveFilter
 }: FilterBarProps) => {
+
+
   const handleFilterOption = (label: FilterProps) => {
     onClickFilter(label);
   };

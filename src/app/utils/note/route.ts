@@ -11,7 +11,7 @@ const supabase = createClient(
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { message, result, topic, emotions, userId } = body;
+    const { message, result, topics, emotions, userId } = body;
 
     if (!userId) {
       throw new SupabaseError('SUPABASE_AUTH_FAILED');
@@ -26,7 +26,7 @@ export const POST = async (req: Request) => {
         Question: message,
         Answer: result.content
       }),
-      topic_category: topic,
+      topic_category: topics.join(','),
       emotion_category: emotions.join(','),
       created_at: new Date().toISOString(),
       note_img: null,

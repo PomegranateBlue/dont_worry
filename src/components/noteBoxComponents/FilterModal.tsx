@@ -5,7 +5,7 @@ import {
 import { useState, useEffect } from 'react';
 import { RotateCw } from 'lucide-react';
 import Text from '../common/Text';
-import { FilterProps, SortProps } from '@/app/notebox/page';
+import { FilterProps, SortProps } from '@/constants/filter/filterProps';
 
 interface FilterModalProps {
   selectedOption: FilterProps | null;

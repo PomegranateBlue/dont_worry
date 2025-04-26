@@ -2,7 +2,10 @@
 
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { EMOTION_CATEGORIES } from '@/constants/openai/category';
+import {
+  TOPIC_CATEGORIES,
+  EMOTION_CATEGORIES
+} from '@/constants/openai/category';
 import Image from 'next/image';
 import Text from '../common/Text';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
@@ -10,7 +13,7 @@ interface NoteCardProps {
   content: string;
   created_at: string;
   note_id: string;
-  topic_category: string | null;
+  topic_category: string[] | null;
   emotion_category: string[] | null;
   isEdit: boolean;
   isChecked?: boolean;
@@ -71,9 +74,23 @@ const NoteCard = ({
           );
         })}
         <div className="flex px-3 py-[6px]  bg-backgroundSet-normal border-line-normal border-[1px]  rounded-[16px] ">
-          <Text color="label-neutral" as="p" variant="body3">
-            {topic_category}
-          </Text>
+          {topic_category?.map((topicLabel) => {
+            const topicData = (TOPIC_CATEGORIES as readonly string[]).includes(
+              topicLabel
+            );
+            if (!topicData) return null;
+
+            return (
+              <div
+                key={topicLabel}
+                className="flex rounded-[16px] h-[32px] border-line-normal border-[1px] gap-1 px-3 py-[6px] bg-backgroundSet-normal"
+              >
+                <Text variant="body3" color="label-neutral" as="p">
+                  {topicLabel}
+                </Text>
+              </div>
+            );
+          })}
         </div>
       </header>
 

@@ -32,7 +32,11 @@ const NoteList = ({ notes, isEdit, selectedNoteIds, onToggleCheck }: Props) => {
                 content={note.content}
                 created_at={note.created_at}
                 note_id={note.note_id}
-                topic_category={note.topic_category}
+                topic_category={
+                  note.topic_category
+                    ? note.topic_category?.split(',').map((e) => e.trim())
+                    : null
+                }
                 emotion_category={
                   note.emotion_category
                     ? note.emotion_category.split(',').map((e) => e.trim())

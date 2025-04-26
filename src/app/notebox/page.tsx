@@ -9,17 +9,7 @@ import EditBar from '@/components/noteBoxComponents/EditBar';
 import { useNoteDelete } from '@/hooks/noteboxHooks/useNoteDelete';
 import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
 import NoteList from '@/components/noteBoxComponents/NoteList';
-
-export enum FilterProps {
-  TOPIC = '주제별',
-  EMOTION = '감정별',
-  SORT = '정렬순'
-}
-
-export enum SortProps {
-  LATEST = '최신순',
-  OLDEST = '과거순'
-}
+import { FilterProps, SortProps } from '@/constants/filter/filterProps';
 
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
@@ -38,7 +28,7 @@ const NotePage = () => {
       setNotes(userNotes);
     }
   }, [userNotes, setNotes]);
-  // 선택된 필터 제거
+
   const handleRemoveFilter = (type: FilterProps, value: string) => {
     if (type === FilterProps.TOPIC) {
       setSelectedTopics([]);
@@ -75,9 +65,10 @@ const NotePage = () => {
           : new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
       );
   }, [notes, filterType, selectedTopics, selectedEmotions, selectedSort]);
+
   const onToggleEdit = () => {
     setIsEdit((prev) => !prev);
-    setSelectedNoteIds([]); // 체크된 항목 초기화
+    setSelectedNoteIds([]);
   };
 
   const handleDeleteNote = async () => {
@@ -90,6 +81,7 @@ const NotePage = () => {
     setSelectedNoteIds([]);
     setIsEdit(false);
   };
+  
   return (
     <section className="flex max-w-[1200px] mx-auto">
       <article className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
@@ -148,8 +140,8 @@ const NotePage = () => {
           isEdit={isEdit}
           selectedNoteIds={selectedNoteIds}
           onToggleCheck={(id: string) => {
-            setSelectedNoteIds((prev) =>
-              prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+            setSelectedNoteIds((note) =>
+              note.includes(id) ? note.filter((i) => i !== id) : [...note, id]
             );
           }}
         />

@@ -1,6 +1,12 @@
-import { ALL } from '@/constants/ranking/line';
-import { FIFTH_WEEK, FIRST_WEEK, FOURTH_WEEK, SECOND_WEEK, SIXTH_WEEK, THIRD_WEEK } from '@/constants/ranking/weekConstants';
-
+import { ALL } from '@/constants/ranking/Line';
+import {
+  FIFTH_WEEK,
+  FIRST_WEEK,
+  FOURTH_WEEK,
+  SECOND_WEEK,
+  SIXTH_WEEK,
+  THIRD_WEEK
+} from '@/constants/ranking/WeekConstants';
 
 import { ChevronDown } from 'lucide-react';
 

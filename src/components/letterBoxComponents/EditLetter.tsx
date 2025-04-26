@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeleteLetters } from '@/hooks/letterHooks/useDeleteLetters';
+import { useDeleteLetters } from '@/hooks/letterboxHooks/useDeleteLetters';
 import Text from '../common/Text';
 
 interface EditLetterProps {

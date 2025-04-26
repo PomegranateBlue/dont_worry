@@ -30,6 +30,7 @@ const LetterCard = ({
 }: LetterCardProps) => {
   return (
     <main className="flex gap-2 self-stretch">
+      {/* 체크박스 */}
       {isEdit && (
         <label className="flex cursor-pointer">
           <input
@@ -42,14 +43,17 @@ const LetterCard = ({
         </label>
       )}
       <div
-        className={`flex flex-col items-center gap-4 p-5 self-stretch border rounded bg-backgroundSet-normal shadow ${isEdit ? 'max-w-[303px]' : 'w-full'}`}
+        className={`flex flex-col items-center gap-4 p-5 border rounded-[8px] bg-backgroundSet-normal shadow w-full ${
+          isEdit ? 'max-w-[303px] xl:max-w-[600px]' : ''
+        }`}
       >
+        {/* 카드내용 */}
         <nav className="flex items-center gap-2 self-stretch">
           <Text variant="label1" color="label-neutral">
             도착 예정일 {formatDate(letter.send_at)}
           </Text>
         </nav>
-        <Separator className="w-[295px] h-[1px] bg-line-normal" />
+        <Separator className="w-full h-[1px] bg-line-normal" />
         <article className="flex items-center gap-3 self-stretch">
           <div className="min-w-[72px] h-[72px] rounded-[4px] bg-gray-100 flex items-center justify-center">
             {letter.img_url && (

@@ -66,7 +66,7 @@ const MyPage = () => {
   }
 
   return (
-    <main className="px-4 pb-20 xl:px-[350px]">
+    <main className="px-4 pb-20 xl:px-[316px] md:px-[60px]">
       <header>
         <Text
           variant="title1"

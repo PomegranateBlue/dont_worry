@@ -8,7 +8,7 @@ import { SocialLogin } from '@/components/loginComponents/SocialLogin';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'DONT WORRY | 로그인',
+  title: `DONT WORRY | ${LOGIN_TEXT.loginTitle}`,
   description: '로그인 페이지'
 };
 

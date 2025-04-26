@@ -6,7 +6,7 @@ import { LOGIN_TEXT } from '@/constants/login/text';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'DONT WORRY | 회원가입',
+  title: `DONT WORRY | ${LOGIN_TEXT.signupTitle}`,
   description: '회원가입 페이지'
 };
 

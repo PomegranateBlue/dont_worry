@@ -73,7 +73,7 @@ const NoteCard = ({
             )
           );
         })}
-        <div className="flex px-3 py-[6px]  bg-backgroundSet-normal border-line-normal border-[1px]  rounded-[16px] ">
+        <div className="flex gap-[8px] ">
           {topic_category?.map((topicLabel) => {
             const topicData = (TOPIC_CATEGORIES as readonly string[]).includes(
               topicLabel

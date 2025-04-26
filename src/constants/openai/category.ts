@@ -1,21 +1,20 @@
 export const TOPIC_CATEGORIES = [
-  { label: '학업' },
-  { label: '인간관계' },
-  { label: '이별' },
-  { label: '경제' },
-  { label: '진로' },
-  { label: '가정' },
-  { label: '시험' },
-  { label: '연애' },
-  { label: '직장' },
-  { label: '건강' },
-  { label: '취미' },
-  { label: '자기계발' },
-  { label: '이직' },
-  { label: '정체성' },
-  { label: '종교' }
+  '학업',
+  '인간관계',
+  '이별',
+  '경제',
+  '진로',
+  '가정',
+  '시험',
+  '연애',
+  '직장',
+  '건강',
+  '취미',
+  '자기계발',
+  '이직',
+  '정체성',
+  '종교'
 ] as const;
-
 //카테고리 내에서만 고르도록
 
 export const EMOTION_CATEGORIES = [

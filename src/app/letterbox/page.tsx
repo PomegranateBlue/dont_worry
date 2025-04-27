@@ -6,10 +6,12 @@ import FilterLetter from '@/components/letterBoxComponents/FilterLetter';
 import LetterCard from '@/components/letterBoxComponents/LetterCard';
 import NoLetter from '@/components/letterBoxComponents/NoLetter';
 import { useUserLetters } from '@/hooks/letterboxHooks/useUserLetters';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { formatDate } from '../utils/letterbox/dateUtils';
+import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
+import LoadingLetters from '@/components/letterBoxComponents/LoadingLetters';
 
 const LetterBoxPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
@@ -46,15 +48,12 @@ const LetterBoxPage = () => {
     }
   };
 
-  const formatDate = (date?: string | null) => {
-    if (!date) return '날짜 없음';
-    return new Date(date).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
+  //에러처리
+  if (isError) {
+    throw new LetterError(LETTER_ERROR_KEYS.CANT_SELECT_LETTER);
+  }
 
+  //작성한 편지가 없을 경우 보여주는 컴포넌트
   if (letters.length === 0) {
     return <NoLetter />;
   }
@@ -108,9 +107,7 @@ const LetterBoxPage = () => {
 
       {/* 편지 리스트 */}
       {isLoading ? (
-        <div className="mt-5">로딩중...</div>
-      ) : isError ? (
-        <div className="mt-5">편지 데이터 로딩 실패</div>
+        <LoadingLetters />
       ) : (
         <section className="flex w-full max-w-[375px] xl:max-w-[648px] px-5 xl:px-4 pb-5 flex-col items-start gap-5 mt-5">
           {letters.map((letter) => (

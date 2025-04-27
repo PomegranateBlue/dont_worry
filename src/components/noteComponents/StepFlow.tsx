@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import EmotionCategoryForm from './EmotionCategoryForm';
 import TopicCategoryForm from './TopicCategoryForm';
@@ -41,6 +41,10 @@ const StepFlow = () => {
   const { mutateAsync: submitGPT, isPending } = useGPTSubmit();
   const { mutateAsync: saveNote } = useNoteSave();
   const { user } = useUserStore();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
 
   const handleCategorySelect = (topic: string) => {
     toggleTopic(topic);

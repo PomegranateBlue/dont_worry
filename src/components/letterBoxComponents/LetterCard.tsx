@@ -4,6 +4,7 @@ import { Separator } from '@radix-ui/react-separator';
 import Image from 'next/image';
 import React from 'react';
 import Text from '../common/Text';
+import { formatDate } from '@/app/utils/letterbox/dateUtils';
 
 // 타입 정의
 interface Letter {
@@ -18,15 +19,13 @@ interface LetterCardProps {
   isEdit: boolean;
   isSelected: boolean;
   onCheckboxChange: () => void;
-  formatDate: (date?: string | null) => string;
 }
 
 const LetterCard = ({
   letter,
   isEdit,
   isSelected,
-  onCheckboxChange,
-  formatDate
+  onCheckboxChange
 }: LetterCardProps) => {
   return (
     <main className="flex gap-2 self-stretch">

@@ -8,8 +8,7 @@ import NoLetter from '@/components/letterBoxComponents/NoLetter';
 import { useUserLetters } from '@/hooks/letterboxHooks/useUserLetters';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { formatDate } from '../utils/letterbox/dateUtils';
+import React, { useMemo, useState } from 'react';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
 import LoadingLetters from '@/components/letterBoxComponents/LoadingLetters';
 
@@ -24,14 +23,19 @@ const LetterBoxPage = () => {
     isError
   } = useUserLetters(selectedFilter);
 
-  const isAllSelected = Boolean(
-    letters?.length &&
+  // 전체 편지가 선택되었는지 여부를 계산
+  const isAllSelected = useMemo<boolean>(() => {
+    if (!letters?.length) return false;
+
+    return (
       selectedLetterIds.length === letters.length &&
       selectedLetterIds.every((id) =>
         letters.some((letter) => letter.letter_id === id)
       )
-  );
+    );
+  }, [letters, selectedLetterIds]);
 
+  // 단일 편지 선택/해제 핸들러
   const handleCheckboxChange = (id: string) => {
     const updatedLetterIds = selectedLetterIds.includes(id)
       ? selectedLetterIds.filter((item) => item !== id)
@@ -40,6 +44,7 @@ const LetterBoxPage = () => {
     setSelectedLetterIds(updatedLetterIds);
   };
 
+  // 전체 선택/해제 핸들러
   const handleSelectAllLetter = () => {
     if (isAllSelected) {
       setSelectedLetterIds([]);
@@ -117,7 +122,6 @@ const LetterBoxPage = () => {
               isEdit={isEdit}
               isSelected={selectedLetterIds.includes(letter.letter_id)}
               onCheckboxChange={() => handleCheckboxChange(letter.letter_id)}
-              formatDate={formatDate}
             />
           ))}
         </section>

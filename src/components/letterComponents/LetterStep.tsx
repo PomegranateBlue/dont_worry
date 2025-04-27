@@ -4,6 +4,7 @@ import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import { ChevronLeft, ImagePlus } from 'lucide-react';
+import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
 
 type LetterStepProps = {
   sendAt: string;
@@ -69,7 +70,7 @@ const LetterStep = ({
         imageUrl = getImageUrl(encodedPath);
       } catch (error) {
         console.error('이미지 업로드 실패:', error);
-        setMessage('이미지 업로드에 실패했습니다.');
+        throw new LetterError(LETTER_ERROR_KEYS.IMAGE_INSERT_FAILED);
         return;
       }
     }
@@ -89,7 +90,7 @@ const LetterStep = ({
 
     if (error) {
       console.error('편지 저장 실패', error);
-      setMessage('저장에 실패했습니다.');
+      throw new LetterError(LETTER_ERROR_KEYS.LETTER_INSERT_FAILED);
       return;
     }
 

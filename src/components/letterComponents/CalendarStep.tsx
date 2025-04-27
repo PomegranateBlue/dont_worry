@@ -16,16 +16,8 @@ const CalendarStep = ({
   onNext,
   isDesktop
 }: CalendarStepProps) => {
-  //날짜 데이터를 -월 -일 형식의 텍스트로 변환
-  // const formatDateText = (dateStr: string) => {
-  //   const date = new Date(dateStr);
-  //   if (isNaN(date.getTime())) return null; //날짜 유효성 검사
-  //   const month = date.getMonth() + 1;
-  //   const day = date.getDate();
-  //   return `${month}월 ${day}일`;
-  // };
-
   const selectedDate = sendAt ? new Date(sendAt) : undefined;
+
   return (
     <section>
       <nav className="flex h-[56px] px-4 justify-center items-center gap-5 xl:h-[80px] xl:px-10 self-stretch">

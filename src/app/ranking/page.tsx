@@ -8,7 +8,6 @@ import EmotionChart from '@/components/ranking/EmotionsChart';
 import { fetchMonthlyNotes, fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
 
-import { NO_DATA_CHART } from '@/constants/ranking/line';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
@@ -23,6 +22,7 @@ import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
+import NoData from '@/components/ranking/NoData';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();
@@ -135,7 +135,7 @@ const RankingPage = () => {
 
   const currentData = chartMode === 'topic' ? topTopics : topEmotions;
   if (currentData.length === 0) {
-    return <div className="p-4">{NO_DATA_CHART}</div>;
+    return <NoData />;
   }
 
   return (

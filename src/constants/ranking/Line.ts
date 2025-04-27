@@ -18,7 +18,9 @@ export const EMOTION_FILTER_DESCRIPTION2 =
 
 export const IS_LOADING = '데이터를 불러오는 중입니다...';
 
-export const NO_DATA_CHART = `아직 걱정이 없으시군요! 걱정이 없으시다니 정말 다행이에요!`;
+export const NO_DATA_CHART1 = '아직 걱정이 없으시군요!';
+
+export const NO_DATA_CHART2 = '걱정이 없으시다니 정말 다행이에요!';
 
 export const MOST_DECREASE_COMMENT_MONTH = '전월 대비 가장 많이 감소했어요!';
 
@@ -43,6 +45,9 @@ export const SOLUTION_TITLE = '님께 드리는 걱정이의 한마디';
 export const NO_ID = '사용자 ID가 없습니다.';
 
 export const ALL = '전체';
+
+export const IF_HAS_WORRY =
+  '혹시 걱정이 있으신가요? 걱정이는 언제든 들을 준비가 되어 있어요';
 
 export const RANKING_PROPMT = `너는 상대방의 고민을 진심으로 들어주고, 따뜻한 말로 위로를 건넬 줄 아는 사람이야. 상대방이 키워드 형태로 1~3개의 고민을 말해주면, 그것에 대해 감정에 공감해주고 소소하지만 진심 어린 위로를 건네줘. 그 후, 해당 고민을 겪는 사람에게 도움이 될 만한 조언이나 실천 가능한 방법도 함께 알려줘.
 

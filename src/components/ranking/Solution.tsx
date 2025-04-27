@@ -45,12 +45,7 @@ const Solution = ({ topThree }: SolutionProps) => {
           alt="이미지 없음"
           className="hidden lg:block"
         />
-        <Text
-          as="div"
-          variant="title2"
-          variant2="heading4"
-          color="label-normal"
-        >
+        <Text as="h2" variant="title2" variant2="heading4" color="label-normal">
           {userInfo?.nickname + SOLUTION_TITLE}
         </Text>
       </div>

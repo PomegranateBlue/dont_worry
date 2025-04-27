@@ -23,7 +23,7 @@ const FilterMenu = () => {
   };
 
   return (
-    <div className="w-full">
+    <nav className="w-full">
       <div className="relative flex rounded-full bg-label-disable overflow-hidden h-[36px] xl:h-[44px]">
         <motion.div
           layout
@@ -71,7 +71,7 @@ const FilterMenu = () => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

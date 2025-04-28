@@ -2,10 +2,12 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Text from '../common/Text';
+import { useRankingStore } from '@/store/ranking/rankingStore';
 
 export interface TopSix {
   name: string;
   count: number;
+  type: 'topic' | 'emotion';
 }
 
 export interface TopSixProps {
@@ -13,11 +15,12 @@ export interface TopSixProps {
 }
 
 const TopSixCard = ({ topSix }: TopSixProps) => {
+  const { chartMode } = useRankingStore();
   return (
     <Link
       href={{
         pathname: '/notebox',
-        query: { category: topSix.name }
+        query: { category: topSix.name, categoryType: chartMode }
       }}
       className="flex bg-backgroundSet-normal h-[56px] p-[16px] items-center gap-[10px] self-stretch rounded-lg shadow-customCard"
     >

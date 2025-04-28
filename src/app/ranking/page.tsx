@@ -1,9 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  Suspense
+} from 'react';
 import { makeTopTen } from '../utils/ranking/RankingFilter';
 import TopicChart from '@/components/ranking/TopicChart';
 import EmotionChart from '@/components/ranking/EmotionsChart';
+import dynamic from 'next/dynamic';
 
 import { fetchMonthlyNotes, fetchUserNotes } from '../utils/ranking/DataFetch';
 import { Most } from '@/types/ranking/types';
@@ -12,129 +19,130 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 import { useUserStore } from '@/store/auth/store';
 import { useMRankingStore } from '@/store/ranking/useMRankingStore';
 import TopSixCard from '@/components/ranking/TopSixCard';
-import MWreportCard from '@/components/ranking/FusionComp/MWreportCard';
 import FilterMenu from '@/components/ranking/FilterMenu';
 
 import Report from '@/components/ranking/Report';
-import Solution from '@/components/ranking/Solution';
+
+// preload 옵션 추가하여 로딩 최적화
+const Solution = dynamic(() => import('@/components/ranking/Solution'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[300px] bg-gray-100 animate-pulse rounded-md" />
+  )
+});
+
+// preload 옵션 추가하여 로딩 최적화
+const MWreportCard = dynamic(
+  () => import('@/components/ranking/FusionComp/MWreportCard'),
+  {
+    loading: () => (
+      <div className="w-full h-[200px] bg-gray-100 animate-pulse rounded-md" />
+    )
+  }
+);
 
 import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
-import NoData from '@/components/ranking/NoData';
 import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+import NoData from '@/components/ranking/NoData';
+
+const EMPTY_ARRAY: { name: string; count: number }[] = [];
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();
   const { year: Myear, month: Mmonth } = useMRankingStore();
   const { user, hydrated } = useUserStore();
 
-  const [topTopics, setTopTopics] = useState<{ name: string; count: number }[]>(
-    []
-  );
-  const [topEmotions, setTopEmotions] = useState<
-    { name: string; count: number }[]
-  >([]);
+  const [topTopics, setTopTopics] =
+    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
+  const [topEmotions, setTopEmotions] =
+    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
 
   const [most, setMost] = useState<Most | null>(null);
-  const [topSixTopic, setTopSixTopic] = useState<
-    { name: string; count: number }[]
-  >([]);
+  const [topSixTopic, setTopSixTopic] =
+    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
 
-  const [topSixEmotion, setTopSixEmotion] = useState<
-    { name: string; count: number }[]
-  >([]);
+  const [topSixEmotion, setTopSixEmotion] =
+    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
 
-  useEffect(() => {
+  // fetchData 함수를 useCallback으로 메모이제이션
+  const fetchData = useCallback(async () => {
     if (!hydrated) return;
 
-    if (mode === WEEK_MODE) {
-      const fetchData = async () => {
-        try {
-          const userNotes = await fetchUserNotes(year, month, week, user);
+    try {
+      let userNotes;
 
-          if (userNotes.length > 0) {
-            const result = makeTopTen(userNotes);
+      if (mode === WEEK_MODE) {
+        userNotes = await fetchUserNotes(year, month, week, user);
+      } else {
+        userNotes = await fetchMonthlyNotes(Myear, Mmonth, user);
+      }
 
-            setTopTopics(result.topTopics);
-            setTopSixTopic(result.topTopics.slice(0, 6));
+      if (userNotes.length > 0) {
+        const result = makeTopTen(userNotes);
 
-            setTopEmotions(result.topEmotions);
-            setTopSixEmotion(result.topEmotions.slice(0, 6));
-          } else {
-            setTopTopics([]);
-            setTopSixTopic([]);
-            setTopEmotions([]);
-            setTopSixEmotion([]);
-          }
-        } catch (err) {
-          console.error(DATA_FETHCING_ERROR, err);
-          throw new RankingError('CANT_SELECT_USER_WORRIES');
-        }
-      };
-
-      fetchData();
-    } else {
-      const fetchMonthData = async () => {
-        try {
-          const userNotes = await fetchMonthlyNotes(Myear, Mmonth, user);
-
-          if (userNotes.length > 0) {
-            const result = makeTopTen(userNotes);
-
-            setTopTopics(result.topTopics);
-            setTopSixTopic(result.topTopics.slice(0, 6));
-            setTopEmotions(result.topEmotions);
-            setTopSixEmotion(result.topEmotions.slice(0, 6));
-          } else {
-            setTopTopics([]);
-            setTopSixTopic([]);
-            setTopEmotions([]);
-            setTopSixEmotion([]);
-          }
-        } catch (err) {
-          console.error(DATA_FETHCING_ERROR, err);
-          throw new RankingError('CANT_SELECT_USER_WORRIES');
-        }
-      };
-
-      fetchMonthData();
+        setTopTopics(result.topTopics);
+        setTopSixTopic(result.topTopics.slice(0, 6));
+        setTopEmotions(result.topEmotions);
+        setTopSixEmotion(result.topEmotions.slice(0, 6));
+      } else {
+        setTopTopics(EMPTY_ARRAY);
+        setTopSixTopic(EMPTY_ARRAY);
+        setTopEmotions(EMPTY_ARRAY);
+        setTopSixEmotion(EMPTY_ARRAY);
+      }
+    } catch (err) {
+      console.error(DATA_FETHCING_ERROR, err);
+      throw new RankingError('CANT_SELECT_USER_WORRIES');
     }
+  }, [year, month, week, Myear, Mmonth, user, mode, hydrated]);
 
+  useEffect(() => {
+    fetchData();
     return () => {
       setMost(null);
     };
-  }, [year, month, week, mode, Mmonth, Myear, hydrated, chartMode]);
+  }, [fetchData]);
 
-  useEffect(() => {
+  // useMemo로 most 계산 - 불필요한 useEffect 제거
+  const calculatedMost = useMemo(() => {
     const currentData = chartMode === 'topic' ? topTopics : topEmotions;
 
-    if (currentData.length === 0) return;
+    if (currentData.length === 0) return null;
 
-    const calculatePercentage = () => {
-      const sortedArr = [...currentData].sort((a, b) => b.count - a.count);
-      const totalMentions = sortedArr.reduce(
-        (total, item) => total + item.count,
-        0
-      );
-      const itemsWithPercentage = sortedArr.map((item) => ({
-        name: item.name,
-        count: item.count,
-        percentage: ((item.count / totalMentions) * 100).toFixed(2)
-      }));
+    const sortedArr = [...currentData].sort((a, b) => b.count - a.count);
+    const totalMentions = sortedArr.reduce(
+      (total, item) => total + item.count,
+      0
+    );
+    const itemsWithPercentage = sortedArr.map((item) => ({
+      name: item.name,
+      count: item.count,
+      percentage: ((item.count / totalMentions) * 100).toFixed(2)
+    }));
 
-      if (itemsWithPercentage.length > 0) {
-        setMost(itemsWithPercentage[0]);
-      } else {
-        setMost(null);
-      }
-    };
-
-    calculatePercentage();
+    return itemsWithPercentage.length > 0 ? itemsWithPercentage[0] : null;
   }, [topTopics, topEmotions, chartMode]);
 
-  const currentData = chartMode === 'topic' ? topTopics : topEmotions;
+  // most 값이 변경될 때만 setMost 호출
+  useEffect(() => {
+    setMost(calculatedMost);
+  }, [calculatedMost]);
+
+  // 메모이제이션된 현재 데이터
+  const currentData = useMemo(
+    () => (chartMode === 'topic' ? topTopics : topEmotions),
+    [chartMode, topTopics, topEmotions]
+  );
+
+  // 메모이제이션된 현재 topSix 데이터
+  const currentTopSix = useMemo(
+    () => (chartMode === 'topic' ? topSixTopic : topSixEmotion),
+    [chartMode, topSixTopic, topSixEmotion]
+  );
+
   if (currentData.length === 0) {
     return (
       <div className="flex w-full max-w-[1280px] flex-col">
@@ -160,40 +168,36 @@ const RankingPage = () => {
         <div className="flex flex-col items-center gap-[20px] px-5 py-10 self-stretch xl:w-full xl:gap-[40px] xl:p-0 xl:max-w-[580px] md:px-0">
           <FilterMenu />
 
-          {chartMode === 'topic' ? (
-            <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
-              {topSixTopic.map((e) => (
-                <div key={e.name}>
-                  <TopSixCard topSix={e} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
-              {topSixEmotion.map((e) => (
-                <div key={e.name}>
-                  <TopSixCard topSix={e} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
+            {currentTopSix.map((e) => (
+              <div key={e.name}>
+                <TopSixCard topSix={e} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       {/*레이아웃 상위*/}
       {/*데스크탑 레이아웃 하위*/}
       <div className="xl:flex xl:flex-row xl:pb-[40px] xl:justify-center xl:items-center xl:gap-[40px] xl:w-full xl:bg-backgroundSet-card">
         <div className="p-4 xl:p-0 w-full md:px-0">
-          <MWreportCard />
+          <Suspense
+            fallback={
+              <div className="w-full h-[200px] bg-gray-100 animate-pulse rounded-md" />
+            }
+          >
+            <MWreportCard />
+          </Suspense>
         </div>
-        {chartMode === 'topic' ? (
-          <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
-            <Solution topSix={topSixTopic} />
-          </div>
-        ) : (
-          <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
-            <Solution topSix={topSixEmotion} />
-          </div>
-        )}
+        <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
+          <Suspense
+            fallback={
+              <div className="w-full h-[300px] bg-gray-100 animate-pulse rounded-md" />
+            }
+          >
+            <Solution topSix={currentTopSix} />
+          </Suspense>
+        </div>
       </div>
       {/*데스크탑 레이아웃 하위.*/}
     </div>

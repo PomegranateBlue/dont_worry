@@ -23,7 +23,6 @@ import FilterMenu from '@/components/ranking/FilterMenu';
 
 import Report from '@/components/ranking/Report';
 
-// preload 옵션 추가하여 로딩 최적화
 const Solution = dynamic(() => import('@/components/ranking/Solution'), {
   ssr: false,
   loading: () => (
@@ -31,7 +30,6 @@ const Solution = dynamic(() => import('@/components/ranking/Solution'), {
   )
 });
 
-// preload 옵션 추가하여 로딩 최적화
 const MWreportCard = dynamic(
   () => import('@/components/ranking/FusionComp/MWreportCard'),
   {

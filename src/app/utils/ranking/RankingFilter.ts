@@ -1,46 +1,17 @@
-import {
-  CategoryCounts,
-  KeywordAnalysis,
-  RankingItem,
-  TopTenRanking,
-  UserNote
-} from '@/types/ranking/types';
+// 두 번째 파일 (랭킹 관련 파일)
 
-export const countMentionedKeyword = (
-  //각 키워드별 언급된 횟수를 카운트하는 함수
-  userCategory: UserNote[]
-): KeywordAnalysis => {
-  const topicCounts: CategoryCounts = {};
-  const emotionCounts: CategoryCounts = {};
+import { RankingItem, TopTenRanking, UserNote } from '@/types/ranking/types';
+import { getKeywordAnalysis } from './categoryCounter';
 
-  userCategory.forEach((note) => {
-    if (note.topic_category) {
-      const topics = note.topic_category.split(/\s*,\s*/);
-      topics.forEach((topic) => {
-        topicCounts[topic] = (topicCounts[topic] || 0) + 1;
-      });
-    }
-
-    if (note.emotion_category) {
-      const emotions = note.emotion_category.split(/\s*,\s*/);
-      emotions.forEach((emotion) => {
-        emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
-      });
-    }
-  });
-
-  return {
-    topics: topicCounts,
-    emotions: emotionCounts
-  };
-};
+// countMentionedKeyword 함수는 getKeywordAnalysis로 대체
 
 export const makeTopTen = (userCategory: UserNote[]): TopTenRanking => {
-  const { topics, emotions } = countMentionedKeyword(userCategory);
+  const { topics, emotions } = getKeywordAnalysis(userCategory);
 
+  //언급된 키워드들 중 가장 상위의 n개의 항목을 정렬
   const topTopics: RankingItem[] = Object.entries(topics)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 6) //차트에 노출 시킬 데이터 수를 줄일거면 여기 참조
+    .slice(0, 6)
     .map(([name, count]) => ({ name, count }));
 
   const topEmotions: RankingItem[] = Object.entries(emotions)

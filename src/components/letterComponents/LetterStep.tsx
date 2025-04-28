@@ -1,10 +1,10 @@
-import { getImageUrl, uploadImage } from '@/app/utils/letter/imageAction';
 import Text from '../common/Text';
-import browserClient from '@/app/utils/supabase/client';
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import { ChevronLeft, ImagePlus } from 'lucide-react';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
+import { saveLetter } from '@/app/utils/supabase/db';
+import { useImageUpload } from '@/hooks/letterHooks/useImageUpload';
 
 type LetterStepProps = {
   sendAt: string;
@@ -16,7 +16,6 @@ type LetterStepProps = {
   imagePreview: string | null;
   setImagePreview: (url: string | null) => void;
   onBack: () => void;
-  setMessage: (msg: string) => void;
   userId: string | null;
   setStep: (step: 'calendar' | 'letter' | 'check') => void;
   isDesktop: boolean;
@@ -27,80 +26,51 @@ const LetterStep = ({
   setSendAt,
   content,
   setContent,
-  imageFile,
   setImageFile,
-  imagePreview,
   setImagePreview,
   onBack,
-  setMessage,
   userId,
   setStep,
   isDesktop
 }: LetterStepProps) => {
+  const { imageFile, imagePreview, handleImageChange, uploadImageAndGetUrl } =
+    useImageUpload(userId);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setImageFile(file);
-    const previewUrl = URL.createObjectURL(file);
-    setImagePreview(previewUrl);
-  };
-
+  // 편지 제출
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!userId) {
-      setMessage('로그인 후 이용해주세요.');
-      return;
-    }
-
     let imageUrl = '';
-
     if (imageFile) {
-      const rawFileName = `${userId}_${Date.now()}.png`;
-      const encodedPath = `letters/${rawFileName}`;
-      const formData = new FormData();
-      formData.append('file', imageFile);
-      formData.append('path', encodedPath);
-
       try {
-        await uploadImage(formData);
-        imageUrl = getImageUrl(encodedPath);
+        imageUrl = await uploadImageAndGetUrl(imageFile);
       } catch (error) {
         console.error('이미지 업로드 실패:', error);
         throw new LetterError(LETTER_ERROR_KEYS.IMAGE_INSERT_FAILED);
-        return;
       }
     }
 
-    const { error } = await browserClient
-      .from('letter')
-      .insert([
-        {
-          user_id: userId,
-          content,
-          send_at: sendAt,
-          img_url: imageUrl,
-          isSent: false
-        }
-      ])
-      .select();
+    try {
+      // 편지 저장
+      await saveLetter(userId, content, sendAt, imageUrl);
 
-    if (error) {
-      console.error('편지 저장 실패', error);
+      // 성공 후 상태 초기화
+      setStep('check');
+      setContent('');
+      setSendAt('');
+      setImageFile(null);
+      setImagePreview(null);
+    } catch (error) {
+      console.error('편지 저장 실패:', error);
       throw new LetterError(LETTER_ERROR_KEYS.LETTER_INSERT_FAILED);
-      return;
     }
-
-    setStep('check');
-    setContent('');
-    setSendAt('');
-    setImageFile(null);
-    setImagePreview(null);
   };
-  const triggerFileInput = () => {
+
+  // 이미지 선택용 트리거
+  const triggerFileInput = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
     inputRef.current?.click();
   };
 
@@ -140,13 +110,13 @@ const LetterStep = ({
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              maxLength={150}
+              maxLength={300}
               placeholder="편지를 작성해주세요"
               required
               className="w-full h-full resize-none text-base text-stone-900 placeholder-stone-300 font-medium focus:outline-none font-['Pretendard']"
             />
             <div className="text-right text-xs text-stone-300">
-              {content.length}/150
+              {content.length}/300
             </div>
           </div>
         </div>

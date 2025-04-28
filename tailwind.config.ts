@@ -39,6 +39,20 @@ const config: Config = {
         customCard:
           '0px 0px 2px 0px var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)), 0px 4px 8px 0px var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08))'
       },
+      backgroundImage: {
+        'transparent-check': `
+        linear-gradient(45deg, #e5e5e5 25%, transparent 25%),
+        linear-gradient(-45deg, #e5e5e5 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e5e5e5 75%),
+        linear-gradient(-45deg, transparent 75%, #e5e5e5 75%)
+      `
+      },
+      backgroundSize: {
+        'check-small': '24px 24px'
+      },
+      backgroundPosition: {
+        'check-position': '0 0, 0 12px, 12px -12px, -12px 0px'
+      },
       colors: {
         // primaryPurple: '#8573C9',
         //이거 일단은 주석처리했습니다

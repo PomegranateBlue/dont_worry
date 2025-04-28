@@ -1,5 +1,5 @@
 import { AIError } from '@/constants/error/aiErrorKeys';
-import { RANKING_PROPMT } from '@/constants/ranking/line';
+import { RANKING_PROPMT } from '@/constants/ranking/Line';
 
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';

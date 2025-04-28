@@ -17,7 +17,7 @@ import FilterMenu from '@/components/ranking/FilterMenu';
 
 import Report from '@/components/ranking/Report';
 import Solution from '@/components/ranking/Solution';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+
 import {
   DATA_FETHCING_ERROR,
   RankingError

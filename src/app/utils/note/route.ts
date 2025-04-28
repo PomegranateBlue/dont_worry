@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { TablesInsert } from '../../../../database.types';
 import { NoteError } from '@/constants/error/noteError';
-
+import { SupabaseError } from '@/constants/error/supabaseErrorKeys';
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -11,10 +11,10 @@ const supabase = createClient(
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { message, result, topic, emotions, userId } = body;
+    const { message, result, topics, emotions, userId } = body;
 
     if (!userId) {
-      return NextResponse.json({ error: '로그인 정보 없음' }, { status: 401 });
+      throw new SupabaseError('SUPABASE_AUTH_FAILED');
     }
 
     if (!message) {
@@ -26,7 +26,7 @@ export const POST = async (req: Request) => {
         Question: message,
         Answer: result.content
       }),
-      topic_category: topic,
+      topic_category: topics.join(','),
       emotion_category: emotions.join(','),
       created_at: new Date().toISOString(),
       note_img: null,

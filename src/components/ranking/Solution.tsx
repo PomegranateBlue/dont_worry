@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Text from '../common/Text';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUserStore } from '@/store/auth/store';
-import { SOLUTION_TITLE } from '@/constants/ranking/Line';
+
 import { useSolutionGenerator } from '@/hooks/ranking/useSolutionGenerator';
+import { SOLUTION_TITLE } from '@/constants/ranking/line';
 
 export type TopSixItem = {
   name: string;

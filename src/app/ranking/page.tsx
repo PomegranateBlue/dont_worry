@@ -23,6 +23,7 @@ import {
   RankingError
 } from '@/constants/error/rankingError';
 import NoData from '@/components/ranking/NoData';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 
 const RankingPage = () => {
   const { year, month, week, mode, chartMode } = useRankingStore();

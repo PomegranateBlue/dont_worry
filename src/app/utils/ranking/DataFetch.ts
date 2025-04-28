@@ -1,4 +1,3 @@
-import { NO_ID } from '@/constants/ranking/Line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
 import {
@@ -184,7 +183,7 @@ export const analyzeWeeklyCategoryTrends = async (
 ) => {
   try {
     if (!id) {
-      throw new Error(NO_ID);
+      throw new RankingError('NO_USER_INFO');
     }
 
     // 이전 주 계산

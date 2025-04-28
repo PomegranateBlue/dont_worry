@@ -32,6 +32,36 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
   }
 };
 
+// 사용자가 작성한 미래 편지 저장하기
+export const saveLetter = async (
+  userId: string | null,
+  content: string,
+  sendAt: string,
+  imgUrl: string = ''
+) => {
+  if (!userId) return null;
+
+  const { data, error } = await browserClient
+    .from('letter')
+    .insert([
+      {
+        user_id: userId,
+        content,
+        send_at: sendAt,
+        img_url: imgUrl,
+        isSent: false
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error('편지 저장 실패:', error);
+    throw new Error('편지를 저장하는 중 문제가 발생했습니다.');
+  }
+
+  return data;
+};
+
 // 사용자의 미래 편지 목록 가져오기
 export const fetchUserLetters = async (
   userId: string | null | undefined,

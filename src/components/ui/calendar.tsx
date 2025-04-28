@@ -18,7 +18,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn('p-3', className)}
+      className={cn('p-5 xl:p-6', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-2 w-full',
@@ -35,7 +35,7 @@ function Calendar({
         head_row: 'flex w-full justify-between',
         head_cell:
           'w-8 h-8 flex items-center justify-center text-muted-foreground text-sm font-normal',
-        row: 'flex w-full justify-between mt-2',
+        row: 'flex w-full justify-between mt-1 xl:mt-2',
         cell: cn(
           'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md',
           props.mode === 'range'

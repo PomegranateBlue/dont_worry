@@ -7,7 +7,7 @@ import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
 import { PATHS } from '@/constants/common/paths';
 import { MypageError } from '@/constants/error/mypageError';
-import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+import { useUserLetters } from '@/hooks/letterboxHooks/useUserLetters';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';

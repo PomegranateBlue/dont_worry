@@ -163,7 +163,7 @@ const RankingPage = () => {
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixTopic.map((e) => (
                 <div key={e.name}>
-                  <TopSixCard topThree={e} />
+                  <TopSixCard topSix={e} />
                 </div>
               ))}
             </div>
@@ -171,7 +171,7 @@ const RankingPage = () => {
             <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
               {topSixEmotion.map((e) => (
                 <div key={e.name}>
-                  <TopSixCard topThree={e} />
+                  <TopSixCard topSix={e} />
                 </div>
               ))}
             </div>
@@ -186,11 +186,11 @@ const RankingPage = () => {
         </div>
         {chartMode === 'topic' ? (
           <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
-            <Solution topThree={topSixTopic} />
+            <Solution topSix={topSixTopic} />
           </div>
         ) : (
           <div className="xl:flex xl:w-full p-4 xl:p-0 xl:max-w-[580px] md:px-0">
-            <Solution topThree={topSixEmotion} />
+            <Solution topSix={topSixEmotion} />
           </div>
         )}
       </div>

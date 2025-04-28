@@ -8,25 +8,25 @@ import { useUserStore } from '@/store/auth/store';
 import { SOLUTION_TITLE } from '@/constants/ranking/line';
 import { useSolutionGenerator } from '@/hooks/ranking/useSolutionGenerator';
 
-export type TopThreeItem = {
+export type TopSixItem = {
   name: string;
   count: number;
 };
 
 type SolutionProps = {
-  topThree: TopThreeItem[];
+  topSix: TopSixItem[];
 };
 
-const Solution = ({ topThree }: SolutionProps) => {
+const Solution = ({ topSix }: SolutionProps) => {
   const { user } = useUserStore();
   const { data: userInfo } = useUserInfo();
   const { solution, generateSolution, isLoading } = useSolutionGenerator();
 
   useEffect(() => {
-    if (topThree.length > 0 && user) {
-      generateSolution(topThree, user);
+    if (topSix.length > 0 && user) {
+      generateSolution(topSix, user);
     }
-  }, [topThree, user, generateSolution]);
+  }, [topSix, user, generateSolution]);
 
   return (
     <div className="flex flex-col gap-4 p-5 w-full xl:gap-6 xl:p-10 rounded-[20px] shadow-customCard bg-backgroundSet-normal xl:h-[407px] xl:max-w-[580px]">

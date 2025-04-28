@@ -4,15 +4,16 @@ import {
   ABOUT,
   MOST_INCREASE_COMMENT_MONTH,
   MOST_INCREASE_COMMENT_WEEK
-} from '@/constants/ranking/Line';
+} from '@/constants/ranking/line';
 
 import { useRankingStore } from '@/store/ranking/rankingStore';
 import { WorsenedThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 import Text from '../common/Text';
-import { WEEK_MODE } from '@/constants/ranking/WeekConstants';
+
 import { NO_DATA } from '@/constants/error/rankingError';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 
 const WorsenedThing = ({ monthData, weekData }: WorsenedThingProps) => {
   const { mode } = useRankingStore();

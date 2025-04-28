@@ -135,11 +135,15 @@ const RankingPage = () => {
 
   const currentData = chartMode === 'topic' ? topTopics : topEmotions;
   if (currentData.length === 0) {
-    return <NoData />;
+    return (
+      <div className="flex w-full max-w-[1280px] flex-col">
+        <NoData />
+      </div>
+    );
   }
 
   return (
-    <div className="bg-backgroundSet-card md:px-[60px]">
+    <div className="bg-backgroundSet-card md:px-[60px] xl:px-10">
       {/*레이아웃 상위*/}
       <div className="xl:flex xl:flex-row xl:bg-backgroundSet-card xl:px-[40px] xl:py-[40px] xl:gap-[40px] xl:items-center xl:justify-center">
         <div className="p-5 xl:p-0 md:p-0">
@@ -176,7 +180,7 @@ const RankingPage = () => {
       </div>
       {/*레이아웃 상위*/}
       {/*데스크탑 레이아웃 하위*/}
-      <div className="xl:flex xl:flex-row xl:px-10 xl:pb-[40px] xl:justify-center xl:items-center xl:gap-[40px] xl:w-full xl:bg-backgroundSet-card">
+      <div className="xl:flex xl:flex-row xl:pb-[40px] xl:justify-center xl:items-center xl:gap-[40px] xl:w-full xl:bg-backgroundSet-card">
         <div className="p-4 xl:p-0 w-full md:px-0">
           <MWreportCard />
         </div>

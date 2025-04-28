@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Text from '@/components/common/Text';
 import StartButton from '@/components/introComponents/StartButton';
 import StartButtonBottom from '@/components/introComponents/StartButtonBottom';
-
 import Carousel from '@/components/introComponents/Carousel';
+
 const HomePage = () => {
   return (
     <main className="min-h-screen">
@@ -32,7 +32,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-[88px] w-full left-1/2 -translate-x-1/2 z-10 ">
+        <div className="absolute bottom-[88px] w-full left-1/2 -translate-x-1/2 z-10 md:bottom-[65px] xl:bottom-[55px] ">
           <Carousel />
         </div>
 
@@ -184,8 +184,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
-        <div className="flex flex-col justify-center items-center gap-[24px] xl:items-start xl:text-left ">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] gap-[40px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <div className="flex flex-col justify-center items-center  gap-[24px] xl:items-start xl:text-left ">
           <div className="flex flex-col justify-center items-center gap-[12px] xl:items-start">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
               <Text
@@ -202,25 +202,25 @@ const HomePage = () => {
                 <br className="xl:hidden" /> 파악하는 기록
               </Text>
             </div>
-            <div className="flex">
-              <div className="flex xl:text-left">
-                <Text variant="body2" variant2="body1" color="label-neutral">
-                  지금까지 작성한 걱정 기록을 기반으로
-                  <br className="xl:hidden" />
-                  나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
-                </Text>
-              </div>
+          </div>
+          <div className="flex">
+            <div className="flex xl:text-left">
+              <Text variant="body2" variant2="body1" color="label-neutral">
+                지금까지 작성한 걱정 기록을 기반으로
+                <br className="xl:hidden" />
+                나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
+              </Text>
             </div>
           </div>
         </div>
 
         <div className="flex">
           <Image
-            src={'images/graph.svg'}
+            src={'/images/graph.svg'}
             width={0}
             height={0}
             alt="graph"
-            className="min-w-[236px] min-h-[236px] xl:min-w-[353px] xl:min-h-[353px]"
+            className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
       </section>

@@ -28,7 +28,7 @@ export const useNoteStore = create<NoteProps>((set) => ({
 
       if (isSelected) {
         return {
-          selectedTopics: state.selectedTopics.filter((t) => t !== topic)
+          selectedTopics: state.selectedTopics.filter((e) => e !== topic)
         };
       }
 

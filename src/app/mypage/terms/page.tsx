@@ -8,19 +8,15 @@ const TermsPage = () => {
   const { mainTerms } = termsOfServiceData;
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* 상단 바 */}
-      <div className="relative flex items-center justify-center h-16 border-b">
-        {/* 왼쪽 아이콘 */}
+    <main className="flex flex-col min-h-screen">
+      <header className="relative flex items-center justify-center h-16 border-b">
         <Link href={PATHS.MYPAGE} className="absolute left-4 p-2">
           <ChevronLeft />
         </Link>
-        {/* 가운데 제목 */}
         <h1 className="text-xl font-semibold">{mainTerms.title}</h1>
-      </div>
+      </header>
 
-      {/* 본문 내용 */}
-      <div className="py-6 px-5">
+      <section className="py-6 px-5">
         <p className="mb-4 text-sm text-gray-500">
           최종 업데이트: {mainTerms.lastUpdated}
         </p>
@@ -30,8 +26,8 @@ const TermsPage = () => {
             <p className="text-sm text-gray-700">{section.content}</p>
           </div>
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

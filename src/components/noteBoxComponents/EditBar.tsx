@@ -16,7 +16,7 @@ const EditBar = ({
   onDelete
 }: EditBarProps) => {
   return (
-    <div className="flex  px-2 py-4 ">
+    <section className="flex  px-2 py-4 ">
       {isEdit ? (
         <div className="flex gap-2">
           <button
@@ -41,7 +41,7 @@ const EditBar = ({
           </Text>
         </button>
       )}
-    </div>
+    </section>
   );
 };
 

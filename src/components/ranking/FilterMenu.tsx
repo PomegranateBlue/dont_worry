@@ -5,7 +5,7 @@ import React from 'react';
 import {
   CHART_FILTER_EMOTION,
   CHART_FILTER_TOPIC
-} from '@/constants/ranking/line';
+} from '@/constants/ranking/Line';
 import Text from '../common/Text';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 

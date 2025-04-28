@@ -1,4 +1,4 @@
-import { NO_ID } from '@/constants/ranking/line';
+import { NO_ID } from '@/constants/ranking/Line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
 import {

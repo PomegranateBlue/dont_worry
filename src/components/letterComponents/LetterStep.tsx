@@ -5,7 +5,7 @@ import { ChevronLeft, ImagePlus } from 'lucide-react';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
 import { saveLetter } from '@/app/utils/supabase/db';
 import { useImageUpload } from '@/hooks/letterHooks/useImageUpload';
-import LoadingSaveLetter from './LoadingSaveLetter';
+import { showToast } from '../common/Toast';
 
 type LetterStepProps = {
   sendAt: string;
@@ -45,6 +45,7 @@ const LetterStep = ({
     if (imageFile) {
       try {
         imageUrl = await uploadImageAndGetUrl(imageFile);
+        showToast('편지를 저장하고 있어요 💌', 'info');
       } catch (error) {
         console.error('이미지 업로드 실패:', error);
         throw new LetterError(LETTER_ERROR_KEYS.IMAGE_INSERT_FAILED);
@@ -55,9 +56,12 @@ const LetterStep = ({
       // 편지 저장
       await saveLetter(userId, content, sendAt, imageUrl);
       setStep('check'); // 성공 후 check스텝으로 이동
+      setIsLoading(false);
     } catch (error) {
       console.error('편지 저장 실패:', error);
-      throw new LetterError(LETTER_ERROR_KEYS.LETTER_INSERT_FAILED);
+      showToast('편지를 저장하는 데 실패했어요 😢', 'error');
+      setIsLoading(false);
+      return;
     }
   };
 
@@ -66,11 +70,6 @@ const LetterStep = ({
     e.preventDefault();
     inputRef.current?.click();
   };
-
-  // 로딩 처리
-  if (isLoading) {
-    return <LoadingSaveLetter />;
-  }
 
   return (
     <section className="w-full">

@@ -4,34 +4,26 @@ import Text from '../common/Text';
 import { PATHS } from '@/constants/common/paths';
 import { MENU } from '@/constants/common/menu';
 
+const menuItems = [
+  { href: PATHS.NOTE, label: MENU.NOTE },
+  { href: PATHS.NOTEBOX, label: MENU.NOTEBOX },
+  { href: PATHS.RANKING, label: MENU.RANKING },
+  { href: PATHS.LETTER, label: MENU.LETTER },
+  { href: PATHS.LETTERBOX, label: MENU.LETTERBOX }
+];
+
 export const IsLoginMenu = () => {
   return (
     <div className="flex flex-col gap-1 items-start lg:flex-row lg:gap-11">
-      <Link href={PATHS.NOTE} className="py-4 lg:py-0">
-        <Text variant="heading5" color="label-neutral">
-          {MENU.NOTE}
-        </Text>
-      </Link>
-      <Link href={PATHS.NOTEBOX} className="py-4 lg:py-0">
-        <Text variant="heading5" color="label-neutral">
-          {MENU.NOTEBOX}
-        </Text>
-      </Link>
-      <Link href={PATHS.RANKING} className="py-4 lg:py-0">
-        <Text variant="heading5" color="label-neutral">
-          {MENU.RANKING}
-        </Text>
-      </Link>
-      <Link href={PATHS.LETTER} className="py-4 lg:py-0">
-        <Text variant="heading5" color="label-neutral">
-          {MENU.LETTER}
-        </Text>
-      </Link>
-      <Link href={PATHS.LETTERBOX} className="py-4 lg:py-0">
-        <Text variant="heading5" color="label-neutral">
-          {MENU.LETTERBOX}
-        </Text>
-      </Link>
+      {menuItems.map(({ href, label }) => {
+        return (
+          <Link key={href} href={href} className="py-4 lg:py-0">
+            <Text variant="heading5" color="label-neutral">
+              {label}
+            </Text>
+          </Link>
+        );
+      })}
     </div>
   );
 };

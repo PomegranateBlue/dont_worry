@@ -28,7 +28,7 @@ const RankingLayout = ({
   children
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <div className="xl:bg-backgroundSet-card">
+    <div className="flex flex-col min-h-screen xl:bg-backgroundSet-card">
       <div className="pr-[6px] pl-[6px] h-14 flex items-center justify-center sticky top-0 z-50 bg-backgroundSet-normal">
         <Text
           as="h1"
@@ -44,7 +44,7 @@ const RankingLayout = ({
         <TimeFilterGroup />
       </div>
 
-      {children}
+      <div className="flex-1 flex flex-col">{children}</div>
     </div>
   );
 };

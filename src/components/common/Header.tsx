@@ -18,7 +18,7 @@ export default function Header() {
       <nav className="max-w-screen-xl mx-auto px-10 hidden lg:flex flex-row flex-wrap items-center justify-between w-full h-full">
         <Link href={PATHS.HOME} className="relative">
           <Image
-            src="/images/header-logo.svg"
+            src="/images/header-logo.webp"
             alt="header-logo"
             width={217}
             height={28}

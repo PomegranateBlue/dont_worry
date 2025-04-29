@@ -22,7 +22,7 @@ export default function LoginPage() {
       </div>
       <div className="flex justify-center my-10">
         <Image
-          src="/images/header-logo.svg"
+          src="/images/login-logo.webp"
           alt="logo"
           width={206}
           height={32}

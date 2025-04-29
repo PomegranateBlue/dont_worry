@@ -19,6 +19,22 @@ export const LOGIN_ERROR_KEYS = {
   RE_SIGNUP_RESTRICTED: 'RE_SIGNUP_RESTRICTED'
 } as const;
 
+export const SUPABASE_ERROR_TO_KEY: Record<string, LoginErrorMessageType> = {
+  'Invalid login credentials': 'INVALID_CREDENTIALS',
+  'User already registered': 'EMAIL_ALREADY_REGISTERED',
+  'Email not confirmed': 'EMAIL_NOT_CONFIRMED',
+  'Too many requests': 'TOO_MANY_REQUESTS',
+  'Auth session missing': 'AUTH_SESSION_MISSING',
+  'Database error': 'DATABASE_ERROR',
+  'For security purposes, you can only request this after a certain amount of time has passed since you last signed up':
+    'RE_SIGNUP_RESTRICTED',
+  'Password should be at least 6 characters': 'WEAK_PASSWORD',
+  'Weak password': 'WEAK_PASSWORD',
+  'Email rate limit exceeded': 'EMAIL_RATE_LIMIT_EXCEEDED',
+  'Unable to validate token': 'UNABLE_TO_VALIDATE_TOKEN',
+  'Network error': 'NETWORK_ERROR'
+};
+
 export const LOGIN_ERROR_MESSAGE = {
   INVALID_EMAIL: {
     status: 400,

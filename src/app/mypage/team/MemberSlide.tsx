@@ -1,8 +1,9 @@
 'use client';
 
-import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
 import Text from '@/components/common/Text';
 
 type Member = {
@@ -17,48 +18,56 @@ type Member = {
 const MemberSlide = ({ members }: { members: Member[] }) => {
   const clonedMembers = [members[members.length - 1], ...members, members[0]];
   const [view, setView] = useState(1);
-  const [transition, setTransition] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [initialRender, setInitialRender] = useState(true);
+
+  const widthPercentage = 100; // 한 슬라이드 너비
 
   const handlePrev = () => {
+    if (!isAnimating) return;
     setView((prev) => prev - 1);
   };
 
   const handleNext = () => {
+    if (!isAnimating) return;
     setView((prev) => prev + 1);
   };
 
-  const handleTransitionEnd = () => {
+  useEffect(() => {
     if (view === 0) {
-      setTransition(false);
-      setView(clonedMembers.length - 2);
+      setTimeout(() => {
+        setIsAnimating(false);
+        setView(clonedMembers.length - 2); // 마지막 진짜 멤버
+      }, 500);
+    } else if (view === clonedMembers.length - 1) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setView(1); // 첫 번째 진짜 멤버
+      }, 500);
+    } else {
+      setIsAnimating(true);
     }
-    if (view === clonedMembers.length - 1) {
-      setTransition(false);
-      setView(1);
-    }
-  };
+  }, [view]);
 
   useEffect(() => {
-    if (!transition) {
-      const timer = setTimeout(() => {
-        setTransition(true);
-      }, 20);
-      return () => clearTimeout(timer);
-    }
-  }, [transition]);
+    // 초기 렌더 이후 애니메이션 활성화
+    const timer = setTimeout(() => setInitialRender(false), 10);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="flex flex-1 justify-center items-center px-4 py-8">
       <div className="w-full max-w-4xl flex flex-col items-center">
         <div className="w-full bg-white rounded-3xl shadow-md p-6">
           <div className="overflow-hidden relative">
-            <div
+            <motion.div
               className="flex"
-              style={{
-                transform: `translateX(-${view * 100}%)`,
-                transition: transition ? 'transform 0.5s ease-in-out' : 'none'
-              }}
-              onTransitionEnd={handleTransitionEnd}
+              animate={{ x: `-${view * widthPercentage}%` }}
+              transition={
+                !initialRender && isAnimating
+                  ? { duration: 0.5, ease: 'easeInOut' }
+                  : { duration: 0 }
+              }
             >
               {clonedMembers.map((member, index) => (
                 <div
@@ -75,12 +84,12 @@ const MemberSlide = ({ members }: { members: Member[] }) => {
                   </div>
                   <div className="text-center flex flex-col gap-4 items-center">
                     <div className="flex items-center gap-2">
-                      <Text variant={'heading2'} color={'label-normal'}>
+                      <Text variant="heading2" color="label-normal">
                         {member.name}
                       </Text>
                       <Text
-                        variant={'heading5'}
-                        color={'label-alternative'}
+                        variant="heading5"
+                        color="label-alternative"
                         className="mt-1"
                       >
                         {member.role}
@@ -93,15 +102,15 @@ const MemberSlide = ({ members }: { members: Member[] }) => {
                         rel="noopener noreferrer"
                       >
                         <Text
-                          variant={'heading5'}
-                          color={'primary4'}
+                          variant="heading5"
+                          color="primary4"
                           className="underline"
                         >
                           GitHub 바로가기
                         </Text>
                       </a>
                     )}
-                    <Text variant={'body2'} color={'label-neutral'}>
+                    <Text variant="body2" color="label-neutral">
                       {member.intro1}
                       <br />
                       {member.intro2}
@@ -109,7 +118,7 @@ const MemberSlide = ({ members }: { members: Member[] }) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
 

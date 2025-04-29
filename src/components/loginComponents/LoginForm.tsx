@@ -5,7 +5,7 @@ import { fetchUser, fetchUserInfo } from '@/app/utils/supabase/db';
 import { useUserStore } from '@/store/auth/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import Text from '../common/Text';
@@ -22,8 +22,12 @@ const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  const schema = mode === 'signup' ? signupSchema : loginSchema;
-  const actionFn = mode === 'signup' ? signup : login;
+  const schema = useMemo(
+    () => (mode === 'signup' ? signupSchema : loginSchema),
+    [mode]
+  );
+  const actionFn = useMemo(() => (mode === 'signup' ? signup : login), [mode]);
+
   const [state, formAction] = useFormState(actionFn, initialState);
 
   const {
@@ -44,9 +48,12 @@ const LoginForm = ({ mode }: LoginFormProps) => {
     const afterLogin = async () => {
       if (state.success) {
         try {
-          const data = await fetchUser();
+          const [data, userInfo] = await Promise.all([
+            fetchUser(),
+            fetchUser().then(fetchUserInfo)
+          ]);
           setUser(data);
-          const userInfo = await fetchUserInfo(data);
+          // const userInfo = await fetchUserInfo(data);
           showToast(`🎉 ${userInfo?.nickname}님 환영합니다!`, 'success');
           router.push('/');
         } catch (error) {

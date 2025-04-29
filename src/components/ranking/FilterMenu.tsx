@@ -5,7 +5,7 @@ import React from 'react';
 import {
   CHART_FILTER_EMOTION,
   CHART_FILTER_TOPIC
-} from '@/constants/ranking/Line';
+} from '@/constants/ranking/line';
 import Text from '../common/Text';
 import { useRankingStore } from '@/store/ranking/rankingStore';
 
@@ -23,7 +23,7 @@ const FilterMenu = () => {
   };
 
   return (
-    <div className="w-full">
+    <nav className="w-full">
       <div className="relative flex rounded-full bg-label-disable overflow-hidden h-[36px] xl:h-[44px]">
         <motion.div
           layout
@@ -71,7 +71,7 @@ const FilterMenu = () => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

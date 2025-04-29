@@ -84,14 +84,13 @@ const StepFlow = () => {
       reset();
     } catch (err) {
       console.error('에러 발생:', err);
-      alert((err as Error).message);
       setStep(StepProps.RESULT);
     }
   };
 
   return (
-    <div className="flex w-full justify-center mx-auto max-w-[1200px]">
-      <div className="w-full  max-w-[648px]">
+    <section className="flex w-full justify-center mx-auto max-w-[1200px]">
+      <header className="w-full  max-w-[648px]">
         {step === StepProps.CATEGORY && (
           <div>
             <Text
@@ -129,7 +128,9 @@ const StepFlow = () => {
                 />
               </button>
               <div className="absolute inset-0 flex justify-center items-center">
-                <Text variant="title1" variant2="heading1">감정 작성</Text>
+                <Text variant="title1" variant2="heading1">
+                  감정 작성
+                </Text>
               </div>
             </div>
 
@@ -157,8 +158,8 @@ const StepFlow = () => {
           </div>
         )}
         {isPending && <MessageLoading />}
-      </div>
-    </div>
+      </header>
+    </section>
   );
 };
 

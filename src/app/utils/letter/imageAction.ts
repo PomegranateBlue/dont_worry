@@ -17,8 +17,6 @@ export const uploadImage = async (formData: FormData) => {
     .upload(path, file, { upsert: true });
 
   if (error) throw error;
-
-  showToast('이미지를 등록했습니다.', 'success');
   return {
     data
   };

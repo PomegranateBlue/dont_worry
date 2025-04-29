@@ -34,8 +34,11 @@ const EditLetter = ({
 
   // 선택된 편지 삭제
   const handleDeleteLetter = async () => {
-    if (selectedLetterIds.length === 0)
+    if (selectedLetterIds.length === 0) {
       showToast('삭제할 편지를 선택해주세요.', 'info');
+      return;
+    }
+
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     try {

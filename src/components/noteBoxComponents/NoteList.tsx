@@ -1,6 +1,6 @@
 import React from 'react';
 import NoteCard from './NoteCard';
-import { CheckCircle2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Tables } from '../../../database.types';
 
 interface Props {
@@ -20,11 +20,13 @@ const NoteList = ({ notes, isEdit, selectedNoteIds, onToggleCheck }: Props) => {
             {isEdit && (
               <button
                 onClick={() => onToggleCheck(note.note_id)}
-                className={`flex items-center justify-center mt-1 ${
-                  isChecked ? 'bg-primary-4 text-white' : 'text-gray-400'
+                className={`flex items-center justify-center mt-1  p-1 ${
+                  isChecked
+                    ? ' text-white bg-primary-4 border-[2px] border-primary-4 rounded-full '
+                    : 'border-label-alternative border-[2px] text-label-alternative rounded-full'
                 }`}
               >
-                <CheckCircle2 />
+                <Check className="w-[16px] h-[16px]" />
               </button>
             )}
             <div className="flex-1 min-w-0">

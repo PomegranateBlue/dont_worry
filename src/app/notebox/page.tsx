@@ -24,7 +24,7 @@ const NotePage = () => {
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [filterType, setFilterType] = useState<FilterProps>(FilterProps.TOPIC);
   const [selectedSort, setSelectedSort] = useState<SortProps>(SortProps.LATEST);
-  
+
   const { mutateAsync: deleteNote } = useNoteDelete();
   const { data: userNotes } = useUserWorries();
 
@@ -107,7 +107,7 @@ const NotePage = () => {
       <article className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
         <div className="flex justify-center items-center px-[6px] py-[15px]">
           <Text
-            variant="title2"
+            variant="title1"
             variant2="heading1"
             color="label-normal"
             className="text-center"

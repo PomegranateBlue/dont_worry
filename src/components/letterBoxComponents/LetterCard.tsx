@@ -51,7 +51,7 @@ const LetterCard = ({
       )}
       <div
         className={`flex flex-col items-center gap-4 p-5 border rounded-[8px] bg-backgroundSet-normal shadow w-full ${
-          isEdit ? 'max-w-[303px] xl:max-w-[600px]' : ''
+          isEdit ? 'max-w-[303px] md:max-w-[576px] xl:max-w-[600px]' : ''
         }`}
       >
         {/* 카드내용 */}

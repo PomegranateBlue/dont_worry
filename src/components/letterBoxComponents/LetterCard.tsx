@@ -2,9 +2,10 @@
 
 import { Separator } from '@radix-ui/react-separator';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Text from '../common/Text';
 import { formatDate } from '@/app/utils/letterbox/dateUtils';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 // 타입 정의
 interface Letter {
@@ -27,6 +28,13 @@ const LetterCard = ({
   isSelected,
   onCheckboxChange
 }: LetterCardProps) => {
+  const [showFullContent, setShowFullContent] = useState(false);
+
+  // 더보기/접기 버튼 클릭 핸들러
+  const toggleContent = () => {
+    setShowFullContent(!showFullContent);
+  };
+
   return (
     <main className="flex gap-2 self-stretch">
       {/* 체크박스 */}
@@ -36,7 +44,7 @@ const LetterCard = ({
             type="checkbox"
             checked={isSelected}
             onChange={onCheckboxChange}
-            className="sr-only peer" // 기본 체크박스 숨기기
+            className="sr-only peer"
           />
           <div className="w-5 h-5 aspect-square rounded-full border-2 border-[#E0E0E2] peer-checked:bg-[#8573C9] peer-checked:border-[#8573C9] transition-all"></div>
         </label>
@@ -65,15 +73,42 @@ const LetterCard = ({
               />
             )}
           </div>
-          <figure className="flex flex-col justify-between items-start flex-[1_0_0] self-stretch">
+          <figure className="flex flex-col justify-between items-start flex-1 self-stretch overflow-hidden">
             <Text variant="label1" color="label-alternative">
               {formatDate(letter.send_at)} 작성
             </Text>
-            <div className="h-[38px] self-stretch">
-              <Text variant="label1" color="label-neutral">
+
+            {/* 본문 내용 */}
+            <div className="w-full overflow-hidden">
+              <Text
+                variant="label1"
+                color="label-neutral"
+                className={`block w-full break-words overflow-wrap-anywhere ${
+                  showFullContent ? '' : 'line-clamp-4'
+                }`}
+              >
                 {letter.content}
               </Text>
             </div>
+
+            {/* 더보기/접기 버튼 */}
+            {letter.content.length > 100 && (
+              <div className="flex justify-end w-full lg:hidden">
+                <button
+                  onClick={toggleContent}
+                  className="mt-2 flex items-center text-label-alternative"
+                >
+                  <Text as="p" variant="label1" color="label-neutral">
+                    {showFullContent ? '접기' : '더보기'}
+                  </Text>
+                  {showFullContent ? (
+                    <ChevronUp className="text-label-alternative" size={18} />
+                  ) : (
+                    <ChevronDown className="text-label-alternative" size={18} />
+                  )}
+                </button>
+              </div>
+            )}
           </figure>
         </article>
       </div>

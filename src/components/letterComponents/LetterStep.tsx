@@ -1,10 +1,11 @@
 import Text from '../common/Text';
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChevronLeft, ImagePlus } from 'lucide-react';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
 import { saveLetter } from '@/app/utils/supabase/db';
 import { useImageUpload } from '@/hooks/letterHooks/useImageUpload';
+import LoadingSaveLetter from './LoadingSaveLetter';
 
 type LetterStepProps = {
   sendAt: string;
@@ -37,10 +38,14 @@ const LetterStep = ({
     useImageUpload(userId);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 편지 제출
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isLoading) return;
+    setIsLoading(true);
 
     let imageUrl = '';
     if (imageFile) {
@@ -73,6 +78,11 @@ const LetterStep = ({
     e.preventDefault();
     inputRef.current?.click();
   };
+
+  // 로딩 처리
+  if (isLoading) {
+    return <LoadingSaveLetter />;
+  }
 
   return (
     <section className="xl:flex xl:flex-col xl:items-start xl:gap-[24px] xl:self-stretch">

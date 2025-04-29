@@ -3,6 +3,7 @@
 import { useDeleteLetters } from '@/hooks/letterboxHooks/useDeleteLetters';
 import Text from '../common/Text';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
+import { showToast } from '../common/Toast';
 
 interface EditLetterProps {
   isEdit: boolean;
@@ -34,12 +35,12 @@ const EditLetter = ({
   // 선택된 편지 삭제
   const handleDeleteLetter = async () => {
     if (selectedLetterIds.length === 0)
-      return alert('삭제할 편지를 선택해주세요.');
+      showToast('삭제할 편지를 선택해주세요.', 'info');
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
     try {
       await mutateAsync(selectedLetterIds);
-      alert('삭제가 완료되었습니다.');
+      showToast('삭제가 완료되었습니다.', 'success');
       setSelectedLetterIds([]);
     } catch (error) {
       if (error) {

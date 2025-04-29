@@ -34,8 +34,8 @@ function Calendar({
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex w-full justify-between',
         head_cell:
-          'w-8 h-8 flex items-center justify-center text-muted-foreground text-sm font-normal',
-        row: 'flex w-full justify-between mt-1 xl:mt-2',
+          'w-8 h-8 md:h-16 md:w-16 xl:h-10 xl:w-10 flex items-center justify-center text-muted-foreground text-sm font-normal',
+        row: 'flex w-full justify-between mt-1 xl:mt-0',
         cell: cn(
           'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected].day-range-end)]:rounded-r-md',
           props.mode === 'range'
@@ -44,7 +44,7 @@ function Calendar({
         ),
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'h-8 w-8 p-0 font-normal text-[#A092D7] aria-selected:opacity-100'
+          'h-8 w-8 md:h-16 md:w-16 xl:h-10 xl:w-10 p-0 font-normal text-[#A092D7] aria-selected:opacity-100'
         ),
         day_range_start: 'day-range-start',
         day_range_end: 'day-range-end',

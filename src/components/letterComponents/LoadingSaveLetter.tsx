@@ -17,7 +17,7 @@ const LoadingSaveLetter = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col justify-center items-center text-center gap-4 py-10">
+    <section className="w-[375px] md:w-[768px] xl:w-[1280px] flex flex-col justify-center items-center text-center gap-4 py-10">
       <Text variant="body1" color="label-normal">
         편지를 저장하고 있어요!
         <motion.span
@@ -40,7 +40,7 @@ const LoadingSaveLetter = () => {
           priority
         />
       </div>
-    </div>
+    </section>
   );
 };
 

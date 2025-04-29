@@ -103,7 +103,7 @@ const LetterStep = ({
       )}
       <form
         onSubmit={handleLetterSubmit}
-        className="flex flex-col items-center px-5 xl:w-[648px] xl:h-[375px] bg-backgroundSet-normal"
+        className="flex flex-col items-center px-5 md:px-[118px] xl:w-[648px] xl:h-[375px] bg-backgroundSet-normal"
       >
         <div className="flex flex-col w-full items-center xl:gap-6 xl:self-stretch">
           <nav className="flex justify-center items-center py-2 gap-2 mb-2 xl:py-[8px] xl:gap-[8px] self-stretch">

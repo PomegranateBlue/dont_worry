@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 const CheckStep = () => {
   return (
-    <section className="w-[375px] xl:w-[1280px] flex items-center flex-col  justify-center xl:gap-[84px]">
+    <section className="w-[375px] md:w-[768px] xl:w-[1280px] flex flex-col items-center justify-center xl:gap-[84px] mx-auto">
       {/*s1*/}
       <nav className="flex h-[56px] px-4 justify-center items-center gap-5 xl:h-[80px] xl:px-10 self-stretch xl:gap-0 mb-[161px]">
         <div className="w-full">

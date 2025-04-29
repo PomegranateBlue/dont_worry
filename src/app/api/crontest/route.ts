@@ -50,15 +50,32 @@ export async function GET() {
         to: data.email,
         subject: '💌 미래의 나에게 온 편지',
         html: `
-          <h2>미래의 나에게 보내는 편지</h2>
-          <p>${letter.content}</p>
-          ${
-            letter.img_url
-              ? `<img src="${letter.img_url}" alt="편지 이미지" width="300"/>`
-              : ''
-          }
-          <p style="font-size: 12px; color: gray;">dontworry 서비스에서 발송됨</p>
-        `
+    <div style="background-color: #F4EFFF; padding: 24px; text-align: center; font-family: sans-serif;">
+      <div style="background-color: white; max-width: 400px; margin: 0 auto; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <!-- 로고 영역 -->
+        <div style="margin-bottom: 16px;">
+          <img src="/public/images/letter-bg.png" alt="letter_bg" style="width: 100%; object-fit: cover; border-radius: 8px;" />
+          <h2 style="color: #9273E6; font-size: 20px; font-weight: bold; margin-top: 12px;">미래의 나에게 보내는 편지</h2>
+        </div>
+        <!-- 편지 내용 -->
+        <p style="font-size: 16px; margin-bottom: 16px; white-space: pre-line;">${
+          letter.content
+        }</p>
+        <!-- 이미지 있으면 추가 -->
+        ${
+          letter.imageUrl
+            ? `<img src="${letter.imageUrl}" alt="편지 이미지" style="max-width: 300px; margin: 16px auto;" />`
+            : ''
+        }
+        <!-- 푸터 -->
+        <p style="font-size: 12px; color: gray; margin-top: 12px;">dontworry 서비스에서 발송됨</p>
+        <!-- 버튼 -->
+        <div style="margin-top: 24px;">
+          <a href="https://dontworry.io.kr" style="display: inline-block; background-color: #9273E6; color: white; font-size: 14px; padding: 8px 24px; border-radius: 8px; text-decoration: none;">돈워리에서 편지 보기</a>
+        </div>
+      </div>
+    </div>
+    `
       });
 
       // ✅ 편지 발송 후 isSent=true로 업데이트

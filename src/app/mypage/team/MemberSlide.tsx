@@ -2,7 +2,7 @@
 
 import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Text from '@/components/common/Text';
 
 type Member = {
@@ -15,15 +15,37 @@ type Member = {
 };
 
 const MemberSlide = ({ members }: { members: Member[] }) => {
-  const [view, setView] = useState(0);
+  const clonedMembers = [members[members.length - 1], ...members, members[0]];
+  const [view, setView] = useState(1);
+  const [transition, setTransition] = useState(true);
 
   const handlePrev = () => {
-    setView((prev) => (prev === 0 ? members.length - 1 : prev - 1));
+    setView((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setView((prev) => (prev === members.length - 1 ? 0 : prev + 1));
+    setView((prev) => prev + 1);
   };
+
+  const handleTransitionEnd = () => {
+    if (view === 0) {
+      setTransition(false);
+      setView(clonedMembers.length - 2);
+    }
+    if (view === clonedMembers.length - 1) {
+      setTransition(false);
+      setView(1);
+    }
+  };
+
+  useEffect(() => {
+    if (!transition) {
+      const timer = setTimeout(() => {
+        setTransition(true);
+      }, 20);
+      return () => clearTimeout(timer);
+    }
+  }, [transition]);
 
   return (
     <div className="flex flex-1 justify-center items-center px-4 py-8">
@@ -31,10 +53,14 @@ const MemberSlide = ({ members }: { members: Member[] }) => {
         <div className="w-full bg-white rounded-3xl shadow-md p-6">
           <div className="overflow-hidden relative">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${view * 100}%)` }}
+              className="flex"
+              style={{
+                transform: `translateX(-${view * 100}%)`,
+                transition: transition ? 'transform 0.5s ease-in-out' : 'none'
+              }}
+              onTransitionEnd={handleTransitionEnd}
             >
-              {members.map((member, index) => (
+              {clonedMembers.map((member, index) => (
                 <div
                   key={index}
                   className="min-w-full flex flex-col items-center justify-center gap-6"

@@ -33,6 +33,7 @@ const StepFlow = () => {
     selectedEmotions,
     toggleTopic,
     message,
+    setMessage,
     setResult,
     reset
   } = useNoteStore();
@@ -44,6 +45,12 @@ const StepFlow = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
+  useEffect(() => {
+    if (step === StepProps.CATEGORY) {
+      setMessage('');
+    }
   }, [step]);
 
   const handleCategorySelect = (topic: string) => {

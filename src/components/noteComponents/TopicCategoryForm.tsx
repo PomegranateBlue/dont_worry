@@ -27,7 +27,7 @@ const TopicCategoryForm = ({ onSelectCategory }: Props) => {
               <button
                 key={topic}
                 onClick={() => onSelectCategory(topic)}
-                className={`  px-3 py-[6px] rounded-[16px]  border-[1px] border-line-normal  flex flex-col items-center justify-center xl:px-[12px] xl:py-[6px] 
+                className={`  px-3 py-[6px] rounded-[16px]  border-[1px] border-line-normal  flex flex-col items-center justify-center xl:px-[12px] xl:py-[6px] xl:w-[120px] xl:h-[56px]
                 ${!isTopic ? 'bg-white text-black' : 'bg-primary-3 text-white'}
               `}
               >

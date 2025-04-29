@@ -8,10 +8,26 @@ import Text from '../common/Text';
 const ResultForm = () => {
   const router = useRouter();
   const [isThumbsUp, setIsThumbsUp] = useState(false);
-  // const [isThumbsDown, setIsThumbsUp] = useState(false);
+  const [isThumbsDown, setIsThumbsDown] = useState(false);
   const { message, result } = useNoteStore();
   const goNoteBox = () => {
     router.push('/notebox');
+  };
+
+  const handleThumbsUpToggle = () => {
+    setIsThumbsUp((prev) => {
+      const newState = !prev;
+      if (newState) setIsThumbsDown(false); // 👍 누르면 👎은 꺼짐
+      return newState;
+    });
+  };
+
+  const handleThumbsDownToggle = () => {
+    setIsThumbsDown((prev) => {
+      const newState = !prev;
+      if (newState) setIsThumbsUp(false); // 👎 누르면 👍은 꺼짐
+      return newState;
+    });
   };
 
   return (
@@ -53,19 +69,41 @@ const ResultForm = () => {
           <div className="flex justify-center gap-6 mt-2">
             <button
               type="button"
-              onClick={() => setIsThumbsUp((prev) => !prev)}
+              onClick={handleThumbsUpToggle}
               className="w-6 h-6 flex items-center justify-center"
             >
               <ThumbsUp
                 className={`w-4 h-4 ${
-                  isThumbsUp ? 'text-primary' : 'text-gray-500'
+                  isThumbsUp ? 'text-primary-4' : 'text-label-alternative'
                 }`}
               />
             </button>
             <div>
-              <ThumbsDown className="w-4 h-4 text-gray-500" />
+              <button
+                type="button"
+                onClick={handleThumbsDownToggle}
+                className="w-6 h-6 flex items-center justify-center"
+              >
+                <ThumbsDown
+                  className={`w-4 h-4 ${
+                    isThumbsDown ? 'text-primary-4' : 'text-label-alternative'
+                  }`}
+                />
+              </button>
             </div>
           </div>
+          <section>
+            {isThumbsUp && (
+              <Text variant="label1" color="label-alternative" className="mt-2">
+                마음에 들었어요.
+              </Text>
+            )}
+            {isThumbsDown && (
+              <Text variant="label1" color="label-alternative" className="mt-2">
+                마음에 들지 않았어요.
+              </Text>
+            )}
+          </section>
         </section>
       </section>
 

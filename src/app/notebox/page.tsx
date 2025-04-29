@@ -15,13 +15,16 @@ import { FilterProps, SortProps } from '@/constants/filter/filterProps';
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
   const searchParams = useSearchParams();
+
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [selectedEmotions, setSelectedEmotions] = useState<string[]>([]);
   const [filterType, setFilterType] = useState<FilterProps>(FilterProps.TOPIC);
   const [selectedSort, setSelectedSort] = useState<SortProps>(SortProps.LATEST);
+  
   const { mutateAsync: deleteNote } = useNoteDelete();
   const { data: userNotes } = useUserWorries();
 

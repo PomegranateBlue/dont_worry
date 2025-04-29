@@ -44,6 +44,30 @@ const FilterModal = ({
 }: FilterModalProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
+  const [startY, setStartY] = useState<number | null>(null);
+  const [translateY, setTranslateY] = useState(0);
+  const threshold = 100; // 닫기 임계값
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (startY !== null) {
+      const deltaY = e.touches[0].clientY - startY;
+      if (deltaY > 0) setTranslateY(deltaY); // 아래로만
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (translateY > threshold) {
+      onClose();
+    } else {
+      setTranslateY(0);
+    }
+    setStartY(null);
+  };
+  //
   useEffect(() => {
     if (selectedOption === FilterProps.SORT) {
       setSelectedValues([selectedSort]);
@@ -96,15 +120,19 @@ const FilterModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end">
+    <div
+      className="fixed inset-0 z-50 bg-black/40 flex justify-center items-end"
+      onClick={onClose}
+    >
       <section
-        className="xl:max-w-[648px] bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5"
+        className="xl:max-w-[648px] bg-backgroundSet-normal w-full rounded-tl-[20px] rounded-tr-[20px] p-5 "
         onClick={(e) => e.stopPropagation()}
+        style={{ transform: `translateY(${translateY}px)` }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        <div
-          className="w-full flex justify-center mb-4 cursor-pointer"
-          onClick={onClose}
-        >
+        <div className="w-full flex justify-center mb-4 cursor-pointer">
           <div className="w-[36px] h-[5px] rounded-[2.5px] bg-label-assistive" />
         </div>
 

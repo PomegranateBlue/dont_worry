@@ -124,7 +124,6 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step1-final.svg'}
-                src={'/images/step1-final.svg'}
                 width={0}
                 height={0}
                 alt="step1"

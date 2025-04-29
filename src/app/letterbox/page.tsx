@@ -64,7 +64,7 @@ const LetterBoxPage = () => {
   }
 
   return (
-    <section className="flex w-full max-w-[375px] xl:max-w-[1280px] pb-1.5 flex-col justify-center items-center bg-backgroundSet-card mx-auto">
+    <section className="flex w-full max-w-[375px] md:max-w-[768px] xl:max-w-[1280px] pb-1.5 flex-col justify-center items-center bg-backgroundSet-card mx-auto">
       {/* 타이틀 */}
       <nav className="flex h-[56px] px-4 xl:px-0 justify-center items-center gap-5 self-stretch bg-backgroundSet-normal">
         <Text variant="title1" color="label-normal" className="text-center">
@@ -73,7 +73,7 @@ const LetterBoxPage = () => {
       </nav>
 
       {/* 필터 + 편집 버튼 */}
-      <header className="flex h-12 px-5 xl:px-4 xl:max-w-[648px] justify-between items-center w-full">
+      <header className="flex h-12 px-5 xl:px-4 md:max-w-[608px] xl:max-w-[648px] justify-between items-center w-full">
         <FilterLetter
           selectedFilter={selectedFilter}
           onToggleFilter={(label) => setSelectedFilter(label || null)}
@@ -89,7 +89,7 @@ const LetterBoxPage = () => {
       </header>
 
       {/* 걱정 작성하러 가기 배너 */}
-      <article className="flex items-center px-4 xl:max-w-[648px] xl:px-4 pt-2 pb-2 w-full rounded-[8px]">
+      <article className="flex items-center px-4 md:max-w-[608px] xl:max-w-[648px] xl:px-4 pt-2 pb-2 w-full rounded-[8px]">
         <Link href="/note" className="w-full">
           <nav className="flex items-center gap-4 p-4 bg-backgroundSet-normal border rounded w-full">
             <Image
@@ -114,7 +114,7 @@ const LetterBoxPage = () => {
       {isLoading ? (
         <LoadingLetters />
       ) : (
-        <section className="flex w-full max-w-[375px] xl:max-w-[648px] px-5 xl:px-4 pb-5 flex-col items-start gap-5 mt-5">
+        <section className="flex w-full max-w-[375px] md:max-w-[608px] xl:max-w-[648px] px-5 xl:px-4 pb-5 flex-col items-start gap-5 mt-5">
           {letters.map((letter) => (
             <LetterCard
               key={letter.letter_id}

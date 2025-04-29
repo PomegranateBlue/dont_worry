@@ -6,10 +6,8 @@ import DeleteAccountButton from '@/components/mypage/DeleteAccountButton';
 import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
 import { PATHS } from '@/constants/common/paths';
-import {
-  MypageError
-} from '@/constants/error/mypageError';
-import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+import { MypageError } from '@/constants/error/mypageError';
+import { useUserLetters } from '@/hooks/letterboxHooks/useUserLetters';
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
@@ -60,20 +58,27 @@ const MyPage = () => {
   const isLoading = userDataLoading || lettersLoading || userWorriesLoading;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <main className="flex justify-center items-center h-screen">
+        Loading...
+      </main>
+    );
   }
 
   return (
-    <div className="px-4 pb-20 xl:px-[350px]">
-      <Text
-        variant="title1"
-        variant2="heading2"
-        color="label-normal"
-        className="text-center py-4"
-      >
-        마이페이지
-      </Text>
-      <div className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
+    <main className="px-4 pb-20 xl:px-[316px] md:px-[60px]">
+      <header>
+        <Text
+          variant="title1"
+          variant2="heading2"
+          color="label-normal"
+          className="text-center py-4"
+        >
+          마이페이지
+        </Text>
+      </header>
+
+      <section className="flex flex-col items-center py-3 xl:flex-row xl:items-center xl:gap-6 xl:justify-center">
         <ProfileImage
           imageUrl={userInfo?.profile_img || undefined}
           onUpload={handleUpload}
@@ -83,14 +88,14 @@ const MyPage = () => {
         <div className="mt-4 mb-2 text-center xl:mt-0 xl:text-left">
           <div className="flex items-center justify-center gap-2 xl:justify-start">
             <Text
-              as="span"
+              as="h2"
               variant="title1"
               variant2="heading3"
               color="label-normal"
             >
               {userInfo?.nickname}
             </Text>
-            <button onClick={openModal}>
+            <button onClick={openModal} aria-label="닉네임 수정">
               <Pencil className="text-label-neutral" size={16} />
             </button>
             <NicknameEditModal isOpen={isModalOpen} onClose={closeModal} />
@@ -99,10 +104,13 @@ const MyPage = () => {
             {userInfo?.email}
           </Text>
         </div>
-      </div>
+      </section>
 
-      <div className="flex justify-center items-center rounded-lg bg-backgroundSet-card py-4 mb-6">
-        <div className="flex-1 text-center">
+      <section
+        className="flex justify-center items-center rounded-lg bg-backgroundSet-card py-4 mb-6"
+        aria-label="사용자 활동 요약"
+      >
+        <article className="flex-1 text-center">
           <Link href={PATHS.NOTEBOX}>
             <Text variant="title2" variant2="heading3" color="label-normal">
               {userWorries?.length || 0}개
@@ -111,9 +119,9 @@ const MyPage = () => {
               작성한 걱정
             </Text>
           </Link>
-        </div>
-        <div className="w-px h-10 bg-line-normal" />
-        <div className="flex-1 text-center">
+        </article>
+        <div className="w-px h-10 bg-line-normal" role="separator" />
+        <article className="flex-1 text-center">
           <Link href={PATHS.LETTERBOX}>
             <Text variant="title2" variant2="heading3" color="label-normal">
               {letters?.length || 0}개
@@ -126,9 +134,13 @@ const MyPage = () => {
               미래 편지
             </Text>
           </Link>
-        </div>
-      </div>
-      <div className="border-t-8 border-b pb-6 pt-10 space-y-5 w-full">
+        </article>
+      </section>
+
+      <nav
+        className="border-t-8 border-b pb-6 pt-10 space-y-5 w-full"
+        aria-label="고객지원 메뉴"
+      >
         <Text
           variant="body2"
           variant2="title2"
@@ -140,8 +152,8 @@ const MyPage = () => {
           ['공지사항', '/mypage/notice'],
           ['이용약관', '/mypage/terms'],
           ['챗봇 문의', '/mypage/chat'],
-          ['버전', '/mypage/version']
-          // [`TEAM DON'T WORRY`, '/mypage/team']
+          ['버전', '/mypage/version'],
+          [`TEAM DON'T WORRY`, '/mypage/team']
         ].map(([label, link], idx) => (
           <Link
             key={idx}
@@ -151,19 +163,20 @@ const MyPage = () => {
             <Text variant="title2" variant2="body1" color="label-neutral">
               {label}
             </Text>
-            <ChevronRight size={18} color="gray" />
+            <ChevronRight size={18} color="gray" aria-hidden="true" />
           </Link>
         ))}
-      </div>
-      <div className="flex flex-row justify-center gap-12 mt-5 ">
+      </nav>
+
+      <footer className="flex flex-row justify-center gap-12 mt-5">
         <LogOutButton
           textVariant="body3"
           textColor="label-alternative"
           className="underline"
         />
         <DeleteAccountButton />
-      </div>
-    </div>
+      </footer>
+    </main>
   );
 };
 

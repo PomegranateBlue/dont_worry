@@ -1,4 +1,4 @@
-import { ALL } from '@/constants/ranking/Line';
+import { ALL } from '@/constants/ranking/line';
 import {
   FIFTH_WEEK,
   FIRST_WEEK,
@@ -6,7 +6,7 @@ import {
   SECOND_WEEK,
   SIXTH_WEEK,
   THIRD_WEEK
-} from '@/constants/ranking/WeekConstants';
+} from '@/constants/ranking/weekConstants';
 
 import { ChevronDown } from 'lucide-react';
 
@@ -47,12 +47,7 @@ const TimeFilter = ({ type, options, onChange, selected }: Props) => {
             isNaN(+e.target.value) ? e.target.value : +e.target.value
           )
         }
-        className="appearance-none h-[32px] px-[16px] py-[6px] border border-line-normal rounded-[16px] text-label-neutral focus:outline-none focus:ring-2 focus:ring-primary-3 pr-[32px] text-center" //todo: 테두리색 변경
-        style={{
-          textAlignLast: 'center',
-          textAlign: 'center',
-          lineHeight: '1.2'
-        }}
+        className="appearance-none h-[32px] px-[16px] py-[6px] border border-line-normal rounded-[16px] text-label-neutral focus:outline-none focus:ring-2 focus:ring-primary-3 pr-[32px] text-center leading-[normal]"
       >
         {options.map((opt) => (
           <option key={opt} value={opt} className="text-center">

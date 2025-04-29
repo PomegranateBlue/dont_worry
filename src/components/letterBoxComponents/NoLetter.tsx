@@ -4,11 +4,12 @@ import React from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
 import Link from 'next/link';
+// import { formatDate } from '@/app/utils/letterbox/dateUtils';
 
 const NoLetter = () => {
   return (
-    <section className="w-[375px] md:w-[648px] flex flex-col justify-center items-center md:pb-[42px] mx-auto">
-      <nav className="w-full flex h-[56px] px-[6px] justify-center items-center gap-[20px] mb-40">
+    <section className="w-[375px] md:w-[648px] xl:w-[1280px] flex flex-col justify-center items-center md:pb-[42px] mx-auto">
+      <nav className="w-full flex h-[56px] px-[6px] justify-center items-center gap-[20px] mb-40 mx-auto">
         <Text
           variant="title1"
           color="label-normal"
@@ -17,7 +18,7 @@ const NoLetter = () => {
           미래 편지 보관함
         </Text>
       </nav>
-      <form className="w-[375px] flex flex-col items-center bg-backgroundSet-normal mx-auto px-5 py-8 md:p-0">
+      <form className="w-full flex flex-col items-center bg-backgroundSet-normal mx-auto px-5 py-8 md:p-0">
         <div className="flex flex-col items-center w-full mb-[190px]">
           <Image
             src="/images/ver-sad.svg"
@@ -38,16 +39,14 @@ const NoLetter = () => {
             </div>
           </nav>
         </div>
-
-        {/* <Text>{formattedDate}에 이메일로 편지가 도착해요</Text> */}
-
-        <div className="w-full">
-          <Link href="/letterbox">
+        {/* 버튼 */}
+        <div className="w-[375px] md:w-[608px] xl">
+          <Link href="/letter">
             <button
               type="button"
               className="w-full h-12 bg-primary-4 text-white text-lg font-semibold rounded-lg py-2"
             >
-              편지함 바로가기
+              편지쓰러 가기
             </button>
           </Link>
         </div>

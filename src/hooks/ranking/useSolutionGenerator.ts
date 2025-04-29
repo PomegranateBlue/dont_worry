@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
-import { TopThreeItem } from '@/components/ranking/Solution';
-import { stringifyTopThree } from '@/app/utils/ranking/stringUtils';
+import { TopSixItem } from '@/components/ranking/Solution';
+import { stringifyTopSix } from '@/app/utils/ranking/stringUtils';
 import {
   fetchExistingSolution,
   saveSolutionToDatabase
@@ -14,8 +14,8 @@ export const useSolutionGenerator = () => {
   const prevKeywordsRef = useRef<string | null>(null);
 
   const generateSolution = useCallback(
-    async (topThree: TopThreeItem[], userId: string) => {
-      const keywords = stringifyTopThree(topThree);
+    async (topSix: TopSixItem[], userId: string) => {
+      const keywords = stringifyTopSix(topSix);
 
       if (prevKeywordsRef.current === keywords) {
         return;

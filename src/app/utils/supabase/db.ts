@@ -1,6 +1,7 @@
 import { supabase } from './supabase';
 import browserClient from './client';
 import { Database } from '../../../../database.types';
+import { SupabaseError } from '@/constants/error/supabaseErrorKeys';
 
 // 데이터베이스 타입 정의
 type User = Database['public']['Tables']['users']['Row'];
@@ -27,9 +28,38 @@ export const fetchUserInfo = async (userId: string | null | undefined) => {
     >;
   } catch (error) {
     console.error('사용자 정보 조회 실패:', error);
-
-    throw new Error('사용자 정보를 불러오는 중 문제가 발생했습니다.');
+    throw new SupabaseError('SUPABASE_AUTH_FAILED');
   }
+};
+
+// 사용자가 작성한 미래 편지 저장하기
+export const saveLetter = async (
+  userId: string | null,
+  content: string,
+  sendAt: string,
+  imgUrl: string = ''
+) => {
+  if (!userId) return null;
+
+  const { data, error } = await browserClient
+    .from('letter')
+    .insert([
+      {
+        user_id: userId,
+        content,
+        send_at: sendAt,
+        img_url: imgUrl,
+        isSent: false
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error('편지 저장 실패:', error);
+    throw new Error('편지를 저장하는 중 문제가 발생했습니다.');
+  }
+
+  return data;
 };
 
 // 사용자의 미래 편지 목록 가져오기
@@ -49,7 +79,7 @@ export const fetchUserLetters = async (
     .eq('user_id', userId)
     .order(sortColumn, { ascending: false });
 
-  if (error) throw new Error(error.message);
+  if (error) throw new SupabaseError('SUPABASE_FETCH_FAILED');
   return data || [];
 };
 
@@ -60,7 +90,7 @@ export const deleteLetters = async (userId: string, letterIds: string[]) => {
     .delete()
     .in('letter_id', letterIds);
 
-  if (error) throw new Error(error.message);
+  if (error) throw new SupabaseError('SUPABASE_DELETE_FAILED');
 };
 
 // 사용자 정보 업데이트하기
@@ -82,7 +112,7 @@ export const updateUserInfo = async (
     .select('email, nickname, profile_img, is_deleted')
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) throw new SupabaseError('SUPABASE_UPDATE_FAILED');
   return data as Pick<
     User,
     'email' | 'nickname' | 'profile_img' | 'is_deleted'
@@ -94,7 +124,7 @@ export const fetchUser = async () => {
   const { data, error } = await browserClient.auth.getUser();
   if (error) {
     console.log('오류!!', '사용자 정보를 가져오는 중 에러가 발생했습니다.');
-    throw new Error('사용자 정보를 가져오는 중 에러가 발생했습니다');
+    throw new SupabaseError('SUPABASE_AUTH_FAILED');
   } else {
     return data.user?.id;
   }
@@ -112,7 +142,7 @@ export const fetchUserWorries = async (userId: string | null | undefined) => {
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
 
-  if (error) throw new Error(error.message);
+  if (error) throw new SupabaseError('SUPABASE_FETCH_FAILED');
   return data || [];
 };
 
@@ -125,8 +155,7 @@ export const uploadProfileImage = async (file: File, userId: string | null) => {
     .from('image')
     .upload(filePath, file, { upsert: false });
 
-  if (uploadError)
-    throw new Error('이미지 업로드 실패: ' + uploadError.message);
+  if (uploadError) throw new SupabaseError('SUPABASE_INSERT_FAILED');
 
   const { data } = supabase.storage.from('image').getPublicUrl(filePath);
   return data.publicUrl;

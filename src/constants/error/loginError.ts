@@ -6,8 +6,34 @@ export const LOGIN_ERROR_KEYS = {
   WRONG_PASSWORD: 'WRONG_PASSWORD', // 비밀번호 불일치
   OAUTH_FAILED: 'OAUTH_FAILED', // 소셜 로그인 실패
   SESSION_EXPIRED: 'SESSION_EXPIRED', // 세션 만료
-  UNKNOWN: 'UNKNOWN' // 알 수 없는 에러
+  UNKNOWN: 'UNKNOWN', // 알 수 없는 에러
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS', //이메일 또는 비밀번호가 올바르지 않습니다.
+  EMAIL_NOT_CONFIRMED: 'EMAIL_NOT_CONFIRMED', //이메일 인증이 완료되지 않았습니다. 이메일을 확인해주세요.
+  TOO_MANY_REQUESTS: 'TOO_MANY_REQUESTS', //요청이 너무 많습니다. 잠시 후 다시 시도해주세요
+  AUTH_SESSION_MISSING: 'AUTH_SESSION_MISSING', //인증 세션이 누락되었습니다. 다시 로그인해주세요
+  DATABASE_ERROR: 'DATABASE_ERROR', //데이터베이스 오류가 발생했습니다. 나중에 다시 시도해주세요
+  WEAK_PASSWORD: 'WEAK_PASSWORD', //비밀번호가 너무 약합니다. 더 강력한 비밀번호를 사용해주세요.
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  UNABLE_TO_VALIDATE_TOKEN: 'UNABLE_TO_VALIDATE_TOKEN',
+  EMAIL_RATE_LIMIT_EXCEEDED: 'EMAIL_RATE_LIMIT_EXCEEDED',
+  RE_SIGNUP_RESTRICTED: 'RE_SIGNUP_RESTRICTED'
 } as const;
+
+export const SUPABASE_ERROR_TO_KEY: Record<string, LoginErrorMessageType> = {
+  'Invalid login credentials': 'INVALID_CREDENTIALS',
+  'User already registered': 'EMAIL_ALREADY_REGISTERED',
+  'Email not confirmed': 'EMAIL_NOT_CONFIRMED',
+  'Too many requests': 'TOO_MANY_REQUESTS',
+  'Auth session missing': 'AUTH_SESSION_MISSING',
+  'Database error': 'DATABASE_ERROR',
+  'For security purposes, you can only request this after a certain amount of time has passed since you last signed up':
+    'RE_SIGNUP_RESTRICTED',
+  'Password should be at least 6 characters': 'WEAK_PASSWORD',
+  'Weak password': 'WEAK_PASSWORD',
+  'Email rate limit exceeded': 'EMAIL_RATE_LIMIT_EXCEEDED',
+  'Unable to validate token': 'UNABLE_TO_VALIDATE_TOKEN',
+  'Network error': 'NETWORK_ERROR'
+};
 
 export const LOGIN_ERROR_MESSAGE = {
   INVALID_EMAIL: {
@@ -45,6 +71,56 @@ export const LOGIN_ERROR_MESSAGE = {
     message: '로그인 세션이 만료되었습니다.',
     action: '다시 로그인해주세요.'
   },
+  INVALID_CREDENTIALS: {
+    status: 401,
+    message: '이메일 또는 비밀번호가 올바르지 않습니다.',
+    action: '다시 확인 후 입력해주세요.'
+  },
+  EMAIL_NOT_CONFIRMED: {
+    status: 403,
+    message: '이메일 인증이 완료되지 않았습니다.',
+    action: '이메일을 확인하고 인증을 완료해주세요.'
+  },
+  TOO_MANY_REQUESTS: {
+    status: 429,
+    message: '요청이 너무 많습니다.',
+    action: '잠시 후 다시 시도해주세요.'
+  },
+  AUTH_SESSION_MISSING: {
+    status: 401,
+    message: '인증 세션이 누락되었습니다.',
+    action: '다시 로그인해주세요.'
+  },
+  DATABASE_ERROR: {
+    status: 500,
+    message: '데이터베이스 오류가 발생했습니다.',
+    action: '잠시 후 다시 시도해주세요.'
+  },
+  RE_SIGNUP_RESTRICTED: {
+    status: 403,
+    message: '회원가입 후 일정 시간이 지나야 다시 시도할 수 있습니다.',
+    action: '잠시 기다렸다가 다시 시도해주세요.'
+  },
+  WEAK_PASSWORD: {
+    status: 400,
+    message: '비밀번호가 너무 약합니다.',
+    action: '더 강력한 비밀번호를 입력해주세요.'
+  },
+  EMAIL_RATE_LIMIT_EXCEEDED: {
+    status: 429,
+    message: '이메일 인증 요청이 너무 많습니다.',
+    action: '잠시 후 다시 시도해주세요.'
+  },
+  UNABLE_TO_VALIDATE_TOKEN: {
+    status: 400,
+    message: '인증 토큰 검증에 실패했습니다.',
+    action: '다시 시도해주세요.'
+  },
+  NETWORK_ERROR: {
+    status: 503,
+    message: '네트워크 오류가 발생했습니다.',
+    action: '인터넷 연결을 확인하고 다시 시도해주세요.'
+  },
   UNKNOWN: {
     status: 500,
     message: '알 수 없는 오류가 발생했습니다.',
@@ -61,10 +137,27 @@ export function isLoginErrorResponse(key: LoginErrorMessageType) {
   };
 }
 
+// export class LoginError extends Error {
+//   key: LoginErrorMessageType;
+//   status: number;
+//   action: string;
+
+//   constructor(key: LoginErrorMessageType) {
+//     const errorInfo = LOGIN_ERROR_MESSAGE[key];
+//     super(errorInfo.message);
+//     this.name = 'LoginError';
+//     this.key = key;
+//     this.status = errorInfo.status;
+//     this.action = errorInfo.action;
+//   }
+// }
+
 export class LoginError extends Error {
   key: LoginErrorMessageType;
   status: number;
   action: string;
+  error: string | null;
+  success: boolean;
 
   constructor(key: LoginErrorMessageType) {
     const errorInfo = LOGIN_ERROR_MESSAGE[key];
@@ -73,5 +166,7 @@ export class LoginError extends Error {
     this.key = key;
     this.status = errorInfo.status;
     this.action = errorInfo.action;
+    this.error = errorInfo.message;
+    this.success = false;
   }
 }

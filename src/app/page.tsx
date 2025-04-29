@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Text from '@/components/common/Text';
 import StartButton from '@/components/introComponents/StartButton';
 import StartButtonBottom from '@/components/introComponents/StartButtonBottom';
-
 import Carousel from '@/components/introComponents/Carousel';
+
 const HomePage = () => {
   return (
     <main className="min-h-screen">
@@ -32,7 +32,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-[88px] w-full left-1/2 -translate-x-1/2 z-10 ">
+        <div className="absolute bottom-[88px] w-full left-1/2 -translate-x-1/2 z-10 md:bottom-[65px] xl:bottom-[55px] ">
           <Carousel />
         </div>
 
@@ -42,6 +42,7 @@ const HomePage = () => {
             src={'/images/hero-section-bg.svg'}
             alt="hero"
             fill
+            priority
             className="absolute  object-cover"
           />
         </div>
@@ -50,6 +51,7 @@ const HomePage = () => {
             src={'/images/hero-section-desktop.svg'}
             alt="hero-desktop"
             fill
+            priority
             className="absolute object-cover"
           />
         </div>
@@ -61,9 +63,10 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/mobile-logo.svg'}
-            width={0}
-            height={0}
+            width={181}
+            height={27}
             alt="logo"
+            loading="lazy"
             className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
           />
         </div>
@@ -120,10 +123,11 @@ const HomePage = () => {
             </div>
             <div>
               <Image
-                src={'images/step1-final.svg'}
-                width={0}
-                height={0}
+                src={'/images/step1-final.svg'}
+                width={335}
+                height={150}
                 alt="step1"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -145,9 +149,10 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step2-final.svg'}
-                width={0}
-                height={0}
+                width={335}
+                height={150}
                 alt="step2"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -173,10 +178,11 @@ const HomePage = () => {
             </div>
             <div className="bg-[#ADA2D7] min-w-[335px] rounded-[8px] xl:min-w-[370px]">
               <Image
-                src={'images/step3-final.svg'}
-                width={0}
-                height={0}
+                src={'/images/step3-final.svg'}
+                width={335}
+                height={150}
                 alt="step3"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -184,8 +190,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
-        <div className="flex flex-col justify-center items-center gap-[24px] xl:items-start xl:text-left ">
+      <section className="flex flex-col justify-center items-center bg-backgroundSet-normal min-h-[752px] gap-[40px] px-5 py-[60px] xl:flex-row xl:gap-[80px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
+        <div className="flex flex-col justify-center items-center  gap-[24px] xl:items-start xl:text-left ">
           <div className="flex flex-col justify-center items-center gap-[12px] xl:items-start">
             <div className="flex bg-primary-4 rounded-[16px] px-3 py-1 ">
               <Text
@@ -202,25 +208,26 @@ const HomePage = () => {
                 <br className="xl:hidden" /> 파악하는 기록
               </Text>
             </div>
-            <div className="flex">
-              <div className="flex xl:text-left">
-                <Text variant="body2" variant2="body1" color="label-neutral">
-                  지금까지 작성한 걱정 기록을 기반으로
-                  <br className="xl:hidden" />
-                  나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
-                </Text>
-              </div>
+          </div>
+          <div className="flex">
+            <div className="flex xl:text-left">
+              <Text variant="body2" variant2="body1" color="label-neutral">
+                지금까지 작성한 걱정 기록을 기반으로
+                <br className="xl:hidden" />
+                나의 감정 패턴과 고민의 주제를 한눈에 확인할 수 있어요
+              </Text>
             </div>
           </div>
         </div>
 
         <div className="flex">
           <Image
-            src={'images/graph.svg'}
-            width={0}
-            height={0}
+            src={'/images/graph.svg'}
+            width={236}
+            height={236}
             alt="graph"
-            className="min-w-[236px] min-h-[236px] xl:min-w-[353px] xl:min-h-[353px]"
+            loading="lazy"
+            className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
       </section>
@@ -259,61 +266,10 @@ const HomePage = () => {
             height={335}
             alt="future"
             className="w-[260px] h-auto xl:w-[335px]"
+            loading="lazy"
           />
         </div>
       </section>
-
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
-        <div className="flex flex-col gap-[24px] justify-center items-center">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
-            <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" variant2="body1" color="white">
-                커뮤니티
-              </Text>
-            </div>
-            <div>
-              <Text variant="heading2" variant2="display2" color="primary4">
-                다른 사람들의 이야기
-              </Text>
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="flex">
-              <Text variant="body2" variant2="body1" color="label-neutral">
-                익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
-                나눠보세요
-              </Text>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
-          <div className="flex flex-col gap-[12px] xl:flex-row w-full">
-            <div className="flex w-full p-[16px] xl:p-[24px]">
-              <Image
-                src={'images/community1.svg'}
-                width={0}
-                height={0}
-                alt="community1"
-                quality={70}
-                className=" w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
-              />
-            </div>
-            <div className="flex p-[16px] w-full xl:p-[24px]">
-              <Image
-                src={'images/community2.svg'}
-                width={0}
-                height={0}
-                alt="community2"
-                quality={70}
-                className="w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="flex flex-col justify-center items-center h-[630px] bg-primary-1 gap-[40px] xl:gap-[60px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <Text
           variant="heading2"
@@ -327,8 +283,8 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/intro-emoticon.svg'}
-            width={0}
-            height={0}
+            width={253}
+            height={160}
             alt="main"
             className="min-w-[253px] min-h-[160px]  xl:max-w-[317px] xl:min-h-[200px]"
           />
@@ -347,12 +303,14 @@ const HomePage = () => {
               alt="footer-emoticon"
               width={28}
               height={28}
+              loading="lazy"
             />
             <Image
               src="/images/mobile-logo.svg"
               alt="footer-logo"
               width={180}
               height={27}
+              loading="lazy"
             />
           </div>
 

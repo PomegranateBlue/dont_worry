@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -15,63 +15,92 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   TOPIC_FILTER_DESCRIPTION,
   TOPIC_FILTER_DESCRIPTION2
-} from '@/constants/ranking/Line';
+} from '@/constants/ranking/line';
 
 import Text from '../common/Text';
 import {
   CHART_LABEL,
   topicBackgroundColor,
   topicBorderColor
-} from '@/constants/ranking/ChartOptions';
+} from '@/constants/ranking/chartOptions';
 
+// 컴포넌트 외부로 ChartJS 등록 옮기기
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 interface ChartProps {
   topTopics: { name: string; count: number }[];
 }
 
-const TopicChart = ({ topTopics }: ChartProps) => {
-  const topicLabels = topTopics.map((topic) => topic.name);
-  const topicData = topTopics.map((topic) => topic.count);
-  const total = topicData.reduce((acc, cur) => acc + cur, 0); // 총합
+// areEqual 함수 구현으로 불필요한 리렌더링 방지
+function areEqual(prevProps: ChartProps, nextProps: ChartProps) {
+  if (prevProps.topTopics.length !== nextProps.topTopics.length) {
+    return false;
+  }
 
-  const topicChartData: ChartData<'doughnut'> = {
-    labels: topicLabels,
-    datasets: [
-      {
-        label: CHART_LABEL,
-        data: topicData,
-        backgroundColor: topicBackgroundColor,
-        borderColor: topicBorderColor,
-        borderWidth: 2
-      }
-    ]
-  };
+  return prevProps.topTopics.every(
+    (topic, index) =>
+      topic.name === nextProps.topTopics[index]?.name &&
+      topic.count === nextProps.topTopics[index]?.count
+  );
+}
 
-  const options: ChartOptions<'doughnut'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        display: false
+const TopicChart = React.memo(({ topTopics }: ChartProps) => {
+  // 차트 데이터와 총합 계산을 메모이제이션 - 불필요한 반환값 제거
+  const { total, topicChartData } = useMemo(() => {
+    const labels = topTopics.map((topic) => topic.name);
+    const data = topTopics.map((topic) => topic.count);
+    const sum = data.reduce((acc, cur) => acc + cur, 0);
+
+    const chartData: ChartData<'doughnut'> = {
+      labels,
+      datasets: [
+        {
+          label: CHART_LABEL,
+          data,
+          backgroundColor: topicBackgroundColor,
+          borderColor: topicBorderColor,
+          borderWidth: 2
+        }
+      ]
+    };
+
+    return {
+      total: sum,
+      topicChartData: chartData
+    };
+  }, [topTopics]);
+
+  // 차트 옵션 메모이제이션
+  const options: ChartOptions<'doughnut'> = useMemo(() => {
+    return {
+      responsive: true,
+      maintainAspectRatio: false, // 명시적으로 설정하여 레이아웃 변경 시 성능 향상
+      animation: {
+        duration: 0 // 애니메이션 비활성화로 초기 렌더링 성능 향상
       },
-      datalabels: {
-        color: '#171719',
-        font: {
-          weight: 'bold',
-          size: 10
+      plugins: {
+        legend: {
+          position: 'bottom',
+          display: false
         },
-        formatter: (value, context) => {
-          const label = context.chart.data.labels?.[context.dataIndex];
-          const percent = ((value / total) * 100).toFixed(0);
-          return `${label}\n (${percent}%)`;
-        },
-        align: 'center',
-        textAlign: 'center',
-        clip: false
+        datalabels: {
+          color: '#171719',
+          font: {
+            weight: 'bold',
+            size: 10
+          },
+          formatter: (value, context) => {
+            const label = context.chart.data.labels?.[context.dataIndex];
+            const percent = ((value / total) * 100).toFixed(0);
+            return `${label}\n (${percent}%)`;
+          },
+          align: 'center',
+          textAlign: 'center',
+          clip: false
+        }
       }
-    }
-  };
+    };
+  }, [total]);
 
   return (
     <>
@@ -99,6 +128,9 @@ const TopicChart = ({ topTopics }: ChartProps) => {
       </div>
     </>
   );
-};
+}, areEqual);
+
+// 컴포넌트 디스플레이 이름 설정
+TopicChart.displayName = 'TopicChart';
 
 export default TopicChart;

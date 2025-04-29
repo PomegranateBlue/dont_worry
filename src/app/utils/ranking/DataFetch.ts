@@ -1,4 +1,3 @@
-import { NO_ID } from '@/constants/ranking/Line';
 import { supabase } from '../supabase/supabase';
 import { UserNote } from '@/types/ranking/types';
 import {
@@ -6,6 +5,7 @@ import {
   DATA_FETHCING_ERROR,
   RankingError
 } from '@/constants/error/rankingError';
+import { getAllCategoryCounts } from './categoryCounter';
 
 //주 단위 데이터를 패칭
 export const fetchUserNotes = async (
@@ -19,17 +19,18 @@ export const fetchUserNotes = async (
   }
 
   try {
-    const startDate = new Date(year, month - 1, (week - 1) * 7 + 1);
-    const endDate = new Date(year, month - 1, (week - 1) * 7 + 7);
+    //주차를 시작일과 종료일로 계산 ex) 1년 1월 (주-1)*주 +1
+    const startDate = new Date(year, month - 1, (week - 1) * 7 + 1); //그 주의 시작일
+    const endDate = new Date(year, month - 1, (week - 1) * 7 + 7); //그 주의 마지막일
 
     const startDateStr = startDate.toISOString().split('T')[0];
     const endDateStr = endDate.toISOString().split('T')[0];
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('topic_category, emotion_category') //todo: 필요한 칼럼 3개만 가져오기 (보안상 이슈가 있을 수 있음 딱 가져올려는것만 가져오는것이 성능상으로도 좋음)
-      .gte('created_at', startDateStr)
-      .lte('created_at', endDateStr)
+      .select('topic_category, emotion_category')
+      .gte('created_at', startDateStr) //시작일 부터
+      .lte('created_at', endDateStr) //마지막일 까지의 데이터 수집
       .eq('user_id', id);
 
     if (error) {
@@ -62,7 +63,7 @@ export const fetchMonthlyNotes = async (
 
     const { data, error } = await supabase
       .from('users_note')
-      .select('topic_category, emotion_category') //todo: 필요한것만 가져오기
+      .select('topic_category, emotion_category')
       .gte('created_at', startDateStr)
       .lte('created_at', endDateStr)
       .eq('user_id', id);
@@ -78,52 +79,34 @@ export const fetchMonthlyNotes = async (
   }
 };
 
-const countAllCategoryMentions = (data: UserNote[]) => {
-  const counts: Record<string, number> = {};
-
-  data.forEach((note) => {
-    // 주제 카테고리 처리
-    const topicCategories =
-      note.topic_category?.split(',').map((e) => e.trim()) || [];
-    // 감정 카테고리 처리
-    const emotionCategories =
-      note.emotion_category?.split(',').map((e) => e.trim()) || [];
-
-    // 모든 카테고리 합치기
-    const allCategories = [...topicCategories, ...emotionCategories];
-
-    allCategories.forEach((category) => {
-      if (category) {
-        counts[category] = (counts[category] || 0) + 1;
-      }
-    });
-  });
-
-  return counts;
-};
-
+//전월 대비 빈도수의 변화가 가장 많은 항목 계산
 export const analyzeCategoryTrends = async (
   currentYear: number,
   currentMonth: number,
   id: string | null
 ) => {
   try {
-    let prevMonth = currentMonth - 1;
+    let prevMonth = currentMonth - 1; //이전 달
     let prevYear = currentYear;
     if (prevMonth === 0) {
+      //이전 달이 0인 경우 즉, 연도가 바뀌게 되면 prevYear을 다시 처리
       prevMonth = 12;
       prevYear = currentYear - 1;
     }
 
     const currentMonthData = await fetchMonthlyNotes(
+      //이번 달 유저 정보를 수집
       currentYear,
       currentMonth,
       id
     );
+    //저번달 유저 정보를 수집
     const prevMonthData = await fetchMonthlyNotes(prevYear, prevMonth, id);
 
-    const currentCounts = countAllCategoryMentions(currentMonthData);
-    const prevCounts = countAllCategoryMentions(prevMonthData);
+    //이번 달 카테고리 언급 횟수 수집 (새로운 함수 사용)
+    const currentCounts = getAllCategoryCounts(currentMonthData);
+    //저번 달 카테고리 언급 횟수 수집 (새로운 함수 사용)
+    const prevCounts = getAllCategoryCounts(prevMonthData);
 
     const changes: Record<
       string,
@@ -140,6 +123,7 @@ export const analyzeCategoryTrends = async (
       ...Object.keys(prevCounts)
     ]);
 
+    //이번달 - 지난달 = 추이, 추이를 계산해서 가장 변화가 큰 항목을 찾아냄
     allCategories.forEach((category) => {
       const current = currentCounts[category] || 0;
       const previous = prevCounts[category] || 0;
@@ -149,7 +133,7 @@ export const analyzeCategoryTrends = async (
       if (previous === 0) {
         percentage = current > 0 ? 100 : 0;
       } else {
-        percentage = ((current - previous) / previous) * 100;
+        percentage = ((current - previous) / previous) * 100; //각각을 백불율로 계산
       }
 
       changes[category] = {
@@ -160,12 +144,15 @@ export const analyzeCategoryTrends = async (
       };
     });
 
+    //변화를 내림차순 정렬
     const sortedChanges = Object.entries(changes).sort(
       (a, b) => b[1].change - a[1].change
     );
 
+    //첫번째 인덱스의 값이 가장 변화가 많은 항목
     const mostIncreased = sortedChanges[0];
 
+    //첫번째 인덱스의 값이 가장 변화가 많은 항목
     const mostDecreased = sortedChanges[sortedChanges.length - 1];
 
     return {
@@ -186,6 +173,7 @@ export const analyzeCategoryTrends = async (
     throw new RankingError('CANT_ANALYZE_WORRIES');
   }
 };
+
 //주단위
 export const analyzeWeeklyCategoryTrends = async (
   currentYear: number,
@@ -195,7 +183,7 @@ export const analyzeWeeklyCategoryTrends = async (
 ) => {
   try {
     if (!id) {
-      throw new Error(NO_ID);
+      throw new RankingError('NO_USER_INFO');
     }
 
     // 이전 주 계산
@@ -228,34 +216,9 @@ export const analyzeWeeklyCategoryTrends = async (
       id
     );
 
-    // 카테고리별 언급 횟수 집계 함수
-    const countAllCategoryMentions = (data: UserNote[]) => {
-      const counts: Record<string, number> = {};
-
-      data.forEach((note) => {
-        // 주제 카테고리 처리
-        const topicCategories =
-          note.topic_category?.split(',').map((e) => e.trim()) || [];
-        // 감정 카테고리 처리
-        const emotionCategories =
-          note.emotion_category?.split(',').map((e) => e.trim()) || [];
-
-        // 모든 카테고리 합치기
-        const allCategories = [...topicCategories, ...emotionCategories];
-
-        allCategories.forEach((category) => {
-          if (category) {
-            counts[category] = (counts[category] || 0) + 1;
-          }
-        });
-      });
-
-      return counts;
-    };
-
-    // 현재 주와 이전 주의 카테고리별 언급 횟수 집계
-    const currentCounts = countAllCategoryMentions(currentWeekData);
-    const prevCounts = countAllCategoryMentions(prevWeekData);
+    // 현재 주와 이전 주의 카테고리별 언급 횟수 집계 (새로운 함수 사용)
+    const currentCounts = getAllCategoryCounts(currentWeekData);
+    const prevCounts = getAllCategoryCounts(prevWeekData);
 
     // 모든 카테고리의 변화 계산
     const changes: Record<

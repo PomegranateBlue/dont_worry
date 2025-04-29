@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-
+import { Suspense } from 'react';
 export const metadata: Metadata = {
   title: 'DONT WORRY | 걱정 보관함',
   description:
@@ -28,7 +28,9 @@ export default function NoteBoxLayout({
 }) {
   return (
     <div>
-      <div>{children}</div>
+      <div>
+        <Suspense>{children}</Suspense>
+      </div>
     </div>
   );
 }

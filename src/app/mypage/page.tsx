@@ -7,7 +7,8 @@ import NicknameEditModal from '@/components/mypage/NicknameEditModal';
 import ProfileImage from '@/components/mypage/ProfileImage';
 import { PATHS } from '@/constants/common/paths';
 import { MypageError } from '@/constants/error/mypageError';
-import { useUserLetters } from '@/hooks/letterboxHooks/useUserLetters';
+import { useUserLetters } from '@/hooks/letterHooks/useUserLetters';
+
 import { useUpdateUserInfo } from '@/hooks/mypageHooks/useProfileUpdate';
 import { useUserWorries } from '@/hooks/noteboxHooks/useUserWorries';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
@@ -152,8 +153,8 @@ const MyPage = () => {
           ['공지사항', '/mypage/notice'],
           ['이용약관', '/mypage/terms'],
           ['챗봇 문의', '/mypage/chat'],
-          ['버전', '/mypage/version']
-          // [`TEAM DON'T WORRY`, '/mypage/team']
+          ['버전', '/mypage/version'],
+          [`TEAM DON'T WORRY`, '/mypage/team']
         ].map(([label, link], idx) => (
           <Link
             key={idx}

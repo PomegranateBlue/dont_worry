@@ -1,5 +1,5 @@
 'use client';
-// import { useUserInfo } from '@/hooks/useMyPageQueries';
+
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import Image from 'next/image';
 import React from 'react';
@@ -43,20 +43,20 @@ const LoginProfile = () => {
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Link href={PATHS.MYPAGE}>
               <Text variant="body3" color="label-neutral">
                 마이페이지
               </Text>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Text variant="body3" color="label-neutral">
               <LogOutButton textColor="label-neutral" />
             </Text>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href={PATHS.LETTER}>
+          <DropdownMenuItem asChild>
+            <Link href={PATHS.LETTERBOX}>
               <Text variant="body3" color="label-neutral">
                 편지함
               </Text>

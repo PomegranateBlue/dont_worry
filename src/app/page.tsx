@@ -42,6 +42,7 @@ const HomePage = () => {
             src={'/images/hero-section-bg.svg'}
             alt="hero"
             fill
+            priority
             className="absolute  object-cover"
           />
         </div>
@@ -50,6 +51,7 @@ const HomePage = () => {
             src={'/images/hero-section-desktop.svg'}
             alt="hero-desktop"
             fill
+            priority
             className="absolute object-cover"
           />
         </div>
@@ -64,6 +66,7 @@ const HomePage = () => {
             width={0}
             height={0}
             alt="logo"
+            loading="lazy"
             className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
           />
         </div>
@@ -120,10 +123,11 @@ const HomePage = () => {
             </div>
             <div>
               <Image
-                src={'images/step1-final.svg'}
+                src={'/images/step1-final.svg'}
                 width={0}
                 height={0}
                 alt="step1"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -148,6 +152,7 @@ const HomePage = () => {
                 width={0}
                 height={0}
                 alt="step2"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -177,6 +182,7 @@ const HomePage = () => {
                 width={0}
                 height={0}
                 alt="step3"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -220,6 +226,7 @@ const HomePage = () => {
             width={0}
             height={0}
             alt="graph"
+            loading="lazy"
             className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
@@ -259,58 +266,8 @@ const HomePage = () => {
             height={335}
             alt="future"
             className="w-[260px] h-auto xl:w-[335px]"
+            loading="lazy"
           />
-        </div>
-      </section>
-
-      <section className="flex flex-col h-[630px] justify-center items-center px-5 py-[60px] gap-[40px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
-        <div className="flex flex-col gap-[24px] justify-center items-center">
-          <div className="flex flex-col justify-center items-center gap-[12px]">
-            <div className="flex bg-primary-4 rounded-[16px] px-3 py-1">
-              <Text variant="body3" variant2="body1" color="white">
-                커뮤니티
-              </Text>
-            </div>
-            <div>
-              <Text variant="heading2" variant2="display2" color="primary4">
-                다른 사람들의 이야기
-              </Text>
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="flex">
-              <Text variant="body2" variant2="body1" color="label-neutral">
-                익명의 사용자들과 서로의 고민을 읽고, 공감하며 응원의 댓글을
-                나눠보세요
-              </Text>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col drop-shadow-xl  xl:flex-row ">
-          <div className="flex flex-col gap-[12px] xl:flex-row w-full">
-            <div className="flex w-full p-[16px] xl:p-[24px]">
-              <Image
-                src={'images/community1.svg'}
-                width={0}
-                height={0}
-                alt="community1"
-                quality={70}
-                className=" w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
-              />
-            </div>
-            <div className="flex p-[16px] w-full xl:p-[24px]">
-              <Image
-                src={'images/community2.svg'}
-                width={0}
-                height={0}
-                alt="community2"
-                quality={70}
-                className="w-full max-w-[335px] min-h-[144px] xl:max-w-[594px] xl:max-h-[212px]"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -347,12 +304,14 @@ const HomePage = () => {
               alt="footer-emoticon"
               width={28}
               height={28}
+              loading="lazy"
             />
             <Image
               src="/images/mobile-logo.svg"
               alt="footer-logo"
               width={180}
               height={27}
+              loading="lazy"
             />
           </div>
 

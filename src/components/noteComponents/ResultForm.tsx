@@ -3,10 +3,12 @@
 import { useNoteStore } from '@/store/note/noteStore';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-
+import { useState } from 'react';
 import Text from '../common/Text';
 const ResultForm = () => {
   const router = useRouter();
+  const [isThumbsUp, setIsThumbsUp] = useState(false);
+  // const [isThumbsDown, setIsThumbsUp] = useState(false);
   const { message, result } = useNoteStore();
   const goNoteBox = () => {
     router.push('/notebox');
@@ -49,9 +51,17 @@ const ResultForm = () => {
             이 답장이 마음에 드셨나요?
           </Text>
           <div className="flex justify-center gap-6 mt-2">
-            <div className="w-4 h-4 ">
-              <ThumbsUp className="w-4 h-4 text-gray-500" />
-            </div>
+            <button
+              type="button"
+              onClick={() => setIsThumbsUp((prev) => !prev)}
+              className="w-6 h-6 flex items-center justify-center"
+            >
+              <ThumbsUp
+                className={`w-4 h-4 ${
+                  isThumbsUp ? 'text-primary' : 'text-gray-500'
+                }`}
+              />
+            </button>
             <div>
               <ThumbsDown className="w-4 h-4 text-gray-500" />
             </div>

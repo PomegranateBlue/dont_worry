@@ -21,7 +21,6 @@ export const POST = async (req: Request) => {
         }
       ]
     });
-    // console.log(completion.choices[0].message);
     return NextResponse.json({
       content: completion.choices[0].message.content
     });

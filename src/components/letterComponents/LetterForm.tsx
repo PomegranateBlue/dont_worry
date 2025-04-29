@@ -53,7 +53,7 @@ const LetterForm = () => {
           </article>
         </div>
       ) : (
-        // 모바일: 기존 step 로직 유지
+        // 모바일, 테블릿: 기존 step 로직 유지
         <>
           {step === 'calendar' && (
             <CalendarStep

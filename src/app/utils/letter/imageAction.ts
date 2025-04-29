@@ -1,4 +1,5 @@
 import { supabase } from '@/app/utils/supabase/supabase';
+import { showToast } from '@/components/common/Toast';
 
 const BUCKET_NAME = process.env.NEXT_PUBLIC_STORAGE_BUCKET!;
 
@@ -17,7 +18,7 @@ export const uploadImage = async (formData: FormData) => {
 
   if (error) throw error;
 
-  alert('이미지를 등록했습니다.');
+  showToast('이미지를 등록했습니다.', 'success');
   return {
     data
   };
@@ -32,7 +33,7 @@ export const getImageUrl = (path: string) => {
 // Update - 이미지 수정하기
 export const updateImage = async (formData: FormData) => {
   const result = await uploadImage(formData); // 이미지 업로드 로직 재사용, 중복 불필요하면 삭제할 예정
-  alert('이미지가 수정되었습니다.');
+  showToast('이미지가 수정되었습니다.', 'success');
   return result;
 };
 
@@ -44,6 +45,6 @@ export const deleteImage = async (path: string) => {
 
   if (error) throw error;
 
-  alert('이미지를 삭제했습니다.');
+  showToast('이미지를 삭제했습니다.', 'success');
   return data;
 };

@@ -270,7 +270,6 @@ const HomePage = () => {
           />
         </div>
       </section>
-
       <section className="flex flex-col justify-center items-center h-[630px] bg-primary-1 gap-[40px] xl:gap-[60px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <Text
           variant="heading2"

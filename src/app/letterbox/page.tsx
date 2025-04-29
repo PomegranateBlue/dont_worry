@@ -67,7 +67,12 @@ const LetterBoxPage = () => {
     <section className="flex w-full max-w-[375px] md:max-w-[768px] xl:max-w-[1280px] pb-1.5 flex-col justify-center items-center bg-backgroundSet-card mx-auto">
       {/* 타이틀 */}
       <nav className="flex h-[56px] px-4 xl:px-0 justify-center items-center gap-5 self-stretch bg-backgroundSet-normal">
-        <Text variant="title1" color="label-normal" className="text-center">
+        <Text
+          variant="title1"
+          variant2="heading1"
+          color="label-normal"
+          className="text-center"
+        >
           미래 편지 보관함
         </Text>
       </nav>

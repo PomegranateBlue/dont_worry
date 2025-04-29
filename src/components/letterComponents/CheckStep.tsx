@@ -1,17 +1,35 @@
 'use client';
-//4/26이후 todo: 폰트 적용 확인 중간 부분 높이가 안 맞는 문제 확인
+
 import React from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
 import Link from 'next/link';
-const CheckStep = () => {
+import { formatDate } from '@/app/utils/letterbox/dateUtils';
+
+type CheckStepProps = {
+  sendAt: string;
+  setSendAt: (date: string) => void;
+  setContent: (val: string) => void;
+  setImageFile: (file: File | null) => void;
+  setImagePreview: (url: string | null) => void;
+};
+
+const CheckStep = ({
+  sendAt,
+  setSendAt,
+  setContent,
+  setImageFile,
+  setImagePreview
+}: CheckStepProps) => {
+  console.log('날짜', sendAt);
   return (
-    <section className="w-[375px] md:w-[768px] xl:w-[1280px] flex flex-col items-center justify-center xl:gap-[84px] mx-auto">
+    <section className="flex flex-col justify center items-center">
       {/*s1*/}
       <nav className="flex h-[56px] px-4 justify-center items-center gap-5 xl:h-[80px] xl:px-10 self-stretch xl:gap-0 mb-[161px]">
         <div className="w-full">
           <Text
             variant="title1"
+            variant2="heading1"
             color="label-normal"
             className="text-center font-pretendard text-[20px] font-semibold leading-[135%]"
           >
@@ -24,7 +42,7 @@ const CheckStep = () => {
       {/*gap*/}
 
       {/*s2*/}
-      <form className="w-[375px] flex flex-col items-center justify-center bg-backgroundSet-normal xl:py-8 xl:w-[648px] xl:p-0">
+      <form className="w-[375px] flex flex-col items-center justify-center bg-backgroundSet-normal md:w-[510px] md:mx-auto xl:py-8 xl:w-[648px] xl:p-0 xl:mx-auto">
         <div className="flex flex-col items-center xl:mb-0 xl:py-[40px] w-full justify-center">
           <Image
             src="/images/ver-default.svg"
@@ -56,7 +74,7 @@ const CheckStep = () => {
               variant2="body2"
               className="flex items-center px-5 py-2 justify-center xl:px-6 w-full"
             >
-              {}월{}일에 메일로 편지가 도착해요
+              {formatDate(sendAt)}에 메일로 편지가 도착해요
             </Text>
           </nav>
           <div className="xl:h-[87px]" />
@@ -65,16 +83,23 @@ const CheckStep = () => {
           <Text
             as="span"
             color="label-alternative"
-            variant2="label1" //todo: 폰트 확인하기 && variant확인
+            variant="label1"
+            variant2="label1"
             className="flex items-center justify-center px-5 py-2 xl:p-0"
           >
             작성한 편지는 보관함에서 확인할 수 있어요
           </Text>
-          <div className="flex px-5 py-2 w-full xl:py-6 items-center justify-center flex-row">
+          <div className="relative w-full justify-center items-center px-5 gap-2 flex-shrink-0 xl:max-w-[648px] xl:max-h-[96px] ">
             <Link href="/letterbox">
               <button
                 type="button"
-                className="w-[335px] h-12 bg-primary-4 rounded-lg flex items-center justify-center"
+                onClick={() => {
+                  setSendAt('');
+                  setContent('');
+                  setImageFile(null);
+                  setImagePreview(null);
+                }}
+                className="w-full h-12 bg-primary-4 rounded-lg"
               >
                 <Text
                   variant="title2"

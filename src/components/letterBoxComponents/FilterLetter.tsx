@@ -41,7 +41,7 @@ const FilterLetter = ({
       </button>
 
       {isOpen && (
-        <figure className="absolute w-[95px] border rounded-[16px] mt-1 bg-backgroundSet-normal shadow">
+        <figure className="absolute w-[95px] border rounded-[16px] mt-1 bg-backgroundSet-normal shadow overflow-hidden">
           <button
             className="flex px-[12px] py-[6px] justify-center items-center gap-[8px] self-stretch z-10 bg-backgroundSet-normal"
             onClick={() => handleFilterOption('작성일순')}

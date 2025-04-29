@@ -33,6 +33,7 @@ const RankingLayout = ({
         <Text
           as="h1"
           variant="title1"
+          variant2="heading1"
           color="label-normal"
           className="text-center border-gray-200 w-full"
         >

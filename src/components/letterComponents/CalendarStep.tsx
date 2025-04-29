@@ -22,7 +22,12 @@ const CalendarStep = ({
     <section className="flex flex-col justify center items-center xl:pb-20">
       <nav className="flex h-[56px] px-4 justify-center items-center gap-5 xl:h-[80px] xl:px-10 self-stretch">
         <div className="w-full">
-          <Text variant="title1" color="label-normal" className="text-center">
+          <Text
+            variant="title1"
+            variant2="heading1"
+            color="label-normal"
+            className="text-center"
+          >
             미래 편지 작성
           </Text>
         </div>

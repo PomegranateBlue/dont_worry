@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import Text from '../common/Text';
 import { formatDate } from '@/app/utils/letterbox/dateUtils';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 
 // 타입 정의
 interface Letter {
@@ -39,19 +39,22 @@ const LetterCard = ({
     <main className="flex gap-2 self-stretch">
       {/* 체크박스 */}
       {isEdit && (
-        <label className="flex cursor-pointer">
-          <input
-            type="checkbox"
-            checked={isSelected}
-            onChange={onCheckboxChange}
-            className="sr-only peer"
-          />
-          <div className="w-5 h-5 aspect-square rounded-full border-2 border-[#E0E0E2] peer-checked:bg-[#8573C9] peer-checked:border-[#8573C9] transition-all"></div>
-        </label>
+        <div className="flex items-start">
+          <button
+            onClick={onCheckboxChange}
+            className={`  ${
+              isSelected
+                ? ' text-white bg-primary-4 border-[2px] border-primary-4 rounded-full '
+                : 'border-label-alternative border-[2px] text-label-alternative rounded-full'
+            }`}
+          >
+            <Check className="w-[16px] h-[16px]" />
+          </button>
+        </div>
       )}
       <div
         className={`flex flex-col items-center gap-4 p-5 border rounded-[8px] bg-backgroundSet-normal shadow w-full ${
-          isEdit ? 'max-w-[303px] xl:max-w-[600px]' : ''
+          isEdit ? 'max-w-[303px] md:max-w-[576px] xl:max-w-[600px]' : ''
         }`}
       >
         {/* 카드내용 */}

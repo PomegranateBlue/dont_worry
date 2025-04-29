@@ -4,7 +4,7 @@ import React from 'react';
 import Text from '../common/Text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatDate } from '@/app/utils/letterbox/dateUtils';
+// import { formatDate } from '@/app/utils/letterbox/dateUtils';
 
 const NoLetter = () => {
   return (

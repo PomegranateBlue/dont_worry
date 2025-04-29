@@ -20,7 +20,7 @@ const ProfileImage = ({ imageUrl, onUpload, onDelete }: ProfileImageProps) => {
         width={112}
         height={112}
         className="rounded-full object-cover w-full h-full p-3"
-        unoptimized
+
       />
 
       <button

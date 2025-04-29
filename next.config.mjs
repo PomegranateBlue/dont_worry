@@ -5,7 +5,10 @@ const nextConfig = {
       'pzyuqsztorznxejhknhd.supabase.co',
       'k.kakaocdn.net',
       'lh3.googleusercontent.com'
-    ]
+    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   }
 };
 

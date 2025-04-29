@@ -63,8 +63,8 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/mobile-logo.svg'}
-            width={0}
-            height={0}
+            width={181}
+            height={27}
             alt="logo"
             loading="lazy"
             className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
@@ -124,8 +124,8 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step1-final.svg'}
-                width={0}
-                height={0}
+                width={335}
+                height={150}
                 alt="step1"
                 loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
@@ -149,8 +149,8 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step2-final.svg'}
-                width={0}
-                height={0}
+                width={335}
+                height={150}
                 alt="step2"
                 loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
@@ -178,9 +178,9 @@ const HomePage = () => {
             </div>
             <div className="bg-[#ADA2D7] min-w-[335px] rounded-[8px] xl:min-w-[370px]">
               <Image
-                src={'images/step3-final.svg'}
-                width={0}
-                height={0}
+                src={'/images/step3-final.svg'}
+                width={335}
+                height={150}
                 alt="step3"
                 loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
@@ -223,8 +223,8 @@ const HomePage = () => {
         <div className="flex">
           <Image
             src={'/images/graph.svg'}
-            width={0}
-            height={0}
+            width={236}
+            height={236}
             alt="graph"
             loading="lazy"
             className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
@@ -284,8 +284,8 @@ const HomePage = () => {
         <div>
           <Image
             src={'/images/intro-emoticon.svg'}
-            width={0}
-            height={0}
+            width={253}
+            height={160}
             alt="main"
             className="min-w-[253px] min-h-[160px]  xl:max-w-[317px] xl:min-h-[200px]"
           />

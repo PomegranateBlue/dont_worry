@@ -11,14 +11,14 @@ const Carousel = () => {
       tags: ['#주제별', '#감정별']
     },
     {
+      src: '/images/report.svg',
+      title: '걱정 리포트',
+      tags: ['#주제별', '#감정별']
+    },
+    {
       src: '/images/chat.svg',
       title: 'AI 상담',
       tags: ['#GPT', '#실시간']
-    },
-    {
-      src: '/images/community.svg',
-      title: '커뮤니티',
-      tags: ['#소통', '#공감']
     },
     {
       src: '/images/letter.svg',
@@ -56,7 +56,7 @@ const Carousel = () => {
     }
   }
 
-  const doubledItems = [...items.slice(0, 2), ...items, ...items.slice(0, 2)];
+  const doubledItems = [...items, ...items, ...items, ...items];
 
   return (
     <div className="w-full  overflow-hidden mx-auto ">
@@ -68,7 +68,7 @@ const Carousel = () => {
           repeat: Infinity,
           repeatType: 'loop',
           ease: 'linear',
-          duration: 10
+          duration: 50
         }}
       >
         {doubledItems.map((item, idx) =>
@@ -77,7 +77,13 @@ const Carousel = () => {
               key={`${item.label}-${idx}`}
               className="bg-backgroundSet-normal flex items-center justify-center rounded-full w-[62px] h-[62px] shrink-0"
             >
-              <Image src={item.src} width={36} height={36} alt="item" />
+              <Image
+                src={item.src}
+                width={36}
+                height={36}
+                alt="item"
+                loading="eager"
+              />
             </div>
           ) : (
             <div
@@ -85,9 +91,15 @@ const Carousel = () => {
               className="flex  bg-white rounded-[40px]  gap-[10px] px-4 py-[9px]  w-[162px] h-[62px] shrink-0  items-center justify-center"
             >
               <div>
-                <Image src={item.src} width={36} height={36} alt="title" />
+                <Image
+                  src={item.src}
+                  width={36}
+                  height={36}
+                  alt="title"
+                  loading="lazy"
+                />
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col whitespace-nowrap ">
                 <Text variant="body3">{item.title}</Text>
                 <div className="flex flex-row">
                   {item.tags?.map((tag, i) => (

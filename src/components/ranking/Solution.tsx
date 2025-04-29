@@ -5,28 +5,29 @@ import Image from 'next/image';
 import Text from '../common/Text';
 import { useUserInfo } from '@/hooks/userHooks/useUserInfo';
 import { useUserStore } from '@/store/auth/store';
-import { SOLUTION_TITLE } from '@/constants/ranking/line';
-import { useSolutionGenerator } from '@/hooks/ranking/useSolutionGenerator';
 
-export type TopThreeItem = {
+import { useSolutionGenerator } from '@/hooks/ranking/useSolutionGenerator';
+import { SOLUTION_TITLE } from '@/constants/ranking/line';
+
+export type TopSixItem = {
   name: string;
   count: number;
 };
 
 type SolutionProps = {
-  topThree: TopThreeItem[];
+  topSix: TopSixItem[];
 };
 
-const Solution = ({ topThree }: SolutionProps) => {
+const Solution = ({ topSix }: SolutionProps) => {
   const { user } = useUserStore();
   const { data: userInfo } = useUserInfo();
   const { solution, generateSolution, isLoading } = useSolutionGenerator();
 
   useEffect(() => {
-    if (topThree.length > 0 && user) {
-      generateSolution(topThree, user);
+    if (topSix.length > 0 && user) {
+      generateSolution(topSix, user);
     }
-  }, [topThree, user, generateSolution]);
+  }, [topSix, user, generateSolution]);
 
   return (
     <div className="flex flex-col gap-4 p-5 w-full xl:gap-6 xl:p-10 rounded-[20px] shadow-customCard bg-backgroundSet-normal xl:h-[407px] xl:max-w-[580px]">
@@ -45,12 +46,7 @@ const Solution = ({ topThree }: SolutionProps) => {
           alt="이미지 없음"
           className="hidden lg:block"
         />
-        <Text
-          as="div"
-          variant="title2"
-          variant2="heading4"
-          color="label-normal"
-        >
+        <Text as="h2" variant="title2" variant2="heading4" color="label-normal">
           {userInfo?.nickname + SOLUTION_TITLE}
         </Text>
       </div>

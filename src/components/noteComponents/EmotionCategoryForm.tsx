@@ -7,15 +7,17 @@ import Text from '../common/Text';
 const EmotionCategoryForm = () => {
   const { selectedEmotions, toggleEmotion } = useNoteStore();
   return (
-    <div>
-      <div className="flex flex-col px-5 py-2 gap-y-2">
-        <Text variant="heading3" color="label-normal">
-          오늘의 감정을 골라보세요
-        </Text>
-        <Text variant="body3" color="label-alternative">
-          복수 선택 가능 (최대 3개)
-        </Text>
-      </div>
+    <section>
+      <article className="flex flex-col  gap-y-2 max-w-[648px]">
+        <div className="flex flex-col  h-auto px-5 py-2 gap-[12px]">
+          <Text variant="heading3" variant2="title1" color="label-normal">
+            오늘의 감정을 골라보세요
+          </Text>
+          <Text variant="body3" variant2="body2" color="label-alternative">
+            복수 선택 가능 (최대 3개)
+          </Text>
+        </div>
+      </article>
 
       <div className="grid grid-cols-3 p-5 ">
         {EMOTION_CATEGORIES.map(({ label, emoji }) => {
@@ -44,7 +46,7 @@ const EmotionCategoryForm = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

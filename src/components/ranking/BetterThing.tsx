@@ -10,8 +10,9 @@ import { BetterThingProps } from '@/types/ranking/types';
 
 import React from 'react';
 import Text from '../common/Text';
-import { WEEK_MODE } from '@/constants/ranking/weekConstants';
+
 import { NO_DATA } from '@/constants/error/rankingError';
+import { WEEK_MODE } from '@/constants/ranking/weekConstants';
 
 const BetterThing = ({ monthData, weekData }: BetterThingProps) => {
   const { mode } = useRankingStore();

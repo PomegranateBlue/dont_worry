@@ -5,45 +5,16 @@ import { fetchUser, fetchUserInfo } from '@/app/utils/supabase/db';
 import { useUserStore } from '@/store/auth/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import Text from '../common/Text';
 import { InputForm } from './InputForm';
 import { showToast } from '../common/Toast';
 import { LOGIN_TEXT } from '@/constants/login/text';
 import { Info } from 'lucide-react';
-
-interface LoginFormProps {
-  mode: string;
-}
-
-interface FormData {
-  email: string;
-  password: string;
-  fullName?: string;
-}
-
-const loginSchema = z.object({
-  email: z
-    .string()
-    .nonempty('이메일을 입력하세요')
-    .email('이메일 형식이 아닙니다.'),
-  password: z.string().nonempty('비밀번호를 입력하세요')
-});
-
-const signupSchema = loginSchema.extend({
-  fullName: z
-    .string()
-    .nonempty('닉네임을 입력하세요')
-    .min(2, '닉네임은 2자 이상이어야 합니다.')
-    .max(10, '닉네임은 10자 이하여야 합니다.')
-    .regex(
-      /^[가-힣a-zA-Z0-9]+$/,
-      '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.'
-    )
-});
+import { AuthFormValues, LoginFormProps } from '@/types/auth/auth';
+import { loginSchema, signupSchema } from '@/types/auth/schemas';
 
 const initialState = { success: false, error: null };
 
@@ -51,17 +22,38 @@ const LoginForm = ({ mode }: LoginFormProps) => {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  const schema = mode === 'signup' ? signupSchema : loginSchema;
-  const actionFn = mode === 'signup' ? signup : login;
+  const schema = useMemo(
+    () => (mode === 'signup' ? signupSchema : loginSchema),
+    [mode]
+  );
+  const actionFn = useMemo(() => (mode === 'signup' ? signup : login), [mode]);
+
   const [state, formAction] = useFormState(actionFn, initialState);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm<AuthFormValues>({
+    resolver: zodResolver(schema),
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+      fullName: ''
+    }
+  });
 
   useEffect(() => {
     const afterLogin = async () => {
       if (state.success) {
         try {
-          const data = await fetchUser();
+          const [data, userInfo] = await Promise.all([
+            fetchUser(),
+            fetchUser().then(fetchUserInfo)
+          ]);
           setUser(data);
-          const userInfo = await fetchUserInfo(data);
+          // const userInfo = await fetchUserInfo(data);
           showToast(`🎉 ${userInfo?.nickname}님 환영합니다!`, 'success');
           router.push('/');
         } catch (error) {
@@ -72,21 +64,18 @@ const LoginForm = ({ mode }: LoginFormProps) => {
     afterLogin();
   }, [state.success]); // success 상태 변화에만 반응
 
-  const {
-    register,
-    formState: { errors }
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    mode: 'onBlur',
-    defaultValues: {
-      email: '',
-      password: '',
-      fullName: ''
+  const onSubmit = (data: AuthFormValues) => {
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    if (mode === 'signup' && data.fullName) {
+      formData.append('fullName', data.fullName);
     }
-  });
+    formAction(formData);
+  };
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 닉네임: 회원가입일 때만 보이게 */}
       {mode === 'signup' && (
         <InputForm
@@ -132,7 +121,7 @@ const LoginForm = ({ mode }: LoginFormProps) => {
       />
 
       {state.error && (
-        <Text color="error" className="!mt-4">
+        <Text color="error" variant={'body2'} className="!mt-4">
           {state.error}
         </Text>
       )}

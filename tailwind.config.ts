@@ -154,7 +154,6 @@ const config: Config = {
           bulkuea: '#F0ECAE', //불쾌
           bulkuea_bg: 'FBFAE2',
           apbak: '#EBB6C8', //압박
-
           apbak_bg: '#FFF1F6'
         }
       },

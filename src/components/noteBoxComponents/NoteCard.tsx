@@ -53,11 +53,12 @@ const NoteCard = ({
           if (!emotionData) return null;
 
           const bgClass = `bg-mind-${emotionData.bgcolor}`;
+          const borderClass = `border-mind-${emotionData.borderColor}`;
           return (
             emotionData && (
               <div
                 key={emotionLabel}
-                className={`flex rounded-[16px] h-[32px] border-label-alternative border-[1px] gap-1 px-3 py-[6px] ${bgClass}`}
+                className={`flex rounded-[16px] h-[32px] ${borderClass} border-[1px] gap-1 px-3 py-[6px] ${bgClass}`}
               >
                 <Image
                   src={emotionData.emoji}

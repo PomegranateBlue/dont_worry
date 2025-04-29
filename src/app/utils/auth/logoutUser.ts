@@ -8,7 +8,7 @@ export const signOutUser = async () => {
     if (error) throw error;
 
     localStorage.removeItem('auth-storage');
-    showToast('🙏 안녕히가세요 🙏', 'info');
+    showToast('🙏 안녕히가세요 🙏', 'success');
 
     return { success: true, error: null };
   } catch (error) {

@@ -42,6 +42,7 @@ const HomePage = () => {
             src={'/images/hero-section-bg.svg'}
             alt="hero"
             fill
+            priority
             className="absolute  object-cover"
           />
         </div>
@@ -50,6 +51,7 @@ const HomePage = () => {
             src={'/images/hero-section-desktop.svg'}
             alt="hero-desktop"
             fill
+            priority
             className="absolute object-cover"
           />
         </div>
@@ -64,6 +66,7 @@ const HomePage = () => {
             width={0}
             height={0}
             alt="logo"
+            loading="lazy"
             className="min-w-[181px] min-h-[27px]  xl:min-w-[312px] xl:min-h-[40px]"
           />
         </div>
@@ -121,9 +124,11 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step1-final.svg'}
+                src={'/images/step1-final.svg'}
                 width={0}
                 height={0}
                 alt="step1"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -148,6 +153,7 @@ const HomePage = () => {
                 width={0}
                 height={0}
                 alt="step2"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -177,6 +183,7 @@ const HomePage = () => {
                 width={0}
                 height={0}
                 alt="step3"
+                loading="lazy"
                 className="min-w-[335px] min-h-[150px] xl:min-w-[370px] xl:min-h-[300px]"
               />
             </div>
@@ -220,6 +227,7 @@ const HomePage = () => {
             width={0}
             height={0}
             alt="graph"
+            loading="lazy"
             className="min-w-[236px] min-h-[236px] md:min-w-[320px] md:min-h-[320px] xl:min-w-[353px] xl:min-h-[353px]"
           />
         </div>
@@ -259,6 +267,7 @@ const HomePage = () => {
             height={335}
             alt="future"
             className="w-[260px] h-auto xl:w-[335px]"
+            loading="lazy"
           />
         </div>
       </section>
@@ -295,12 +304,14 @@ const HomePage = () => {
               alt="footer-emoticon"
               width={28}
               height={28}
+              loading="lazy"
             />
             <Image
               src="/images/mobile-logo.svg"
               alt="footer-logo"
               width={180}
               height={27}
+              loading="lazy"
             />
           </div>
 

@@ -8,7 +8,7 @@ import { SocialLogin } from '@/components/loginComponents/SocialLogin';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'DONT WORRY | 로그인',
+  title: `DONT WORRY | ${LOGIN_TEXT.loginTitle}`,
   description: '로그인 페이지'
 };
 
@@ -22,7 +22,7 @@ export default function LoginPage() {
       </div>
       <div className="flex justify-center my-10">
         <Image
-          src="/images/header-logo.svg"
+          src="/images/login-logo.webp"
           alt="logo"
           width={206}
           height={32}

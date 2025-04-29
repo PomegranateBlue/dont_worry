@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import FilterBar from '@/components/noteBoxComponents/FilterBar';
 import FilterModal from '@/components/noteBoxComponents/FilterModal';
 import { useNoteListStore } from '@/store/notebox/noteboxStore';
@@ -13,6 +14,7 @@ import { FilterProps, SortProps } from '@/constants/filter/filterProps';
 
 const NotePage = () => {
   const { notes, setNotes } = useNoteListStore();
+  const searchParams = useSearchParams();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
@@ -28,6 +30,21 @@ const NotePage = () => {
       setNotes(userNotes);
     }
   }, [userNotes, setNotes]);
+
+  useEffect(() => {
+    const category = searchParams.get('category');
+    const categoryType = searchParams.get('categoryType');
+
+    if (category && categoryType) {
+      if (categoryType === 'topic') {
+        setFilterType(FilterProps.TOPIC);
+        setSelectedTopics([category]);
+      } else if (categoryType === 'emotion') {
+        setFilterType(FilterProps.EMOTION);
+        setSelectedEmotions([category]);
+      }
+    }
+  }, [searchParams]);
 
   const handleRemoveFilter = (type: FilterProps, value: string) => {
     if (type === FilterProps.TOPIC) {
@@ -81,7 +98,7 @@ const NotePage = () => {
     setSelectedNoteIds([]);
     setIsEdit(false);
   };
-  
+
   return (
     <section className="flex max-w-[1200px] mx-auto">
       <article className="w-full max-w-[648px] mx-auto pb-20 bg-backgroundSet-normal flex flex-col">
@@ -96,8 +113,8 @@ const NotePage = () => {
           </Text>
         </div>
 
-        <div className="flex flex-1 justify-between items-center sticky top-0 z-10 bg-backgroundSet-normal  ">
-          <div className="flex  items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
+        <div className="flex flex-1 justify-between items-center sticky top-0 z-10 bg-backgroundSet-normal">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap">
             <FilterBar
               onClickFilter={(label) => {
                 setFilterType(label);

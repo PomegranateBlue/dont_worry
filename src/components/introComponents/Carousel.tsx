@@ -11,14 +11,14 @@ const Carousel = () => {
       tags: ['#주제별', '#감정별']
     },
     {
+      src: '/images/report.svg',
+      title: '걱정 리포트',
+      tags: ['#주제별', '#감정별']
+    },
+    {
       src: '/images/chat.svg',
       title: 'AI 상담',
       tags: ['#GPT', '#실시간']
-    },
-    {
-      src: '/images/community.svg',
-      title: '커뮤니티',
-      tags: ['#소통', '#공감']
     },
     {
       src: '/images/letter.svg',
@@ -56,7 +56,7 @@ const Carousel = () => {
     }
   }
 
-  const doubledItems = [...items.slice(0, 2), ...items, ...items.slice(0, 2)];
+  const doubledItems = [...items, ...items, ...items, ...items];
 
   return (
     <div className="w-full  overflow-hidden mx-auto ">
@@ -68,7 +68,7 @@ const Carousel = () => {
           repeat: Infinity,
           repeatType: 'loop',
           ease: 'linear',
-          duration: 10
+          duration: 50
         }}
       >
         {doubledItems.map((item, idx) =>
@@ -82,7 +82,7 @@ const Carousel = () => {
                 width={36}
                 height={36}
                 alt="item"
-                loading="lazy"
+                loading="eager"
               />
             </div>
           ) : (

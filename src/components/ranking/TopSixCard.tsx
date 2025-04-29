@@ -7,7 +7,6 @@ import { useRankingStore } from '@/store/ranking/rankingStore';
 export interface TopSix {
   name: string;
   count: number;
-  type: 'topic' | 'emotion';
 }
 
 export interface TopSixProps {

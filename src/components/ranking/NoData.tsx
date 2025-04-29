@@ -12,10 +12,11 @@ import {
 
 const NoData = () => {
   return (
-    <div className="flex flex-col max-h-screen w-full bg-backgroundSet-card items-center">
-      <div className="flex flex-col items-center flex-1 w-full max-w-[1280px] pt-[105px]">
+    <div className="flex flex-col w-full min-h-[calc(100dvh-7.5rem)] bg-backgroundSet-card items-center">
+      <div className="flex flex-col items-center w-full max-w-[1280px] flex-1 justify-center">
         <div className="w-full flex flex-col items-center justify-center px-5 xl:px-0">
-          <div className="flex flex-col items-center xl:mb-0 xl:py-[40px] w-full justify-center mt-[30px] xl:mt-0">
+          <div className="flex flex-col items-center w-full justify-center">
+            {/* 이미지들 */}
             <Image
               src="/images/ver-default.svg"
               alt="default 이미지"
@@ -47,8 +48,9 @@ const NoData = () => {
           </div>
         </div>
       </div>
-      <div className="xl:h-[78px] h-[87px] md:h-[112px]" />
-      <div className="w-full max-w-[1280px] flex flex-col items-center xl:px-0 pt-10">
+
+      {/* 하단 영역 */}
+      <div className="w-full max-w-[1280px] flex flex-col items-center xl:px-0 py-5">
         <Text
           as="span"
           color="label-alternative"
@@ -58,7 +60,7 @@ const NoData = () => {
         >
           {IF_HAS_WORRY}
         </Text>
-        <Link href="/note" className="w-full flex justify-center px-5 py-6">
+        <Link href="/note" className="w-full flex justify-center px-5 p-6">
           <button
             type="button"
             className="w-full max-w-[648px] h-12 bg-primary-4 rounded-lg flex items-center justify-center"

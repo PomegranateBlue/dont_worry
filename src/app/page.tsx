@@ -124,6 +124,7 @@ const HomePage = () => {
             <div>
               <Image
                 src={'/images/step1-final.svg'}
+                src={'/images/step1-final.svg'}
                 width={0}
                 height={0}
                 alt="step1"
@@ -178,7 +179,7 @@ const HomePage = () => {
             </div>
             <div className="bg-[#ADA2D7] min-w-[335px] rounded-[8px] xl:min-w-[370px]">
               <Image
-                src={'images/step3-final.svg'}
+                src={'/images/step3-final.svg'}
                 width={0}
                 height={0}
                 alt="step3"
@@ -270,7 +271,6 @@ const HomePage = () => {
           />
         </div>
       </section>
-
       <section className="flex flex-col justify-center items-center h-[630px] bg-primary-1 gap-[40px] xl:gap-[60px] xl:min-h-[752px] xl:px-[60px] xl:py-[80px]">
         <Text
           variant="heading2"

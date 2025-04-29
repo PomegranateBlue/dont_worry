@@ -1,10 +1,11 @@
 import Text from '../common/Text';
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChevronLeft, ImagePlus } from 'lucide-react';
 import { LETTER_ERROR_KEYS, LetterError } from '@/constants/error/letterError';
 import { saveLetter } from '@/app/utils/supabase/db';
 import { useImageUpload } from '@/hooks/letterHooks/useImageUpload';
+import LoadingSaveLetter from './LoadingSaveLetter';
 
 type LetterStepProps = {
   sendAt: string;
@@ -37,10 +38,14 @@ const LetterStep = ({
     useImageUpload(userId);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 편지 제출
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isLoading) return;
+    setIsLoading(true);
 
     let imageUrl = '';
     if (imageFile) {
@@ -74,6 +79,11 @@ const LetterStep = ({
     inputRef.current?.click();
   };
 
+  // 로딩 처리
+  if (isLoading) {
+    return <LoadingSaveLetter />;
+  }
+
   return (
     <section className="xl:flex xl:flex-col xl:items-start xl:gap-[24px] xl:self-stretch">
       {!isDesktop && (
@@ -93,7 +103,7 @@ const LetterStep = ({
       )}
       <form
         onSubmit={handleLetterSubmit}
-        className="flex flex-col items-center px-5 xl:w-[648px] xl:h-[375px] bg-backgroundSet-normal"
+        className="flex flex-col items-center px-5 md:px-[118px] xl:w-[648px] xl:h-[375px] bg-backgroundSet-normal"
       >
         <div className="flex flex-col w-full items-center xl:gap-6 xl:self-stretch">
           <nav className="flex justify-center items-center py-2 gap-2 mb-2 xl:py-[8px] xl:gap-[8px] self-stretch">

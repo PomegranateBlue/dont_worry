@@ -34,13 +34,10 @@ const LetterForm = () => {
               />
               <LetterStep
                 sendAt={sendAt}
-                setSendAt={setSendAt}
                 content={content}
                 setContent={setContent}
                 imageFile={imageFile}
-                setImageFile={setImageFile}
                 imagePreview={imagePreview}
-                setImagePreview={setImagePreview}
                 onBack={() => setStep('calendar')}
                 userId={userInfo?.user_id ?? null}
                 setStep={setStep}
@@ -49,7 +46,15 @@ const LetterForm = () => {
             </article>
           )}
           <article className="w-[648px] mx-auto">
-            {step === 'check' && <CheckStep />}
+            {step === 'check' && (
+              <CheckStep
+                sendAt={sendAt}
+                setSendAt={setSendAt}
+                setContent={setContent}
+                setImageFile={setImageFile}
+                setImagePreview={setImagePreview}
+              />
+            )}
           </article>
         </div>
       ) : (
@@ -66,20 +71,25 @@ const LetterForm = () => {
           {step === 'letter' && (
             <LetterStep
               sendAt={sendAt}
-              setSendAt={setSendAt}
               content={content}
               setContent={setContent}
               imageFile={imageFile}
-              setImageFile={setImageFile}
               imagePreview={imagePreview}
-              setImagePreview={setImagePreview}
               onBack={() => setStep('calendar')}
               userId={userInfo?.user_id ?? null}
               setStep={setStep}
               isDesktop={false}
             />
           )}
-          {step === 'check' && <CheckStep />}
+          {step === 'check' && (
+            <CheckStep
+              sendAt={sendAt}
+              setSendAt={setSendAt}
+              setContent={setContent}
+              setImageFile={setImageFile}
+              setImagePreview={setImagePreview}
+            />
+          )}
         </>
       )}
     </main>

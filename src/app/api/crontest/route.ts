@@ -63,8 +63,8 @@ export async function GET() {
         }</p>
         <!-- 이미지 있으면 추가 -->
         ${
-          letter.imageUrl
-            ? `<img src="${letter.imageUrl}" alt="편지 이미지" style="max-width: 300px; margin: 16px auto;" />`
+          letter.img_url
+            ? `<img src="${letter.img_url}" alt="편지 이미지" style="max-width: 300px; margin: 16px auto;" />`
             : ''
         }
         <!-- 푸터 -->

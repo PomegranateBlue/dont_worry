@@ -9,13 +9,10 @@ import LoadingSaveLetter from './LoadingSaveLetter';
 
 type LetterStepProps = {
   sendAt: string;
-  setSendAt: (date: string) => void;
   content: string;
   setContent: (val: string) => void;
   imageFile: File | null;
-  setImageFile: (file: File | null) => void;
   imagePreview: string | null;
-  setImagePreview: (url: string | null) => void;
   onBack: () => void;
   userId: string | null;
   setStep: (step: 'calendar' | 'letter' | 'check') => void;
@@ -24,11 +21,8 @@ type LetterStepProps = {
 
 const LetterStep = ({
   sendAt,
-  setSendAt,
   content,
   setContent,
-  setImageFile,
-  setImagePreview,
   onBack,
   userId,
   setStep,
@@ -60,13 +54,7 @@ const LetterStep = ({
     try {
       // 편지 저장
       await saveLetter(userId, content, sendAt, imageUrl);
-
-      // 성공 후 상태 초기화
-      setStep('check');
-      setContent('');
-      setSendAt('');
-      setImageFile(null);
-      setImagePreview(null);
+      setStep('check'); // 성공 후 check스텝으로 이동
     } catch (error) {
       console.error('편지 저장 실패:', error);
       throw new LetterError(LETTER_ERROR_KEYS.LETTER_INSERT_FAILED);
@@ -85,7 +73,7 @@ const LetterStep = ({
   }
 
   return (
-    <section className="xl:flex xl:flex-col xl:items-start xl:gap-[24px] xl:self-stretch">
+    <section className="w-full">
       {!isDesktop && (
         <nav className="relative flex h-[56px] px-[6px] justify-center items-center gap-[20px] self-stretch xl:hidden">
           {/* 뒤로가기 버튼 */}
@@ -103,7 +91,7 @@ const LetterStep = ({
       )}
       <form
         onSubmit={handleLetterSubmit}
-        className="flex flex-col items-center px-5 md:px-[118px] xl:w-[648px] xl:h-[375px] bg-backgroundSet-normal"
+        className="flex flex-col items-center px-5 md:max-w-[510px] md:mx-auto xl:max-w-[648px] bg-backgroundSet-normal "
       >
         <div className="flex flex-col w-full items-center xl:gap-6 xl:self-stretch">
           <nav className="flex justify-center items-center py-2 gap-2 mb-2 xl:py-[8px] xl:gap-[8px] self-stretch">

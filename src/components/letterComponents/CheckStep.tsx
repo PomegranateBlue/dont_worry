@@ -29,6 +29,7 @@ const CheckStep = ({
         <div className="w-full">
           <Text
             variant="title1"
+            variant2="heading1"
             color="label-normal"
             className="text-center font-pretendard text-[20px] font-semibold leading-[135%]"
           >

@@ -23,8 +23,8 @@ export const SocialLogin = ({ provider }: SocialLoginProps) => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        // redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback` //배포시
-        redirectTo: `http://localhost:3000/auth/callback` //로컬
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback` //배포시
+        // redirectTo: `http://localhost:3000/auth/callback` //로컬
       }
     });
   };

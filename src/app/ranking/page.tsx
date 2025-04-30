@@ -126,12 +126,6 @@ const RankingPage = () => {
     [chartMode, topTopics, topEmotions]
   );
 
-  // 메모이제이션된 현재 topSix 데이터
-  const currentTopSix = useMemo(
-    () => (chartMode === 'topic' ? topTopics : topEmotions),
-    [chartMode, topTopics, topEmotions]
-  );
-
   if (currentData.length === 0) {
     return (
       <div className="flex w-full max-w-[1280px] flex-col">
@@ -158,7 +152,7 @@ const RankingPage = () => {
           <FilterMenu />
 
           <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
-            {currentTopSix.map((e) => (
+            {currentData.map((e) => (
               <div key={e.name}>
                 <TopSixCard topSix={e} />
               </div>
@@ -184,7 +178,7 @@ const RankingPage = () => {
               <div className="w-full h-[300px] bg-gray-100 animate-pulse rounded-md" />
             }
           >
-            <Solution topSix={currentTopSix} />
+            <Solution topSix={currentData} />
           </Suspense>
         </div>
       </div>

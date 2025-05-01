@@ -38,6 +38,12 @@ const LetterStep = ({
   const handleLetterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // ✅ 날짜 선택 여부 먼저 검사
+    if (!sendAt) {
+      showToast('날짜를 선택해주세요 📅', 'error');
+      return;
+    }
+
     if (isLoading) return;
     setIsLoading(true);
 

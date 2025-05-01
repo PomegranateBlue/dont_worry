@@ -75,9 +75,6 @@ const TopicChart = React.memo(({ topTopics }: ChartProps) => {
     return {
       responsive: true,
       maintainAspectRatio: false, // 명시적으로 설정하여 레이아웃 변경 시 성능 향상
-      animation: {
-        duration: 0 // 애니메이션 비활성화로 초기 렌더링 성능 향상
-      },
       plugins: {
         legend: {
           position: 'bottom',

@@ -7,7 +7,7 @@ import React, {
   useCallback,
   Suspense
 } from 'react';
-import { makeTopTen } from '../utils/ranking/RankingFilter';
+import { makeTopSix } from '../utils/ranking/RankingFilter';
 import TopicChart from '@/components/ranking/TopicChart';
 import EmotionChart from '@/components/ranking/EmotionsChart';
 import dynamic from 'next/dynamic';
@@ -59,11 +59,6 @@ const RankingPage = () => {
     useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
 
   const [most, setMost] = useState<Most | null>(null);
-  const [topSixTopic, setTopSixTopic] =
-    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
-
-  const [topSixEmotion, setTopSixEmotion] =
-    useState<{ name: string; count: number }[]>(EMPTY_ARRAY);
 
   // fetchData 함수를 useCallback으로 메모이제이션
   const fetchData = useCallback(async () => {
@@ -79,17 +74,13 @@ const RankingPage = () => {
       }
 
       if (userNotes.length > 0) {
-        const result = makeTopTen(userNotes);
+        const result = makeTopSix(userNotes);
 
         setTopTopics(result.topTopics);
-        setTopSixTopic(result.topTopics.slice(0, 6));
         setTopEmotions(result.topEmotions);
-        setTopSixEmotion(result.topEmotions.slice(0, 6));
       } else {
         setTopTopics(EMPTY_ARRAY);
-        setTopSixTopic(EMPTY_ARRAY);
         setTopEmotions(EMPTY_ARRAY);
-        setTopSixEmotion(EMPTY_ARRAY);
       }
     } catch (err) {
       console.error(DATA_FETHCING_ERROR, err);
@@ -135,12 +126,6 @@ const RankingPage = () => {
     [chartMode, topTopics, topEmotions]
   );
 
-  // 메모이제이션된 현재 topSix 데이터
-  const currentTopSix = useMemo(
-    () => (chartMode === 'topic' ? topSixTopic : topSixEmotion),
-    [chartMode, topSixTopic, topSixEmotion]
-  );
-
   if (currentData.length === 0) {
     return (
       <div className="flex w-full max-w-[1280px] flex-col">
@@ -167,7 +152,7 @@ const RankingPage = () => {
           <FilterMenu />
 
           <div className="flex flex-col w-full xl:w-[580px] gap-[12px] xl:gap-[16px]">
-            {currentTopSix.map((e) => (
+            {currentData.map((e) => (
               <div key={e.name}>
                 <TopSixCard topSix={e} />
               </div>
@@ -193,7 +178,7 @@ const RankingPage = () => {
               <div className="w-full h-[300px] bg-gray-100 animate-pulse rounded-md" />
             }
           >
-            <Solution topSix={currentTopSix} />
+            <Solution topSix={currentData} />
           </Suspense>
         </div>
       </div>

@@ -92,8 +92,8 @@
         <sub><b>송제우</b></sub>
         <br>
         <sub>
-          <a href="https://github.com/PomegranateBlue">깃허브</a> /
-          <a href="https://velog.io/@wpdn98/posts">블로그</a>
+          <a href="https://github.com/PomegranateBlue" target="_blank" rel="noopener noreferrer">제우 깃허브</a> /
+          <a href="https://velog.io/@wpdn98/posts" target="_blank" rel="noopener noreferrer">제우 블로그</a>
         </sub>
       </td>
       <!-- 오원택 -->
@@ -103,8 +103,8 @@
         <sub><b>오원택</b></sub>
         <br>
         <sub>
-          <a href="https://github.com/dhdnjs0702">깃허브</a> /
-          <a href="https://ihatecoding3636.tistory.com/">블로그</a>
+          <a href="https://github.com/dhdnjs0702" target="_blank" rel="noopener noreferrer">원택 깃허브</a> /
+          <a href="https://ihatecoding3636.tistory.com/" target="_blank" rel="noopener noreferrer">원택 블로그</a>
         </sub>
       </td>
       <!-- 유익환 -->
@@ -114,8 +114,8 @@
         <sub><b>유익환</b></sub>
         <br>
         <sub>
-          <a href="https://github.com/ick-web/">깃허브</a> /
-          <a href="https://devyu0001.tistory.com/">블로그</a>
+          <a href="https://github.com/ick-web/" target="_blank" rel="noopener noreferrer">익환 깃허브</a> /
+          <a href="https://devyu0001.tistory.com/" target="_blank" rel="noopener noreferrer">익환 블로그</a>
         </sub>
       </td>
       <!-- 문정빈 -->
@@ -125,8 +125,8 @@
         <sub><b>문정빈</b></sub>
         <br>
         <sub>
-          <a href="https://github.com/answq">깃허브</a> /
-          <a href="https://blog.naver.com/answq_">블로그</a>
+          <a href="https://github.com/answq" target="_blank" rel="noopener noreferrer">정빈 깃허브</a> /
+          <a href="https://blog.naver.com/answq_" target="_blank" rel="noopener noreferrer">정빈 블로그</a>
         </sub>
       </td>
       <!-- 강혜린 -->
@@ -136,8 +136,8 @@
         <sub><b>강혜린</b></sub>
         <br>
         <sub>
-          <a href="https://github.com/hyerin-kang">깃허브</a> /
-          <a href="https://rinny01.tistory.com/">블로그</a>
+          <a href="https://github.com/hyerin-kang" target="_blank" rel="noopener noreferrer">혜린 깃허브</a> /
+          <a href="https://rinny01.tistory.com/" target="_blank" rel="noopener noreferrer">혜린 블로그</a>
         </sub>
       </td>
     </tr>
@@ -150,6 +150,7 @@
     </tr>
   </tbody>
 </table>
+
 
 ---
 
